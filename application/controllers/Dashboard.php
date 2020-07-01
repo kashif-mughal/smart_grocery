@@ -22,7 +22,7 @@ class Dashboard extends CI_Controller {
         //'purchase_amount' => number_format($sales_report[0]['total_supplier_rate'], 2, '.', ','),
         
         $data = array(
-            'title' => display('dashboard')
+            'title' => 'Sauda Express | Buy each and everything home grocery'
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);
