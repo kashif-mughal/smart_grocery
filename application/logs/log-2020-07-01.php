@@ -1808,3 +1808,233 @@ DEBUG - 2020-07-01 17:57:59 --> UTF-8 Support Enabled
 DEBUG - 2020-07-01 17:57:59 --> No URI present. Default controller set.
 DEBUG - 2020-07-01 17:57:59 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2020-07-01 17:57:59 --> Total execution time: 0.1229
+DEBUG - 2020-07-01 19:02:09 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:02:09 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:02:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:02:10 --> Total execution time: 0.1367
+DEBUG - 2020-07-01 19:02:11 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:02:11 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:02:11 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:02:11 --> Total execution time: 0.1255
+DEBUG - 2020-07-01 19:03:30 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:03:30 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:03:30 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:03:30 --> Total execution time: 0.1386
+DEBUG - 2020-07-01 19:03:31 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:03:31 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:03:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:03:31 --> Total execution time: 0.1443
+DEBUG - 2020-07-01 19:04:33 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:33 --> Total execution time: 0.2777
+DEBUG - 2020-07-01 19:04:33 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:33 --> Total execution time: 0.3356
+DEBUG - 2020-07-01 19:04:34 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:34 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:34 --> Total execution time: 0.3609
+DEBUG - 2020-07-01 19:04:57 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:57 --> Total execution time: 0.2512
+DEBUG - 2020-07-01 19:04:57 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:58 --> Total execution time: 0.3962
+DEBUG - 2020-07-01 19:04:58 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:04:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:04:58 --> Total execution time: 0.2910
+DEBUG - 2020-07-01 19:05:21 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:05:21 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:05:22 --> Total execution time: 0.2850
+DEBUG - 2020-07-01 19:05:22 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:05:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:05:22 --> Total execution time: 0.4335
+DEBUG - 2020-07-01 19:06:44 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:44 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:44 --> Total execution time: 0.2896
+DEBUG - 2020-07-01 19:06:44 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:44 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:45 --> Total execution time: 0.3856
+DEBUG - 2020-07-01 19:06:47 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:47 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:48 --> Total execution time: 0.2708
+DEBUG - 2020-07-01 19:06:50 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:50 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:51 --> Total execution time: 0.2627
+DEBUG - 2020-07-01 19:06:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:51 --> Total execution time: 0.4139
+DEBUG - 2020-07-01 19:06:54 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:06:54 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:06:54 --> Total execution time: 0.3182
+DEBUG - 2020-07-01 19:07:06 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:07:06 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:08:46 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:08:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:08:46 --> Total execution time: 0.2723
+DEBUG - 2020-07-01 19:08:47 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:08:47 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:08:47 --> Total execution time: 0.4220
+DEBUG - 2020-07-01 19:09:35 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:35 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:35 --> Total execution time: 0.2923
+DEBUG - 2020-07-01 19:09:35 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:35 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:36 --> Total execution time: 0.5556
+DEBUG - 2020-07-01 19:09:36 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:36 --> Total execution time: 0.2701
+DEBUG - 2020-07-01 19:09:42 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:43 --> Total execution time: 0.2798
+DEBUG - 2020-07-01 19:09:43 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:43 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:44 --> Total execution time: 1.2449
+DEBUG - 2020-07-01 19:09:44 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:44 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:47 --> Total execution time: 2.5050
+DEBUG - 2020-07-01 19:09:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:51 --> Total execution time: 0.2745
+DEBUG - 2020-07-01 19:09:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:09:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:09:52 --> Total execution time: 0.3727
+DEBUG - 2020-07-01 19:10:48 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:10:48 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:10:48 --> Total execution time: 0.2977
+DEBUG - 2020-07-01 19:10:48 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:10:48 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:10:49 --> Total execution time: 0.3848
+DEBUG - 2020-07-01 19:10:49 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:10:49 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:10:49 --> Total execution time: 0.2787
+DEBUG - 2020-07-01 19:11:45 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:11:45 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:11:45 --> Total execution time: 0.2555
+DEBUG - 2020-07-01 19:11:45 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:11:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:11:46 --> Total execution time: 0.3841
+DEBUG - 2020-07-01 19:11:47 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:11:47 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:11:47 --> Total execution time: 0.2546
+DEBUG - 2020-07-01 19:12:48 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:12:48 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:12:48 --> Total execution time: 0.2596
+DEBUG - 2020-07-01 19:12:49 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:12:49 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:12:49 --> Total execution time: 0.3816
+DEBUG - 2020-07-01 19:12:49 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:12:49 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:12:49 --> Total execution time: 0.3150
+DEBUG - 2020-07-01 19:19:28 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:19:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:19:29 --> Total execution time: 0.2575
+DEBUG - 2020-07-01 19:19:29 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:19:29 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:19:29 --> Total execution time: 0.4638
+DEBUG - 2020-07-01 19:19:29 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:19:29 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:19:30 --> Total execution time: 0.2586
+DEBUG - 2020-07-01 19:20:21 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:21 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:20:21 --> 404 Page Not Found: Admin_dashboard/see_all_best_sales
+DEBUG - 2020-07-01 19:20:23 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:23 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:24 --> Total execution time: 0.3095
+DEBUG - 2020-07-01 19:20:26 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:26 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:27 --> Total execution time: 0.4443
+DEBUG - 2020-07-01 19:20:27 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:27 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:27 --> Total execution time: 0.2814
+DEBUG - 2020-07-01 19:20:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:51 --> Total execution time: 0.2579
+DEBUG - 2020-07-01 19:20:52 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:52 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:52 --> Total execution time: 0.3989
+DEBUG - 2020-07-01 19:20:53 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:20:53 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:20:53 --> Total execution time: 0.2663
+DEBUG - 2020-07-01 19:21:40 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:21:40 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:21:40 --> Total execution time: 0.2676
+DEBUG - 2020-07-01 19:21:40 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:21:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:21:41 --> Total execution time: 0.3522
+DEBUG - 2020-07-01 19:21:41 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:21:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:21:41 --> Total execution time: 0.2595
+DEBUG - 2020-07-01 19:22:16 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:22:16 --> 404 Page Not Found: Company_setup/manage_company
+DEBUG - 2020-07-01 19:22:18 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:18 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:18 --> Total execution time: 0.2724
+DEBUG - 2020-07-01 19:22:18 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:18 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:19 --> Total execution time: 0.3439
+DEBUG - 2020-07-01 19:22:19 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:19 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:19 --> Total execution time: 0.3376
+DEBUG - 2020-07-01 19:22:28 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:28 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:22:28 --> 404 Page Not Found: Cweb_setting/index
+DEBUG - 2020-07-01 19:22:31 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:31 --> Total execution time: 0.2694
+DEBUG - 2020-07-01 19:22:31 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:32 --> Total execution time: 0.3563
+DEBUG - 2020-07-01 19:22:32 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:32 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:22:32 --> Total execution time: 0.3768
+DEBUG - 2020-07-01 19:22:43 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:43 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:22:43 --> 404 Page Not Found: Language/index
+DEBUG - 2020-07-01 19:22:50 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:22:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:22:50 --> 404 Page Not Found: User/manage_user
+DEBUG - 2020-07-01 19:23:02 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:23:02 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:23:02 --> 404 Page Not Found: Company_setup/manage_company
+DEBUG - 2020-07-01 19:23:36 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:23:36 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2020-07-01 19:23:36 --> 404 Page Not Found: Cproduct/index
+DEBUG - 2020-07-01 19:23:55 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:23:55 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:23:56 --> Total execution time: 0.2586
+DEBUG - 2020-07-01 19:23:56 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:23:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:23:56 --> Total execution time: 0.4185
+DEBUG - 2020-07-01 19:23:56 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:23:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:23:56 --> Total execution time: 0.2710
+DEBUG - 2020-07-01 19:24:39 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:39 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:24:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:39 --> Total execution time: 0.1259
+DEBUG - 2020-07-01 19:24:40 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:40 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:24:40 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:40 --> Total execution time: 0.1095
+DEBUG - 2020-07-01 19:24:44 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:44 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:24:44 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:44 --> Total execution time: 0.1603
+DEBUG - 2020-07-01 19:24:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:51 --> Total execution time: 0.2593
+DEBUG - 2020-07-01 19:24:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:51 --> Total execution time: 0.3725
+DEBUG - 2020-07-01 19:24:51 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:52 --> Total execution time: 0.3261
+DEBUG - 2020-07-01 19:24:55 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:55 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:24:55 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:55 --> Total execution time: 0.1338
+DEBUG - 2020-07-01 19:24:55 --> UTF-8 Support Enabled
+DEBUG - 2020-07-01 19:24:55 --> No URI present. Default controller set.
+DEBUG - 2020-07-01 19:24:55 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-01 19:24:55 --> Total execution time: 0.1277

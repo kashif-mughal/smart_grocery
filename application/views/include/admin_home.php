@@ -139,6 +139,22 @@
                 </div>
             </div>
         </div>  -->
+        <div class="row">
+            <!-- This month progress -->
+            <div class="col-sm-12 col-md-8">
+                <div class="panel panel-bd">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4 style="display: inline-block; line-height: 34px;"> <?php echo display('best_sale_product') ?></h4>
+                            <a href="<?php echo base_url(); ?>Admin_dashboard/see_all_best_sales" class="btn btn-success text-white" style="display: inline-block; float: right;">See All</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <canvas id="lineChart" height="142"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php if ($this->session->userdata('user_type') == '1' && '1' =='2') { ?>
             <!-- Third Counter -->
             <div class="row">

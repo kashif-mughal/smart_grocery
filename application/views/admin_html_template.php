@@ -85,6 +85,8 @@
         <!-- Start Core Plugins-->
         <!-- jquery-ui --> 
         <script src="<?php echo base_url() ?>assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+        
+        <script src="<?php echo base_url() ?>assets/js/popper.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- SlimScroll -->

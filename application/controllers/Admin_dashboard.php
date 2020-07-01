@@ -24,7 +24,6 @@ class Admin_dashboard extends CI_Controller {
         $data = array(
             'title' => display('dashboard')
         );
-
         $content = $CI->parser->parse('include/admin_home', $data, true);
         $this->template->full_admin_html_view($content);
     }
