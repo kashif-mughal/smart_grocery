@@ -23,7 +23,8 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-
+        <link href="<?php echo base_url() ?>assets/css/slick.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url() ?>assets/css/slick-theme.css" rel="stylesheet" type="text/css"/>
         <?php
         $CI = & get_instance();
         $CI->load->model('Web_settings');
@@ -127,6 +128,20 @@
             // $("#insert_sale_order").validate();
             
         </script>
-
+        <style type="text/css">
+            #toTop{
+                width: 44px;
+                background: green;
+                padding: 10px;
+                border-radius: 100%;
+                color: white;
+                font-weight: bolder;
+                position: fixed;
+                bottom: 0px;
+                right: 0px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+            }
+        </style>
     </body>
 </html>
