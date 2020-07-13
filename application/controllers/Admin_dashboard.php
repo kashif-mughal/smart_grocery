@@ -41,6 +41,7 @@ class Admin_dashboard extends CI_Controller {
 
     public function do_login() {
         $error = '';
+        $this->load->model('Web_settings');
         $setting_detail = $this->Web_settings->retrieve_setting_editdata();
 
         if ($setting_detail[0]['captcha'] == 0 && $setting_detail[0]['secret_key'] != null && $setting_detail[0]['site_key'] != null) {

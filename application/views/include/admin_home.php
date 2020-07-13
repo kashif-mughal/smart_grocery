@@ -139,8 +139,7 @@
                 </div>
             </div>
         </div>  -->
-        <div class="row">
-            <!-- This month progress -->
+        <!-- <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="panel panel-bd">
                     <div class="panel-heading">
@@ -154,7 +153,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <?php if ($this->session->userdata('user_type') == '1' && '1' =='2') { ?>
             <!-- Third Counter -->
             <div class="row">

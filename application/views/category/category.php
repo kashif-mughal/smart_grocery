@@ -5,12 +5,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('manage_category') ?></h1>
-            <small><?php echo display('manage_your_category') ?></small>
+            <h1>Manage Category</h1>
+            <small>Manage Your Category</small>
             <ol class="breadcrumb">
-                <li><a href=""><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('category') ?></a></li>
-                <li class="active"><?php echo display('manage_category') ?></li>
+                <li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+                <li><a href="#">Category</a></li>
+                <li class="active">Manage Category</li>
             </ol>
         </div>
     </section>
@@ -45,7 +45,7 @@
             <div class="col-sm-12">
                 <div class="column">
 
-                    <a href="<?php echo base_url('Ccategory') ?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-plus"> </i> <?php echo display('add_category') ?> </a>
+                    <a href="<?php echo base_url('Ccategory') ?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-plus"> </i> Add Category </a>
 
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4><?php echo display('manage_category') ?></h4>
+                            <h4>Manage Category</h4>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -65,9 +65,12 @@
                             <table id="dataTableExample3" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="text-center"><?php echo display('category_id') ?></th>
-                                        <th class="text-center"><?php echo display('category_name') ?></th>
-                                        <th class="text-center"><?php echo display('action') ?></th>
+                                        <th>SL#</th>
+                                        <th class="text-center">Category Name</th>
+                                        <th class="text-center">Alias</th>
+                                        <th class="text-center">Parent</th>
+                                        <th class="text-center">Last Modified</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,18 +78,21 @@
                                     if ($category_list) {
                                         ?>
                                         {category_list}
-                                        <tr>
-                                            <td class="text-center">{category_id}</td>
-                                            <td class="text-center">{category_name}</td>
+                                        <tr id="{Id}">
+                                            <td class="text-center">{sl}</td>
+                                            <td class="text-center">{CatName}</td>
+                                            <td class="text-center">{Alias}</td>
+                                            <td class="text-center">{ParentName}</td>
+                                            <td class="text-center">{ModifiedOn}</td>
                                             <td>
-                                    <center>
-                                        <?php echo form_open() ?>
-                                        <a href="<?php echo base_url() . 'Ccategory/category_update_form/{category_id}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <center>
+                                                    <?php echo form_open() ?>
+                                                    <a href="<?php echo base_url() . 'Ccategory/category_update_form/{category_id}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                        <a href="" class="DeleteCategory btn btn-danger btn-sm" name="{category_id}" data-toggle="tooltip" data-placement="right" title="" data-original-title="<?php echo display('delete') ?> "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                            <?php echo form_close() ?>
-                                    </center>
-                                    </td>
+                                                    <a href="" class="DeleteCategory btn btn-danger btn-sm" name="{category_id}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        <?php echo form_close() ?>
+                                                </center>
+                                            </td>
                                     </tr>
                                     {/category_list}
                                     <?php
