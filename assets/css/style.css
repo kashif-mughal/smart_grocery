@@ -1242,7 +1242,29 @@ button.category-button:active {
       padding-right: 4px;
       border-right: 1px solid #ececec;
    }
+
+   .call_to_action_grid{
+      display: block;
+      border-right: none;
+      text-align: center;
+   }
+   .call_to_action_grid .call_to_action_image {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-top: 12px;
+   }
+   .categories .category-grid {
+      display: block;
+   }
    
+   .categories .category-grid .sub-category {
+      border-right: none !important;
+   }
+
+   .categories .category-grid .sub-category .sub-category-content h6 {
+      margin-top: 16px;
+   }
+
 }
 
 @media (max-width: 1024px) { 
