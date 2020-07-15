@@ -8,60 +8,76 @@ class Lproduct {
      * * Retrieve  Quize List From DB 
      */
 
-    public function product_list($links, $per_page, $page, $product_id = 0) {
+    // public function product_list($links, $per_page, $page, $product_id = 0) {
+
+    //     print_r('Links: '. $links . ', Per Page: ' . $per_page . ', Page: ' . $page . ', ProductId: '. $product_id);
+
+    //     $CI = & get_instance();
+    //     $CI->load->model('Products');
+    //     $CI->load->model('Web_settings');
+    //     $products_list = $CI->Products->product_list($per_page, $page, $product_id);
+    //     $all_product_list = $CI->Products->product_list_for_dropdown();
+    //     $i = 0;
+    //     if (!empty($products_list)) {
+    //         foreach ($products_list as $k => $v) {
+    //             $i++;
+    //             $products_list[$k]['sl'] = $i + $CI->uri->segment(3);
+    //         }
+    //     }
+    //     $all_categories = $CI->db->select('*')
+    //             ->from('product_category')
+    //             ->get()
+    //             ->result();
+    //     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+    //     $data = array(
+    //         'title' => display('manage_product'),
+    //         'products_list' => $products_list,
+    //         'all_product_list' => $all_product_list,
+    //         'links' => $links,
+    //         'currency' => $currency_details[0]['currency'],
+    //         'position' => $currency_details[0]['currency_position'],
+    //         'all_categories' => $all_categories
+    //     );
+
+    //     $productList = $CI->parser->parse('product/product', $data, true);
+    //     return $productList;
+    // }
+
+    public function product_list() {
         $CI = & get_instance();
         $CI->load->model('Products');
-        $CI->load->model('Web_settings');
-        $products_list = $CI->Products->product_list($per_page, $page, $product_id);
-        $all_product_list = $CI->Products->product_list_for_dropdown();
+
+        $product_list = $CI->Products->product_list();  //It will get all the products with status = 1
         $i = 0;
-        if (!empty($products_list)) {
-            foreach ($products_list as $k => $v) {
+        if(!empty($product_list)) {
+            foreach($product_list as $k => $v) {
                 $i++;
-                $products_list[$k]['sl'] = $i + $CI->uri->segment(3);
+                $product_list[$k]['sl'] = $i;
             }
         }
-        $all_categories = $CI->db->select('*')
-                ->from('product_category')
-                ->get()
-                ->result();
-        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+
         $data = array(
             'title' => display('manage_product'),
-            'products_list' => $products_list,
-            'all_product_list' => $all_product_list,
-            'links' => $links,
-            'currency' => $currency_details[0]['currency'],
-            'position' => $currency_details[0]['currency_position'],
-            'all_categories' => $all_categories
+            'product_list' => $product_list
         );
 
         $productList = $CI->parser->parse('product/product', $data, true);
+
         return $productList;
     }
 
     //Sub Category Add
     public function product_add_form() {
         $CI = & get_instance();
-        $CI->load->model('Products');
-        $CI->load->model('Suppliers');
+
         $CI->load->model('Categories');
-        $CI->load->model('Units');
-        $supplier = $CI->Suppliers->supplier_list("110", "0");
-        $category_list = $CI->Categories->category_list_product();
-        $unit_list = $CI->Units->unit_list();
-        $tax_list = $CI->db->select('*')
-                ->from('tax_information')
-                ->get()
-                ->result();
+        $categories = $CI->Categories->category_list_dropdown();
         $data = array(
-            'title' => "Add Item",
-            'supplier' => $supplier,
-            'category_list' => $category_list,
-            'unit_list' => $unit_list,
-            'tax_list' => $tax_list
+            'title' => 'Add Product',
+            'categories' => $categories
         );
         $productForm = $CI->parser->parse('product/add_product_form', $data, true);
+
         return $productForm;
     }
 
@@ -80,46 +96,26 @@ class Lproduct {
     public function product_edit_data($product_id) {
         $CI = & get_instance();
         $CI->load->model('Products');
-        $CI->load->model('Suppliers');
         $CI->load->model('Categories');
-        $CI->load->model('Units');
 
         $product_detail = $CI->Products->retrieve_product_editdata($product_id);
-        $supplier_product_detail = $CI->Products->supplier_product_editdata($product_id);
-        @$supplier_id = $product_detail[0]['supplier_id'];
-
-        @$category_id = $product_detail[0]['category_id'];
-        $supplier_list = $CI->Suppliers->supplier_list();
-        $supplier_selected = $CI->Products->supplier_selected($product_id);
-
-        $category_list = $CI->Categories->category_list_product();
-        $unit_list = $CI->Units->unit_list();
-        $category_selected = $CI->Categories->category_search_item($category_id);
-
-        $tax_list = $CI->db->select('*')
-                ->from('tax_information')
-                ->get()
-                ->result();
-
+        $categories = $CI->Categories->category_list_dropdown();
         $data = array(
-            'title' => display('edit_your_product'),
-            'product_id' => $product_detail[0]['product_id'],
-            'product_name' => $product_detail[0]['product_name'],
-            'price' => $product_detail[0]['price'],
-            'serial_no' => $product_detail[0]['serial_no'],
-            'product_model' => $product_detail[0]['product_model'],
-            'product_details' => $product_detail[0]['product_details'],
-            'image' => $product_detail[0]['image'],
-            'unit' => $product_detail[0]['unit'],
-            'supplier_list' => $supplier_list,
-            'supplier_selected' => $supplier_selected,
-            'unit_list' => $unit_list,
-            'category_list' => $category_list,
-            'category_selected' => $category_selected,
-            'tax_list' => $tax_list,
-            'tax_selecete' => $product_detail[0]['tax'] * 100,
-            'supplier_product_data' => $supplier_product_detail,
+            'title' => display('product_edit'),
+            'product_id' => $product_detail[0]['ProductId'],
+            'product_name' => $product_detail[0]['ProductName'],
+            'unit' => $product_detail[0]['Unit'],
+            'price' => $product_detail[0]['Price'],
+            'sale_price' => $product_detail[0]['SalePrice'],
+            'is_featured' => $product_detail[0]['IsFeatured'],
+            'is_hot' => $product_detail[0]['IsHot'],
+            'category' => $product_detail[0]['Category'],
+            'categories' => $categories,
+            'status' => $product_detail[0]['status']
         );
+
+        //print_r($data);
+
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 
         return $chapterList;

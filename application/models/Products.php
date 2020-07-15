@@ -14,30 +14,53 @@ class Products extends CI_Model {
         return $this->db->count_all("product_information");
     }
 
+
+    private $tableName = 'smart_products';
     //Product List
-    public function product_list($per_page, $page, $category_id = 0) {
-        $query = "SELECT pi.*, pi.product_id p_id, pc.category_name from product_information pi
-        join product_category pc on pi.category_id = pc.category_id
-        where pi.sub_product = '0' ";
-        if($category_id != 0)
-            $query .= "and pi.category_id = '". $category_id ."'";
-        $query .= " order by pi.product_id desc";
+    public function product_list() {
+        //$this->db->select('*');
+        //$this->db->from($this->tableName);
+        //$this->db-where('Status', 1);
+        //$query = $this->db->get();
+
+        // $query = $this->db->query("Select * from ".$this->tableName." Where Status = 1");
+
+        $query = "SELECT p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
+                        p.IsFeatured, p.IsHot, p.ProductImg from smart_products p join grocery_category c on p.Category = c.Id";
         $query = $this->db->query($query);
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
     }
 
+    //Product List
+    // public function product_list($per_page, $page, $category_id = 0) {
+    //     $query = "SELECT pi.*, pi.product_id p_id, pc.category_name from product_information pi
+    //     join product_category pc on pi.category_id = pc.category_id
+    //     where pi.sub_product = '0' ";
+    //     if($category_id != 0)
+    //         $query .= "and pi.category_id = '". $category_id ."'";
+    //     $query .= " order by pi.product_id desc";
+    //     $query = $this->db->query($query);
+    //     if ($query->num_rows() > 0) {
+    //         return $query->result_array();
+    //     }
+    //     return false;
+    // }
+
     //All Product List
     public function all_product_list() {
-        $query = $this->db->select('supplier_information.*,product_information.*,supplier_product.*')
-                ->from('product_information')
-                ->join('supplier_product', 'product_information.product_id = supplier_product.product_id', 'left')
-                ->join('supplier_information', 'supplier_information.supplier_id = supplier_product.supplier_id', 'left')
-                ->order_by('product_information.product_id', 'desc')
-                ->get();
+
+        $this->db->select('p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
+                         p.IsFeatured, p.IsHot');
+        $this->db->from('smart_products p');
+        $this->db->join('grocery_category c', 'p.Category=c.Id');
+        $query = $this->db->get();
+
         if ($query->num_rows() > 0) {
+            print_r($query->result_array());
             return $query->result_array();
         }
         return false;
@@ -58,12 +81,11 @@ class Products extends CI_Model {
 
     //Product List
     public function product_list_count() {
-        $query = $this->db->select('supplier_information.*,product_information.*,supplier_product.*')
-                ->from('product_information')
-                ->join('supplier_product', 'product_information.product_id = supplier_product.product_id', 'left')
-                ->join('supplier_information', 'supplier_information.supplier_id = supplier_product.supplier_id', 'left')
-                ->order_by('product_information.product_id', 'desc')
-                ->get();
+
+         $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('Status', 1);
+        $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         }
@@ -106,29 +128,25 @@ class Products extends CI_Model {
 
     //Count Product
     public function product_entry($data) {
-
         $this->db->select('*');
-        $this->db->from('product_information');
-        $this->db->where('status', 1);
-        $this->db->where('product_model', $data['product_model']);
+        $this->db->from($this->tableName);
+        $this->db->where('Status', 1);
+        $this->db->where('ProductName', $data['ProductName']);
         $query = $this->db->get();
+        
         if ($query->num_rows() > 0) {
             return FALSE;
         } else {
-            $this->db->insert('product_information', $data);
-            $this->db->select('*');
-            $this->db->from('product_information');
-            $this->db->where('status', 1);
-            $this->update_cache_file();
+            $this->db->insert($this->tableName, $data);
             return TRUE;
         }
     }
 
     //Retrieve Product Edit Data
     public function retrieve_product_editdata($product_id) {
-        $this->db->select('*');
-        $this->db->from('product_information');
-        $this->db->where('product_id', $product_id);
+         $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('ProductId', $product_id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -173,59 +191,18 @@ class Products extends CI_Model {
         return false;
     }
 
-    //Update Categories
+    //Update Products
     public function update_product($data, $product_id) {
-
-        $this->db->select('*');
-        $this->db->from('product_information');
-        $this->db->where('status', 1);
-        $this->db->where('product_id !=', $product_id);
-        $this->db->where('product_model', $data['product_model']);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return FALSE;
-        } else {
-            $this->db->where('product_id', $product_id);
-            $this->db->update('product_information', $data);
-
-
-
-            $this->db->select('*');
-            $this->db->from('product_information');
-            $this->db->where('status', 1);
-            $this->update_cache_file();
-            return true;
-        }
+        $this->db->where('ProductId', $product_id);
+        $this->db->update($this->tableName, $data);
+        return true;
     }
 
     // Delete Product Item
     public function delete_product($product_id) {
-
-        #### Check product is using on system or not##########
-        # If this product is used any calculation you can't delete this product.
-        # but if not used you can delete it from the system.
-        $this->db->select('product_id');
-        $this->db->from('product_purchase_details');
-        $this->db->where('product_id', $product_id);
-        $query = $this->db->get();
-        $affected_row = $this->db->affected_rows();
-
-        if ($affected_row == 0) {
-            $this->db->where('product_id', $product_id);
-            $this->db->delete('product_information');
-            $this->db->where('product_id', $product_id);
-            $this->db->delete('supplier_product');
-            $this->session->set_userdata(array('message' => display('successfully_delete')));
-
-            $this->db->select('*');
-            $this->db->from('product_information');
-            $this->db->where('status', 1);
-            $this->update_cache_file();
-            return true;
-        } else {
-            $this->session->set_userdata(array('error_message' => display('you_cant_delete_this_product')));
-            return false;
-        }
+        $this->db->where("ProductId", $product_id);
+        $this->db->delete($this->tableName);
+        return true;
     }
 
     //Product By Search 
