@@ -101,12 +101,16 @@ class CI_Model extends Lic {
         return true;
     }
 
-    public function customSelect($selectString, $where = null) {
+    public function customSelect($selectString, $where = null, $limit = null, $orderByCol = null, $orderByOrder = 'DESC') {
         $this->db->select($selectString);
         $this->db->from($this->tableName);
         $this->db->where('Status', 1);
         if(!is_null($where))
         	$this->db->where($where);
+        if(!is_null($orderByCol))
+            $this->db->order_by($orderByCol, $orderByOrder);
+        if(!is_null($limit))
+            $this->db->limit($limit);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();

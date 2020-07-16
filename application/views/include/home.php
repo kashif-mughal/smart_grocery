@@ -21,7 +21,7 @@
                               <?php if($discountPercentage != 0) { ?> 
                                  <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
                               <?php } ?>
-                                 <a href="#" class="add_to_favorite">
+                                 <a href="javascript:void(0)" class="add_to_favorite">
                                     <i class="fas fa-heart float-right"></i>
                                  </a>
                               </div>

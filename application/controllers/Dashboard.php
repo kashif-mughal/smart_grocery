@@ -23,7 +23,9 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Products');
 
         $category_list = $CI->Categories->category_list();
-        $product_list = $CI->Products->product_list();
+        $product_list = $CI->Products->customSelect(
+                '*', 'IsFeatured = 1', 20, 'ModifiedOn'
+        );
 
         $catArray = Array();
         for ($i=0; $i < count($category_list); $i++) { 
