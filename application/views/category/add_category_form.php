@@ -83,7 +83,7 @@
                                 <select class="form-control" name ="ParentId" id="ParentId">
                                     <option value="0">None</option>
                                     {parent_categories}
-                                        <option value="{Id}">{CatName}</option>
+                                        <option value="{CategoryId}">{CatName}</option>
                                     {/parent_categories}
                                 </select>
                             </div>

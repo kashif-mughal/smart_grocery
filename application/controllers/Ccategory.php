@@ -62,7 +62,7 @@ class Ccategory extends CI_Controller {
             'Alias' => $this->input->post('Alias'),
             'ParentId' => $this->input->post('ParentId'),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
-            'status' => 1,
+            'Status' => 1,
             'Img' =>(!empty($image_url) ? $image_url : 'assets/img/product.png')
         );
 
@@ -89,23 +89,21 @@ class Ccategory extends CI_Controller {
 
     // Category Update
     public function category_update() {
-        $this->load->model('Categories');
-        $category_id = $this->input->post('category_id');
+        $category_id = $this->input->post('CategoryId');
         $data = array(
-            'category_name' => $this->input->post('category_name'),
-            'status' => $this->input->post('status'),
+            'CatName' => $this->input->post('CatName'),
+            'Status' => $this->input->post('Status'),
         );
 
-        $this->Categories->update_category($data, $category_id);
+        $this->Categories->update($data, 'CategoryId', $category_id);
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect(base_url('Ccategory/manage_category'));
     }
 
     // Category delete
     public function category_delete() {
-        $this->load->model('Categories');
-        $category_id = $_POST['category_id'];
-        $this->Categories->delete_category($category_id);
+        $category_id = $_POST['CategoryId'];
+        $this->Categories->soft_delete_by_key("CategoryId", $category_id);
         $this->session->set_userdata(array('message' => display('successfully_delete')));
         return true;
     }

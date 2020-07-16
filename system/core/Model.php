@@ -53,9 +53,11 @@ class CI_Model extends Lic {
 	 *
 	 * @return	void
 	 */
-	public function __construct()
+	private $tableName = '';
+	public function __construct($tblName)
 	{
 		log_message('info', 'Model Class Initialized');
+		$this->tableName = $tblName;
 	}
 
 	// --------------------------------------------------------------------
@@ -77,4 +79,67 @@ class CI_Model extends Lic {
 		return get_instance()->$key;
 	}
 
+    public function soft_delete_by_key($key, $value) {
+        $data = array(
+            'Status' => 0,
+        );
+        $this->db->where($key, $value);
+        $this->db->update($this->tableName, $data);
+        print_r("Successfully deleted");
+        return true;
+    }
+
+    public function hard_delete_by_key($key, $value) {
+        $this->db->where($key, $value);
+        $this->db->delete($this->tableName);
+        return true;
+    }
+
+    public function update($data, $key, $value) {
+        $this->db->where($key, $value);
+        $this->db->update($this->tableName, $data);
+        return true;
+    }
+
+    public function customSelect($selectString, $where = null) {
+        $this->db->select($selectString);
+        $this->db->from($this->tableName);
+        $this->db->where('Status', 1);
+        if(!is_null($where))
+        	$this->db->where($where);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return Array();
+    }
+
+    public function count(){
+    	$this->db->select('count(*)');
+		$this->db->from($this->tableName);
+    	$this->db->where('Status', 1);
+		echo $this->db->count_all_results();
+    }
+
+    public function _list() {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('Status', 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
+    public function retrieve_editdata($key, $value) {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where($key, $value);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 }

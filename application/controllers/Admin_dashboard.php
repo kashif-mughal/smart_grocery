@@ -8,7 +8,6 @@ class Admin_dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
-        $this->load->model('Reports');
         //$this->load->database();
     }
 

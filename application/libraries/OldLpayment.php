@@ -69,7 +69,7 @@ class Lpayment {
 	{
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->date_summary_query($per_page,$page);
        	$category 	= $CI->Payment->tran_cat_list();
@@ -214,7 +214,7 @@ class Lpayment {
 	public function trans_data($links=null,$per_page=null,$page=null){
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->tran_rep_query($per_page,$page);
 
@@ -261,7 +261,7 @@ class Lpayment {
 	public function trans_datewise_data($links=null,$per_page=null,$page=null){
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->date_summary_query($per_page,$page);
 
@@ -310,7 +310,7 @@ class Lpayment {
 	public function result_datewise_data($start,$end){
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->search_query($start,$end);
 
@@ -359,7 +359,7 @@ class Lpayment {
 	public function trans_custom_report_data($links,$per_page=null,$page=null){
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->date_summary_query($per_page,$page);
        	$category = $CI->Payment->tran_cat_list();
@@ -412,7 +412,7 @@ class Lpayment {
 	public function custom_result_datewise_data($start,$end,$account){
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$category = $CI->Payment->tran_cat_list();
 		$ledger 	= $CI->Payment->custom_search_query($start,$end,$account);
@@ -458,7 +458,7 @@ class Lpayment {
 	{
 		$CI =& get_instance();
 		$CI->load->model('Payment');
-		$CI->load->model('Reports');
+		
 
 		$ledger 	= $CI->Payment->date_summary_query_date_to_date($start,$end);
        	$category 	= $CI->Payment->tran_cat_list();

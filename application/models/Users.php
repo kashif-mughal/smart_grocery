@@ -6,9 +6,9 @@ if (!defined('BASEPATH'))
 class Users extends CI_Model {
 
     public function __construct() {
-        parent::__construct();
+        parent::__construct('users');
     }
-
+    private $tableName = 'users';
     function check_valid_user($username, $password) {
         $password = md5("gef" . $password);
         $this->db->where(array('username' => $username, 'password' => $password, 'status' => 1));

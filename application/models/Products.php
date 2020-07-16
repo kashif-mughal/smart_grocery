@@ -6,27 +6,22 @@ if (!defined('BASEPATH'))
 class Products extends CI_Model {
 
     public function __construct() {
-        parent::__construct();
+        parent::__construct('grocery_products');
     }
-
+    private $tableName = 'grocery_products';
     //Count Product
     public function count_product() {
         return $this->db->count_all("product_information");
     }
 
-
-    private $tableName = 'smart_products';
     //Product List
     public function product_list() {
-        //$this->db->select('*');
-        //$this->db->from($this->tableName);
-        //$this->db-where('Status', 1);
-        //$query = $this->db->get();
-
-        // $query = $this->db->query("Select * from ".$this->tableName." Where Status = 1");
 
         $query = "SELECT p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
-                        p.IsFeatured, p.IsHot, p.ProductImg from smart_products p join grocery_category c on p.Category = c.Id";
+                        CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
+                        CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot, 
+                        -- p.IsFeatured, p.IsHot,
+                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId where p.Status = 1";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {
@@ -35,27 +30,11 @@ class Products extends CI_Model {
         return false;
     }
 
-    //Product List
-    // public function product_list($per_page, $page, $category_id = 0) {
-    //     $query = "SELECT pi.*, pi.product_id p_id, pc.category_name from product_information pi
-    //     join product_category pc on pi.category_id = pc.category_id
-    //     where pi.sub_product = '0' ";
-    //     if($category_id != 0)
-    //         $query .= "and pi.category_id = '". $category_id ."'";
-    //     $query .= " order by pi.product_id desc";
-    //     $query = $this->db->query($query);
-    //     if ($query->num_rows() > 0) {
-    //         return $query->result_array();
-    //     }
-    //     return false;
-    // }
-
-    //All Product List
     public function all_product_list() {
 
         $this->db->select('p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
                          p.IsFeatured, p.IsHot');
-        $this->db->from('smart_products p');
+        $this->db->from('grocery_products p');
         $this->db->join('grocery_category c', 'p.Category=c.Id');
         $query = $this->db->get();
 
@@ -189,20 +168,6 @@ class Products extends CI_Model {
             return $query->result_array();
         }
         return false;
-    }
-
-    //Update Products
-    public function update_product($data, $product_id) {
-        $this->db->where('ProductId', $product_id);
-        $this->db->update($this->tableName, $data);
-        return true;
-    }
-
-    // Delete Product Item
-    public function delete_product($product_id) {
-        $this->db->where("ProductId", $product_id);
-        $this->db->delete($this->tableName);
-        return true;
     }
 
     //Product By Search 

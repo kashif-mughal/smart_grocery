@@ -18,7 +18,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -88,7 +88,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -146,7 +146,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->library('occational');
 
@@ -268,7 +268,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Suppliers');
 
@@ -384,7 +384,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Suppliers');
 
@@ -502,7 +502,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Suppliers');
 
@@ -664,7 +664,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -762,7 +762,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -824,7 +824,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -888,7 +888,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -956,7 +956,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1026,7 +1026,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1082,7 +1082,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1156,7 +1156,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1212,7 +1212,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1276,7 +1276,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1350,7 +1350,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1424,7 +1424,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 
@@ -1510,7 +1510,7 @@ class Lreport {
 
         $CI = & get_instance();
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->model('Web_settings');
 

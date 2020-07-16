@@ -59,256 +59,23 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 			<div class="categories my-4">
 				<h4>Categories</h4>
 				<div class="category-grid">
-					<div class="sub-category">
-						<div class="sub-category-content">
 
-							<h6>EDIBLES</h6>
-							
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
-							</a>
+					<?php foreach($CatList as $key => $value) {?>
+						<div class="sub-category">
+							<div class="sub-category-content">
 
+								<h6><?=$key?></h6>
+								
+								<?php for ($i=0; $i < count($value); $i++) {?>
+									<a href="#">
+										<span class="hyphen">&#8212;</span> <span class="category-text"><?=$value[$i]['Alias']?></span>
+									</a>
+								<?php } ?>
+
+							</div>
 						</div>
-					</div>
+					<?php } ?>
 
-					<div class="sub-category">
-						<div class="sub-category-content">
-
-							<h6>SNACKS & BREAKFAST</h6>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
-							</a>
-							
-						</div>
-					</div>
-
-					<div class="sub-category">
-						<div class="sub-category-content">
-
-							<h6>EDIBLES</h6>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
-							</a>
-							
-						</div>
-					</div>
-
-					<div class="sub-category">
-						<div class="sub-category-content">
-
-							<h6>EDIBLES</h6>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
-							</a>
-							
-						</div>
-					</div>
-
-					<div class="sub-category">
-						<div class="sub-category-content">
-
-							<h6>EDIBLES</h6>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
-							</a>
-							<a href="#">
-								<span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
-							</a>
-							
-						</div>
-					</div>
 
 				</div>
 			</div>
@@ -397,7 +164,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 							<p>info@saudaexpress.com, 0300 123 45678, Plot No. 30, Sector 26, Korangi Industrial Area, Karachi,<br>PakistanSauda Express &#0174 2020</p>
 						</div>
 						<div class="col-md-3">
-							<p class="float-right">Power by: Malejol</p>
+							<p class="float-right">Power by: <a href="http://bitechware.com/" target="_blank">bitechware 	</a></p>
 						</div>
 					</div>
 				</div>

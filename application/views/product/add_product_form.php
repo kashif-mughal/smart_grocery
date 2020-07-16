@@ -115,7 +115,7 @@
                                 <select class="form-control" name ="CategoryId" id="CategoryId">
                                     <option value="0">None</option>
                                     {categories}
-                                        <option value="{Id}">{CatName}</option>
+                                        <option value="{CategoryId}">{CatName}</option>
                                     {/categories}
                                 </select>
                             </div>

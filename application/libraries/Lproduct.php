@@ -4,44 +4,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Lproduct {
-    /*
-     * * Retrieve  Quize List From DB 
-     */
-
-    // public function product_list($links, $per_page, $page, $product_id = 0) {
-
-    //     print_r('Links: '. $links . ', Per Page: ' . $per_page . ', Page: ' . $page . ', ProductId: '. $product_id);
-
-    //     $CI = & get_instance();
-    //     $CI->load->model('Products');
-    //     $CI->load->model('Web_settings');
-    //     $products_list = $CI->Products->product_list($per_page, $page, $product_id);
-    //     $all_product_list = $CI->Products->product_list_for_dropdown();
-    //     $i = 0;
-    //     if (!empty($products_list)) {
-    //         foreach ($products_list as $k => $v) {
-    //             $i++;
-    //             $products_list[$k]['sl'] = $i + $CI->uri->segment(3);
-    //         }
-    //     }
-    //     $all_categories = $CI->db->select('*')
-    //             ->from('product_category')
-    //             ->get()
-    //             ->result();
-    //     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-    //     $data = array(
-    //         'title' => display('manage_product'),
-    //         'products_list' => $products_list,
-    //         'all_product_list' => $all_product_list,
-    //         'links' => $links,
-    //         'currency' => $currency_details[0]['currency'],
-    //         'position' => $currency_details[0]['currency_position'],
-    //         'all_categories' => $all_categories
-    //     );
-
-    //     $productList = $CI->parser->parse('product/product', $data, true);
-    //     return $productList;
-    // }
 
     public function product_list() {
         $CI = & get_instance();
@@ -57,7 +19,7 @@ class Lproduct {
         }
 
         $data = array(
-            'title' => display('manage_product'),
+            'title' => 'Manage Product',
             'product_list' => $product_list
         );
 
@@ -71,7 +33,7 @@ class Lproduct {
         $CI = & get_instance();
 
         $CI->load->model('Categories');
-        $categories = $CI->Categories->category_list_dropdown();
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $data = array(
             'title' => 'Add Product',
             'categories' => $categories
@@ -99,9 +61,9 @@ class Lproduct {
         $CI->load->model('Categories');
 
         $product_detail = $CI->Products->retrieve_product_editdata($product_id);
-        $categories = $CI->Categories->category_list_dropdown();
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $data = array(
-            'title' => display('product_edit'),
+            'title' => 'Product Edit',
             'product_id' => $product_detail[0]['ProductId'],
             'product_name' => $product_detail[0]['ProductName'],
             'unit' => $product_detail[0]['Unit'],
@@ -119,37 +81,6 @@ class Lproduct {
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 
         return $chapterList;
-    }
-
-    //Search Product
-    public function product_search_list($product_id) {
-        $CI = & get_instance();
-        $CI->load->model('Products');
-        $CI->load->model('Web_settings');
-        $products_list = $CI->Products->product_search_item($product_id);
-        $all_product_list = $CI->Products->product_list_for_dropdown();
-
-        $i = 0;
-        if ($products_list) {
-            foreach ($products_list as $k => $v) {
-                $i++;
-                $products_list[$k]['sl'] = $i;
-            }
-
-            $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-            $data = array(
-                'title' => display('manage_product'),
-                'products_list' => $products_list,
-                'all_product_list' => $all_product_list,
-                'links' => "",
-                'currency' => $currency_details[0]['currency'],
-                'position' => $currency_details[0]['currency_position'],
-            );
-            $productList = $CI->parser->parse('product/product', $data, true);
-            return $productList;
-        } else {
-            redirect('Cproduct/manage_product');
-        }
     }
 
     //Product Details
@@ -187,7 +118,7 @@ class Lproduct {
         $stock = ($totalPurchase - $totalSales);
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $data = array(
-            'title' => display('product_report'),
+            'title' => 'Product Report',
             'product_name' => $details_info[0]['product_name'],
             'product_model' => $details_info[0]['product_model'],
             'price' => $details_info[0]['price'],
@@ -259,7 +190,7 @@ class Lproduct {
         $company_info = $CI->Products->retrieve_company();
 
         $data = array(
-            'title' => display('product_statement'),
+            'title' => 'Product Statement',
             'product_id' => $details_info[0]['product_id'],
             'product_name' => $details_info[0]['product_name'],
             'product_model' => $details_info[0]['product_model'],

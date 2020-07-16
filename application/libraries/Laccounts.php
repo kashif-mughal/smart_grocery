@@ -10,7 +10,6 @@ class Laccounts {
         $CI = & get_instance();
         $CI->load->model('Accounts');
         $CI->load->model('Web_settings');
-        $CI->load->model('Reports');
         $CI->load->library('occational');
         $daily_closing_data = $CI->Accounts->get_closing_report($per_page, $page);
 
@@ -43,7 +42,6 @@ class Laccounts {
 //            echo $from_date. " - ". $to_date;die();
         $CI = & get_instance();
         $CI->load->model('Accounts');
-        $CI->load->model('Reports');
         $CI->load->library('occational');
         $daily_closing_data = $CI->Accounts->get_date_wise_closing_report($per_page, $page, $from_date, $to_date);
 //        echo '<pre>';        print_r($daily_closing_data); die();

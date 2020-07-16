@@ -7,11 +7,11 @@ class Web_settings extends CI_Model {
 
     private $table = "language";
     private $phrase = "phrase";
-
+    private $tableName = 'web_setting';
     public function __construct() {
-        parent::__construct();
+        parent::__construct('web_setting');
     }
-
+    
     //Retrieve Setting Edit Data
     public function retrieve_setting_editdata() {
         $this->db->select('*');

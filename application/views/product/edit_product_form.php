@@ -5,12 +5,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('product_edit') ?></h1>
-            <small><?php echo display('product_edit') ?></small>
+            <h1>Product Edit</h1>
+            <small>Product Edit</small>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('product') ?></a></li>
-                <li class="active"><?php echo display('product_edit') ?></li>
+                <li><a href="#"><i class="pe-7s-home"></i> Home</a></li>
+                <li><a href="#">Product</a></li>
+                <li class="active">Product Edit</li>
             </ol>
         </div>
     </section>
@@ -47,30 +47,30 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4><?php echo display('product_edit') ?> </h4>
+                            <h4>Product Edit </h4>
                         </div>
                     </div>
                   <?php echo form_open_multipart('Cproduct/product_update',array('class' => 'form-vertical', 'id' => 'product_update'))?>
                     <div class="panel-body">
 
                     	<div class="form-group row">
-                            <label for="product_name" class="col-sm-3 col-form-label"><?php echo display('product_name') ?> <i class="text-danger">*</i></label>
+                            <label for="product_name" class="col-sm-3 col-form-label">Product_name <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="product_name" id="product_name" type="text" placeholder="<?php echo display('products_name'); ?>"  required="" value="{product_name}">
+                                <input class="form-control" name ="product_name" id="product_name" type="text" placeholder="Products Name"  required="" value="{product_name}">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="unit" class="col-sm-3 col-form-label"><?php echo display('unit') ?> <i class="text-danger">*</i></label>
+                            <label for="unit" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="unit" id="unit" type="text" placeholder="<?php echo display('unit'); ?>"  required="" value="{unit}">
+                                <input class="form-control" name ="unit" id="unit" type="text" placeholder="Unit"  required="" value="{unit}">
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="price" class="col-sm-3 col-form-label"><?php echo display('price') ?> <i class="text-danger">*</i></label>
+                            <label for="price" class="col-sm-3 col-form-label">Price <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="price" id="price" type="text" placeholder="<?php echo display('price'); ?>"  required="" value="{price}">
+                                <input class="form-control" name ="price" id="price" type="text" placeholder="Price"  required="" value="{price}">
                             </div>
                         </div>
 
@@ -86,8 +86,8 @@
                             <label for="isFeatured" class="col-sm-3 col-form-label">Is Featured <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="isFeatured" id="isFeatured">
-                                    <option value="1"><?php echo display('active') ?></option>
-                                    <option value="0"><?php echo display('inactive') ?></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -96,8 +96,8 @@
                             <label for="isHot" class="col-sm-3 col-form-label">Is Hot <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="isHot" id="isHot">
-                                    <option value="1"><?php echo display('active') ?></option>
-                                    <option value="0"><?php echo display('inactive') ?></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -109,18 +109,21 @@
                                 <select class="form-control" name ="CategoryId" id="CategoryId">
                                     <option value="0">None</option>
                                     {categories}
-                                        <option value="{Id}">{CatName}</option>
+                                        <option value="{CategoryId}">{CatName}</option>
                                     {/categories}
                                 </select>
                             </div>
                         </div>
+                        <script type="text/javascript">
+                            $('#CategoryId').val('<?=$category?>');
+                        </script>
 
                         <div class="form-group row">
-                            <label for="status" class="col-sm-3 col-form-label"><?php echo display('status') ?> <i class="text-danger">*</i></label>
+                            <label for="status" class="col-sm-3 col-form-label">Status <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="status" id="status">
-                                    <option value="1"><?php echo display('active') ?></option>
-                                    <option value="0"><?php echo display('inactive') ?></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -130,7 +133,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
                             <div class="col-sm-6">
-                                <input type="submit" id="edit-product" class="btn btn-success btn-large" name="edit-product" value="<?php echo display('save_changes') ?>" />
+                                <input type="submit" id="edit-product" class="btn btn-success btn-large" name="edit-product" value="Save Changes" />
                             </div>
                         </div>
                     </div>

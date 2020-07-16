@@ -71,8 +71,8 @@
                                         <th class="text-center">Unit</th>
                                         <th class="text-center">Sale Price</th>
                                         <th class="text-center">Last Modified</th>
-                                        <th class="text-center">IsFeatured</th>
-                                        <th class="text-center">IsHot</th>
+                                        <th class="text-center">Featured</th>
+                                        <th class="text-center">Hot</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>

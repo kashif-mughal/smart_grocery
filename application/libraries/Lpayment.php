@@ -114,7 +114,7 @@ class Lpayment {
     public function payment_list($links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Payment');
-        $CI->load->model('Reports');
+        
         $CI->load->library('occational');
 
         $CI->load->model('Purchases');
@@ -486,7 +486,7 @@ class Lpayment {
     public function payment_date_date_info($star_date, $end_date, $links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Payment');
-        $CI->load->model('Reports');
+        
         $CI->load->library('occational');
         $ledger = $CI->Payment->date_summary_date_to_date($star_date, $end_date, $per_page, $page);
         $category = $CI->Payment->tran_cat_list();
@@ -612,7 +612,7 @@ class Lpayment {
        public function voucher_list($links, $per_page, $page) {
         $CI = & get_instance();
         $CI->load->model('Payment');
-        $CI->load->model('Reports');
+        
         $CI->load->library('occational');
 
 

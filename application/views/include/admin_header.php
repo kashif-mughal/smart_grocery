@@ -1,11 +1,10 @@
 <?php
 $CI = & get_instance();
 $CI->load->model('Web_settings');
-$CI->load->model('Reports');
+
 $CI->load->model('Users');
 $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 $users = $CI->Users->profile_edit_data();
-$out_of_stock = $CI->Reports->out_of_stock_count();
 ?>
 <!-- Admin header end -->
 <style type="text/css">
@@ -152,8 +151,27 @@ $out_of_stock = $CI->Reports->out_of_stock_count();
             </li>
             <!-- Product menu end -->
 
-            <!-- Transection menu start -->
-          
+            <!-- Brand menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Cbrand")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="ti-bag"></i><span>Brand</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Cbrand') ?>">Add brand</a></li>
+                    <li><a href="<?php echo base_url('Cbrand/manage_brand') ?>">Manage brand</a></li>
+
+                </ul>
+            </li>
+            <!-- Product menu end -->            
 
     </ul>
 </div> <!-- /.sidebar -->

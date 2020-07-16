@@ -16,7 +16,6 @@ class Linvoice {
         $CI->load->model('Invoices');
         $CI->load->model('Web_settings');
         $CI->load->library('occational');
-        $CI->load->model('Reports');
 
         $monthly_sales_report = $CI->Reports->monthly_sales_report_mk($from_date, $to_date);
 
@@ -78,7 +77,6 @@ class Linvoice {
 
         $CI->load->library('occational');
 
-        $CI->load->model('Reports');
 
 
         $invoices_list = $CI->Invoices->invoice_list($perpage, $page);
@@ -214,7 +212,7 @@ class Linvoice {
 
         $CI->load->model('Web_settings');
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->library('occational');
 
@@ -290,7 +288,7 @@ class Linvoice {
 
         $CI->load->model('Web_settings');
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->library('occational');
 
@@ -425,7 +423,7 @@ class Linvoice {
 
         $CI->load->model('Web_settings');
 
-        $CI->load->model('Reports');
+        
 
         $CI->load->library('occational');
 

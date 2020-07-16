@@ -2,7 +2,6 @@
 $CI = & get_instance();
 $CI->load->model('Users');
 $users = $CI->Users->profile_edit_data();
-$out_of_stock = $CI->Reports->out_of_stock_count();
 ?>
 
 <div class="section-head">

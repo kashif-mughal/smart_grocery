@@ -291,16 +291,16 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                         $ttl_amount = $ttl_paid = $ttl_due = $ttl_discout = $ttl_receipt = 0;
+                                        $ttl_amount = $ttl_paid = $ttl_due = $ttl_discout = $ttl_receipt = 0;
                                         $todays = date('Y-m-d');
                                         if ($todays_sales_report) {
                                             $sl = 0;
 //                                            echo '<pre>';   print_r($todays_sales_report); echo '<pre>';
                                             foreach ($todays_sales_report as $single) {
                                                 $sql = "SELECT (SELECT SUM(total_price) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_amount, 
-		(SELECT SUM(paid_amount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_paid, 
-		(SELECT SUM(due_amount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_due, 
-		(SELECT SUM(total_discount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_discount";
+                                                (SELECT SUM(paid_amount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_paid, 
+                                                (SELECT SUM(due_amount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_due, 
+                                                (SELECT SUM(total_discount) FROM invoice_details a JOIN invoice b ON b.invoice_id = a.invoice_id WHERE a.invoice_id = '" . $single->invoice_id . "' AND b.customer_id = '" . $single->customer_id . "') as total_discount";
                                                 $result = $this->db->query($sql)->row();
                                                 
                                                 $todays_receipt_sql = "SELECT SUM(a.amount) today_receipt FROM transection a JOIN customer_information b ON b.customer_id = a.relation_id WHERE a.date_of_transection = '".$todays."' AND a.relation_id = '" . $single->customer_id . "'";
@@ -410,116 +410,3 @@
 
 <!-- ChartJs JavaScript -->
 <script src="<?php echo base_url() ?>assets/plugins/chartJs/Chart.min.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-<?php
-$chart_label = $chart_data = '';
-if (!empty($best_sales_product))
-    for ($i = 0; $i < 12; $i++) {
-        $chart_label .= (!empty($best_sales_product[$i]) ? '"' . $best_sales_product[$i]->product_name . '", ' : null);
-        $chart_data .= (!empty($best_sales_product[$i]) ? $best_sales_product[$i]->quantity . ', ' : null);
-    }
-$chart_label = rtrim($chart_label, ", ");
-$chart_data = rtrim($chart_data, ", ");
-?>
-    //line chart
-    var ctx = document.getElementById("lineChart");
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-//            labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
-            labels: [<?php echo $chart_label; ?>],
-            datasets: [
-                {
-                    label: "Sales Product",
-                    fillColor: "#000000",
-                    strokeColor: "#000000",
-                    pointColor: "#000000",
-                    pointStrokeColor: "#000000",
-                    pointHighlightFill: "#000000",
-                    pointHighlightStroke: "#000000",
-                    maintainAspectRatio: false,
-                    scaleFontColor: "#000000",
-                    pointLabelFontColor: "#000000",
-                    pointLabelFontSize: 30,
-                    data: [<?php echo $chart_data; ?>]
-                }
-//                ,
-//                {
-//                    label: "Purchase",
-//                    borderColor: "#73BC4D",
-//                    borderWidth: "1",
-//                    backgroundColor: "#73BC4D",
-//                    pointHighlightStroke: "rgba(26,179,148,1)",
-//                    data: [
-//                    <?php
-if (!empty($monthly_sales_report[1]))
-    for ($i = 0; $i < 12; $i++)
-        echo (!empty($monthly_sales_report[1][$i]) ? $monthly_sales_report[1][$i]->total_month . ", " : null);
-?>// 
-//                    ]
-//                }
-            ]
-        },
-        options: {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
-            scales: {
-                xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Products'
-                        }
-                    }],
-                yAxes: [{
-                        display: true,
-                        ticks: {
-                            beginAtZero: true,
-                            steps: 10,
-                            stepValue: 5,
-                            max: <?php
-$seperatedData = explode(',', $chart_data);
-echo ($seperatedData[0] + 10);
-?>
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Quantity'
-                        }
-                    }]
-            },
-            "animation": {
-                "duration": 1,
-                "onComplete": function () {
-                    var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-
-                    // ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                    ctx.color = '#000000';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'bottom';
-
-                    this.data.datasets.forEach(function (dataset, i) {
-                        var meta = chartInstance.controller.getDatasetMeta(i);
-                        meta.data.forEach(function (bar, index) {
-                            var data = dataset.data[index];
-                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                        });
-                    });
-                }
-            }
-        }
-
-
-    });
-
-    //
-</script>

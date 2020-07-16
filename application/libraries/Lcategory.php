@@ -43,7 +43,7 @@ class Lcategory {
         }
         $data = array(
 
-            'title' => display('manage_category'),
+            'title' => 'Manage Category',
 
             'category_list' => $category_list,
 
@@ -64,7 +64,7 @@ class Lcategory {
         $CI = & get_instance();
 
         $CI->load->model('Categories');
-        $categories = $CI->Categories->category_list_dropdown();
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $data = array(
 
             'title' => 'Add Category',
@@ -88,19 +88,19 @@ class Lcategory {
 
         $CI->load->model('Categories');
 
-        $category_detail = $CI->Categories->retrieve_category_editdata($category_id);
+        $category_detail = $CI->Categories->retrieve_editdata('CategoryId', $category_id);
 
 
 
         $data = array(
 
-            'title' => display('category_edit'),
+            'title' => 'Category Edit',
 
-            'category_id' => $category_detail[0]['category_id'],
+            'CategoryId' => $category_detail[0]['CategoryId'],
 
-            'category_name' => $category_detail[0]['category_name'],
+            'CatName' => $category_detail[0]['CatName'],
 
-            'status' => $category_detail[0]['status']
+            'Status' => $category_detail[0]['Status']
 
         );
 
