@@ -653,3 +653,21 @@ DEBUG - 2020-07-16 08:47:38 --> Auth class already loaded. Second attempt ignore
 DEBUG - 2020-07-16 08:47:38 --> Session class already loaded. Second attempt ignored.
 DEBUG - 2020-07-16 08:47:38 --> Lproduct class already loaded. Second attempt ignored.
 DEBUG - 2020-07-16 08:47:38 --> Total execution time: 0.1163
+DEBUG - 2020-07-16 08:50:42 --> UTF-8 Support Enabled
+DEBUG - 2020-07-16 08:50:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-16 08:50:42 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Lproduct class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Total execution time: 0.1163
+DEBUG - 2020-07-16 08:50:42 --> UTF-8 Support Enabled
+DEBUG - 2020-07-16 08:50:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-16 08:50:42 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Lproduct class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Total execution time: 0.1308
+DEBUG - 2020-07-16 08:50:42 --> UTF-8 Support Enabled
+DEBUG - 2020-07-16 08:50:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2020-07-16 08:50:42 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Lproduct class already loaded. Second attempt ignored.
+DEBUG - 2020-07-16 08:50:42 --> Total execution time: 0.1157

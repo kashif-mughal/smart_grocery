@@ -141,11 +141,7 @@ $users = $CI->Users->profile_edit_data();
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('Cproduct') ?>"><?php echo display('add_product') ?></a></li>
-                    <li><a href="<?php echo base_url('Cproduct/add_item') ?>">Add Item</a></li>
-                    <li><a href="<?php echo base_url('Cproduct/add_product_csv') ?>"><?php echo display('import_product_csv') ?></a></li>
                     <li><a href="<?php echo base_url('Cproduct/manage_product') ?>"><?php echo display('manage_product') ?></a></li>
-                    <li><a href="<?php echo base_url('Cproduct/add_stock') ?>">Add Stock</a></li>
-                    <li><a href="<?php echo base_url('Cproduct/manage_stock') ?>">Manage Stock</a></li>
 
                 </ul>
             </li>
