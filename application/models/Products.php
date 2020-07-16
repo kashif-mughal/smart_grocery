@@ -121,18 +121,6 @@ class Products extends CI_Model {
         }
     }
 
-    //Retrieve Product Edit Data
-    public function retrieve_product_editdata($product_id) {
-         $this->db->select('*');
-        $this->db->from($this->tableName);
-        $this->db->where('ProductId', $product_id);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return false;
-    }
-
     // Supplier product information
     public function supplier_product_editdata($product_id) {
         $this->db->select('a.*,b.*');

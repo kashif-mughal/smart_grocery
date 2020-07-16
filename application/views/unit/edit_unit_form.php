@@ -1,16 +1,16 @@
-<!-- add unit form start -->
+<!-- Add new customer start -->
 <div class="content-wrapper">
     <section class="content-header">
         <div class="header-icon">
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('add_unit') ?></h1>
-            <small><?php echo display('add_new_unit') ?></small>
+            <h1>Update Unit</h1>
+            <small>Update New Unit</small>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#"><?php echo display('unit') ?></a></li>
-                <li class="active"><?php echo display('add_unit') ?></li>
+                <li><a href="#"><i class="pe-7s-home"></i> Home</a></li>
+                <li><a href="#">Unit</a></li>
+                <li class="active">Update Unit</li>
             </ol>
         </div>
     </section>
@@ -45,7 +45,7 @@
             <div class="col-sm-12">
                 <div class="column">
 
-                    <a href="<?php echo base_url('Cunit/manage_unit') ?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-align-justify"> </i> <?php echo display('manage_unit') ?> </a>
+                    <a href="<?php echo base_url('Cunit/manage_unit') ?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-align-justify"> </i> Manage Unit </a>
 
                 </div>
             </div>
@@ -57,23 +57,24 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4><?php echo display('add_unit') ?> </h4>
+                            <h4>Update Unit </h4>
                         </div>
                     </div>
-                    <?php echo form_open('Cunit/insert_unit', array('class' => 'form-vertical', 'id' => 'insert_unit')) ?>
+                    <?php echo form_open('Cunit/unit_update', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'insert_unit')) ?>
+                    <input type="hidden" name="UnitId" value="<?=$UnitData['UnitId']?>">
                     <div class="panel-body">
 
                         <div class="form-group row">
-                            <label for="unit_name" class="col-sm-3 col-form-label"><?php echo display('unit_name') ?> <i class="text-danger">*</i></label>
+                            <label for="UnitName" class="col-sm-3 col-form-label">Unit Name <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="unit_name" id="unit_name" type="text" placeholder="<?php echo display('unit_name') ?>"  required="">
+                                <input class="form-control" name ="UnitName" id="UnitName" type="text" value="<?=$UnitData['UnitName']?>" placeholder="unit Name"  required="">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
                             <div class="col-sm-6">
-                                <input type="submit" id="add-customer" class="btn btn-success btn-large" name="add-customer" value="<?php echo display('save') ?>" />
+                                <input type="submit" id="add-customer" class="btn btn-success btn-large" name="add-customer" value="Save" />
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
         </div>
     </section>
 </div>
-<!--  add unit form end -->
+<!-- Add new customer end -->
 
 
 

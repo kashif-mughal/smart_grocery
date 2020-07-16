@@ -167,7 +167,29 @@ $users = $CI->Users->profile_edit_data();
 
                 </ul>
             </li>
-            <!-- Product menu end -->            
+            <!-- Brand menu end -->
+
+            <!-- Unit menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Cunit")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="fa fa-balance-scale "></i><span>Unit</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Cunit') ?>">Add unit</a></li>
+                    <li><a href="<?php echo base_url('Cunit/manage_unit') ?>">Manage unit</a></li>
+
+                </ul>
+            </li>
+            <!-- Unit menu end -->
 
     </ul>
 </div> <!-- /.sidebar -->

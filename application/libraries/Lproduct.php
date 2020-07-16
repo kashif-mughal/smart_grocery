@@ -60,7 +60,7 @@ class Lproduct {
         $CI->load->model('Products');
         $CI->load->model('Categories');
 
-        $product_detail = $CI->Products->retrieve_product_editdata($product_id);
+        $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $data = array(
             'title' => 'Product Edit',

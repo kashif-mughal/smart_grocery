@@ -71,6 +71,7 @@
         <!-- <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-3.5.1.min.js" type="text/javascript"></script> -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
         <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>assets/js/notify.min.js" type="text/javascript"></script>
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="se-pre-con"></div>

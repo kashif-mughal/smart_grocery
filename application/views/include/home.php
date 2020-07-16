@@ -15,7 +15,7 @@
                               $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                         ?>
                      <div class="featured-products-content">
-                        <div class="card mr-2">
+                        <div class="card mr-2 each-prod">
                            <div class="card-body p-0">
                               <div class="header">
                               <?php if($discountPercentage != 0) { ?> 
@@ -31,11 +31,24 @@
                               <p class="card-text product-name"><?php echo $value['ProductName']; ?></p>
                               <p class="card-text product-weight"><?php echo $value['Unit'].'kg'; ?></p>
                               <p class="card-text product-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
+                              <p class="card-text product-price d-inline"><input type="number" min="1" class="quantity" ></p>
                               <?php if($discountPercentage != 0) { ?> 
                               <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
-                              <?php } ?>
+                              <?php }
+                                 $productObject = (object) [
+                                  'id' => $value['ProductId'],
+                                  'pName' => $value['ProductName'],
+                                  'price' => $value['SalePrice'],
+                                  'img' => base_url().$value['ProductImg']
+                                ];
+                              ?>
                            </div>
-                           <a href="#" class="product-card-btn mx-auto">Add to Cart</a>
+                           <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
+                           data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                           >Add to Cart</a>
+                           <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                           data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                           >Remove From Cart</a>
                          </div>
                      </div>
                      <?php }} ?>
