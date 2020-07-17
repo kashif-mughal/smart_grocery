@@ -59,9 +59,11 @@ class Lproduct {
         $CI = & get_instance();
         $CI->load->model('Products');
         $CI->load->model('Categories');
+        $CI->load->model('Brands');
 
         $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
+        $brands = $CI->Brands->customSelect('BrandId, BrandName');
         $data = array(
             'title' => 'Product Edit',
             'product_id' => $product_detail[0]['ProductId'],
@@ -73,10 +75,10 @@ class Lproduct {
             'is_hot' => $product_detail[0]['IsHot'],
             'category' => $product_detail[0]['Category'],
             'categories' => $categories,
+            'brand' => $product_detail[0]['Brand'],
+            'brands' => $brands,
             'status' => $product_detail[0]['status']
         );
-
-        //print_r($data);
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 

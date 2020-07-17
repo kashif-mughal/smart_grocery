@@ -63,6 +63,55 @@ class Cproduct extends CI_Controller {
         // $CI->load->view("admin_template",$data);
     }
 
+    public function products($categoryId = null) {
+        
+        $CI = & get_instance();
+        if (!$this->auth->is_logged()) {
+            $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+        }
+        $this->auth->check_auth();
+        
+        $CI->load->model('Categories');
+        
+        $category_list = $CI->Categories->category_list();
+        $catId = $this->input->get('categoryId');
+        $whereString = ($catId == null) ? null : 'Category = '.$catId;
+        $product_list = $CI->Products->customSelect(
+            '*', $whereString, 20, 'ModifiedOn'
+        );
+
+        $catArray = Array();
+        if($catId == null) {
+            $selectedCategory = array(
+                'MainCategory' => 'Products',
+                'SubCategory' => 'All'
+            );
+        }
+
+        for ($i=0; $i < count($category_list); $i++) { 
+            if($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']])){
+                $catArray[$category_list[$i]['ParentName']] = Array();
+            }
+            if(is_array($catArray[$category_list[$i]['ParentName']]))
+                array_push($catArray[$category_list[$i]['ParentName']], $category_list[$i]);
+
+            if($catId != null && $category_list[$i]['CategoryId'] == $catId) {
+                $selectedCategory = array(
+                    'MainCategory' => $category_list[$i]['ParentName'],
+                    'SubCategory' => $category_list[$i]['CatName']
+                );
+            }
+        }
+        $data = array(
+            'title' => 'Sauda Express | Buy each and everything home grocery',
+            'CatList' => $catArray,
+            'ProdList' => $product_list,
+            'SelectCategory' => $selectedCategory
+        );
+        $content = $CI->parser->parse('product/products', $data, true);
+        $this->template->full_html_view($content);
+    }
+
     //Insert Product and uload
     public function insert_product() {
         if ($_FILES['image']['name']) {

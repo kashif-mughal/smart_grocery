@@ -119,6 +119,21 @@
                         </script>
 
                         <div class="form-group row">
+                            <label for="BrandId" class="col-sm-3 col-form-label">Brand <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="BrandId" id="BrandId">
+                                    <option value="0">None</option>
+                                    {brands}
+                                        <option value="{BrandId}">{BrandName}</option>
+                                    {/brands}
+                                </select>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $('#BrandId').val('0');
+                        </script>
+
+                        <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">Status <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="status" id="status">
