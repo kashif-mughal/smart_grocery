@@ -217,11 +217,13 @@ class Lproduct {
     public function products_by_category($catId){
         $CI = & get_instance();
         $CI->load->model('Products');
+        $CI->load->model('Categories');
         $CI->load->library('lcategory');
         $whereString = ($catId == null) ? null : 'Category = '.$catId;
-        $product_list = $CI->Products->customSelect(
-            '*', $whereString, 20, 'ModifiedOn'
-        );
+        // $product_list = $CI->Products->customSelect(
+        //     '*', $whereString, 20, 'ModifiedOn'
+        // );
+        $product_list = $CI->Categories->getCatPrducts($catId, 0, 8);
         $catArray = $CI->lcategory->get_category_hierarchy();
 
         foreach($catArray as $key => $value) {

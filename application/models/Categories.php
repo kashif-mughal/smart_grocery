@@ -61,6 +61,24 @@ class Categories extends CI_Model {
     }
     //Get limited products inside all sub cat hierarchy
     public function getCatPrducts($catId, $startFrom = 0, $limit = 10){
+        $inCats = NULL;
+        $func = function($value) {
+            return $value["CategoryId"];
+        };
+        $queryFirst = "SELECT  CategoryId
+                            from    (select * from grocery_category
+                                     order by ParentId, CategoryId) products_sorted,
+                                    (select @pv := $catId) initialisation
+                            where   find_in_set(ParentId, @pv)
+                            and     length(@pv := concat(@pv, ',', CategoryId))";
+        $firstQueryResult = $this->db->query($queryFirst);
+        if ($firstQueryResult->num_rows() > 0) {
+            $inCats = array_map($func, $firstQueryResult->result_array());
+            $inCats = join(",", $inCats);
+        }
+        else{
+            $inCats = $catId;
+        }
         $query = "SELECT 
                         gp.*, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
@@ -69,16 +87,12 @@ class Categories extends CI_Model {
                     gu.UnitId = gp.Unit
                     WHERE gp.Status = 1 AND
                     gp.Category IN(
-                        select  CategoryId
-                        from    (select * from grocery_category
-                                 order by ParentId, CategoryId) products_sorted,
-                                (select @pv := $catId) initialisation
-                        where   find_in_set(ParentId, @pv)
-                        and     length(@pv := concat(@pv, ',', CategoryId))
+                        $inCats
                     )
                     ORDER BY gp.ModifiedOn DESC
                     LIMIT $startFrom, $limit";
         $query = $this->db->query($query);
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
