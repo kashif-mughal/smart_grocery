@@ -214,6 +214,42 @@ class Lproduct {
         return $productList;
     }
 
+    public function products_by_category($catId){
+        $CI = & get_instance();
+        $CI->load->model('Products');
+        $CI->load->library('lcategory');
+        $whereString = ($catId == null) ? null : 'Category = '.$catId;
+        $product_list = $CI->Products->customSelect(
+            '*', $whereString, 20, 'ModifiedOn'
+        );
+        $catArray = $CI->lcategory->get_category_hierarchy();
+
+        foreach($catArray as $key => $value) {
+            for ($i=0; $i < count($value->childCats); $i++) { 
+                if($catId != null && $value->childCats[$i]['CategoryId'] == $catId) {
+                    $selectedCategory = array(
+                        'MainCategory' => $value->childCats[$i]['ParentName'],
+                        'SubCategory' => $value->childCats[$i]['CatName']
+                    );
+                }   
+            }
+        }
+
+        if($catId == null) {
+            $selectedCategory = array(
+                'MainCategory' => 'Products',
+                'SubCategory' => 'All'
+            );
+        }
+        $data = array(
+            'title' => 'Sauda Express | Buy each and everything home grocery',
+            'CatList' => $catArray,
+            'ProdList' => $product_list,
+            'SelectCategory' => $selectedCategory
+        );
+        return $CI->parser->parse('product/products', $data, true);
+    }
+
 }
 
 ?>

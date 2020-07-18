@@ -30,6 +30,10 @@ class Products extends CI_Model {
         return false;
     }
 
+    public function getProductFromCatAndAllSubCats($catID) {
+                
+    }
+
     public function all_product_list() {
 
         $this->db->select('p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,

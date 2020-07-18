@@ -13,7 +13,6 @@ class Cbrand extends CI_Controller {
         $this->load->library('lbrand');
         $this->load->library('session');
         $this->load->model('Brands');
-        $this->auth->check_admin_auth();
     }
 
     //Default loading for brand system.

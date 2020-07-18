@@ -13,7 +13,6 @@ class Cunit extends CI_Controller {
         $this->load->library('lunit');
         $this->load->library('session');
         $this->load->model('Units');
-        $this->auth->check_admin_auth();
     }
 
     //Default loading for unit system.

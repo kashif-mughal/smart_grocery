@@ -13,7 +13,6 @@ class Ccategory extends CI_Controller {
         $this->load->library('lcategory');
         $this->load->library('session');
         $this->load->model('Categories');
-        $this->auth->check_admin_auth();
     }
 
     //Default loading for Category system.

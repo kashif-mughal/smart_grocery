@@ -15,101 +15,22 @@ class Cproduct extends CI_Controller {
         $this->load->library('lproduct');
         $this->load->library('session');
         $this->load->model('Products');
-        $this->auth->check_admin_auth();
     }
 
     //Index page load
     public function index() {
         $content = $this->lproduct->product_add_form();
         $this->template->full_admin_html_view($content);
-        // $CI = & get_instance();
-        // $CI->load->model('Purchases');
-        // $CI->load->model('Suppliers');
-        // $CI->load->model('Products');
-        // if ($CI->auth->is_admin()) {
-        //     $menu_template = 'include/top_menu';
-        //     $logged_data = 'include/admin_loggedin_info';
-        //     $log_info = array(
-        //         'email' => $CI->session->userdata('user_name'),
-        //         'logout' => base_url() . 'Admin_dashboard/logout'
-        //     );
-        //     $top_menu = $CI->parser->parse($menu_template, true);
-        //     $logged_info = $CI->parser->parse($logged_data, $log_info, true);
-        // }
-
-        // $company_info = $CI->Products->retrieve_company();
-        // $CI->load->model('Categories');
-        // $CI->load->model('Units');
-        // $supplier = $CI->Suppliers->supplier_list("110", "0");
-        // $category_list = $CI->Categories->category_list_product();
-        // $unit_list = $CI->Units->unit_list();
-        // $tax_list = $CI->db->select('*')
-        //         ->from('tax_information')
-        //         ->get()
-        //         ->result();
-        // $data = array(
-        //     'logindata' => $logged_info,
-        //     'mainmenu' => $top_menu,
-        //     'content' => "product/add_item_form",
-        //     'msg_content' => $message,
-        //     'company_info' => $company_info,
-        //     'supplier' => $supplier,
-        //     'category_list' => $category_list,
-        //     'unit_list' => $unit_list,
-        //     'tax_list' => $tax_list,
-        //     'title'=> "Add Product"
-        // );
-
-        // $CI->load->view("admin_template",$data);
     }
 
     public function products($categoryId = null) {
         
-        $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
-        }
-        $this->auth->check_auth();
-        
-        $CI->load->model('Categories');
-        
-        $category_list = $CI->Categories->category_list();
         $catId = $this->input->get('categoryId');
-        $whereString = ($catId == null) ? null : 'Category = '.$catId;
-        $product_list = $CI->Products->customSelect(
-            '*', $whereString, 20, 'ModifiedOn'
-        );
 
-        $catArray = Array();
-        if($catId == null) {
-            $selectedCategory = array(
-                'MainCategory' => 'Products',
-                'SubCategory' => 'All'
-            );
-        }
+        $content = $this->lproduct->products_by_category($catId);
 
-        for ($i=0; $i < count($category_list); $i++) { 
-            if($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']])){
-                $catArray[$category_list[$i]['ParentName']] = Array();
-            }
-            if(is_array($catArray[$category_list[$i]['ParentName']]))
-                array_push($catArray[$category_list[$i]['ParentName']], $category_list[$i]);
-
-            if($catId != null && $category_list[$i]['CategoryId'] == $catId) {
-                $selectedCategory = array(
-                    'MainCategory' => $category_list[$i]['ParentName'],
-                    'SubCategory' => $category_list[$i]['CatName']
-                );
-            }
-        }
-        $data = array(
-            'title' => 'Sauda Express | Buy each and everything home grocery',
-            'CatList' => $catArray,
-            'ProdList' => $product_list,
-            'SelectCategory' => $selectedCategory
-        );
-        $content = $CI->parser->parse('product/products', $data, true);
         $this->template->full_html_view($content);
+
     }
 
     //Insert Product and uload

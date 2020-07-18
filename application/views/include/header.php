@@ -65,9 +65,7 @@ $users = $CI->Users->profile_edit_data();
                                     </button>
                                     <div class="dropdown-menu">
                                        <?php foreach($CatList as $key => $value) {?>
-                                          <?php for ($i=0; $i < count($value); $i++) {?>
-                                             <a class="dropdown-item" href="javascript:void(0);" data-value="<?=$value[$i]['CategoryId']?>"><?=$value[$i]['Alias']?></a>
-                                          <?php } ?>
+                                          <a class="dropdown-item" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
                                        <?php } ?>
                                     </div>
                                  </div>
@@ -106,7 +104,7 @@ $users = $CI->Users->profile_edit_data();
                                  <a href="#">
                                     <img src="<?php echo base_url() ?>assets/img/basket.png?>" alt="" id="basket-img">
                                     <div class="cart_icon_text">
-                                       <span id="add_to_cart_items" class="badge badge-pill badge-light">2</span>
+                                       <span id="add_to_cart_items" class="badge badge-pill badge-light">0</span>
                                     </div>
                                  </a>
                               </div>
@@ -126,7 +124,11 @@ $users = $CI->Users->profile_edit_data();
       function getCookie(name) {
          const value = `; ${document.cookie}`;
          const parts = value.split(`; ${name}=`);
-         if (parts.length === 2) return parts.pop().split(';').shift();
+         if(parts.length > 1){
+            while(parts.length == 1)
+               parts.shift();
+            return parts.pop()
+         }
       }
 
       $(document).ready(() => {
@@ -136,12 +138,7 @@ $users = $CI->Users->profile_edit_data();
          });
          $(document).on('click', '.remove-cart', function () {
             var productJson = $(this).data('json');
-            if(removeAndUpdateFromCart(productJson)){
-               $(this).hide();
-               $($(this).parent().find('.quantity')[0]).val('');
-               $($(this).parent().find('.add-cart')[0]).html('Add to Cart');
-               $.notify(`${productJson.pName} removed from cart`, "warn");
-            }
+            removeAndUpdateFromCart(productJson, $(this));
          });
          $(document).on('click', '.add-cart', function () {
              var productJson = $(this).data('json');
@@ -150,15 +147,13 @@ $users = $CI->Users->profile_edit_data();
                var cart = getCookie('baskit');
                if(cart)
                   cart = JSON.parse(cart);
-               if(addOrUpdateCart(cart && cart.length > 0 ? cart : [], productJson, quantity)){
-                  $($(this).parent().find('.remove-cart')[0]).show();
-                  $(this).html('Update to Cart');
-               }
+               addOrUpdateCart(cart && cart.length > 0 ? cart : [], productJson, quantity, $(this))
+                  
              }else{
                $.notify("Select a valid quantity, quantity must be greater then 0", "error");
              }
          });
-         function addOrUpdateCart(cart, productJson, quantity){
+         function addOrUpdateCart(cart, productJson, quantity, addCartObj){
             var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
             var oldQty = 0;
             if(currentProduct.length > 0){
@@ -169,22 +164,29 @@ $users = $CI->Users->profile_edit_data();
                productJson.quantity = quantity;
                cart.push(productJson);
             }
-            document.cookie = 'baskit=' + JSON.stringify(cart);
+            document.cookie = `baskit=${JSON.stringify(cart)};path=/`;
             if(currentProduct.length > 0)
                $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
             else
                $.notify(`${productJson.pName} added into cart`, "success");
             $('#add_to_cart_items').html(cart.length);
+            $(addCartObj.parent().find('.remove-cart')[0]).show();
+            addCartObj.html('Update to Cart');
             return true;
          }
-         function removeAndUpdateFromCart(productJson){
+         function removeAndUpdateFromCart(productJson, removeCartObj){
             var cart = getCookie('baskit');
             if(!cart)
                return true;
             cart = JSON.parse(cart);
             var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productJson.id});
-            document.cookie = 'baskit=' + JSON.stringify(cartExceptCurrentProduct);
+            document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
             $('#add_to_cart_items').html(cartExceptCurrentProduct.length);
+
+            removeCartObj.hide();
+            $(removeCartObj.parent().find('.quantity')[0]).val('');
+            $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
+            $.notify(`${productJson.pName} removed from cart`, "warn");
             return true;
          }
          function loadCartData(){
@@ -203,6 +205,46 @@ $users = $CI->Users->profile_edit_data();
                }
             }
             $('#add_to_cart_items').html(cart.length);
+         }
+         $(document).on('click', '.qty-pls', function () {
+            changeQtyOfProductAndPutInCart($(this), 'plus');
+         });
+         $(document).on('click', '.qty-mns', function () {
+            changeQtyOfProductAndPutInCart($(this), 'minus');
+         });
+         function changeQtyOfProductAndPutInCart(targetElem, operation){
+            var prodContainer = $(targetElem.closest('.each-prod')[0]);
+            var prodCountObj = prodContainer.find('.quantity')[0];
+            if(!prodCountObj || isNaN(prodCountObj.value)){
+               $.notify(`Please add a valid quantity`, "error");
+               return false;
+            }
+            else{
+               debugger;
+               var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
+               if(qty <= 0 && operation == 'minus')
+                  return false;
+               prodCountObj.value = operation == 'plus' ? ++qty : --qty;
+               var addCartObj = $(prodContainer.find('.add-cart')[0]);
+               if(addCartObj.html().toLocaleLowerCase() == 'add to cart'){
+                  return true;
+               }
+               var cart = getCookie('baskit');
+               if(cart)
+                  cart = JSON.parse(cart);
+
+               if(qty == 0){
+                  removeAndUpdateFromCart(addCartObj.data('json'), $(prodContainer.find('.remove-cart')[0]));
+                  return true;
+               }else{
+                  addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
+                     addCartObj.data('json'), 
+                     qty,
+                     addCartObj
+                  );
+                  return true;
+               }
+            }
          }
       });
       

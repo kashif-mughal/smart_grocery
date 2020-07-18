@@ -59,5 +59,29 @@ class Categories extends CI_Model {
             return TRUE;
         }
     }
-
+    //Get limited products inside all sub cat hierarchy
+    public function getCatPrducts($catId, $startFrom = 0, $limit = 10){
+        $query = "SELECT 
+                        gp.*, 
+                        CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
+                    FROM grocery_products gp
+                    LEFT JOIN grocery_unit gu ON
+                    gu.UnitId = gp.Unit
+                    WHERE gp.Status = 1 AND
+                    gp.Category IN(
+                        select  CategoryId
+                        from    (select * from grocery_category
+                                 order by ParentId, CategoryId) products_sorted,
+                                (select @pv := $catId) initialisation
+                        where   find_in_set(ParentId, @pv)
+                        and     length(@pv := concat(@pv, ',', CategoryId))
+                    )
+                    ORDER BY gp.ModifiedOn DESC
+                    LIMIT $startFrom, $limit";
+        $query = $this->db->query($query);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 }

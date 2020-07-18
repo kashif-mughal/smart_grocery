@@ -66,9 +66,9 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 
 								<h6><?=$key?></h6>
 								
-								<?php for ($i=0; $i < count($value); $i++) {?>
+								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
 									<a href="#">
-										<span class="hyphen">&#8212;</span> <span class="category-text"><?=$value[$i]['Alias']?></span>
+										<span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
 									</a>
 								<?php } ?>
 

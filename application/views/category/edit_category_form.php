@@ -54,9 +54,9 @@
                     <div class="panel-body">
 
                     	<div class="form-group row">
-                            <label for="category_name" class="col-sm-3 col-form-label"><?php echo display('category_name') ?> <i class="text-danger">*</i></label>
+                            <label for="CatName" class="col-sm-3 col-form-label">CatName <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="category_name" id="category_name" type="text" placeholder="<?php echo display('category_name') ?>"  required="" value="{category_name}">
+                                <input class="form-control" name ="CatName" id="CatName" type="text" placeholder="<?php echo display('CatName') ?>"  required="" value="{CatName}">
                             </div>
                         </div>
                        <div class="form-group row">
@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" value="{category_id}" name="category_id">
+                        <input type="hidden" value="{CategoryId}" name="CategoryId">
 
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>

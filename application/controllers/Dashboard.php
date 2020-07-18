@@ -13,29 +13,16 @@ class Dashboard extends CI_Controller {
 
     public function index() {
         $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
-        }
-        $this->auth->check_auth();
-
-        //'purchase_amount' => number_format($sales_report[0]['total_supplier_rate'], 2, '.', ','),
-        $CI->load->model('Categories');
+        $this->load->library('lcategory');
         $CI->load->model('Products');
 
-        $category_list = $CI->Categories->category_list();
         $product_list = $CI->Products->customSelect(
                 '*', 'IsFeatured = 1', 20, 'ModifiedOn'
         );
-
-        $catArray = Array();
-        for ($i=0; $i < count($category_list); $i++) { 
-            if($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']])){
-                $catArray[$category_list[$i]['ParentName']] = Array();
-            }
-            if(is_array($catArray[$category_list[$i]['ParentName']]))
-                array_push($catArray[$category_list[$i]['ParentName']], $category_list[$i]);
+        $catArray = $CI->lcategory->get_category_hierarchy();
+        foreach($catArray as $key => $value) {
+            $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
         }
-
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
