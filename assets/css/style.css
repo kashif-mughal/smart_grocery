@@ -1142,6 +1142,21 @@ button.category-button:active {
   padding: 16px;
 }
 
+#shoppingCartModal tbody img {
+   max-width: 50px;
+}
+.cart_icon {
+   position: relative !important;
+}
+#shoppingCartModal .modal-dialog {
+   position: absolute !important;
+   right: 40px;
+   top: 120px;
+}
+#shoppingCartModal .card-body {
+   overflow-y: auto;
+   max-height: 400px;
+}
 /* Sidebar */
 
 
