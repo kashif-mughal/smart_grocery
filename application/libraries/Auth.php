@@ -77,6 +77,7 @@ class Auth {
         if ($url == '') {
             $url = base_url() . 'Admin_dashboard/login';
         }
+        
         $CI = & get_instance();
         if ((!$this->is_logged()) || (!$this->is_admin())) {
             $this->logout();
