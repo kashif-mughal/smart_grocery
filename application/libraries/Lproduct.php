@@ -33,10 +33,16 @@ class Lproduct {
         $CI = & get_instance();
 
         $CI->load->model('Categories');
+        $CI->load->model('Brands');
+        $CI->load->model('Units');
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
+        $brands = $CI->Brands->customSelect('BrandId, BrandName');
+        $units = $CI->Units->customSelect('UnitId, UnitName');
         $data = array(
             'title' => 'Add Product',
-            'categories' => $categories
+            'categories' => $categories,
+            'brands' => $brands,
+            'units' => $units
         );
         $productForm = $CI->parser->parse('product/add_product_form', $data, true);
 
@@ -60,10 +66,12 @@ class Lproduct {
         $CI->load->model('Products');
         $CI->load->model('Categories');
         $CI->load->model('Brands');
+        $CI->load->model('Units');
 
         $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $brands = $CI->Brands->customSelect('BrandId, BrandName');
+        $units = $CI->Units->customSelect('UnitId, UnitName');
         $data = array(
             'title' => 'Product Edit',
             'product_id' => $product_detail[0]['ProductId'],
@@ -77,7 +85,9 @@ class Lproduct {
             'categories' => $categories,
             'brand' => $product_detail[0]['Brand'],
             'brands' => $brands,
-            'status' => $product_detail[0]['status']
+            'status' => $product_detail[0]['status'],
+            'units' => $units,
+            'unit' => $product_detail[0]['UnitId']
         );
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
@@ -225,7 +235,6 @@ class Lproduct {
         // );
         $product_list = $CI->Categories->getCatPrducts($catId, 0, 8);
         $catArray = $CI->lcategory->get_category_hierarchy();
-
         foreach($catArray as $key => $value) {
             for ($i=0; $i < count($value->childCats); $i++) { 
                 if($catId != null && $value->childCats[$i]['CategoryId'] == $catId) {

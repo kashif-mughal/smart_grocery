@@ -15,18 +15,28 @@ class Dashboard extends CI_Controller {
         $CI = & get_instance();
         $this->load->library('lcategory');
         $CI->load->model('Products');
+        $CI->load->model('Units');
 
         $product_list = $CI->Products->customSelect(
-                '*', 'IsFeatured = 1', 20, 'ModifiedOn'
+            '*', 'IsFeatured = 1', 20, 'ModifiedOn'
         );
+        // print_r($product_list);die;
+
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
         }
+        $final_product_list = array();
+        foreach($product_list as $prod => $value) {
+            $unitId = $prod['UnitId'];
+            $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
+            $value['UnitName'] = $currentUnit[0]['UnitName'];
+            array_push($final_product_list,$value);
+        }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
-            'ProdList' => $product_list
+            'ProdList' => $final_product_list
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);

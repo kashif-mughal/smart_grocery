@@ -54,5 +54,15 @@ $(document).ready(function(){
          }
       ]
    });
+
+
+   
+
+   $(".featured-products-content img").on("error", function() {
+     $(this).attr(
+       "src",
+       "https://via.placeholder.com/190x110?text=Add+Product+Image"
+     );
+   });
     
  });

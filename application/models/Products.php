@@ -30,6 +30,20 @@ class Products extends CI_Model {
         return false;
     }
 
+    public function get_featured_products() {
+        $query = "SELECT p.ProductId, p.ProductName, p.Unit, u.UnitName, p.Price, p.SalePrice, p.ModifiedOn,
+                        CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
+                        CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot,
+                        p.ProductImg from grocery_products p join grocery_unit u on p.UnitId = u.UnitId
+                        where p.Status = 1 AND p.IsFeatured = 1 order by p.ModifiedOn DESC LIMIT 8";
+        $query = $this->db->query($query);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
     public function getProductFromCatAndAllSubCats($catID) {
                 
     }

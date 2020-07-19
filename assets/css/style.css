@@ -874,6 +874,7 @@ button.category-button:active {
    background-color: #ff3030;
    padding: 6px 8px;
    margin-top: 12px;
+   z-index: 500;
 }
 .main-content .featured-products-content .card .header i {
    margin-top: 15px;
@@ -1599,6 +1600,22 @@ button.category-button:active {
    margin-bottom: 20px;
 }
 
+.remove-cart {
+   top: 30%;
+   left: 5%;
+   text-align: center;
+   z-index: 20;
+   position: absolute;
+   vertical-align: middle !important;
+   background: rgba(43, 233, 204, 0.7) !important;
+   border-radius: 10px 0px 10px 0px;
+   color: white;
+   font-weight: bolder;
+}
+.remove-cart:hover {
+   background: rgba(43, 233, 204, 0.9) !important;
+}
+
 /* ----------------------------------------------------- */
 /* Media Queries */
 
@@ -1702,9 +1719,6 @@ button.category-button:active {
 
 }
 
-@media (min-width: 992px) {
-   
-}
 
 @media (max-width: 991px) {
    .tag-line {

@@ -86,7 +86,7 @@ class Categories extends CI_Model {
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     LEFT JOIN grocery_unit gu ON
-                    gu.UnitId = gp.Unit
+                    gu.UnitId = gp.UnitId
                     WHERE gp.Status = 1 AND
                     gp.Category IN(
                         $inCats

@@ -12,7 +12,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                             <div class="call_to_action_image">
                                 <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/SameNextDayDelivery_icon.png?>" alt="Icon">
                             </div>
-                            <div class="call_to_action_content">
+                            <div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
                                 <h5 class="call_to_action_title">Same/Next Day Delivery</h5>
                                 <h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100
                                     for
@@ -27,7 +27,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                             <div class="call_to_action_image">
                                 <h4 class="call_to_action_custom_img m-0">Rs.</h4>
                             </div>
-                            <div class="call_to_action_content">
+                            <div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
                                 <h5 class="call_to_action_title">Cash On Delivery</h5>
                                 <h6 class="call_to_action_content">You pay when rider comes at your address.</h6>
                             </div>
@@ -40,7 +40,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                             <div class="call_to_action_image">
                                 <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/OnlineSupport_icon.png?>" alt="Icon">
                             </div>
-                            <div class="call_to_action_content">
+                            <div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
                                 <h5 class="call_to_action_title">Online Support</h5>
                                 <h6 class="call_to_action_content">Customer support from 9AM - Midnight (021) 111
                                     111 123
@@ -55,7 +55,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <section class="main-footer">
 	<div class="container-fluid">
 		<div class="main-content">
-			<p class="footer-text">
+			<p class="footer-text text-center text-md-left">
 				Sauda Express is not just another online grocery store. We at Sauda Express aim at revolutionizing the whole thinking of online shopping by introducing latest technology into the arena and at the same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily abandoned by online shopping platforms focusing only on the technological aspect. We consistently work hard to:
 			</p>
 

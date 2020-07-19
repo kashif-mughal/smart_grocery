@@ -29,7 +29,7 @@
          <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
          <div class="product-info text-center">
           <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
-          <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].'kg'; ?></p>
+          <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].$value['UnitName']; ?></p>
           <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
           <?php if($discountPercentage != 0) { ?> 
             <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
@@ -165,7 +165,7 @@ foreach($CatList as $key => $value) {?>
      <img class="card-img-bottom text-center" src="<?php echo base_url().$value->products[$i]['ProductImg']; ?>" alt="Card image cap">
      <div class="product-info text-center">
       <p class="card-text product-card-inner-name"><?php echo $value->products[$i]['ProductName']; ?></p>
-      <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['Unit'].'kg'; ?></p>
+      <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['Unit'].$value->products[$i]['UnitName']; ?></p>
       <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value->products[$i]['SalePrice']; ?></p>
       <?php if($discountPercentage != 0) { ?> 
         <span class="product-discount"><del>Rs. <?php echo $value->products[$i]['Price']; ?></del></span>
