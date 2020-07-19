@@ -3,7 +3,19 @@ $CI = & get_instance();
 $CI->load->model('Users');
 $users = $CI->Users->profile_edit_data();
 ?>
-
+<style type="text/css">
+   .emptyCart{
+      background: red;
+      padding: 20px;
+      margin: 35px;
+      text-align: center;
+      border-radius: 10px;
+      color: white;
+      font-weight: 400;
+      font-size: 20px;
+      min-width: 360px;
+   }
+</style>
 <div class="section-head">
    <div class="top-bar">
       <div class="container-fluid">
@@ -127,6 +139,7 @@ $users = $CI->Users->profile_edit_data();
                <div class="card-header">
                   Shopping Cart
                </div>
+               <div class="emptyCart" style="display: none;">The cart is empty!!!</div>
                <div class="card-body" id="shoppingCartBody">
                   <table class="table table-sm table-bordered table-responsive-md">
                      <thead>
@@ -140,14 +153,14 @@ $users = $CI->Users->profile_edit_data();
                         </tr>
                      </thead>
                      <tbody>
-                        
+
                      </tbody>
                   </table>
                   <div class="text-right">
-                     <a href="#" class="btn btn-sm btn-primary">
+                     <a href="<?php echo base_url() ?>corder/checkout" target="_blank" class="checkout-btn btn btn-sm btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout
                      </a>
-                     <a href="#" class="btn btn-sm btn-secondary">
+                     <a href="javascript:void(0);" onclick="emptyCart();" class="btn btn-sm btn-secondary">
                         <i class="fa fa-trash" aria-hidden="true"></i> Clear
                      </a>
                   </div>
@@ -163,7 +176,7 @@ $users = $CI->Users->profile_edit_data();
 <!-- Cart Scripts Start -->
 
 <script type="text/javascript">
-
+   const currency = 'Rs';
    function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -173,26 +186,33 @@ $users = $CI->Users->profile_edit_data();
          return parts.pop()
       }
    }
-
-   $(document).ready(() => {
-      loadCartData();
-      $(document).on('keydown', '.quantity', function () {
-         return false;
-      });
-      $(document).on('click', '.remove-item-from-cart', function () {
-         removeItemFromShoppingCart($(this));
-      });
-      $(document).on('click', '#cartBtn', function () {
-         loadShoppingCart();
-      });
-      $(document).on('click', '.remove-cart', function () {
-         var productJson = $(this).data('json');
-         removeAndUpdateFromCart(productJson, $(this));
-      });
-      $(document).on('click', '.add-cart', function () {
-        var productJson = $(this).data('json');
-        var quantity = parseInt($(this).parent().find('.quantity')[0].value);
-        if(!isNaN(quantity) && quantity > 0){
+   function formatCurrency(total) {
+     var neg = false;
+     if(total < 0) {
+       neg = true;
+       total = Math.abs(total);
+    }
+    return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+ }
+ $(document).ready(() => {
+   loadCartData();
+   $(document).on('keydown', '.quantity', function () {
+      return false;
+   });
+   $(document).on('click', '.remove-item-from-cart', function () {
+      removeItemFromShoppingCart($(this));
+   });
+   $(document).on('click', '#cartBtn', function () {
+      loadShoppingCart();
+   });
+   $(document).on('click', '.remove-cart', function () {
+      var productJson = $(this).data('json');
+      removeAndUpdateFromCart(productJson, $(this));
+   });
+   $(document).on('click', '.add-cart', function () {
+       var productJson = $(this).data('json');
+       var quantity = parseInt($(this).parent().find('.quantity')[0].value);
+       if(!isNaN(quantity) && quantity > 0){
          var cart = getCookie('baskit');
          if(cart)
             cart = JSON.parse(cart);
@@ -202,162 +222,190 @@ $users = $CI->Users->profile_edit_data();
          $.notify("Select a valid quantity, quantity must be greater then 0", "error");
       }
    });
-      function addOrUpdateCart(cart, productJson, quantity, addCartObj){
-         var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
-         var oldQty = 0;
-         if(currentProduct.length > 0){
-            oldQty = currentProduct[0].quantity;
-            currentProduct[0].quantity = quantity;
-         }
-         else{
-            productJson.quantity = quantity;
-            cart.push(productJson);
-         }
-         document.cookie = `baskit=${JSON.stringify(cart)};path=/`;
-         if(currentProduct.length > 0)
-            $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
-         else
-            $.notify(`${productJson.pName} added into cart`, "success");
-         $('#add_to_cart_items').html(cart.length);
-         $(addCartObj.parent().find('.remove-cart')[0]).show();
-         addCartObj.html('Update to Cart');
-         return true;
-      }
-      function removeAndUpdateFromCart(productJson, removeCartObj){
-         var cart = getCookie('baskit');
-         if(!cart)
-            return true;
-         cart = JSON.parse(cart);
-         var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productJson.id});
-         document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
-         $('#add_to_cart_items').html(cartExceptCurrentProduct.length);
-
-         removeCartObj.hide();
-         $(removeCartObj.parent().find('.quantity')[0]).val('');
-         $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
-         $.notify(`${productJson.pName} removed from cart`, "warn");
-         return true;
-      }
-      function loadCartData(){
-         var cart = getCookie('baskit');
-         if(!cart)
-            return true;
-         cart = JSON.parse(cart);
-         var allProducts = $('.each-prod');
-         for (var i = 0; i < allProducts.length; i++) {
-            var productJson = $($(allProducts[i]).find('.add-cart')[0]).data('json');
-            var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
-            if(currentProduct.length > 0){
-               $($(allProducts[i]).find('.remove-cart')[0]).show();
-               $($(allProducts[i]).find('.quantity')[0]).val(currentProduct[0].quantity);
-               $($(allProducts[i]).find('.add-cart')[0]).html('Update to Cart');
-            }else{
-               $($(allProducts[i]).find('.remove-cart')[0]).hide();
-               $($(allProducts[i]).find('.quantity')[0]).val('');
-               $($(allProducts[i]).find('.add-cart')[0]).html('Add to Cart');
-            }
-         }
-         $('#add_to_cart_items').html(cart.length);
-      }
-      $(document).on('click', '.qty-pls', function () {
-         changeQtyOfProductAndPutInCart($(this), 'plus');
-      });
-      $(document).on('click', '.qty-mns', function () {
-         changeQtyOfProductAndPutInCart($(this), 'minus');
-      });
-      function changeQtyOfProductAndPutInCart(targetElem, operation){
-         var prodContainer = $(targetElem.closest('.each-prod')[0]);
-         var prodCountObj = prodContainer.find('.quantity')[0];
-         if(!prodCountObj || isNaN(prodCountObj.value)){
-            $.notify(`Please add a valid quantity`, "error");
-            return false;
-         }
-         else{
-            var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
-            if(qty <= 0 && operation == 'minus')
-               return false;
-            prodCountObj.value = operation == 'plus' ? ++qty : --qty;
-            var addCartObj = $(prodContainer.find('.add-cart')[0]);
-            if(addCartObj.html().toLocaleLowerCase() == 'add to cart'){
-               return true;
-            }
-            var cart = getCookie('baskit');
-            if(cart)
-               cart = JSON.parse(cart);
-
-            if(qty == 0){
-               removeAndUpdateFromCart(addCartObj.data('json'), $(prodContainer.find('.remove-cart')[0]));
-               return true;
-            }else{
-               addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
-                  addCartObj.data('json'), 
-                  qty,
-                  addCartObj
-                  );
-               return true;
-            }
-         }
-      }
-      function removeItemFromShoppingCart(currentElem){
-         var productId = parseInt(currentElem.data('id'));
-         var prodName = currentElem.data('name');
-         var cart = getCookie('baskit');
-         if(cart)
-            cart = JSON.parse(cart);
-         var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productId});
-         document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
-         $(currentElem.closest('tbody')).remove(currentElem.closest('tr')[0]);
-         $.notify(`${prodName} removed from cart`, "warn");
-         loadCartData();
-      }
-      function loadShoppingCart(){
-         var cartBody = $('#shoppingCartBody');
-         $(cartBody.find('tbody')).empty();
-         var eachProdTemplate = `<tr>
-                           <td class="text-center">
-                              <img src="{imgValue}" alt="" class="img-fluid">
-                           </td>
-                           <td colspan="3">{prodName}</td>
-                           <td>{qty}</td>
-                           <td class="text-right" colspan="2">{price}</td>
-                           <td class="text-right">{totalPrice}</td>
-                           <td class="text-right">
-                              <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="btn btn-sm btn-block btn-danger remove-item-from-cart">
-                                 <i class="fa fa-times"></i> Remove
-                              </a>
-                           </td>
-                        </tr>`;
-         var cartTotalRow = `<tr>
-                           <td colspan="7" class="text-right">Total</td>
-                           <td class="text-right">{grandTotal}</td>
-                           <td></td>
-                        </tr>`;
-         var cart = getCookie('baskit');
-         if(cart){
-            cart = JSON.parse(cart);
-            var sum = 0;
-            for (var i = 0; i < cart.length; i++) {
-               var eachProdTemplateCopy = eachProdTemplate;
-               sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{price}', cart[i].price);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
-               //append newly created row in card body
-               $(cartBody.find('tbody')).append(eachProdTemplateCopy);
-            }
-            cartTotalRow = cartTotalRow.replace('{grandTotal}', sum);
-            $(cartBody.find('tbody')).append(cartTotalRow);
-         }
-         else{
-            //show empty message
-            return false;
-         }   
-      }
+   $(document).on('click', '.qty-pls', function () {
+      changeQtyOfProductAndPutInCart($(this), 'plus');
    });
+   $(document).on('click', '.qty-mns', function () {
+      changeQtyOfProductAndPutInCart($(this), 'minus');
+   });
+});
+ function addOrUpdateCart(cart, productJson, quantity, addCartObj){
+   var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
+   var oldQty = 0;
+   if(currentProduct.length > 0){
+      oldQty = currentProduct[0].quantity;
+      currentProduct[0].quantity = quantity;
+   }
+   else{
+      productJson.quantity = quantity;
+      cart.push(productJson);
+   }
+   document.cookie = `baskit=${JSON.stringify(cart)};path=/`;
+   if(currentProduct.length > 0)
+      $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
+   else
+      $.notify(`${productJson.pName} added into cart`, "success");
+   $('#add_to_cart_items').html(cart.length);
+   $(addCartObj.parent().find('.remove-cart')[0]).show();
+   addCartObj.html('Update to Cart');
+   return true;
+}
+function removeAndUpdateFromCart(productJson, removeCartObj){
+   var cart = getCookie('baskit');
+   if(!cart)
+      return true;
+   cart = JSON.parse(cart);
+   var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productJson.id});
+   document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
+   $('#add_to_cart_items').html(cartExceptCurrentProduct.length);
 
+   removeCartObj.hide();
+   $(removeCartObj.parent().find('.quantity')[0]).val('');
+   $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
+   $.notify(`${productJson.pName} removed from cart`, "warn");
+   return true;
+}
+function loadCartData(){
+   var cart = getCookie('baskit');
+   if(!cart)
+      return true;
+   cart = JSON.parse(cart);
+   var allProducts = $('.each-prod');
+   for (var i = 0; i < allProducts.length; i++) {
+      var productJson = $($(allProducts[i]).find('.add-cart')[0]).data('json');
+      var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
+      if(currentProduct.length > 0){
+         $($(allProducts[i]).find('.remove-cart')[0]).show();
+         $($(allProducts[i]).find('.quantity')[0]).val(currentProduct[0].quantity);
+         $($(allProducts[i]).find('.add-cart')[0]).html('Update to Cart');
+      }else{
+         $($(allProducts[i]).find('.remove-cart')[0]).hide();
+         $($(allProducts[i]).find('.quantity')[0]).val('');
+         $($(allProducts[i]).find('.add-cart')[0]).html('Add to Cart');
+      }
+   }
+   $('#add_to_cart_items').html(cart.length);
+}
+function changeQtyOfProductAndPutInCart(targetElem, operation){
+   var prodContainer = $(targetElem.closest('.each-prod')[0]);
+   var prodCountObj = prodContainer.find('.quantity')[0];
+   if(!prodCountObj || isNaN(prodCountObj.value)){
+      $.notify(`Please add a valid quantity`, "error");
+      return false;
+   }
+   else{
+      var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
+      if(qty <= 0 && operation == 'minus')
+         return false;
+      prodCountObj.value = operation == 'plus' ? ++qty : --qty;
+      var addCartObj = $(prodContainer.find('.add-cart')[0]);
+      if(addCartObj.html().toLocaleLowerCase() == 'add to cart'){
+         return true;
+      }
+      var cart = getCookie('baskit');
+      if(cart)
+         cart = JSON.parse(cart);
+
+      if(qty == 0){
+         removeAndUpdateFromCart(addCartObj.data('json'), $(prodContainer.find('.remove-cart')[0]));
+         return true;
+      }else{
+         addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
+            addCartObj.data('json'), 
+            qty,
+            addCartObj
+            );
+         return true;
+      }
+   }
+}
+function removeItemFromShoppingCart(currentElem){
+   var productId = parseInt(currentElem.data('id'));
+   var prodName = currentElem.data('name');
+   var cart = getCookie('baskit');
+   if(cart)
+      cart = JSON.parse(cart);
+   var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productId});
+   document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
+   $(currentElem.closest('tbody')).remove(currentElem.closest('tr')[0]);
+   $.notify(`${prodName} removed from cart`, "warn");
+   if(cartExceptCurrentProduct.length == 0){
+      var cartObj = $('#shoppingCartBody');
+      if(cartObj && cartObj.length > 0)
+         showEmptyResponse(cartObj)
+   }
+   loadCartData();
+}
+function loadShoppingCart(){
+   var cartBody = $('#shoppingCartBody');
+   var cart = getCookie('baskit');
+   $(cartBody.find('tbody')).empty();
+   if(cart){
+      cart = JSON.parse(cart);
+      if(cart.length == 0)
+      {
+         //show empty response here
+         showEmptyResponse(cartBody);
+         return;
+      }
+      $(cartBody).show();
+      $($('.emptyCart')[0]).hide();
+      $(document).off('click', '.checkout-btn', handleCheckout(event));
+      var eachProdTemplate = `<tr>
+      <td class="text-center">
+      <img src="{imgValue}" alt="" class="img-fluid">
+      </td>
+      <td colspan="3">{prodName}</td>
+      <td>{qty}</td>
+      <td class="text-right" colspan="2">{price}</td>
+      <td class="text-right">{totalPrice}</td>
+      <td class="text-right">
+      <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="btn btn-sm btn-block btn-danger remove-item-from-cart">
+      <i class="fa fa-times"></i> Remove
+      </a>
+      </td>
+      </tr>`;
+      var cartTotalRow = `<tr>
+      <td colspan="7" class="text-right">Total</td>
+      <td class="text-right">{grandTotal}</td>
+      <td></td>
+      </tr>`;
+      var sum = 0;
+      for (var i = 0; i < cart.length; i++) {
+         var eachProdTemplateCopy = eachProdTemplate;
+         sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace('{price}', cart[i].price);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
+         eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
+         //append newly created row in card body
+         $(cartBody.find('tbody')).append(eachProdTemplateCopy);
+         }
+         cartTotalRow = cartTotalRow.replace('{grandTotal}', sum);
+         $(cartBody.find('tbody')).append(cartTotalRow);
+      }
+      else{
+         //show empty response here
+         showEmptyResponse(cartBody);
+         return false;
+      }   
+   }
+   function showEmptyResponse(cartBody){
+      $(cartBody).hide();
+      $($('.emptyCart')[0]).show();
+      $(document).on('click', '.checkout-btn', handleCheckout(event));
+   }
+   function handleCheckout(e){
+      event.preventDefault();
+      return false;
+   }
+   function emptyCart(){
+      document.cookie = `baskit=[];path=/`;
+      showEmptyResponse($('#shoppingCartBody'));
+      loadCartData();
+   }
 </script>
 
    <!-- Cart Scripts End -->

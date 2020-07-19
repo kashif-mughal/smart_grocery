@@ -3,6 +3,55 @@ $CI =& get_instance();
 $CI->load->model('Web_settings');
 $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 ?>
+<div id="main-page">
+	<section class="main-content mx-4">
+		<div class="row my-4">
+                    <div class="col-md-4">
+
+                        <div class="call_to_action_grid border-right-full">
+                            <div class="call_to_action_image">
+                                <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/SameNextDayDelivery_icon.png?>" alt="Icon">
+                            </div>
+                            <div class="call_to_action_content">
+                                <h5 class="call_to_action_title">Same/Next Day Delivery</h5>
+                                <h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100
+                                    for
+                                    orders below Rs. 4,000</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="call_to_action_grid border-right-full">
+                            <div class="call_to_action_image">
+                                <h4 class="call_to_action_custom_img m-0">Rs.</h4>
+                            </div>
+                            <div class="call_to_action_content">
+                                <h5 class="call_to_action_title">Cash On Delivery</h5>
+                                <h6 class="call_to_action_content">You pay when rider comes at your address.</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="call_to_action_grid">
+                            <div class="call_to_action_image">
+                                <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/OnlineSupport_icon.png?>" alt="Icon">
+                            </div>
+                            <div class="call_to_action_content">
+                                <h5 class="call_to_action_title">Online Support</h5>
+                                <h6 class="call_to_action_content">Customer support from 9AM - Midnight (021) 111
+                                    111 123
+                                </h6>
+                            </div>
+                        </div>
+
+                    </div>
+        </div>
+	</section>
+</div>
 <section class="main-footer">
 	<div class="container-fluid">
 		<div class="main-content">

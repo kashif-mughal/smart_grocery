@@ -65,11 +65,13 @@ class Categories extends CI_Model {
         $func = function($value) {
             return $value["CategoryId"];
         };
+        if(empty($catId))
+            $catId = 0;
         $queryFirst = "SELECT  CategoryId
                             from    (select * from grocery_category
                                      order by ParentId, CategoryId) products_sorted,
                                     (select @pv := $catId) initialisation
-                            where   find_in_set(ParentId, @pv)
+                            where   find_in_set(ParentId, @pv) and Status = 1
                             and     length(@pv := concat(@pv, ',', CategoryId))";
         $firstQueryResult = $this->db->query($queryFirst);
         if ($firstQueryResult->num_rows() > 0) {
