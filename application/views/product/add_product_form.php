@@ -121,7 +121,30 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="BrandId" class="col-sm-3 col-form-label">Brand <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="BrandId" id="BrandId">
+                                    <option value="0">None</option>
+                                    {brands}
+                                        <option value="{BrandId}">{BrandName}</option>
+                                    {/brands}
+                                </select>
+                            </div>
+                        </div>
 
+                        <div class="form-group row">
+                            <label for="UnitId" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="UnitId" id="UnitId">
+                                    <option value="0">None</option>
+                                    {units}
+                                        <option value="{UnitId}">{UnitName}</option>
+                                    {/units}
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="form-group row">
                             <label for="Img" class="col-sm-3 col-form-label">Product Image </label>
                             <div class="col-sm-6">

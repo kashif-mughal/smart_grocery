@@ -130,7 +130,22 @@
                             </div>
                         </div>
                         <script type="text/javascript">
-                            $('#BrandId').val('0');
+                            $('#BrandId').val(<?=$brand?>);
+                        </script>
+
+                        <div class="form-group row">
+                            <label for="UnitId" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="UnitId" id="UnitId">
+                                    <option value="0">None</option>
+                                    {units}
+                                        <option value="{UnitId}">{UnitName}</option>
+                                    {/units}
+                                </select>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $('#UnitId').val(<?=$unit?>);
                         </script>
 
                         <div class="form-group row">

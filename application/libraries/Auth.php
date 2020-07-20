@@ -25,7 +25,7 @@ class Auth {
             $key = str_replace("0", "eXnyiKFj", $key);
             $sid_web = substr($key, rand(0, 3), rand(28, 32));
 
-            // codeigniter session stored data			
+            // codeigniter session stored data          
             $user_data = array(
                 'sid_web' => $sid_web,
                 'user_id' => $result[0]['user_id'],

@@ -65,11 +65,13 @@ class Categories extends CI_Model {
         $func = function($value) {
             return $value["CategoryId"];
         };
+        if(empty($catId))
+            $catId = 0;
         $queryFirst = "SELECT  CategoryId
                             from    (select * from grocery_category
                                      order by ParentId, CategoryId) products_sorted,
                                     (select @pv := $catId) initialisation
-                            where   find_in_set(ParentId, @pv)
+                            where   find_in_set(ParentId, @pv) and Status = 1
                             and     length(@pv := concat(@pv, ',', CategoryId))";
         $firstQueryResult = $this->db->query($queryFirst);
         if ($firstQueryResult->num_rows() > 0) {
@@ -84,7 +86,7 @@ class Categories extends CI_Model {
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     LEFT JOIN grocery_unit gu ON
-                    gu.UnitId = gp.Unit
+                    gu.UnitId = gp.UnitId
                     WHERE gp.Status = 1 AND
                     gp.Category IN(
                         $inCats

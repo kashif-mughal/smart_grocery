@@ -106,7 +106,6 @@ class Cbrand extends CI_Controller {
                 $image_url = "assets/img/brand/" . $image['file_name'];
             }
         }
-        $this->load->model('Brands');
         $BrandId = $this->input->post('BrandId');
         $data = array(
             'BrandName' => $this->input->post('BrandName'),
@@ -122,7 +121,6 @@ class Cbrand extends CI_Controller {
 
     // brand delete
     public function brand_delete() {
-        $this->load->model('Brands');
         $BrandId = $_POST['BrandId'];
         $this->Brands->soft_delete_by_key('BrandId', $BrandId);
         return true;

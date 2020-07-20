@@ -29,7 +29,6 @@ class Lunit {
     //Sub unit Add
     public function unit_add_form() {
         $CI = & get_instance();
-        $CI->load->model('Units');
         $data = array(
             'title' => 'Add Unit'
         );

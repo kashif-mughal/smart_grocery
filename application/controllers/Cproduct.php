@@ -112,11 +112,6 @@ class Cproduct extends CI_Controller {
         redirect(base_url('Cproduct/manage_product'));
     }
 
-    //Manage Product
-    // public function manage_category() {
-    //     $content = $this->lcategory->category_list();
-    //     $this->template->full_admin_html_view($content);
-    // }
 
     public function manage_product() {
         $CI = & get_instance();

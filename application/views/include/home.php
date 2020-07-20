@@ -29,7 +29,7 @@
          <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
          <div class="product-info text-center">
           <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
-          <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].'kg'; ?></p>
+          <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].$value['UnitName']; ?></p>
           <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
           <?php if($discountPercentage != 0) { ?> 
             <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
@@ -165,7 +165,7 @@ foreach($CatList as $key => $value) {?>
      <img class="card-img-bottom text-center" src="<?php echo base_url().$value->products[$i]['ProductImg']; ?>" alt="Card image cap">
      <div class="product-info text-center">
       <p class="card-text product-card-inner-name"><?php echo $value->products[$i]['ProductName']; ?></p>
-      <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['Unit'].'kg'; ?></p>
+      <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['Unit'].$value->products[$i]['UnitName']; ?></p>
       <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value->products[$i]['SalePrice']; ?></p>
       <?php if($discountPercentage != 0) { ?> 
         <span class="product-discount"><del>Rs. <?php echo $value->products[$i]['Price']; ?></del></span>
@@ -205,52 +205,5 @@ foreach($CatList as $key => $value) {?>
 </div>
 <?php } ?>
 <!-- HOUSEHOLD ESSENTIALS -->
-
-<!-- Call to Action -->
-
-<div class="row my-4">
- <div class="col-md-4">
-
-  <div class="call_to_action_grid border-right-full">
-   <div class="call_to_action_image">
-    <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/SameNextDayDelivery_icon.png?>" alt="Icon">
-  </div>
-  <div class="call_to_action_content">
-    <h5 class="call_to_action_title">Same/Next Day Delivery</h5>
-    <h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100 for orders below Rs. 4,000</h6>
-  </div>
-</div>
-
-</div>
-<div class="col-md-4">
-
-  <div class="call_to_action_grid border-right-full">
-   <div class="call_to_action_image">
-    <h4 class="call_to_action_custom_img m-0">Rs.</h4> 
-  </div>
-  <div class="call_to_action_content">
-    <h5 class="call_to_action_title">Cash On Delivery</h5>
-    <h6 class="call_to_action_content">You pay when rider comes at your address.</h6>
-  </div>
-</div>
-
-</div>
-<div class="col-md-4">
-
-  <div class="call_to_action_grid">
-   <div class="call_to_action_image">
-    <img src="<?php echo base_url() ?>assets/img/footer/call_to_action/OnlineSupport_icon.png?>" alt="Icon">
-  </div>
-  <div class="call_to_action_content">
-    <h5 class="call_to_action_title">Online Support</h5>
-    <h6 class="call_to_action_content">Customer support from 9AM - Midnight (021) 111 111 123</h6>
-  </div>
-</div>
-
-</div>
-</div>
-
-<!-- Call to Action -->
-
 </div>
 </section>

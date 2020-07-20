@@ -49,11 +49,16 @@ class Lcategory
         $CI =& get_instance();
         $CI->load->model('Categories');
         $category_detail = $CI->Categories->retrieve_editdata('CategoryId', $category_id);
+        $categories   = $CI->Categories->customSelect('CategoryId, CatName');
         $data            = array(
             'title' => 'Category Edit',
             'CategoryId' => $category_detail[0]['CategoryId'],
             'CatName' => $category_detail[0]['CatName'],
-            'Status' => $category_detail[0]['Status']
+            'Alias' => $category_detail[0]['Alias'],
+            'Status' => $category_detail[0]['Status'],
+            'Img' => $category_detail[0]['Img'],
+            'ParentId' => $category_detail[0]['ParentId'],
+            'parent_categories' => $categories
         );
         $chapterList     = $CI->parser->parse('category/edit_category_form', $data, true);
         return $chapterList;

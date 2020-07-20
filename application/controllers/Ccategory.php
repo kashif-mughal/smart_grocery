@@ -9,7 +9,6 @@ class Ccategory extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->library('auth');
         $this->load->library('lcategory');
         $this->load->library('session');
         $this->load->model('Categories');
@@ -88,13 +87,34 @@ class Ccategory extends CI_Controller {
 
     // Category Update
     public function category_update() {
-        $category_id = $this->input->post('CategoryId');
+        if ($_FILES['image']['name']) {
+
+            $config['upload_path'] = './assets/img/category/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+            $config['max_size'] = "*";
+            $config['max_width'] = "*";
+            $config['max_height'] = "*";
+            $config['encrypt_name'] = TRUE;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('image')) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+                redirect(base_url('Ccategory'));
+            } else {
+                $image = $this->upload->data();
+                $image_url = "assets/img/category/" . $image['file_name'];
+            }
+        }
+        $CategoryId = $this->input->post('CategoryId');
         $data = array(
             'CatName' => $this->input->post('CatName'),
-            'Status' => $this->input->post('Status'),
+            'Alias' => $this->input->post('Alias'),
+            'ParentId' => $this->input->post('ParentId')
         );
-
-        $this->Categories->update($data, 'CategoryId', $category_id);
+        if($_FILES['image']['name'])
+            $data['Img'] = (!empty($image_url) ? $image_url : 'assets/img/category.jpg');
+        $this->Categories->update($data, 'CategoryId', $CategoryId);
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect(base_url('Ccategory/manage_category'));
     }
