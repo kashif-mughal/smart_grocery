@@ -1,5 +1,5 @@
 <section class="main-content">
-   <div class="container-fluid">
+   <div class="container">
       <div class="row">
          <div class="col-xl-9 col-lg-9 col-md-12">
             <div class="featured-products">
@@ -115,7 +115,7 @@
             <section class="edibles-main products-widget">
                <div class="container-fluid">
                   <div class="row">
-                     <div class="col-md-2 pl-0">
+                     <div class="col-md-3 pl-0">
                         <h2 class="products-widget-heading"><?=$key?></h2>
                         <div class="card product-category">
                            <div class="card-body product-card-category-list">
@@ -130,9 +130,9 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-10 pr-0">
+                     <div class="col-md-9">
                         <div class="container-fluid">
-                           <div class="row featured-products-content mb-3">
+                           <div class="row featured-products-content">
                               <?php for ($i=0; $i < count($value->products); $i++) {?>
                               <div class="card mr-2 each-prod product-card-inner">
                                  <?php if(!empty($value->products[$i]['ProductName'])){?>

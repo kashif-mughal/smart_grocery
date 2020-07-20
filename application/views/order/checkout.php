@@ -2,7 +2,7 @@
         <!-- Bread Crumb -->
 
         <div class="bread_crumb">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row d-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -19,7 +19,7 @@
 
 
         <section class="main-content mx-4">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="content-box pd-50">

@@ -20,24 +20,24 @@ $users = $CI->Users->profile_edit_data();
 
 <div class="section-head">
       <div class="top-bar">
-         <div class="container-fluid">
+         <div class="container">
             <div class="row">
-               <nav class="navbar navbar-expand-sm ml-md-auto">
+               <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="#">My Account</a>
+                        <a class="nav-link" href="javascript:void(0)">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Wishlist</a>
+                        <a class="nav-link" href="javascript:void(0)">Wishlist</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Track your order</a>
+                        <a class="nav-link" href="javascript:void(0)">Track your order</a>
                      </li>
                   </ul>
                </nav>
@@ -45,7 +45,7 @@ $users = $CI->Users->profile_edit_data();
          </div>
       </div>
       <div class="main-nav bg-light">
-         <div class="container-fluid">
+         <div class="container">
             <div class="row align-items-center py-4">
                <!-- Brand Logo & Sidebar Button -->
                <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-4 mb-md-2 mb-lg-0 col-12 order-1 text-center">
