@@ -117,7 +117,7 @@ $users = $CI->Users->profile_edit_data();
                            <div class="cart_container d-flex flex-row align-item-center justify-content-start">
                               <!-- Cart Icon -->
                               <div class="cart_icon">
-                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#shoppingCartModal">
+                                 <a href="javascript:void(0)" id="cartBtn" data-toggle="modal" data-target="#shoppingCartModal">
                                     <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
                                     <div class="cart_icon_text">
                                        <span id="add_to_cart_items" class="badge badge-pill badge-light">0</span>
@@ -247,7 +247,7 @@ $users = $CI->Users->profile_edit_data();
       productJson.quantity = quantity;
       cart.push(productJson);
    }
-   document.cookie = `baskit=${JSON.stringify(cart)};path=/`;
+   document.cookie = `baskit=${JSON.stringify(cart)};path=/;`;
    if(currentProduct.length > 0)
       $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
    else
@@ -263,7 +263,12 @@ function removeAndUpdateFromCart(productJson, removeCartObj){
       return true;
    cart = JSON.parse(cart);
    var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productJson.id});
-   document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
+   var cookieString = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/;`;
+   if(cartExceptCurrentProduct.length == 0){
+      var oldDt = new Date(1);
+      cookieString += `expires=${oldDt}`;
+   }
+   document.cookie = cookieString;
    $('#add_to_cart_items').html(cartExceptCurrentProduct.length);
 
    removeCartObj.hide();
@@ -275,7 +280,7 @@ function removeAndUpdateFromCart(productJson, removeCartObj){
 function loadCartData(){
    var cart = getCookie('baskit');
    if(!cart)
-      return true;
+      cart = '[]';
    cart = JSON.parse(cart);
    var allProducts = $('.each-prod');
    for (var i = 0; i < allProducts.length; i++) {
@@ -333,7 +338,12 @@ function removeItemFromShoppingCart(currentElem){
    if(cart)
       cart = JSON.parse(cart);
    var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productId});
-   document.cookie = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/`;
+   var cookieString = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/;`;
+   if(cartExceptCurrentProduct.length == 0){
+      var oldDt = new Date(1);
+      cookieString += `expires=${oldDt}`;
+   }
+   document.cookie = cookieString;
    $(currentElem.closest('tbody')).remove(currentElem.closest('tr')[0]);
    $.notify(`${prodName} removed from cart`, "warn");
    if(cartExceptCurrentProduct.length == 0){
@@ -409,7 +419,8 @@ function loadShoppingCart(){
       return false;
    }
    function emptyCart(){
-      document.cookie = `baskit=[];path=/`;
+      var oldDt = new Date(1);
+      document.cookie = `baskit=[];path=/;expires=${oldDt}`;
       showEmptyResponse($('#shoppingCartBody'));
       loadCartData();
    }
