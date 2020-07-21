@@ -17,6 +17,113 @@ $users = $CI->Users->profile_edit_data();
    }
 </style>
 
+<!-- Sidebar -->
+
+<!-- Sidebar -->
+    
+    <div id="mySidenav" class="sidenav">
+        <div class="sidenav-content">
+            <a href="javascript:void(0)" class="closebtn" id="btn-close-sidebar">&times;</a>
+            <h3 class="sidebar-heading">Welcome, Guest User</h3>
+
+            <div class="sidebar-menu">
+                <div class="accordion" id="accordionExample">
+                    <div class="card border-none">
+                        <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                            <button class="btn-block d-flex justify-content-around align-items-center" type="button" data-toggle="collapse" 
+                                data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <img src="img/sidenav-toggle.png" class="d-inline" alt="">
+                                <h4 class="d-inline">Shop Categories</h4>
+                                <img src="img/sidenav-chevron.png" class="d-inline" alt="">
+                            </button>
+                        </div>
+                
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                               <ul class="sidebar-menu-items navbar-nav">
+                                   <li><a href="#">Edibles</a></li>
+                                   <li><a href="#">Snacks & Breakfast</a></li>
+                                   <li><a href="#">Dairy & Allied</a></li>
+                                   <li><a href="#">Fresh Fruits & Vegetables</a></li>
+                                   <li><a href="#">Meat, Fish & Poultry</a></li>
+                                   <li><a href="#">Personal Hygiene</a></li>
+                                   <li><a href="#">Toiletries</a></li>
+                                   <li><a href="#">Haircare</a></li>
+                                   <li><a href="#">Baby Care</a></li>
+                                   <li><a href="#">Petcare</a></li>
+                                   <li><a href="#">Kitchen Accessories</a></li>
+                                   <li><a href="#">Household Essentials</a></li>
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="img/profile.png" class="d-inline" alt="">
+                                    <h4 class="d-inline ml-4">Profile</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="img/my_order_history.png" class="d-inline" alt="">
+                                    <h4 class="d-inline ml-4">My Order History</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="img/track_your_order.png" class="d-inline" alt="">
+                                    <h4 class="d-inline ml-4">Track Your Order</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="img/call_us.png" class="d-inline" alt="">
+                                    <h4 class="d-inline ml-4">Call Us</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="img/sign-in.png" class="d-inline" alt="">
+                                    <h4 class="d-inline ml-4">Sign In</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+
+<!-- Sidebar Ends -->
+
 
 <div class="section-head">
       <div class="top-bar">
@@ -52,10 +159,15 @@ $users = $CI->Users->profile_edit_data();
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-end justify-content-md-end justify-content-sm-center">
                      <div class="sidebar-button">
-                        <button class="navbar-toggler h-100" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
+                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
+                              <img src="img/toggler_icon.png" alt="Toggle navigation">
+                        </button>
+                        <!-- <button class="navbar-toggler h-100" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                            <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
-                        </button>
+                        </button> -->
                      </div>
                      <div class="logo ml-2">
                         <div class="logo_content text-center">

@@ -1452,7 +1452,6 @@ button.category-button:active {
    text-decoration: none !important;
 }
 /* Sidebar */
-
 .sidenav {
   height: 100%;
   width: 0;
@@ -1460,13 +1459,21 @@ button.category-button:active {
   z-index: 10000;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border: 1px solid #cccccc;
   overflow-x: hidden;
   transition: 0.5s;
 }
+.sidenav .card-header {
+   background-color: #ffffff;
+   border: none !important;
+   padding: 10px 16px;
+   border-bottom: 1px solid #cccccc !important; 
+}
+
 .sidenav .sidenav-content {
    padding: 60px 12px;
+   background-color: #ffffff;
 }
 .sidenav .sidebar-menu .sidebar-menu-title {
    border: none !important;
@@ -1493,6 +1500,7 @@ button.category-button:active {
    padding-top: 0px;
    padding-bottom: 0px;
 }
+
 .sidenav .sidebar-menu .sidebar-menu-items li a:hover {
    text-decoration: underline;
 }

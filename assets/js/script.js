@@ -73,4 +73,16 @@ $(document).ready(function(){
      );
    });
     
+   $("#btn-sidebar").click(function() {
+     document.getElementById("mySidenav").style.width = "315px";
+     document.getElementById("body-content").style.marginLeft = "315px";
+     // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+   });
+
+   $("#btn-close-sidebar").click(function() {
+     document.getElementById("mySidenav").style.width = "0";
+     document.getElementById("body-content").style.marginLeft = "0";
+     // document.body.style.backgroundColor = "white";
+   });
+  
  });
