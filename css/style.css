@@ -1599,6 +1599,84 @@ button.category-button:active {
    margin-bottom: 20px;
 }
 
+/* ===================================== */
+/* ========== Timeline ================= */
+
+.timeline {
+   width: 800px;
+   height: auto;
+   margin: 50px auto 0;
+   padding: 20px;
+   box-sizing: border-box;
+}
+.timeline li {
+   position: relative;
+   list-style: none;
+}
+.timeline li .item {
+   position: relative;
+   min-height: 60px;
+   padding: 0 20px 20px 30px;
+   margin-left: 20px;
+   border-left: 0.2rem solid #17a18d;
+}
+.timeline li .item p {
+   font-size: 12px;
+   margin-top: 10px !important;
+   width: 200px !important;
+}
+.timeline li:last-child .item {
+   border-left: 1px solid transparent;
+   margin-left: 21px;
+}
+.timeline li .item span {
+   position: absolute;
+   top: -3px;
+   left: -14px;
+   width: 20px;
+   height: 20px;
+   line-height: 20px;
+   text-align: center;
+   background: #ffffff;
+   color: #17a18d;
+   font-weight: 600;
+   border-radius: 50%;
+   border: 2px solid #17a18d;
+}
+.timeline li .item span i {
+   font-size: 16px;
+   margin-top: 2px;
+   /* margin-left: 1px; */
+}
+.timeline li .item h4,
+.timeline li .item p,
+.timeline li .item h5 {
+   margin: 0;
+   padding: 0;
+}
+.timeline li .item h5 {
+   color: #000000;
+   position: absolute;
+   left: -80px;
+   top: 2px;
+   font-size: 13px;
+}
+.timeline li div.notDone span i {
+   display: none !important;
+}
+.timeline li div.notDone h5 {
+   display: none;
+}
+.timeline li div.notDone h4 {
+   color: #cccccc;
+}
+
+/* ========== Timeline Ends ============ */
+/* ===================================== */
+
+
+
+
 /* ----------------------------------------------------- */
 /* Media Queries */
 
