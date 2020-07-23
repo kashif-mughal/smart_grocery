@@ -33,9 +33,9 @@ $users = $CI->Users->profile_edit_data();
                             <button class="btn-block d-flex justify-content-around align-items-center" type="button" data-toggle="collapse" 
                                 data-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne">
-                                <img src="img/sidenav-toggle.png" class="d-inline" alt="">
+                                <img src="<?php echo base_url() ?>assets/img/sidenav-toggle.png" class="d-inline" alt="">
                                 <h4 class="d-inline">Shop Categories</h4>
-                                <img src="img/sidenav-chevron.png" class="d-inline" alt="">
+                                <img src="<?php echo base_url() ?>assets/img/sidenav-chevron.png" class="d-inline" alt="">
                             </button>
                         </div>
                 
@@ -63,7 +63,7 @@ $users = $CI->Users->profile_edit_data();
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button" data-toggle="collapse"
                                     data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="img/profile.png" class="d-inline" alt="">
+                                    <img src="<?php echo base_url() ?>assets/img/profile.png" class="d-inline" alt="">
                                     <h4 class="d-inline ml-4">Profile</h4>
                                 </button>
                             </div>
@@ -74,7 +74,7 @@ $users = $CI->Users->profile_edit_data();
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="img/my_order_history.png" class="d-inline" alt="">
+                                    <img src="<?php echo base_url() ?>assets/img/my_order_history.png" class="d-inline" alt="">
                                     <h4 class="d-inline ml-4">My Order History</h4>
                                 </button>
                             </div>
@@ -85,7 +85,7 @@ $users = $CI->Users->profile_edit_data();
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="img/track_your_order.png" class="d-inline" alt="">
+                                    <img src="<?php echo base_url() ?>assets/img/track_your_order.png" class="d-inline" alt="">
                                     <h4 class="d-inline ml-4">Track Your Order</h4>
                                 </button>
                             </div>
@@ -96,7 +96,7 @@ $users = $CI->Users->profile_edit_data();
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="img/call_us.png" class="d-inline" alt="">
+                                    <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline" alt="">
                                     <h4 class="d-inline ml-4">Call Us</h4>
                                 </button>
                             </div>
@@ -107,7 +107,7 @@ $users = $CI->Users->profile_edit_data();
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="img/sign-in.png" class="d-inline" alt="">
+                                    <img src="<?php echo base_url() ?>assets/img/sign-in.png" class="d-inline" alt="">
                                     <h4 class="d-inline ml-4">Sign In</h4>
                                 </button>
                             </div>
@@ -162,12 +162,8 @@ $users = $CI->Users->profile_edit_data();
                         <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                               aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="img/toggler_icon.png" alt="Toggle navigation">
+                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
                         </button>
-                        <!-- <button class="navbar-toggler h-100" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                           <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
-                        </button> -->
                      </div>
                      <div class="logo ml-2">
                         <div class="logo_content text-center">
