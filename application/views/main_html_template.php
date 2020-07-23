@@ -29,6 +29,7 @@
         $CI = & get_instance();
         $CI->load->model('Web_settings');
         $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
+        $data['Web_settings'] = $Web_settings;
         ?>
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="<?php
@@ -50,7 +51,6 @@
             <?php
         }
         ?>
-        <link href="<?php echo base_url() ?>assets/css/cmxform.css" rel="stylesheet" type="text/css"/>
         <!-- Themify icons -->
         <link href="<?php echo base_url() ?>assets/themify-icons/themify-icons.min.css" rel="stylesheet" type="text/css"/>
         <!-- Pe-icon -->
@@ -59,14 +59,6 @@
         <link href="<?php echo base_url() ?>assets/plugins/datatables/dataTables.min.css" rel="stylesheet" type="text/css"/>
         <!-- Theme style -->
         <link href="<?php echo base_url() ?>assets/css/select2.min.css" rel="stylesheet" type="text/css"/>
-        <?php
-        if ($Web_settings[0]['rtr'] == 1) {
-            ?>
-            <!-- Theme style rtl -->
-            <link href="<?php echo base_url() ?>assets/dist/css/styleBD-rtl.css" rel="stylesheet" type="text/css"/>
-            <?php
-        }
-        ?>
         <!-- jQuery -->
         <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-3.5.1.min.js" type="text/javascript"></script>
         <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script> -->
@@ -81,13 +73,13 @@
             <?php
             $url = $this->uri->segment(2);
             if ($url != "login") {
-                $this->load->view('include/header');
+                $this->load->view('include/header', $data);
             }
             ?>
             {content}
             <?php
             if ($url != "login") {
-                $this->load->view('include/footer');
+                $this->load->view('include/footer', $data);
             }
             ?>
         </div>

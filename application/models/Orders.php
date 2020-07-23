@@ -23,20 +23,22 @@ class Orders extends CI_Model {
         return false;
     }
 
-    //Count customer
-    public function order_entry($data) {
+    public function place_order($data){
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('Status', 1);
-        $this->db->where('OrderName', $data['OrderName']);
+        $this->db->where('Hash', $data['Hash']);
+        $this->db->where('CustomerId', $data['CustomerId']);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return FALSE;
+            return false;
         } else {
-            $this->db->insert('grocery_order', $data);
-            return TRUE;
+            $this->db->insert($this->tableName, $data);
+            return $this->db->insert_id();
         }
     }
-
-
+    public function place_order_details($data){
+        $this->db->insert('grocery_order_detail', $data);
+        return true;
+    }
 }

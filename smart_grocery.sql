@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2020 at 11:51 AM
+-- Generation Time: Jul 23, 2020 at 08:58 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -616,7 +616,112 @@ INSERT INTO `grocery_category` (`CategoryId`, `CatName`, `Alias`, `Img`, `Parent
 (11, 'Biscuits', 'Biscuits', 'assets/img/category/6cfdc904f73383eb352970235d3faafc.jpg', 9, '2020-07-13 10:44:58', '2020-07-13 01:44:58', b'1'),
 (12, 'EDIBLES', 'EDIBLES', 'assets/img/product.png', 0, '2020-07-13 10:45:27', '2020-07-13 01:45:27', b'1'),
 (13, 'Atta (Flour)', 'Atta & Flour', 'assets/img/category/868f874b0059a140826161b8a60fe0c2.jpg', 12, '2020-07-13 10:46:11', '2020-07-13 01:46:11', b'1'),
-(14, 'Cooking Oil', 'Cooking Oil', 'assets/img/category/43f2a5fd549a616fae43d48345ca2a94.jpg', 12, '2020-07-13 10:46:34', '2020-07-13 01:46:34', b'1');
+(14, 'Cooking Oil', 'Cooking Oil', 'assets/img/category/43f2a5fd549a616fae43d48345ca2a94.jpg', 12, '2020-07-13 10:46:34', '2020-07-13 01:46:34', b'1'),
+(20, 'Fresh Fruits2', 'Fresh Fruits2', 'assets/img/product.png', 6, '2020-07-18 18:45:10', '2020-07-18 21:45:10', b'0'),
+(21, 'Fresh Vegetables2', 'Fresh Vegetables2', 'assets/img/product.png', 6, '2020-07-18 18:45:26', '2020-07-18 21:45:26', b'0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grocery_order`
+--
+
+CREATE TABLE `grocery_order` (
+  `OrderId` int(11) NOT NULL,
+  `CustomerId` int(11) NOT NULL,
+  `OrderValue` int(11) NOT NULL,
+  `Hash` varchar(42) NOT NULL,
+  `CreatedOn` datetime NOT NULL,
+  `ModifiedOn` datetime NOT NULL DEFAULT current_timestamp(),
+  `Status` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `grocery_order`
+--
+
+INSERT INTO `grocery_order` (`OrderId`, `CustomerId`, `OrderValue`, `Hash`, `CreatedOn`, `ModifiedOn`, `Status`) VALUES
+(7, 1, 375, '2831b4f50b42502790a0f6d18c8254ab991c7cbd', '2020-07-21 15:48:32', '2020-07-21 18:48:32', b'1'),
+(8, 1, 110, '8a021a1904e46b8bca5f504108a89e902d452404', '2020-07-21 16:00:26', '2020-07-21 19:00:26', b'1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grocery_order_detail`
+--
+
+CREATE TABLE `grocery_order_detail` (
+  `OrderDetailId` int(11) NOT NULL,
+  `OrderId` int(11) NOT NULL,
+  `ItemId` int(11) NOT NULL,
+  `ItemQuantity` int(11) NOT NULL,
+  `SoldPrice` int(11) NOT NULL,
+  `Status` bit(1) NOT NULL,
+  `CreatedOn` datetime NOT NULL,
+  `ModifiedOn` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `grocery_order_detail`
+--
+
+INSERT INTO `grocery_order_detail` (`OrderDetailId`, `OrderId`, `ItemId`, `ItemQuantity`, `SoldPrice`, `Status`, `CreatedOn`, `ModifiedOn`) VALUES
+(10, 7, 10, 3, 70, b'1', '2020-07-21 15:48:32', '2020-07-21 18:48:32'),
+(11, 7, 16, 3, 55, b'1', '2020-07-21 15:48:32', '2020-07-21 18:48:32'),
+(12, 8, 16, 2, 55, b'1', '2020-07-21 16:00:26', '2020-07-21 19:00:26'),
+(13, 0, 7, 2, 200, b'1', '2020-07-23 20:11:21', '2020-07-23 23:11:21'),
+(14, 0, 7, 2, 200, b'1', '2020-07-23 20:13:19', '2020-07-23 23:13:19'),
+(15, 0, 7, 2, 200, b'1', '2020-07-23 20:13:29', '2020-07-23 23:13:29'),
+(16, 0, 7, 2, 200, b'1', '2020-07-23 20:13:42', '2020-07-23 23:13:42'),
+(17, 0, 7, 2, 200, b'1', '2020-07-23 20:14:42', '2020-07-23 23:14:42'),
+(18, 0, 7, 2, 200, b'1', '2020-07-23 20:16:12', '2020-07-23 23:16:12'),
+(19, 0, 7, 2, 200, b'1', '2020-07-23 20:16:21', '2020-07-23 23:16:21'),
+(20, 0, 7, 2, 200, b'1', '2020-07-23 20:20:18', '2020-07-23 23:20:18'),
+(21, 0, 7, 2, 200, b'1', '2020-07-23 20:20:22', '2020-07-23 23:20:22'),
+(22, 0, 7, 2, 200, b'1', '2020-07-23 20:20:37', '2020-07-23 23:20:37'),
+(23, 0, 7, 2, 200, b'1', '2020-07-23 20:21:26', '2020-07-23 23:21:26'),
+(24, 0, 7, 2, 200, b'1', '2020-07-23 20:21:33', '2020-07-23 23:21:33'),
+(25, 0, 7, 2, 200, b'1', '2020-07-23 20:21:39', '2020-07-23 23:21:39'),
+(26, 0, 7, 2, 200, b'1', '2020-07-23 20:21:43', '2020-07-23 23:21:43'),
+(27, 0, 7, 2, 200, b'1', '2020-07-23 20:22:27', '2020-07-23 23:22:27'),
+(28, 0, 7, 2, 200, b'1', '2020-07-23 20:22:31', '2020-07-23 23:22:31'),
+(29, 0, 7, 2, 200, b'1', '2020-07-23 20:22:36', '2020-07-23 23:22:36'),
+(30, 0, 7, 2, 200, b'1', '2020-07-23 20:22:43', '2020-07-23 23:22:43'),
+(31, 0, 7, 2, 200, b'1', '2020-07-23 20:22:50', '2020-07-23 23:22:50'),
+(32, 0, 7, 2, 200, b'1', '2020-07-23 20:22:57', '2020-07-23 23:22:57'),
+(33, 0, 7, 2, 200, b'1', '2020-07-23 20:23:36', '2020-07-23 23:23:36'),
+(34, 0, 7, 2, 200, b'1', '2020-07-23 20:24:12', '2020-07-23 23:24:12'),
+(35, 0, 7, 2, 200, b'1', '2020-07-23 20:24:32', '2020-07-23 23:24:32'),
+(36, 0, 7, 2, 200, b'1', '2020-07-23 20:25:22', '2020-07-23 23:25:22'),
+(37, 0, 7, 2, 200, b'1', '2020-07-23 20:25:25', '2020-07-23 23:25:25'),
+(38, 0, 7, 2, 200, b'1', '2020-07-23 20:26:31', '2020-07-23 23:26:31'),
+(39, 0, 7, 2, 200, b'1', '2020-07-23 20:27:01', '2020-07-23 23:27:01'),
+(40, 0, 7, 2, 200, b'1', '2020-07-23 20:27:21', '2020-07-23 23:27:21'),
+(41, 0, 7, 2, 200, b'1', '2020-07-23 20:27:45', '2020-07-23 23:27:45'),
+(42, 0, 7, 2, 200, b'1', '2020-07-23 20:28:04', '2020-07-23 23:28:04'),
+(43, 0, 7, 2, 200, b'1', '2020-07-23 20:28:22', '2020-07-23 23:28:22'),
+(44, 0, 7, 2, 200, b'1', '2020-07-23 20:28:54', '2020-07-23 23:28:54'),
+(45, 0, 7, 2, 200, b'1', '2020-07-23 20:29:20', '2020-07-23 23:29:20'),
+(46, 0, 7, 2, 200, b'1', '2020-07-23 20:29:43', '2020-07-23 23:29:43'),
+(47, 0, 7, 2, 200, b'1', '2020-07-23 20:30:09', '2020-07-23 23:30:09'),
+(48, 0, 7, 2, 200, b'1', '2020-07-23 20:32:04', '2020-07-23 23:32:04'),
+(49, 0, 7, 2, 200, b'1', '2020-07-23 20:32:23', '2020-07-23 23:32:23'),
+(50, 0, 7, 2, 200, b'1', '2020-07-23 20:32:34', '2020-07-23 23:32:34'),
+(51, 0, 7, 2, 200, b'1', '2020-07-23 20:34:07', '2020-07-23 23:34:07'),
+(52, 0, 7, 2, 200, b'1', '2020-07-23 20:35:19', '2020-07-23 23:35:19'),
+(53, 0, 7, 2, 200, b'1', '2020-07-23 20:37:01', '2020-07-23 23:37:01'),
+(54, 0, 7, 2, 200, b'1', '2020-07-23 20:39:48', '2020-07-23 23:39:48'),
+(55, 0, 7, 2, 200, b'1', '2020-07-23 20:41:22', '2020-07-23 23:41:22'),
+(56, 0, 7, 2, 200, b'1', '2020-07-23 20:44:57', '2020-07-23 23:44:57'),
+(57, 0, 7, 2, 200, b'1', '2020-07-23 20:45:16', '2020-07-23 23:45:16'),
+(58, 0, 7, 2, 200, b'1', '2020-07-23 20:48:06', '2020-07-23 23:48:06'),
+(59, 0, 7, 2, 200, b'1', '2020-07-23 20:49:27', '2020-07-23 23:49:27'),
+(60, 0, 3, 2, 150, b'1', '2020-07-23 20:50:11', '2020-07-23 23:50:11'),
+(61, 0, 5, 1, 45, b'1', '2020-07-23 20:50:11', '2020-07-23 23:50:11'),
+(62, 0, 3, 2, 150, b'1', '2020-07-23 20:52:00', '2020-07-23 23:52:00'),
+(63, 0, 5, 1, 45, b'1', '2020-07-23 20:52:00', '2020-07-23 23:52:00'),
+(64, 0, 3, 2, 150, b'1', '2020-07-23 20:53:07', '2020-07-23 23:53:07'),
+(65, 0, 5, 1, 45, b'1', '2020-07-23 20:53:07', '2020-07-23 23:53:07');
 
 -- --------------------------------------------------------
 
@@ -629,6 +734,7 @@ CREATE TABLE `grocery_products` (
   `ProductName` varchar(40) NOT NULL,
   `Category` int(3) NOT NULL,
   `Unit` int(3) NOT NULL,
+  `UnitId` int(11) NOT NULL DEFAULT 1,
   `Price` int(11) NOT NULL,
   `SalePrice` int(11) NOT NULL,
   `Status` bit(1) NOT NULL DEFAULT b'1',
@@ -644,17 +750,17 @@ CREATE TABLE `grocery_products` (
 -- Dumping data for table `grocery_products`
 --
 
-INSERT INTO `grocery_products` (`ProductId`, `ProductName`, `Category`, `Unit`, `Price`, `SalePrice`, `Status`, `ProductImg`, `CreatedOn`, `ModifiedOn`, `IsFeatured`, `IsHot`, `Brand`) VALUES
-(1, 'Banana', 8, 1, 60, 55, b'1', 'assets/img/products/banana.png', '2020-07-14 00:00:00', '2020-07-14 00:00:00', b'1', b'0', 1),
-(2, 'Cauliflower', 7, 1, 35, 35, b'1', 'assets/img/products/cauliflower.png', '2020-07-14 21:29:05', '2020-07-14 21:29:05', b'0', b'0', 1),
-(3, 'Orange', 8, 9, 200, 150, b'1', 'assets/img/products/orange.png', '2020-07-14 21:30:04', '2020-07-14 21:30:04', b'1', b'0', 1),
-(5, 'Tomato', 7, 1, 56, 45, b'1', 'assets/img/products/Tomato.png', '2020-07-14 21:31:52', '2020-07-14 21:31:52', b'1', b'0', 1),
-(6, 'Grapes', 8, 1, 400, 400, b'1', 'assets/img/products/grapes.png', '2020-07-14 23:21:22', '2020-07-14 23:21:22', b'1', b'0', 1),
-(7, 'Apple', 8, 1, 250, 200, b'1', 'assets/img/products/apple.jpg', '2020-07-14 23:22:12', '2020-07-14 23:22:12', b'1', b'0', 1),
-(8, 'Onion', 7, 1, 50, 50, b'1', 'assets/img/products/onion.jpg', '2020-07-14 23:44:31', '2020-07-14 23:44:31', b'0', b'0', 1),
-(10, 'Ginger', 7, 1, 80, 70, b'1', 'assets/img/products/ginger.png', '2020-07-15 12:38:57', '2020-07-15 15:38:57', b'1', b'0', 1),
-(11, 'Cucumber', 7, 1, 80, 70, b'0', 'assets/img/product/cucumber.jpg', '2020-07-15 12:39:58', '2020-07-15 15:39:58', b'0', b'0', 1),
-(16, 'Potato', 7, 1, 50, 55, b'1', 'assets/img/products/2867b5b52ad4b082fae0ee4750924eb5.jpg', '2020-07-16 08:11:55', '2020-07-15 23:11:55', b'1', b'1', 1);
+INSERT INTO `grocery_products` (`ProductId`, `ProductName`, `Category`, `Unit`, `UnitId`, `Price`, `SalePrice`, `Status`, `ProductImg`, `CreatedOn`, `ModifiedOn`, `IsFeatured`, `IsHot`, `Brand`) VALUES
+(1, 'Banana', 8, 1, 1, 60, 55, b'1', 'assets/img/products/banana.png', '2020-07-14 00:00:00', '2020-07-14 00:00:00', b'1', b'0', 1),
+(2, 'Cauliflower', 7, 1, 1, 35, 35, b'1', 'assets/img/products/cauliflower.png', '2020-07-14 21:29:05', '2020-07-14 21:29:05', b'0', b'0', 1),
+(3, 'Orange', 8, 1, 1, 200, 150, b'1', 'assets/img/products/orange.png', '2020-07-14 21:30:04', '2020-07-14 21:30:04', b'1', b'0', 1),
+(5, 'Tomato', 7, 1, 1, 56, 45, b'1', 'assets/img/products/Tomato.png', '2020-07-14 21:31:52', '2020-07-14 21:31:52', b'1', b'0', 1),
+(6, 'Grapes', 8, 1, 1, 400, 400, b'1', 'assets/img/products/grapes.png', '2020-07-14 23:21:22', '2020-07-14 23:21:22', b'1', b'0', 1),
+(7, 'Apple', 8, 1, 1, 250, 200, b'1', 'assets/img/products/apple.jpg', '2020-07-14 23:22:12', '2020-07-14 23:22:12', b'1', b'0', 1),
+(8, 'Onion', 7, 1, 1, 50, 50, b'1', 'assets/img/products/onion.jpg', '2020-07-14 23:44:31', '2020-07-14 23:44:31', b'0', b'0', 1),
+(10, 'Ginger', 7, 1, 1, 80, 70, b'1', 'assets/img/products/ginger.png', '2020-07-15 12:38:57', '2020-07-15 15:38:57', b'1', b'0', 1),
+(11, 'Cucumber', 7, 1, 1, 80, 70, b'0', 'assets/img/product/cucumber.jpg', '2020-07-15 12:39:58', '2020-07-15 15:39:58', b'0', b'0', 1),
+(16, 'Potato', 7, 1, 1, 50, 55, b'1', 'assets/img/products/2867b5b52ad4b082fae0ee4750924eb5.jpg', '2020-07-16 08:11:55', '2020-07-15 23:11:55', b'1', b'1', 1);
 
 -- --------------------------------------------------------
 
@@ -675,7 +781,7 @@ CREATE TABLE `grocery_unit` (
 --
 
 INSERT INTO `grocery_unit` (`UnitId`, `UnitName`, `Status`, `CreatedOn`, `ModifiedOn`) VALUES
-(1, 'KG', b'0', '2020-07-16 21:02:55', '2020-07-16 12:02:55'),
+(1, 'KG', b'1', '2020-07-16 21:02:55', '2020-07-16 12:02:55'),
 (2, 'KG', b'0', '2020-07-16 21:07:05', '2020-07-16 12:07:05'),
 (3, 'Gram', b'1', '2020-07-16 21:07:29', '2020-07-16 12:07:29');
 
@@ -4722,7 +4828,7 @@ CREATE TABLE `web_setting` (
 --
 
 INSERT INTO `web_setting` (`setting_id`, `logo`, `invoice_logo`, `favicon`, `currency`, `currency_position`, `footer_text`, `language`, `rtr`, `captcha`, `site_key`, `secret_key`, `discount_type`) VALUES
-(1, '#', '#', '#', '₨', '1', 'Copyright © 2016-2018 . All rights reserved.', 'english', '0', 1, '', '', 1);
+(1, '#', '#', '#', '₨', '1', '<div class=\"col-md-9\">\r\n							<p>info@saudaexpress.com, 0300 123 45678, Plot No. 30, Sector 26, Korangi Industrial Area, Karachi,<br>PakistanSauda Express &#0174 2020</p>\r\n						</div>\r\n						<div class=\"col-md-3\">\r\n						</div>', 'english', '0', 1, '', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -4754,6 +4860,20 @@ ALTER TABLE `grocery_brand`
 ALTER TABLE `grocery_category`
   ADD PRIMARY KEY (`CategoryId`),
   ADD KEY `CatName` (`CatName`);
+
+--
+-- Indexes for table `grocery_order`
+--
+ALTER TABLE `grocery_order`
+  ADD PRIMARY KEY (`OrderId`),
+  ADD KEY `CustomerId` (`CustomerId`);
+
+--
+-- Indexes for table `grocery_order_detail`
+--
+ALTER TABLE `grocery_order_detail`
+  ADD PRIMARY KEY (`OrderDetailId`),
+  ADD KEY `OrderId` (`OrderId`);
 
 --
 -- Indexes for table `grocery_products`
@@ -4824,7 +4944,19 @@ ALTER TABLE `grocery_brand`
 -- AUTO_INCREMENT for table `grocery_category`
 --
 ALTER TABLE `grocery_category`
-  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `grocery_order`
+--
+ALTER TABLE `grocery_order`
+  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `grocery_order_detail`
+--
+ALTER TABLE `grocery_order_detail`
+  MODIFY `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `grocery_products`

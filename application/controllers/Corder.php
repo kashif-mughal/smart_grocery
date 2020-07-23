@@ -9,9 +9,7 @@ class Corder extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->library('auth');
         $this->load->library('lorder');
-        $this->load->library('session');
         $this->load->model('Orders');
     }
 
@@ -27,35 +25,39 @@ class Corder extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
+    //Proceed to checkout
+    public function proceed_to_checkout(){
+        if(empty($this->input->post('order'))){
+            $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
+            redirect(base_url('Corder/checkout'));
+        }
+        $result = $this->lorder->place_order();
+        
+        if ($result == TRUE) {
+            $this->session->set_userdata(array('message' => 'Successfully Added'));
+            $content = $this->lorder->proceed_to_checkout();
+            $this->template->full_html_view($content);
+        } else {
+            $this->session->set_userdata(array('error_message' => $result));
+            redirect(base_url('Corder/checkout'));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     //Manage order form
     public function manage_order() {
         $content = $this->lorder->order_list();
         $this->template->full_html_view($content);
         
-    }
-
-    //Insert order and upload
-    public function insert_order() {
-
-        $data = array(
-            'OrderName' => $this->input->post('OrderName'),
-            'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
-            'Status' => 1
-        );
-
-        $result = $this->Orders->order_entry($data);
-
-        if ($result == TRUE) {
-            $this->session->set_userdata(array('message' => 'Successfully Added'));
-            if (isset($_POST['add-customer'])) {
-                redirect(base_url('Corder/manage_order'));
-            } elseif (isset($_POST['add-customer-another'])) {
-                redirect(base_url('Corder'));
-            }
-        } else {
-            $this->session->set_userdata(array('error_message' => 'Already Inserted'));
-            redirect(base_url('Corder'));
-        }
     }
 
     //order Update Form

@@ -1,8 +1,3 @@
-<?php
-$CI =& get_instance();
-$CI->load->model('Web_settings');
-$Web_settings = $CI->Web_settings->retrieve_setting_editdata();
-?>
 <div id="main-page">
 	<div class="container">
 
@@ -211,19 +206,11 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 			<div class="company-address">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-9">
-							<p>info@saudaexpress.com, 0300 123 45678, Plot No. 30, Sector 26, Korangi Industrial Area, Karachi,<br>PakistanSauda Express &#0174 2020</p>
-						</div>
-						<div class="col-md-3">
-							<p class="float-right">Power by: <a href="http://bitechware.com/" target="_blank">bitechware 	</a></p>
-						</div>
+						<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
 					</div>
 				</div>
 			</div>
 
 		</div>
 	</div>
-	<strong>
-		<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
-	</strong><i class="fa fa-heart color-green"></i>
 </section>

@@ -6,7 +6,7 @@
                 <div class="row d-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Order</a></li>
                             <li class="breadcrumb-item">Checkout</li>
                         </ol>
                     </nav>
@@ -76,9 +76,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <a href="#" class="button-secondary button-full-width mt-5 mb-3 p-3 
-                                                text-dec-none text-white font-size-18">View Order history</a>
+                                <a href="javascript:void(0);" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Proceed To Checkout</a>
+                                <a href="#" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
                                 
                             </div>
                         </div>
@@ -139,6 +138,9 @@
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
         loadCheckoutCartArea();
+        $(document).on('click', '#checkout', function () {
+          proceedToCheckout();
+       });
     });
 
     function loadCheckoutCartArea(){
@@ -173,5 +175,43 @@
             //show empty message
             return false;
          }   
+    }
+
+    function proceedToCheckout(){
+        var baskit = getCookie('baskit');
+        if(!baskit || JSON.parse(baskit).length == 0){
+            $.notify("The Cart is empty, please add some item in cart", "error");
+            return false;
+        }
+
+        openWindowWithPost(
+            "proceed_to_checkout", JSON.parse(baskit)
+        );
+    }
+
+    function openWindowWithPost(url, dataArr) {
+        var form = document.createElement("form");
+        form.target = "_blank";
+        form.method = "POST";
+        form.action = url;
+        form.style.display = "none";
+        // for (var i = 0; i < dataArr.length; i++) {
+        //     for (var key in dataArr[i]) {
+        //         var input = document.createElement("input");
+        //         input.type = "hidden";
+        //         input.name = key + '[]';
+        //         input.value = dataArr[i][key];
+        //         form.appendChild(input);
+        //     }   
+        // }
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = 'order';
+        input.value = JSON.stringify(dataArr);
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 </script>

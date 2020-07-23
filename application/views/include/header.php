@@ -15,6 +15,11 @@ $users = $CI->Users->profile_edit_data();
       font-size: 20px;
       min-width: 360px;
    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
 </style>
 
 <!-- Sidebar -->
@@ -42,18 +47,9 @@ $users = $CI->Users->profile_edit_data();
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                <ul class="sidebar-menu-items navbar-nav">
-                                   <li><a href="#">Edibles</a></li>
-                                   <li><a href="#">Snacks & Breakfast</a></li>
-                                   <li><a href="#">Dairy & Allied</a></li>
-                                   <li><a href="#">Fresh Fruits & Vegetables</a></li>
-                                   <li><a href="#">Meat, Fish & Poultry</a></li>
-                                   <li><a href="#">Personal Hygiene</a></li>
-                                   <li><a href="#">Toiletries</a></li>
-                                   <li><a href="#">Haircare</a></li>
-                                   <li><a href="#">Baby Care</a></li>
-                                   <li><a href="#">Petcare</a></li>
-                                   <li><a href="#">Kitchen Accessories</a></li>
-                                   <li><a href="#">Household Essentials</a></li>
+                                <?php foreach($CatList as $key => $value) {?>
+                                   <li><a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value->catId) ?>"><?=$key?></a></li>
+                                <?php } ?>
                                </ul>
                             </div>
                         </div>
@@ -166,7 +162,7 @@ $users = $CI->Users->profile_edit_data();
                         </button>
                      </div>
                      <div class="logo ml-2">
-                        <div class="logo_content text-center">
+                        <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <img src="<?php echo base_url() ?>assets/img/logo.png" alt="Sauda Express" class="img-fluid d-block">
                            <p class="text-white tag-line mb-0">Where technology meets tradition</p> 
                         </div>
@@ -312,7 +308,8 @@ $users = $CI->Users->profile_edit_data();
  $(document).ready(() => {
    loadCartData();
    $(document).on('keydown', '.quantity', function () {
-      return false;
+      if(event.keyCode == 189)
+        return false;
    });
    $(document).on('click', '.remove-item-from-cart', function () {
       removeItemFromShoppingCart($(this));
@@ -526,6 +523,7 @@ function loadShoppingCart(){
       $(document).on('click', '.checkout-btn', handleCheckout(event));
    }
    function handleCheckout(e){
+    if(event)
       event.preventDefault();
       return false;
    }

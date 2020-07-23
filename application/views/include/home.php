@@ -43,7 +43,7 @@
                               ?>
                            <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                               <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                              <input type="text" class="d-inline-flex quantity quantity-input">
+                              <input type="number" min="0" class="d-inline-flex quantity quantity-input">
                               <span class="d-block quantity-button">
                                  <a href="javascript:void(0);" class="qty-pls d-block">+</a>
                                  <div class="separator"></div>
@@ -76,7 +76,7 @@
                                     <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
                                     <button class="card-button">Use Assistant</button>
                                  </div>
-                                 <div class="col-md-5 pl-0">
+                                 <div style="position: absolute;right: 0;max-width: 30%;">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -96,7 +96,7 @@
                                     <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
                                     <button class="card-button">Use Assistant</button>
                                  </div>
-                                 <div class="col-md-5 pl-0">
+                                 <div style="position: absolute;right: 0;max-width: 30%;">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>

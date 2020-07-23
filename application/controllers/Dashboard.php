@@ -16,29 +16,23 @@ class Dashboard extends CI_Controller {
         $this->load->library('lcategory');
         $CI->load->model('Products');
         $CI->load->model('Units');
+        $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
+        $product_list;
+        if ($query->num_rows() > 0) {
+            $product_list =  $query->result_array();
+        }
+        // print_r($product_list);die;
 
-        $product_list = $CI->Products->customSelect(
-            '*', 'IsFeatured = 1', 20, 'ModifiedOn'
-        );
-        
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
         }
-        $activeCategories = $CI->Categories->get_active_categories();
-        $activeCategoriesFlat = array();
-        foreach($activeCategories as $value) {
-            array_push($activeCategoriesFlat ,$value['CategoryId']);
-        }
-
         $final_product_list = array();
         foreach($product_list as $prod => $value) {
-            if (in_array($value['Category'], $activeCategoriesFlat)) {
-                $unitId = $prod['Unit'];
-                $currentUnit = $CI->Units->unit_search_item($value['Unit']);
-                $value['UnitName'] = $currentUnit[0]['UnitName'];
-                array_push($final_product_list,$value);
-            }
+            $unitId = $prod['UnitId'];
+            $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
+            $value['UnitName'] = $currentUnit[0]['UnitName'];
+            array_push($final_product_list,$value);
         }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
