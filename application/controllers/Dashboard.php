@@ -20,18 +20,25 @@ class Dashboard extends CI_Controller {
         $product_list = $CI->Products->customSelect(
             '*', 'IsFeatured = 1', 20, 'ModifiedOn'
         );
-        // print_r($product_list);die;
-
+        
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
         }
+        $activeCategories = $CI->Categories->get_active_categories();
+        $activeCategoriesFlat = array();
+        foreach($activeCategories as $value) {
+            array_push($activeCategoriesFlat ,$value['CategoryId']);
+        }
+
         $final_product_list = array();
         foreach($product_list as $prod => $value) {
-            $unitId = $prod['UnitId'];
-            $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
-            $value['UnitName'] = $currentUnit[0]['UnitName'];
-            array_push($final_product_list,$value);
+            if (in_array($value['Category'], $activeCategoriesFlat)) {
+                $unitId = $prod['Unit'];
+                $currentUnit = $CI->Units->unit_search_item($value['Unit']);
+                $value['UnitName'] = $currentUnit[0]['UnitName'];
+                array_push($final_product_list,$value);
+            }
         }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',

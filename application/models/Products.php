@@ -21,7 +21,8 @@ class Products extends CI_Model {
                         CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
                         CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot, 
                         -- p.IsFeatured, p.IsHot,
-                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId where p.Status = 1";
+                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId 
+                        where c.Status = 1 AND p.Status = 1";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {
@@ -34,8 +35,9 @@ class Products extends CI_Model {
         $query = "SELECT p.ProductId, p.ProductName, p.Unit, u.UnitName, p.Price, p.SalePrice, p.ModifiedOn,
                         CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
                         CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot,
-                        p.ProductImg from grocery_products p join grocery_unit u on p.UnitId = u.UnitId
-                        where p.Status = 1 AND p.IsFeatured = 1 order by p.ModifiedOn DESC LIMIT 8";
+                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId
+                        join grocery_unit u on p.UnitId = u.Unit
+                        where c.Status = 1 AND p.Status = 1 AND p.IsFeatured = 1 order by p.ModifiedOn DESC LIMIT 8";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {

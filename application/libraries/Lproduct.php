@@ -242,7 +242,7 @@ class Lproduct {
                         'MainCategory' => $value->childCats[$i]['ParentName'],
                         'SubCategory' => $value->childCats[$i]['CatName']
                     );
-                }   
+                }
             }
         }
 
