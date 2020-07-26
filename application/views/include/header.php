@@ -132,7 +132,7 @@ $users = $CI->Users->profile_edit_data();
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">My Account</a>
+                        <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
@@ -343,6 +343,7 @@ $users = $CI->Users->profile_edit_data();
    $(document).on('click', '.qty-mns', function () {
       changeQtyOfProductAndPutInCart($(this), 'minus');
    });
+
 });
  function addOrUpdateCart(cart, productJson, quantity, addCartObj){
    var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
