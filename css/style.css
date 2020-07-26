@@ -1599,6 +1599,123 @@ button.category-button:active {
    margin-bottom: 20px;
 }
 
+/* ================== */
+/* Order History */
+.order-button a {
+   font-size: 14px;
+   font-weight: 600;
+   font-family: "Work Sans";
+   padding: 6px 20px;
+   text-decoration: none;
+   color: #ffffff;
+   margin: 4px 0px;
+}
+.order-button .button-primary {
+   background-color: #25bfa9;
+}
+.order-button .button-primary:hover {
+   background-color: #23b19c !important;
+}
+.order-button .button-secondary {
+   background-color: #333333;
+}
+.order-button .button-secondary:hover {
+   background-color: #464646 !important;
+}
+.order-history-card img {
+   max-width: 100px;
+}
+.order-item {
+   height: 100%;
+   padding-left: 20px;
+   border-left: 1px solid #cccccc;
+   margin-top: auto;
+   margin-bottom: auto;
+}
+.order-product-name .order-name {
+   font-size: 16px;
+   letter-spacing: 0px;
+   color: #000000;
+   margin-bottom: 0px;
+   font-weight: 500;
+   font-family: "Work Sans";
+   padding-top: 17px;
+}
+.order-product-name .order-weight {
+   font-size: 14px;
+   color: #999999;
+   font-weight: 400;
+   font-family: "Work Sans";
+   margin-bottom: 0px;
+}
+.order-product-price .order-discount {
+   font-size: 13px !important;
+   color: #999999 !important;
+   font-weight: 400 !important;
+   font-family: "Work Sans";
+   margin-bottom: 0px;
+}
+.order-product-price .order-price {
+   font-size: 17px;
+   color: #000000;
+   margin-bottom: 0px;
+   font-weight: 500;
+   font-family: "Work Sans";
+   padding-top: 17px;
+}
+.order-history-header h5 {
+   font-size: 20px;
+   color: #333333;
+   font-weight: 400;
+   font-family: "Work Sans";
+}
+.order-history-header .order-header {
+   font-size: 14px;
+   color: #666666;
+   font-weight: 400;
+   font-family: "Work Sans";
+}
+.order-content {
+   display: grid;
+   grid-template-columns: 1fr 2fr 5fr 3fr 3fr 3fr;
+   /* place-items: center; */
+}
+.quantity-text {
+   font-weight: 600;
+}
+.quantity-area .quantity-button {
+   margin-left: 2px;
+   width: 25px;
+}
+.quantity-button .separator {
+   margin-top: 2px;
+   margin-bottom: 2px;
+}
+.quantity-area .quantity-button a {
+   border: none;
+   width: 100%;
+   font-size: 0.6rem;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   letter-spacing: 0px;
+   color: #000000;
+   font-weight: 700;
+   font-family: "Work Sans";
+   background-color: #cccccc;
+   text-decoration: none;
+}
+.quantity-area .quantity-button a:hover {
+   background-color: #999999;
+}
+.order-history-button {
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
+}
+/* Order History */
+/* ================== */
+
+
 /* ===================================== */
 /* ========== Timeline ================= */
 
