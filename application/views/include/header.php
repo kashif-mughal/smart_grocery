@@ -2,6 +2,11 @@
 $CI = & get_instance();
 $CI->load->model('Users');
 $users = $CI->Users->profile_edit_data();
+if(is_array($users) && !empty($users[0])){
+  $users = $users[0];
+}else{
+  $users = null;
+}
 ?>
 <style type="text/css">
    .emptyCart{
@@ -23,13 +28,11 @@ $users = $CI->Users->profile_edit_data();
 </style>
 
 <!-- Sidebar -->
-
-<!-- Sidebar -->
     
     <div id="mySidenav" class="sidenav">
         <div class="sidenav-content">
             <a href="javascript:void(0)" class="closebtn" id="btn-close-sidebar">&times;</a>
-            <h3 class="sidebar-heading">Welcome, Guest User</h3>
+            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].' '.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
 
             <div class="sidebar-menu">
                 <div class="accordion" id="accordionExample">
@@ -54,39 +57,41 @@ $users = $CI->Users->profile_edit_data();
                             </div>
                         </div>
                     </div>
-                    <div class="card border-none">
-                        <div class="card-header" id="headingTwo">
-                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="<?php echo base_url() ?>assets/img/profile.png" class="d-inline" alt="">
-                                    <h4 class="d-inline ml-4">Profile</h4>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-none">
-                        <div class="card-header" id="headingTwo">
-                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="<?php echo base_url() ?>assets/img/my_order_history.png" class="d-inline" alt="">
-                                    <h4 class="d-inline ml-4">My Order History</h4>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-none">
-                        <div class="card-header" id="headingTwo">
-                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <img src="<?php echo base_url() ?>assets/img/track_your_order.png" class="d-inline" alt="">
-                                    <h4 class="d-inline ml-4">Track Your Order</h4>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php if(!is_null($users)){?>
+                       <div class="card border-none">
+                           <div class="card-header" id="headingTwo"> 
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button" data-toggle="collapse"
+                                       data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/profile.png" class="d-inline" alt="">
+                                       <h4 class="d-inline ml-4">Profile</h4>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="card border-none">
+                           <div class="card-header" id="headingTwo">
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/my_order_history.png" class="d-inline" alt="">
+                                       <h4 class="d-inline ml-4">My Order History</h4>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="card border-none">
+                           <div class="card-header" id="headingTwo">
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
+                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/track_your_order.png" class="d-inline" alt="">
+                                       <h4 class="d-inline ml-4">Track Your Order</h4>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                    <?php }?>
                     <div class="card border-none">
                         <div class="card-header" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
@@ -104,15 +109,19 @@ $users = $CI->Users->profile_edit_data();
                                 <button class="btn-block bg-transparent d-flex justify-content-start align-items-center" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <img src="<?php echo base_url() ?>assets/img/sign-in.png" class="d-inline" alt="">
-                                    <h4 class="d-inline ml-4">Sign In</h4>
+                                    <?php if(is_null($users)){?>
+                                       <h4 class="d-inline ml-4">Sign In</h4>
+                                    <?php } else{?>
+                                       <h4 class="d-inline ml-4">Sign Out</h4>
+                                    <?php } ?>
                                 </button>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
     
@@ -127,6 +136,7 @@ $users = $CI->Users->profile_edit_data();
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
+                    <?php if(!is_null($users)){?>
                      <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)">My Account</a>
                      </li>
@@ -140,8 +150,13 @@ $users = $CI->Users->profile_edit_data();
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Track your order</a>
+                        <a class="nav-link" href="<?=base_url().'Corder/manage_order'?>">Track your order</a>
                      </li>
+                   <?php }else{?>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?=base_url().'Dashboard/login'?>">Register Or Login</a>
+                     </li>
+                   <?php } ?>
                   </ul>
                </nav>
             </div>

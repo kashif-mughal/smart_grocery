@@ -50,6 +50,15 @@ class Auth {
         return false;
     }
 
+    public function authenticated_user_or_admin($expected_authenticated_user_id = null){
+        $CI = & get_instance();
+        if ($CI->session->userdata('user_type') == 1 || 
+            (!is_null($expected_authenticated_user_id) && $CI->session->userdata('user_id') == $expected_authenticated_user_id)) {
+            return true;
+        }
+        return false;
+    }
+
     //Logout....
     public function logout() {
         $CI = & get_instance();

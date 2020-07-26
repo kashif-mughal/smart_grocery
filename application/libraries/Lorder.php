@@ -36,7 +36,6 @@ class Lorder {
     public function place_order(){
         $CI = & get_instance();
         $CI->load->model('Orders');
-        $CI->load->library('session');
         $orderDetail = json_decode($_POST['order']);
         $OV = 0;
         foreach ($orderDetail as $key => $eachProd) {
@@ -78,21 +77,32 @@ class Lorder {
         return true;
     }
 
-
-
-
-
-
+    public function order_list(){
+        $CI = & get_instance();
+        $CI->load->model('Orders');
+        $orderData = $CI->Orders->retrieve_user_orders();
+        if (!empty($orderData)) {
+            foreach ($orderData as $k => $v) {
+                $i++;
+                $orderData[$k]['sl'] = $i + $CI->uri->segment(3);
+            }
+        }
+        $data = array(
+            'title' => 'Manage Order',
+            'orderData' => $orderData
+        );
+        return $CI->parser->parse('order/order_list', $data, true);
+    }
 
     //order Edit Data
     public function order_edit_data($OrderId) {
         $CI = & get_instance();
         $CI->load->model('Orders');
-        $order_detail = $CI->Orders->retrieve_editdata('OrderId', $OrderId);
-
+        $order_detail = $CI->Orders->retrieve_order_editdata($OrderId);
+//echo '<pre>';print_r($order_detail);die;
         $data = array(
             'title' => 'Order Edit',
-            'OrderData' => $order_detail[0]
+            'OrderData' => $order_detail
         );
         $chapterList = $CI->parser->parse('order/edit_order_form', $data, true);
         return $chapterList;
