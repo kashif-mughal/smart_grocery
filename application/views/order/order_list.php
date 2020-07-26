@@ -44,7 +44,7 @@
         ?>
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-12 pr-0">
-                <div class="sidenav" style="position: relative;width: 100%;z-index: 0;">
+                <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
                     <div class="sidenav-content">
                         <?php 
                             if(empty($CatList))
