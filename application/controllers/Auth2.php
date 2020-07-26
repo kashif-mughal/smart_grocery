@@ -1,17 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth2 extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model->('Auth');
+        $this->load->model('auths');
     }    
 
     // Goto Login Page [POST CALL]
-    public function login() {
-        $this->load->library('form_validation');
-        
+    public function login() {   
+
         $email = $this->input->Post('inputLoginEmail');
         $password = $this->input->Post('inputLoginPassword');
 
@@ -20,18 +19,8 @@ class Auth extends CI_Controller {
 
         if($this->form_validation->run()) {
             // get user from table:(user_login) by user_id
-            $user_login = $this->Auth->get_user_from_user_login($email, $password);
-
-            if($user_login->num_rows() > 0) {
-                $currentUser = $user_login->result_array();
-                $this->load->library('session');
-                $userData = array(
-                    'username'  => $currentUser[0]['username'],
-                    'logged_in' => TRUE
-                );
-
-                $this->session->set_userdata($userData);
-
+            $user_login = $this->auth->login($email, $password);
+            if($user_login) {
                 $result['response'] = "User logged in successfully";
                 $result['status'] = 'Success';
                 echo json_encode($result); 
@@ -52,8 +41,8 @@ class Auth extends CI_Controller {
     // Goto Register View Page
     public function register() {
         
-        $data['country'] = $this->Auth->get_country();
-        $data['city'] = $this->Auth->get_city();
+        $data['country'] = $this->auths->get_country();
+        $data['city'] = $this->auths->get_city();
 
         $this->load->view('registration',$data);
     }
@@ -61,7 +50,7 @@ class Auth extends CI_Controller {
     // Register User in db : Handles User Registration [POST CALL]
     public function updateUserRegistration() {
         $this->load->helper(array('form', 'url'));
-        $this->load->library('form_validation');
+        
         
         // Get Post Data
         $full_name = $this->input->Post('inputName');
@@ -86,15 +75,15 @@ class Auth extends CI_Controller {
             // Update user
             //------------------
             // Get User by Id
-            $user = $this->Auth->get_user_by_id($user_id);
+            $user = $this->auths->get_user_by_id($user_id);
 
             if($user->num_rows() > 0) {
                 // Update user_login [username, password]
                 //--------------------------------------- 
-                $this->Auth->update_user_login($user_id, $email, $password);
+                $this->auths->update_user_login($user_id, $email, $password);
 
                 // Update users [firstname, email, city, country, address, address_details]
-                $this->Auth->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
+                $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
             }
             else {
                 $result['response'] = "User not found, Please verify your phone number first";
@@ -118,7 +107,8 @@ class Auth extends CI_Controller {
 
     // Goto Welcome Page
     public function welcome() {
-        if($this->session->userdata('logged_in') == TRUE) {
+        //echo '<pre>';print_r($_SERVER['HTTP_REFERER']);die;
+        if($this->auth->is_logged()) {
             echo "Welcome your are Logged In".`<a href='javascript:void(0)' id='userLoggedOut'>Logout</a>`;
         }
         else {
@@ -127,9 +117,8 @@ class Auth extends CI_Controller {
     }
 
     public function logout() {
-        if($this->session->userdata('logged_in') == TRUE) {
-            $this->session->sess_destroy();
-        }
+        if ($this->auth->logout())
+            $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
     }
 
     
@@ -146,7 +135,7 @@ class Auth extends CI_Controller {
         else {
             $user_id = substr($user_id, 0, 20);
             // Get otp data from otp table
-            $otpData = $this->Auth->get_otp_by_user_id($user_id);
+            $otpData = $this->auths->get_otp_by_user_id($user_id);
 
             if($otpData->num_rows() > 0) {
                 $userData = $otpData->result_array();
@@ -175,7 +164,7 @@ class Auth extends CI_Controller {
                     else {
                         if($code == $otp_code) {// User Phone Verified
                             // Set Verified
-                            $this->Auth->update_otp_verified($user_id);
+                            $this->auths->update_otp_verified($user_id);
 
                             // Response
                             $result['response'] = 'Verification Completed';

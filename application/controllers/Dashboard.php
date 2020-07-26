@@ -8,9 +8,6 @@ class Dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
-        // $this->load->model('Auth');
-        $this->load->model('Auth');
-        //$this->load->database();
     }
 
     public function index() {
@@ -151,7 +148,7 @@ class Dashboard extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
-    #============Change Password===========#
+    #============Change Password===========#f
 
     public function change_password() {
         $CI = & get_instance();
@@ -188,17 +185,16 @@ class Dashboard extends CI_Controller {
     #============User Authentication=======#
 
     public function user_authentication() {
-        // $data['title'] = 'Sauda Express | Buy each and everything home grocery';
-        // $content = $CI->parser->parse('users/registration', $data, true);
-        // $this->template->full_html_view($content);
-
-        // $this->load->view('include/header');
-        $this->load->view('users/registration');
-        // $this->load->view('include/footer');
+        $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        $content = $this->parser->parse('users/registration', $data, true);
+        $this->template->full_html_view($content);
     }
 
     // Verify Phone Number
-    public function phoneVerify() {
+    public function phoneVerify() {        
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
         $phone_number = $this->input->Post('phone');
 
         if(!isset($phone_number)) {
@@ -209,7 +205,7 @@ class Dashboard extends CI_Controller {
         }
 
         // Check if this phone number is already registered
-        $db_phone = $this->Auth->phone_registered($phone_number);
+        $db_phone = $CI->Auths->phone_registered($phone_number);
 
         if($db_phone->num_rows() > 0) {
             $phoneExist = $db_phone->result_array();
@@ -223,7 +219,7 @@ class Dashboard extends CI_Controller {
                 $formatDate = date("Y-m-d H:i:s", $futureDate); // Current Date + 5 minutes
                 
                 // Update new otp code and set expiry date
-                $this->Auth->update_otp_code($fourRandomDigit, $formatDate, $phone_number);
+                $CI->Auths->update_otp_code($fourRandomDigit, $formatDate, $phone_number);
 
                 //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
 
@@ -256,10 +252,10 @@ class Dashboard extends CI_Controller {
             $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
             $user_id = substr($userId, 0, 20);
             // - Store User with UserId and phone number in table:(user_login)
-            $this->Auth->insert_user_login($user_id);            
+            $CI->Auths->insert_user_login($user_id);            
 
             // insert users table
-            $this->Auth->insert_user();
+            $CI->Auths->insert_user($user_id, $phone_number);
             
             // - Add Entry in table:(otp) with randomly generated 4-digit code and 5 min expiry
             $fourRandomDigit = mt_rand(1000,9999);
@@ -269,7 +265,7 @@ class Dashboard extends CI_Controller {
             $futureDate = $currentDate+(60*5);
             $formatDate = date("Y-m-d H:i:s", $futureDate);
             
-            $this->Auth->insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate);
+            $CI->Auths->insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate);
 
             //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
 

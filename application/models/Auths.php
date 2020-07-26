@@ -3,9 +3,9 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Auth extends CI_Model {	
+class Auths extends CI_Model {	
 	public function __construct() {
-        parent::__construct();
+        parent::__construct('Auth');
     }
 
     // ======================================================================================
@@ -14,12 +14,16 @@ class Auth extends CI_Model {
 
     // Get user from user_login table by email and password
     public function get_user_from_user_login($email, $password) {
-    	$this->db->where('username', $email);
-        $this->db->where('password', md5($password));
-        $this->db->where('status', 1);
-        $query = $this->db->get('user_login');
+    	// $this->db->where('username', $email);
+     //    $this->db->where('password', md5($password));
+     //    $this->db->where('status', 1);
+     //    $query = $this->db->get('user_login');
 
-        return $query;
+     //    return $query;
+
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        return $CI->Users->check_valid_user($username, $password);
     }
 
     // Get user from user_login table by user id
@@ -28,7 +32,7 @@ class Auth extends CI_Model {
         $this->db->where('status', 1);
         $query = $this->db->get('user_login');
 
-        reutrn $query;
+        return $query;
     }
 
     // Get OTP Data by User Id
@@ -78,10 +82,12 @@ class Auth extends CI_Model {
         $this->db->update('otp', $otp_data);
     }
 
-    public function update_otp_verified() {
+    public function update_otp_verified($user_id) {
+        $data = array(
+            'verified' => 1
+        );
     	$this->db->where('user_id', $user_id);
-        $this->db->set('verified', 1);
-        $this->db->update('otp');
+        $this->db->update('otp', $data);
 
         return TRUE;
     }
@@ -110,7 +116,7 @@ class Auth extends CI_Model {
 		    'status' => 1
 		);
 		$this->db->insert('user_login', $user_login_data);
-		return TRUE:
+		return TRUE;
     }
 
     public function insert_user($user_id, $phone_number) {
