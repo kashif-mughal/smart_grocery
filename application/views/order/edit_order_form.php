@@ -62,22 +62,40 @@
                      <a class="nav-link" data-toggle="tab" href="#detail" role="tab">Order Detail</a>
                   </li>
                </ul>
+               <?php //echo '<pre>'; print_r($OrderData);die;?>
                <!-- Tab panes -->
                <div class="tab-content">
                   <div class="tab-pane active" id="traking" role="tabpanel">
                      <div class="orderprogress">
                         <div class="row">
                            <ul class="timeline" style="margin-left: 60px;">
-                              <li>
-                                 <div class="item">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>Requested</h4>
-                                 </div>
-                              </li>
-                              <li>
+                              <?php $elem = null; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
+                                 <li>
+                                    <?php 
+                                    $cls = '';
+                                    if(!empty($OrderData['OrderTrakingDetail'])){
+                                       $key = array_search($OrderData['TrakingSteps'][$i]['StepId'], array_column($OrderData['OrderTrakingDetail'], 'StepId'));
+                                       if(!is_numeric($key)){
+                                          $cls = 'notDone';
+                                          $elem = null;
+                                       }
+                                       else{
+                                          $elem = $OrderData['OrderTrakingDetail'][$key];
+                                       }
+                                    }?>
+                                    <div class="item <?=$cls?>">
+                                       <span>
+                                       <i class="fas fa-circle"></i>
+                                       </span>
+                                       <h5><?php if(!is_null($elem)) {
+                                          $date = date_create($elem['ModifiedOn']);
+                                          echo date_format($date,"d /m /Y");
+                                       }?></h5>
+                                       <h4><?=$OrderData['TrakingSteps'][$i]['StepName']?></h4>
+                                    </div>
+                                 </li>
+                              <?php } ?>
+                              <!-- <li>
                                  <div class="item">
                                     <span>
                                     <i class="fas fa-circle"></i>
@@ -125,7 +143,7 @@
                                     <h5>18/7/20</h5>
                                     <h4>Processed</h4>
                                  </div>
-                              </li>
+                              </li> -->
                            </ul>
                         </div>
                      </div>
@@ -142,97 +160,17 @@
                                        <div class="card order-history-card">
                                           <div class="card-header order-header d-flex justify-content-between">
                                              <div class="order-date">
-                                                <img src="img/orderhistory/calendar_icon.png" alt="Calendar">
+                                                <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
                                                 <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
                                                 <span class="order-header-text">Tuesday, 23rd June 2020</span>    
                                                 </button>                                                
                                              </div>
                                              <div class="order-time">
-                                                <img src="img/orderhistory/clock_icon.png" alt="Clock">
+                                                <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
                                                 <span class="order-header-text">9:00 am - 11:30 am</span>
                                              </div>
                                           </div>
-                                          <div id="orderHistoryCollapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
-                                             <div class="card-body">
-                                                <div class="featured-products order-content align-item-center">
-                                                   <div class="order-history-checkbox align-self-center">
-                                                      <input type="checkbox">
-                                                   </div>
-                                                   <img src="img/products/cauliflower.png" alt="" class="order-item">
-                                                   <div class="order-product-name order-item">
-                                                      <p class="order-name">Onion</p>
-                                                      <p class="order-weight">1kg</p>
-                                                   </div>
-                                                   <div class="order-product-price text-center align-self-center order-item">
-                                                      <p class="order-price">Rs.45</p>
-                                                      <p class="order-discount"><del>Rs. 56</del></p>
-                                                   </div>
-                                                   <div class="quantity-area order-item align-self-center">
-                                                      <div class="d-flex justify-content-center p-4">
-                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                         <input type="text" value="1" class="d-inline-flex quantity-input">
-                                                         <span class="d-block quantity-button text-center">
-                                                            <a href="javascript:void(0)" class="d-block">+</a>
-                                                            <div class="separator"></div>
-                                                            <a href="javascript:void(0)" class="d-block">-</a>
-                                                         </span>
-                                                      </div>
-                                                   </div>
-                                                   <div class="order-button order-item text-center">
-                                                      <a href="#" class="d-block button-primary">Add to Cart</a>
-                                                      <a href="#" class="d-block button-secondary">Delete</a>
-                                                   </div>
-                                                </div>
-                                                <div class="featured-products order-content align-item-center">
-                                                   <div class="order-history-checkbox align-self-center">
-                                                      <input type="checkbox">
-                                                   </div>
-                                                   <img src="img/products/cauliflower.png" alt="" class="order-item">
-                                                   <div class="order-product-name order-item my-auto">
-                                                      <div class="align-self-center my-auto">
-                                                         <p class="order-name">Onion</p>
-                                                         <p class="order-weight">1kg</p>
-                                                      </div>
-                                                   </div>
-                                                   <div class="order-product-price text-center order-item">
-                                                      <p class="order-price">Rs.45</p>
-                                                      <p class="order-discount"><del>Rs. 56</del></p>
-                                                   </div>
-                                                   <div class="quantity-area order-item align-self-center">
-                                                      <div class="d-flex justify-content-center">
-                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                         <input type="text" value="1" class="d-inline-flex quantity-input">
-                                                         <span class="d-block quantity-button text-center">
-                                                            <a href="javascript:void(0)" class="d-block">+</a>
-                                                            <div class="separator"></div>
-                                                            <a href="javascript:void(0)" class="d-block">-</a>
-                                                         </span>
-                                                      </div>
-                                                   </div>
-                                                   <div class="order-button order-item text-center">
-                                                      <a href="javascript:void(0)" class="d-block button-primary">Add to Cart</a>
-                                                      <a href="javascript:void(0)" class="d-block button-secondary">Delete</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="accordion" id="orderHistoryaccordion">
-                                       <div class="card order-history-card">
-                                          <div class="card-header order-header d-flex justify-content-between">
-                                             <div class="order-date">
-                                                <img src="img/orderhistory/calendar_icon.png" alt="Calendar">
-                                                <button data-toggle="collapse" data-target="#orderHistoryCollapse2" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                                <span class="order-header-text">Wednes, 24th June 2020</span>    
-                                                </button>                                                
-                                             </div>
-                                             <div class="order-time">
-                                                <img src="img/orderhistory/clock_icon.png" alt="Clock">
-                                                <span class="order-header-text">9:00 am - 11:30 am</span>
-                                             </div>
-                                          </div>
-                                          <div id="orderHistoryCollapse2" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
+                                          <div id="orderHistoryCollapse1" class="collapse" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
                                              <div class="card-body">
                                                 <div class="featured-products order-content align-item-center">
                                                    <div class="order-history-checkbox align-self-center">
