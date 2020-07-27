@@ -8,7 +8,6 @@ class Dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
-        //$this->load->database();
     }
 
     public function index() {
@@ -143,7 +142,7 @@ class Dashboard extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
-    #============Change Password===========#
+    #============Change Password===========#f
 
     public function change_password() {
         $CI = & get_instance();
@@ -174,6 +173,119 @@ class Dashboard extends CI_Controller {
         } else {
             $this->session->set_userdata(array('message' => display('successfully_changed_password')));
             $this->output->set_header("Location: " . base_url() . 'Dashboard/change_password_form', TRUE, 302);
+        }
+    }
+
+    #============User Authentication=======#
+
+    public function user_authentication() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        $data['countries'] = $CI->Auths->get_country();
+        $data['cities'] = $CI->Auths->get_city();
+        $content = $this->parser->parse('users/registration', $data, true);
+        $this->template->full_html_view($content);
+    }
+
+    
+
+    // Verify Phone Number
+    public function phoneVerify() {        
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        $phone_number = $this->input->Post('phone');
+
+        if(!isset($phone_number)) {
+            $result['response'] = 'Phone number is not valid';
+            $result['status'] = 'Error';
+            echo json_encode($result);
+            return;     
+        }
+
+        // Check if this phone number is already registered
+        $db_phone = $CI->Auths->phone_registered($phone_number);
+
+        if($db_phone->num_rows() > 0) {
+            $phoneExist = $db_phone->result_array();
+            // Verify Phone
+            if($phoneExist[0]['verified'] == 0) { // User Exist but phone not verified
+                $fourRandomDigit = mt_rand(1000,9999); // 4 digit OTP Code
+                $dateTime = new DateTime();
+                $date = $dateTime->format('Y-m-d H:i:s');
+                $currentDate = strtotime($date);
+                $futureDate = $currentDate+(60*5);
+                $formatDate = date("Y-m-d H:i:s", $futureDate); // Current Date + 5 minutes
+                
+                // Update new otp code and set expiry date
+                $CI->Auths->update_otp_code($fourRandomDigit, $formatDate, $phone_number);
+
+                //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
+
+                $result['response'] = 'We have send message to your phone number, Please verify your account';
+                $result['status'] = 'Success';
+                $result['phone_exist'] = true;
+                $result['phone_verified'] = false;
+                $result['userId'] = $phoneExist[0]['user_id'];
+                echo json_encode($result);    
+                return;    
+                
+            }
+            else { // User Exist and Verified
+
+                $result['response'] = 'Please register your account';
+                $result['status'] = 'Success';
+                $result['phone_exist'] = false;
+                $result['phone_verified'] = true;
+                $result['userId'] = $phoneExist[0]['user_id'];
+                echo json_encode($result);
+                return;
+            }
+            
+        }
+        else {
+            // Steps:
+            // ------
+            // - Create Hash for UserId
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
+            $user_id = substr($userId, 0, 20);
+            // - Store User with UserId and phone number in table:(user_login)
+            $CI->Auths->insert_user_login($user_id);            
+
+            // insert users table
+            $CI->Auths->insert_user($user_id, $phone_number);
+            
+            // - Add Entry in table:(otp) with randomly generated 4-digit code and 5 min expiry
+            $fourRandomDigit = mt_rand(1000,9999);
+            $dateTime = new DateTime();
+            $date = $dateTime->format('Y-m-d H:i:s');
+            $currentDate = strtotime($date);
+            $futureDate = $currentDate+(60*5);
+            $formatDate = date("Y-m-d H:i:s", $futureDate);
+            
+            $CI->Auths->insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate);
+
+            //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
+
+            //Response
+            $result['response'] = 'We have send message to your phone number Please verify your account';
+            $result['userId'] = $user_id;
+            $result['status'] = 'Success';
+            echo json_encode($result);
+        }        
+    }
+
+    // Checkout
+    public function checkout() {
+        if ($this->auth->is_logged()) {
+            $this->output->set_header("Location: " . base_url() . 'Dashboard', TRUE, 302);
+        }
+        else {
+            $retString = "?ret_url=".$_SERVER['HTTP_REFERER']."";
+            redirect(base_url('Dashboard/user_authentication'.$retString));
         }
     }
 }

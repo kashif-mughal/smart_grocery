@@ -126,7 +126,6 @@ class Auth {
         }
         return $con;
     }
-
 }
 
 ?>
