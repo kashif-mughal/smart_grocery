@@ -8,8 +8,10 @@ class Auth2 extends CI_Controller {
         $this->load->model('auths');
     }    
 
+    
+
     // Goto Login Page [POST CALL]
-    public function login() {   
+    public function login() {
 
         $email = $this->input->Post('inputLoginEmail');
         $password = $this->input->Post('inputLoginPassword');
@@ -19,14 +21,25 @@ class Auth2 extends CI_Controller {
 
         if($this->form_validation->run()) {
             // get user from table:(user_login) by user_id
-            $user_login = $this->auth->login($email, $password);
+            $user_login = $this->auths->user_login($email, $password);
+            
             if($user_login) {
-                $result['response'] = "User logged in successfully";
-                $result['status'] = 'Success';
-                echo json_encode($result); 
+
+                    $url = $_SERVER['HTTP_REFERER'];
+                    if(strpos($url,"?ret_url=")) {
+                        $returnURL = substr($url,(strpos($url,"?ret_url=")+9));    
+                    }
+                    else {
+                        $returnURL = FALSE;
+                    }
+
+                    $result['response'] = "User logged in successfully";
+                    $result['redirectUrl'] = $returnURL;
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
             }
             else {
-                $result['response'] = "User not found in our database";
+                $result['response'] = "Username or Password is wrong";
                 $result['status'] = 'Error';
                 echo json_encode($result); 
             }    
@@ -38,19 +51,10 @@ class Auth2 extends CI_Controller {
         }        
     }
 
-    // Goto Register View Page
-    public function register() {
-        
-        $data['country'] = $this->auths->get_country();
-        $data['city'] = $this->auths->get_city();
-
-        $this->load->view('registration',$data);
-    }
 
     // Register User in db : Handles User Registration [POST CALL]
     public function updateUserRegistration() {
         $this->load->helper(array('form', 'url'));
-        
         
         // Get Post Data
         $full_name = $this->input->Post('inputName');
@@ -76,7 +80,7 @@ class Auth2 extends CI_Controller {
             //------------------
             // Get User by Id
             $user = $this->auths->get_user_by_id($user_id);
-
+            $user_by_email = $this->auths->get_user_by_email($email);
             if($user->num_rows() > 0) {
                 // Update user_login [username, password]
                 //--------------------------------------- 
@@ -84,6 +88,15 @@ class Auth2 extends CI_Controller {
 
                 // Update users [firstname, email, city, country, address, address_details]
                 $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
+            }
+            else if($user_by_email->num_rows() > 0) {
+                $email_user = $this->user_by_email->result_array();
+                // Update user_login [username, password]
+                //--------------------------------------- 
+                $this->auths->update_user_login($email_user['user_id'], $email, $password);
+
+                // Update users [firstname, email, city, country, address, address_details]
+                $this->auths->update_user($email_user['user_id'], $full_name, $email, $city, $country, $address, $address_details);   
             }
             else {
                 $result['response'] = "User not found, Please verify your phone number first";
@@ -122,7 +135,6 @@ class Auth2 extends CI_Controller {
     }
 
     
-
     // Verify One Time Password
     public function otpVerify() {
         $otp_code = $this->input->Post('code');
@@ -130,7 +142,7 @@ class Auth2 extends CI_Controller {
         if(!isset($otp_code) && !isset($user_id)) {
             $result['response'] = 'OTP code is not valid';
             $result['status'] = 'Error';
-            echo json_encode($result); 
+            echo json_encode($result);
         }
         else {
             $user_id = substr($user_id, 0, 20);
@@ -144,7 +156,7 @@ class Auth2 extends CI_Controller {
                 $expiryDateFinal = $expiryDate->format('Y-m-d H:i:s');
 
                 if($userData[0]['verified'] == 1) {
-                    $result['response'] = 'User '.'('. $user_id .') not found';
+                    $result['response'] = 'User is verified';
                     $result['user_found_in_otp'] = true;
                     $result['user_verified'] = true;
                     $result['status'] = 'Success';

@@ -185,10 +185,17 @@ class Dashboard extends CI_Controller {
     #============User Authentication=======#
 
     public function user_authentication() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
         $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        $data['countries'] = $CI->Auths->get_country();
+        $data['cities'] = $CI->Auths->get_city();
         $content = $this->parser->parse('users/registration', $data, true);
         $this->template->full_html_view($content);
     }
+
+    
 
     // Verify Phone Number
     public function phoneVerify() {        
@@ -223,7 +230,7 @@ class Dashboard extends CI_Controller {
 
                 //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
 
-                $result['response'] = 'We have send message to your phone number Please verify your account';
+                $result['response'] = 'We have send message to your phone number, Please verify your account';
                 $result['status'] = 'Success';
                 $result['phone_exist'] = true;
                 $result['phone_verified'] = false;
@@ -234,9 +241,9 @@ class Dashboard extends CI_Controller {
             }
             else { // User Exist and Verified
 
-                $result['response'] = 'Phone already exist ';
+                $result['response'] = 'Please register your account';
                 $result['status'] = 'Success';
-                $result['phone_exist'] = true;
+                $result['phone_exist'] = false;
                 $result['phone_verified'] = true;
                 $result['userId'] = $phoneExist[0]['user_id'];
                 echo json_encode($result);
@@ -275,5 +282,16 @@ class Dashboard extends CI_Controller {
             $result['status'] = 'Success';
             echo json_encode($result);
         }        
+    }
+
+    // Checkout
+    public function checkout() {
+        if ($this->auth->is_logged()) {
+            $this->output->set_header("Location: " . base_url() . 'Dashboard', TRUE, 302);
+        }
+        else {
+            $retString = "?ret_url=".$_SERVER['HTTP_REFERER']."";
+            redirect(base_url('Dashboard/user_authentication'.$retString));
+        }
     }
 }

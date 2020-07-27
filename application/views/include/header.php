@@ -131,6 +131,12 @@ $users = $CI->Users->profile_edit_data();
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=base_url();?>Dashboard/checkout">Checkout</a>
+                     </li>
+                     <li>
+                        <p class="seperator">|</p>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
                      </li>
