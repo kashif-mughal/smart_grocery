@@ -138,7 +138,7 @@ if(is_array($users) && !empty($users[0])){
                   <ul class="navbar-nav">
                     <?php if(!is_null($users)){?>
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">My Account</a>
+                        <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>

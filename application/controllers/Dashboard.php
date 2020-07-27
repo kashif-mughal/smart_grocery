@@ -277,15 +277,4 @@ class Dashboard extends CI_Controller {
             echo json_encode($result);
         }        
     }
-
-    // Checkout
-    public function checkout() {
-        if ($this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'Dashboard', TRUE, 302);
-        }
-        else {
-            $retString = "?ret_url=".$_SERVER['HTTP_REFERER']."";
-            redirect(base_url('Dashboard/user_authentication'.$retString));
-        }
-    }
 }

@@ -225,12 +225,9 @@
 							}, 2000);
 						}
 						else {
-							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><i class='fas fa-check-square mr-3'></i><small>` + data.response + `</small></div>`);
+							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.response + `</small></div>`);
 							$('.errorNotify').css('display', 'block');
-							setTimeout(function() {
-								$('.errorNotify').hide();
-							}, 2000);
-
+							
 							localStorage.setItem('UserId',data.userId);
 							if(data.phone_exist && data.phone_verified) {
 								// It means user exist and verified
@@ -420,7 +417,10 @@
 							$('#registrationForm').hide();
 							$('#registrationForm').css('display', 'none');
 							$('#userId').val(localStorage.removeItem('UserId'));
-							window.location = "<?php echo base_url(); ?>Dashboard";
+							if(!data.redirectUrl)
+								window.location = "<?php echo base_url(); ?>Dashboard";
+							else
+								window.location.href = data.redirectUrl
 						}
 					},
 					error: function(data) {

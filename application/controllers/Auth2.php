@@ -90,7 +90,7 @@ class Auth2 extends CI_Controller {
                 $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
             }
             else if($user_by_email->num_rows() > 0) {
-                $email_user = $this->user_by_email->result_array();
+                $email_user = $user_by_email->result_array();
                 // Update user_login [username, password]
                 //--------------------------------------- 
                 $this->auths->update_user_login($email_user['user_id'], $email, $password);
@@ -106,6 +106,15 @@ class Auth2 extends CI_Controller {
             }
 
             // Success Response
+            $url = $_SERVER['HTTP_REFERER'];
+            if(strpos($url,"?ret_url=")) {
+                $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+            }
+            else {
+                $returnURL = FALSE;
+            }
+
+            $result['redirectUrl'] = $returnURL;
             $result['response'] = 'Form Validated';
             $result['status'] = 'Success';
             echo json_encode($result); 

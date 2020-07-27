@@ -72,9 +72,10 @@
                               <?php $elem = null; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
                                  <li>
                                     <?php 
-                                    $cls = '';
+                                    $cls = 'notDone';
                                     if(!empty($OrderData['OrderTrakingDetail'])){
                                        $key = array_search($OrderData['TrakingSteps'][$i]['StepId'], array_column($OrderData['OrderTrakingDetail'], 'StepId'));
+                                       
                                        if(!is_numeric($key)){
                                           $cls = 'notDone';
                                           $elem = null;
@@ -82,7 +83,8 @@
                                        else{
                                           $elem = $OrderData['OrderTrakingDetail'][$key];
                                        }
-                                    }?>
+                                    }
+                                    ?>
                                     <div class="item <?=$cls?>">
                                        <span>
                                        <i class="fas fa-circle"></i>

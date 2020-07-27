@@ -29,7 +29,8 @@ class Corder extends CI_Controller {
     public function proceed_to_checkout(){
         $CI = & get_instance();
         if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'login', TRUE, 302);
+            $retString = "?ret_url=".$_SERVER['HTTP_REFERER']."";
+            $this->output->set_header("Location: " . base_url('Dashboard/user_authentication'.$retString), TRUE, 302);
         }
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
