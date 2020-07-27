@@ -25,18 +25,18 @@ class Auth2 extends CI_Controller {
             
             if($user_login) {
 
-                    $url = $_SERVER['HTTP_REFERER'];
-                    if(strpos($url,"?ret_url=")) {
-                        $returnURL = substr($url,(strpos($url,"?ret_url=")+9));    
-                    }
-                    else {
-                        $returnURL = FALSE;
-                    }
+                $url = $_SERVER['HTTP_REFERER'];
+                if(strpos($url,"?ret_url=")) {
+                    $returnURL = substr($url,(strpos($url,"?ret_url=")+9));    
+                }
+                else {
+                    $returnURL = FALSE;
+                }
 
-                    $result['response'] = "User logged in successfully";
-                    $result['redirectUrl'] = $returnURL;
-                    $result['status'] = 'Success';
-                    echo json_encode($result);
+                $result['response'] = "User logged in successfully";
+                $result['redirectUrl'] = $returnURL;
+                $result['status'] = 'Success';
+                echo json_encode($result);
             }
             else {
                 $result['response'] = "Username or Password is wrong";
@@ -81,6 +81,16 @@ class Auth2 extends CI_Controller {
             // Get User by Id
             $user = $this->auths->get_user_by_id($user_id);
             $user_by_email = $this->auths->get_user_by_email($email);
+
+            $url = $_SERVER['HTTP_REFERER'];
+            if(strpos($url,"?ret_url=")) {
+                $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+            }
+            else {
+                $returnURL = false;
+            }
+
+
             if($user->num_rows() > 0) {
                 // Update user_login [username, password]
                 //--------------------------------------- 
@@ -90,32 +100,57 @@ class Auth2 extends CI_Controller {
                 $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
             }
             else if($user_by_email->num_rows() > 0) {
-                $email_user = $user_by_email->result_array();
+                $userDetails = $user_by_email->result_array();
+
+                //Check user details is available
+                if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                    // logged in user
+                    $this->auths->user_login($userDetails['username'], $userDetails['password']);
+
+                    // Response
+                    $result['response'] = 'User by Email is Available, Logging in';
+                    $result['user_details_available'] = true;
+                    $result['redirectUrl'] = $returnURL;
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
+                    return;
+                }
                 // Update user_login [username, password]
                 //--------------------------------------- 
                 $this->auths->update_user_login($email_user['user_id'], $email, $password);
 
                 // Update users [firstname, email, city, country, address, address_details]
-                $this->auths->update_user($email_user['user_id'], $full_name, $email, $city, $country, $address, $address_details);   
+                $this->auths->update_user($email_user['user_id'], $full_name, $email, $city, $country, $address, $address_details);  
+
+                $result['response'] = 'User by Email is Available, Logging in';
+                $result['user_details_available'] = false;
+                $result['redirectUrl'] = $returnURL;
+                $result['status'] = 'Success';
+                echo json_encode($result);
+                return; 
             }
             else {
                 $result['response'] = "User not found, Please verify your phone number first";
+                $result['user_details_available'] = false;
+                $result['redirectUrl'] = false; 
                 $result['status'] = 'Error';
                 echo json_encode($result); 
                 return;
             }
 
             // Success Response
-            $url = $_SERVER['HTTP_REFERER'];
-            if(strpos($url,"?ret_url=")) {
-                $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
-            }
-            else {
-                $returnURL = FALSE;
-            }
+            // $url = $_SERVER['HTTP_REFERER'];
+            // if(strpos($url,"?ret_url=")) {
+            //     $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+            // }
+            // else {
+            //     $returnURL = FALSE;
+            // }
 
-            $result['redirectUrl'] = $returnURL;
+            
             $result['response'] = 'Form Validated';
+            $result['user_details_available'] = false;
+            $result['redirectUrl'] = $returnURL;
             $result['status'] = 'Success';
             echo json_encode($result); 
             return;
@@ -165,11 +200,51 @@ class Auth2 extends CI_Controller {
                 $expiryDateFinal = $expiryDate->format('Y-m-d H:i:s');
 
                 if($userData[0]['verified'] == 1) {
-                    $result['response'] = 'User is verified';
-                    $result['user_found_in_otp'] = true;
-                    $result['user_verified'] = true;
-                    $result['status'] = 'Success';
-                    echo json_encode($result); 
+
+                    // check user details is available
+                    $userDetails = $this->auths->get_user_detail($user_id);
+                    if(!$userDetails) {
+                        // Response: Send to User Registration Form
+                        $result['response'] = 'Verification Completed, But User details is not available';
+                        $result['user_found_in_otp'] = true;
+                        $result['user_verified'] = true;
+                        $result['user_details_available'] = false;
+                        $result['redirectUrl'] = false;
+                        $result['status'] = 'Success';
+                        echo json_encode($result);
+                        return;       
+                    }
+
+                    if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                        // logged in user
+                        $this->auths->user_login($userDetails['username'], $userDetails['password']);
+
+                        $url = $_SERVER['HTTP_REFERER'];
+                        if(strpos($url,"?ret_url=")) {
+                            $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+                        }
+                        else {
+                            $returnURL = false;
+                        }
+
+                        // Response
+                        $result['response'] = 'Verification Completed, User Already Exist';
+                        $result['user_found_in_otp'] = true;
+                        $result['user_verified'] = true;
+                        $result['user_details_available'] = true;
+                        $result['redirectUrl'] = $returnURL;
+                        $result['status'] = 'Success';
+                        echo json_encode($result);
+                    }
+                    else {
+                        $result['response'] = 'Verification Completed, User detail not available';
+                        $result['user_found_in_otp'] = true;
+                        $result['user_verified'] = true;
+                        $result['user_details_available'] = false;
+                        $result['redirectUrl'] = false;
+                        $result['status'] = 'Success';
+                        echo json_encode($result);
+                    }
                 }
                 else {
                     // Current Date
@@ -187,12 +262,52 @@ class Auth2 extends CI_Controller {
                             // Set Verified
                             $this->auths->update_otp_verified($user_id);
 
-                            // Response
-                            $result['response'] = 'Verification Completed';
-                            $result['user_found_in_otp'] = true;
-                            $result['user_verified'] = true;
-                            $result['status'] = 'Success';
-                            echo json_encode($result);  
+                            // Check if user details available
+                            $userDetails = $this->auths->get_user_detail($user_id);
+
+                            if(!$userDetails) {
+                                // Response: Send to User Registration Form
+                                $result['response'] = 'Verification Completed, But User details is not available';
+                                $result['user_found_in_otp'] = true;
+                                $result['user_verified'] = true;
+                                $result['user_details_available'] = false;
+                                $result['redirectUrl'] = false;
+                                $result['status'] = 'Success';
+                                echo json_encode($result);
+                                return;       
+                            }
+
+                            if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                                // logged in user
+                                $this->auths->user_login($userDetails['username'], $userDetails['password']);
+
+                                $url = $_SERVER['HTTP_REFERER'];
+                                if(strpos($url,"?ret_url=")) {
+                                    $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+                                }
+                                else {
+                                    $returnURL = false;
+                                }
+
+                                // Response
+                                $result['response'] = 'Verification Completed, User Already Exist';
+                                $result['user_found_in_otp'] = true;
+                                $result['user_verified'] = true;
+                                $result['user_details_available'] = true;
+                                $result['redirectUrl'] = $returnURL;
+                                $result['status'] = 'Success';
+                                echo json_encode($result);
+                            }
+                            else {
+                                $result['response'] = 'Verification Completed, User detail not available';
+                                $result['user_found_in_otp'] = true;
+                                $result['user_verified'] = true;
+                                $result['user_details_available'] = false;
+                                $result['redirectUrl'] = false;
+                                $result['status'] = 'Success';
+                                echo json_encode($result);
+                            }
+
                         }
                         else {
                             $result['response'] = 'Please enter correct code';

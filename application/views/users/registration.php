@@ -229,7 +229,14 @@
 							$('.errorNotify').css('display', 'block');
 							
 							localStorage.setItem('UserId',data.userId);
-							if(data.phone_exist && data.phone_verified) {
+							if(data.user_exist) {
+								$('#phoneForm').hide();
+								$('#phoneForm').css('display', 'none');
+
+								$('#loginForm').show();
+								$('#loginForm').css('display', 'block');
+							}
+							else if(data.phone_exist && data.phone_verified) {
 								// It means user exist and verified
 								// Send to Login Page
 								$('#phoneForm').hide();
@@ -244,12 +251,6 @@
 								$('#phoneForm').css('display', 'none');
 								$('#otpForm').show();
 								$('#otpForm').css('display', 'block');
-							}
-							else if(!data.phone_exist && data.phone_verified) {
-								$('#phoneForm').hide();
-								$('#phoneForm').css('display', 'none');
-								$('#registrationForm').show();
-								$('#registrationForm').css('display', 'block');   
 							}
 							else {
 								$('#phoneForm').hide();
@@ -297,15 +298,18 @@
 							setTimeout(function() {
 								$('.errorNotify').hide();
 							}, 2000);
-							
-							if(!data.user_found_in_otp && !data.user_verified) {
-								$('#otpForm').hide();
-								$('#otpForm').css('display', 'none');
 
-								$('#phoneForm').show();
-								$('#phoneForm').css('display', 'block');
-							} 
-							else if(data.user_found_in_otp && data.user_verified) {
+							if(data.user_found_in_otp && data.user_verified && data.user_details_available) {
+								console.log('If return URL is present goto return url else goto Dashboard');
+								if(!data.redirectUrl) {
+									window.location.href = "<?php echo base_url(); ?>Dashboard";
+								}
+								else {
+									window.location.href = data.redirectUrl;	
+								}
+							}
+							else if(data.user_found_in_otp && data.user_verified && !data.user_details_available) {
+								console.log('Goto user register details form, show phone verified animation');
 								$('#otpForm').hide();
 								$('#otpForm').css('display', 'none');
 								$('#phoneVerified').show(function() {
@@ -318,13 +322,13 @@
 									$('#registrationForm').show();
 								}, 5000);
 							}
-							else {
+							else if(!data.user_found_in_otp && !data.user_verified && !data.user_details_available) {
+								console.log('Goto phone verify form');
 								$('#otpForm').hide();
 								$('#otpForm').css('display', 'none');
-								$('#phoneVerified').hide();
-								$('#phoneVerified').css('display', 'none');
-								$('#registrationForm').show();
-								$('#registrationForm').css('display', 'block');
+
+								$('#phoneForm').show();
+								$('#phoneForm').css('display', 'block');
 							}
 							
 						}
@@ -413,6 +417,15 @@
 								$('.errorNotify').hide();
 							}, 2000);
 
+							if(data.user_details_available) {
+								$('#userId').val(localStorage.removeItem('UserId'));
+								if(!data.redirectUrl) {
+									window.location.href = "<?php echo base_url(); ?>Dashboard";	
+								}
+								else {
+									window.location.href = data.redirectUrl;
+								}
+							}
 
 							$('#registrationForm').hide();
 							$('#registrationForm').css('display', 'none');

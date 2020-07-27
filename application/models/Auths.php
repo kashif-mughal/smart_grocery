@@ -23,7 +23,15 @@ class Auths extends CI_Model {
 
         $CI = & get_instance();
         $CI->load->model('Users');
-        return $CI->Users->check_valid_user($username, $password);
+        $check_user_login = $CI->Users->check_valid_user($username, $password);
+
+        if($check_user_login) {
+            return $this->auth->login($username, $password);
+        }
+        else {
+            return false;
+        }
+
     }
 
     // Get user from user_login table by user id
@@ -33,6 +41,18 @@ class Auths extends CI_Model {
         $query = $this->db->get('user_login');
 
         return $query;
+    }
+
+    public function get_user_detail($user_id) {
+        $this->db->select('a.*,b.*');
+        $this->db->from('user_login a');
+        $this->db->join('users b', 'b.user_id = a.user_id');
+        $this->db->where('a.user_id', $user_id);
+        $query = $this->db->get();
+        if($query->num_rows() > 0) {
+            return $query->result_array();    
+        }
+        return false;   
     }
 
     // Get OTP Data by User Id

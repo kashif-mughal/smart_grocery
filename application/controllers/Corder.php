@@ -29,7 +29,7 @@ class Corder extends CI_Controller {
     public function proceed_to_checkout(){
         $CI = & get_instance();
         if (!$this->auth->is_logged()) {
-            $retString = "?ret_url=".$_SERVER['HTTP_REFERER']."";
+            $retString = "?ret_url=".base_url('Corder/checkout');
             $this->output->set_header("Location: " . base_url('Dashboard/user_authentication'.$retString), TRUE, 302);
         }
         if(empty($this->input->post('order'))){

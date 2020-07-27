@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
+        $this->load->model('auths');
     }
 
     public function index() {
@@ -235,13 +236,30 @@ class Dashboard extends CI_Controller {
             }
             else { // User Exist and Verified
 
-                $result['response'] = 'Please register your account';
-                $result['status'] = 'Success';
-                $result['phone_exist'] = false;
-                $result['phone_verified'] = true;
-                $result['userId'] = $phoneExist[0]['user_id'];
-                echo json_encode($result);
-                return;
+                $userDetails = $this->auths->get_user_detail($phoneExist[0]['user_id']);
+
+                if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                    // Response
+                    $result['response'] = 'User by Email is Available, Logging in form';
+                    $result['phone_exist'] = true;
+                    $result['phone_verified'] = true;
+                    $result['user_exist'] = true;
+                    $result['userId'] = $phoneExist[0]['user_id'];
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
+                    return;
+                }
+                else {
+                    $result['response'] = 'Please register your account';
+                    $result['status'] = 'Success';
+                    $result['phone_exist'] = false;
+                    $result['phone_verified'] = true;
+                    $result['user_exist'] = false;
+                    $result['userId'] = $phoneExist[0]['user_id'];
+                    echo json_encode($result);
+                    return;
+                }
+                
             }
             
         }
