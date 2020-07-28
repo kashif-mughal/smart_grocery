@@ -2,6 +2,11 @@
 $CI = & get_instance();
 $CI->load->model('Users');
 $users = $CI->Users->profile_edit_data();
+if(is_array($users) && !empty($users[0])){
+  $users = $users[0];
+}else{
+  $users = null;
+}
 ?>
 <style type="text/css">
    .emptyCart{
@@ -15,50 +20,171 @@ $users = $CI->Users->profile_edit_data();
       font-size: 20px;
       min-width: 360px;
    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
 </style>
+
+<!-- Sidebar -->
+    
+    <div id="mySidenav" class="sidenav">
+        <div class="sidenav-content">
+            <a href="javascript:void(0)" class="closebtn" id="btn-close-sidebar">&times;</a>
+            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].'&nbsp;'.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
+
+            <div class="sidebar-menu">
+                <div class="accordion border-b-primary" id="accordionExample">
+                    <div class="card border-none">
+                        <div class="card-header p-2 sidebar-menu-title p-0" id="headingOne">
+                            <a href="#" class="btn-block d-flex align-items-center p-0" type="button" data-toggle="collapse" 
+                                data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <img src="<?php echo base_url() ?>assets/img/sidenav-toggle.png" class="d-inline pr-4" alt="">
+                                <h4 class="d-inline">Shop Categories</h4>
+                                <img src="<?php echo base_url() ?>assets/img/sidenav-chevron.png" class="d-inline ml-auto" alt="">  
+                            </a>
+                        </div>
+                
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body p-0">
+                               <ul class="sidebar-menu-items navbar-nav mb-3 ml-4">
+                                <?php foreach($CatList as $key => $value) {?>
+                                   <li><a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value->catId) ?>"><?=$key?></a></li>
+                                <?php } ?>
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+
+                    <?php if(!is_null($users)){?>
+                       <div class="card border-none">
+                           <div class="card-header p-2" id="headingTwo"> 
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button" data-toggle="collapse"
+                                       data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/profile.png" class="d-inline pr-4" alt="">
+                                       <h4 class="d-inline">Profile</h4>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="card border-none">
+                           <div class="card-header p-2" id="headingTwo">
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/my_order_history.png" class="d-inline pr-4" alt="">
+                                       <h4 class="d-inline">My Order History</h4>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="card border-none">
+                           <div class="card-header p-2" id="headingTwo">
+                               <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                       <img src="<?php echo base_url() ?>assets/img/track_your_order.png" class="d-inline pr-4" alt="">
+                                       <h4 class="d-inline">Track Your Order</h4>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                    <?php }?>
+                    <div class="card border-none">
+                        <div class="card-header p-2" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
+                                    <h4 class="d-inline">Call Us</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-none">
+                        <div class="card-header p-2" id="headingTwo">
+                            <div class="card-header sidebar-menu-title p-0" id="headingOne">
+                                <a href="<?= is_null($users) ? base_url('Dashboard/user_authentication') : base_url('Dashboard/logout') ; ?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <img src="<?php echo base_url() ?>assets/img/sign-in.png" class="d-inline pr-4" alt="">
+                                    <?php if(is_null($users)){?>
+                                       <h4 class="d-inline">Sign In</h4>
+                                    <?php } else{?>
+                                       <h4 class="d-inline">Sign Out</h4>
+                                    <?php } ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+
+<!-- Sidebar Ends -->
 
 
 <div class="section-head">
       <div class="top-bar">
-         <div class="container-fluid">
+         <div class="container">
             <div class="row">
-               <nav class="navbar navbar-expand-sm ml-md-auto">
+               <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Account</a>
+                    <?php if(!is_null($users)){?>
+                     <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Wishlist</a>
+                        <a class="nav-link" href="<?=base_url().'Corder/my_order'?>">Track your order</a>
+                     </li>
+                     <li>
+                        <p class="seperator">|</p>
+                     </li> -->
+                     <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);">Wellcome&nbsp;<?=$users['first_name'].'&nbsp;'.$users['last_name']?></a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Track your order</a>
+                        <a class="nav-link" href="<?=base_url().'Dashboard/logout'?>">Logout</a>
                      </li>
+                   <?php }else{?>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?=base_url().'Dashboard/user_authentication'?>">Register Or Login</a>
+                     </li>
+                   <?php } ?>
                   </ul>
                </nav>
             </div>
          </div>
       </div>
       <div class="main-nav bg-light">
-         <div class="container-fluid">
+         <div class="container">
             <div class="row align-items-center py-4">
                <!-- Brand Logo & Sidebar Button -->
                <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-4 mb-md-2 mb-lg-0 col-12 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-end justify-content-md-end justify-content-sm-center">
                      <div class="sidebar-button">
-                        <button class="navbar-toggler h-100" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                           <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
+                        <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
+                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
+                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
                         </button>
                      </div>
                      <div class="logo ml-2">
-                        <div class="logo_content text-center">
+                        <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <img src="<?php echo base_url() ?>assets/img/logo.png" alt="Sauda Express" class="img-fluid d-block">
                            <p class="text-white tag-line mb-0">Where technology meets tradition</p> 
                         </div>
@@ -70,7 +196,7 @@ $users = $CI->Users->profile_edit_data();
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
-                           <form action="#">
+                           <form action="<?=base_url('cproduct/products')?>" method="get">
                               <div class="input-group mb-3">
                                  <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button" type="button"
@@ -79,16 +205,19 @@ $users = $CI->Users->profile_edit_data();
                                        <img src="<?php echo base_url() ?>assets/img/chevron.png" alt="" class="img-fluid">
                                     </button>
                                     <div class="dropdown-menu">
-                                    <?php foreach($CatList as $key => $value) {?>
-                                       <a class="dropdown-item" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
-                                    <?php } ?>
+                                      <?php foreach($CatList as $key => $value) {?>
+                                         <a class="dropdown-item" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
+                                      <?php } ?>
+                                   </div>
                                  </div>
-                                 </div>
-                                 <input type="text" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
+                                 <input type="text" name="q" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary btn-black border-none" type="button">Search</button>
+                                    <button class="btn btn-outline-secondary btn-black border-none" type="submit">Search</button>
                                  </div>
                               </div>
+                              </div>
+                              <div class="input-group mb-3" style="position: absolute; color: white;">
+                                <span>Searching in &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
                               </div>
                            </form>
                         </div>
@@ -204,7 +333,8 @@ $users = $CI->Users->profile_edit_data();
  $(document).ready(() => {
    loadCartData();
    $(document).on('keydown', '.quantity', function () {
-      return false;
+      if(event.keyCode == 189)
+        return false;
    });
    $(document).on('click', '.remove-item-from-cart', function () {
       removeItemFromShoppingCart($(this));
@@ -418,6 +548,7 @@ function loadShoppingCart(){
       $(document).on('click', '.checkout-btn', handleCheckout(event));
    }
    function handleCheckout(e){
+    if(event)
       event.preventDefault();
       return false;
    }
@@ -426,6 +557,10 @@ function loadShoppingCart(){
       document.cookie = `baskit=[];path=/;expires=${oldDt}`;
       showEmptyResponse($('#shoppingCartBody'));
       loadCartData();
+   }
+   function changeSelectedCat(currentElem){
+      $('#categoryId').val($(currentElem).data('value'));
+      $('#searching-cat-name').html($(currentElem).text());
    }
 </script>
 

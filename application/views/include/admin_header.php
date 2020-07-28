@@ -148,8 +148,29 @@ $users = $CI->Users->profile_edit_data();
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('Cbrand') ?>">Add brand</a></li>
-                    <li><a href="<?php echo base_url('Cbrand/manage_brand') ?>">Manage brand</a></li>
+                    <li><a href="<?php echo base_url('Cbrand') ?>">Add Brand</a></li>
+                    <li><a href="<?php echo base_url('Cbrand/manage_brand') ?>">Manage Brand</a></li>
+
+                </ul>
+            </li>
+            <!-- Brand menu end -->
+
+            <!-- Brand menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Corder")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="ti-bag"></i><span>Orders</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Corder') ?>">Manage Orders</a></li>
 
                 </ul>
             </li>
@@ -170,8 +191,8 @@ $users = $CI->Users->profile_edit_data();
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('Cunit') ?>">Add unit</a></li>
-                    <li><a href="<?php echo base_url('Cunit/manage_unit') ?>">Manage unit</a></li>
+                    <li><a href="<?php echo base_url('Cunit') ?>">Add Unit</a></li>
+                    <li><a href="<?php echo base_url('Cunit/manage_unit') ?>">Manage Unit</a></li>
 
                 </ul>
             </li>

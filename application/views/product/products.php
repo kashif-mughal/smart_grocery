@@ -1,7 +1,7 @@
 <!-- Bread Crumb -->
 
 <div class="bread_crumb">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -19,9 +19,9 @@
 
 
 <section class="main-content">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-3 pr-0">
+            <div class="col-xl-3 col-lg-3 col-md-12 pr-0">
                 <div class="categories sidebar-inner-page">
                     <h4>Shop By Department</h4>
                     <?php foreach($CatList as $key => $value) {?>
@@ -44,15 +44,15 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-9 col-md-12 my-3">
+            <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
 
-                <div class="container bg-transparent">
-                    <div class="row">
+                <div class="container bg-transparent pr-0">
+                    <div class="row" id="products-area">
                         <?php foreach($ProdList as $value) { 
                             $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                             ?>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="featured-products-content mb-3">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 px-0">
+                                <div class="featured-products-content mb-2 d-flex justify-content-between">
                                     <div class="card mr-2 each-prod product-card-inner">
                                         <div class="card-body p-0">
                                             <div class="header">
@@ -67,7 +67,7 @@
                                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                         <div class="product-info text-center">
                                             <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
-                                            <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].$value['UnitName']; ?></p>
+                                            <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
                                             <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
                                             <?php if($discountPercentage != 0) { ?> 
                                                 <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
@@ -99,7 +99,9 @@
                                 </div>
                             </div>
                         <?php } ?>
-
+                    </div>
+                    <div class="product-info text-center">
+                        <button class="product-card-btn mx-auto" style="background-color: #17A18D;color: white;">Load More</button>
                     </div>
                 </div>
 

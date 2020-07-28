@@ -26,8 +26,9 @@ class Cproduct extends CI_Controller {
     public function products($categoryId = null) {
         
         $catId = $this->input->get('categoryId');
+        $name = $this->input->get('q');
 
-        $content = $this->lproduct->products_by_category($catId);
+        $content = $this->lproduct->products_by_category($catId, $name);
 
         $this->template->full_html_view($content);
 

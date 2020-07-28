@@ -32,6 +32,7 @@ class Auth {
                 'user_type' => $result[0]['user_type'],
                 'user_name' => $result[0]['first_name'] . " " . $result[0]['last_name'],
                 'user_email' => $result[0]['username'],
+                'address' => $result[0]['address']
             );
 
             $CI->session->set_userdata($user_data);
@@ -45,6 +46,15 @@ class Auth {
     public function is_logged() {
         $CI = & get_instance();
         if ($CI->session->userdata('sid_web')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function authenticated_user_or_admin($expected_authenticated_user_id = null){
+        $CI = & get_instance();
+        if ($CI->session->userdata('user_type') == 1 || 
+            (!is_null($expected_authenticated_user_id) && $CI->session->userdata('user_id') == $expected_authenticated_user_id)) {
             return true;
         }
         return false;
@@ -117,7 +127,6 @@ class Auth {
         }
         return $con;
     }
-
 }
 
 ?>

@@ -2,11 +2,11 @@
         <!-- Bread Crumb -->
 
         <div class="bread_crumb">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row d-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Order</a></li>
                             <li class="breadcrumb-item">Checkout</li>
                         </ol>
                     </nav>
@@ -19,7 +19,30 @@
 
 
         <section class="main-content mx-4">
-            <div class="container-fluid">
+            <div class="container">
+                <!-- Alert Message -->
+                <?php
+                $message = $this->session->userdata('message');
+                if (isset($message)) {
+                    ?>
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <?php echo $message ?>
+                    </div>
+                    <?php
+                    $this->session->unset_userdata('message');
+                }
+                $error_message = $this->session->userdata('error_message');
+                if (isset($error_message)) {
+                    ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <?php echo $error_message ?>                    
+                    </div>
+                    <?php
+                    $this->session->unset_userdata('error_message');
+                }
+                ?>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="content-box pd-50">
@@ -60,7 +83,7 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Date</h4>
-                                            <h4 class="feature-text-price mb-0">Tuesday, 23rd June 2020</h4>
+                                            <h4 class="feature-text-price mb-0" id="delivery-date"></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -72,13 +95,12 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Address</h4>
-                                            <h4 class="feature-text-price mb-0">ABC Plaza Near XYZ Market, Khayaban-e-Ittehad Phase V, Karachi</h4>
+                                            <h4 class="feature-text-price mb-0"><?php echo empty($_SESSION['address']) ? 'Not Specified' : $_SESSION['address'];?></h4>
                                         </div>
                                     </div>
                                 </div>
-
-                                <a href="#" class="button-secondary button-full-width mt-5 mb-3 p-3 
-                                                text-dec-none text-white font-size-18">View Order history</a>
+                                <a href="javascript:void(0);" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Proceed To Checkout</a>
+                                <a href="#"  style="display: none;" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
                                 
                             </div>
                         </div>
@@ -139,6 +161,9 @@
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
         loadCheckoutCartArea();
+        $(document).on('click', '#checkout', function () {
+          proceedToCheckout();
+       });
     });
 
     function loadCheckoutCartArea(){
@@ -168,10 +193,53 @@
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
             $('.sub-total').html(formatCurrency(sum));
+            if(cart.length >= 15){
+                $('#delivery-date').html('Next working day');
+            }else{
+                $('#delivery-date').html('Today');
+            }
          }
          else{
             //show empty message
             return false;
          }   
+    }
+
+    function proceedToCheckout(){
+        var baskit = getCookie('baskit');
+        if(!baskit || JSON.parse(baskit).length == 0){
+            $.notify("The Cart is empty, please add some item in cart", "error");
+            return false;
+        }
+
+        openWindowWithPost(
+            "proceed_to_checkout", JSON.parse(baskit)
+        );
+    }
+
+    function openWindowWithPost(url, dataArr) {
+        var form = document.createElement("form");
+        form.target = "_blank";
+        form.method = "POST";
+        form.action = url;
+        form.style.display = "none";
+        // for (var i = 0; i < dataArr.length; i++) {
+        //     for (var key in dataArr[i]) {
+        //         var input = document.createElement("input");
+        //         input.type = "hidden";
+        //         input.name = key + '[]';
+        //         input.value = dataArr[i][key];
+        //         form.appendChild(input);
+        //     }   
+        // }
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = 'order';
+        input.value = JSON.stringify(dataArr);
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 </script>

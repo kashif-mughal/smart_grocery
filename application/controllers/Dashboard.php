@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
-        //$this->load->database();
+        $this->load->model('auths');
     }
 
     public function index() {
@@ -16,15 +16,16 @@ class Dashboard extends CI_Controller {
         $this->load->library('lcategory');
         $CI->load->model('Products');
         $CI->load->model('Units');
-
-        $product_list = $CI->Products->customSelect(
-            '*', 'IsFeatured = 1', 20, 'ModifiedOn'
-        );
+        $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
+        $product_list;
+        if ($query->num_rows() > 0) {
+            $product_list =  $query->result_array();
+        }
         // print_r($product_list);die;
 
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
-            $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
+            $value->products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
         }
         $final_product_list = array();
         foreach($product_list as $prod => $value) {
@@ -109,7 +110,7 @@ class Dashboard extends CI_Controller {
 
     public function logout() {
         if ($this->auth->logout())
-            $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+            $this->output->set_header("Location: " . base_url(), TRUE, 302);
     }
 
     #=============Edit Profile======#
@@ -142,7 +143,7 @@ class Dashboard extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
-    #============Change Password===========#
+    #============Change Password===========#f
 
     public function change_password() {
         $CI = & get_instance();
@@ -174,5 +175,124 @@ class Dashboard extends CI_Controller {
             $this->session->set_userdata(array('message' => display('successfully_changed_password')));
             $this->output->set_header("Location: " . base_url() . 'Dashboard/change_password_form', TRUE, 302);
         }
+    }
+
+    #============User Authentication=======#
+
+    public function user_authentication() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        $data['countries'] = $CI->Auths->get_country();
+        $data['cities'] = $CI->Auths->get_city();
+        $content = $this->parser->parse('users/registration', $data, true);
+        $this->template->full_html_view($content);
+    }
+
+    
+
+    // Verify Phone Number
+    public function phoneVerify() {        
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        $phone_number = $this->input->Post('phone');
+
+        if(!isset($phone_number)) {
+            $result['response'] = 'Phone number is not valid';
+            $result['status'] = 'Error';
+            echo json_encode($result);
+            return;     
+        }
+
+        // Check if this phone number is already registered
+        $db_phone = $CI->Auths->phone_registered($phone_number);
+
+        if($db_phone->num_rows() > 0) {
+            $phoneExist = $db_phone->result_array();
+            // Verify Phone
+            if($phoneExist[0]['verified'] == 0) { // User Exist but phone not verified
+                $fourRandomDigit = mt_rand(1000,9999); // 4 digit OTP Code
+                $dateTime = new DateTime();
+                $date = $dateTime->format('Y-m-d H:i:s');
+                $currentDate = strtotime($date);
+                $futureDate = $currentDate+(60*5);
+                $formatDate = date("Y-m-d H:i:s", $futureDate); // Current Date + 5 minutes
+                
+                // Update new otp code and set expiry date
+                $CI->Auths->update_otp_code($fourRandomDigit, $formatDate, $phone_number);
+
+                //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
+
+                $result['response'] = 'We have send message to your phone number, Please verify your account';
+                $result['status'] = 'Success';
+                $result['phone_exist'] = true;
+                $result['phone_verified'] = false;
+                $result['userId'] = $phoneExist[0]['user_id'];
+                echo json_encode($result);    
+                return;    
+                
+            }
+            else { // User Exist and Verified
+
+                $userDetails = $this->auths->get_user_detail($phoneExist[0]['user_id']);
+
+                if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                    // Response
+                    $result['response'] = 'User by Email is Available, Logging in form';
+                    $result['phone_exist'] = true;
+                    $result['phone_verified'] = true;
+                    $result['user_exist'] = true;
+                    $result['userId'] = $phoneExist[0]['user_id'];
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
+                    return;
+                }
+                else {
+                    $result['response'] = 'Please register your account';
+                    $result['status'] = 'Success';
+                    $result['phone_exist'] = false;
+                    $result['phone_verified'] = true;
+                    $result['user_exist'] = false;
+                    $result['userId'] = $phoneExist[0]['user_id'];
+                    echo json_encode($result);
+                    return;
+                }
+                
+            }
+            
+        }
+        else {
+            // Steps:
+            // ------
+            // - Create Hash for UserId
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
+            $user_id = substr($userId, 0, 20);
+            // - Store User with UserId and phone number in table:(user_login)
+            $CI->Auths->insert_user_login($user_id);            
+
+            // insert users table
+            $CI->Auths->insert_user($user_id, $phone_number);
+            
+            // - Add Entry in table:(otp) with randomly generated 4-digit code and 5 min expiry
+            $fourRandomDigit = mt_rand(1000,9999);
+            $dateTime = new DateTime();
+            $date = $dateTime->format('Y-m-d H:i:s');
+            $currentDate = strtotime($date);
+            $futureDate = $currentDate+(60*5);
+            $formatDate = date("Y-m-d H:i:s", $futureDate);
+            
+            $CI->Auths->insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate);
+
+            //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
+
+            //Response
+            $result['response'] = 'We have send message to your phone number Please verify your account';
+            $result['userId'] = $user_id;
+            $result['status'] = 'Success';
+            echo json_encode($result);
+        }        
     }
 }

@@ -1,5 +1,5 @@
 <section class="main-content">
-   <div class="container-fluid">
+   <div class="container">
       <div class="row">
          <div class="col-xl-9 col-lg-9 col-md-12">
             <div class="featured-products">
@@ -29,7 +29,7 @@
                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                         <div class="product-info text-center">
                            <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
-                           <p class="card-text product-card-inner-weight"><?php echo $value['Unit'].$value['UnitName']; ?></p>
+                           <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
                            <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
                            <?php if($discountPercentage != 0) { ?> 
                            <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
@@ -43,7 +43,7 @@
                               ?>
                            <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                               <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                              <input type="text" class="d-inline-flex quantity quantity-input">
+                              <input type="number" min="0" class="d-inline-flex quantity quantity-input">
                               <span class="d-block quantity-button">
                                  <a href="javascript:void(0);" class="qty-pls d-block">+</a>
                                  <div class="separator"></div>
@@ -76,7 +76,7 @@
                                     <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
                                     <button class="card-button">Use Assistant</button>
                                  </div>
-                                 <div class="col-md-5 pl-0">
+                                 <div style="position: absolute;right: 0;max-width: 30%;">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -96,7 +96,7 @@
                                     <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
                                     <button class="card-button">Use Assistant</button>
                                  </div>
-                                 <div class="col-md-5 pl-0">
+                                 <div style="position: absolute;right: 0;max-width: 30%;">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -115,7 +115,7 @@
             <section class="edibles-main products-widget">
                <div class="container-fluid">
                   <div class="row">
-                     <div class="col-md-2 pl-0">
+                     <div class="col-md-3 pl-0">
                         <h2 class="products-widget-heading"><?=$key?></h2>
                         <div class="card product-category">
                            <div class="card-body product-card-category-list">
@@ -130,9 +130,9 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-10 pr-0">
+                     <div class="col-md-9">
                         <div class="container-fluid">
-                           <div class="row featured-products-content mb-3">
+                           <div class="row featured-products-content">
                               <?php for ($i=0; $i < count($value->products); $i++) {?>
                               <div class="card mr-2 each-prod product-card-inner">
                                  <?php if(!empty($value->products[$i]['ProductName'])){?>
@@ -153,7 +153,7 @@
                                  <img class="card-img-bottom text-center" src="<?php echo base_url().$value->products[$i]['ProductImg']; ?>" alt="Card image cap">
                                  <div class="product-info text-center">
                                     <p class="card-text product-card-inner-name"><?php echo $value->products[$i]['ProductName']; ?></p>
-                                    <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['Unit'].$value->products[$i]['UnitName']; ?></p>
+                                    <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['UnitName']; ?></p>
                                     <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value->products[$i]['SalePrice']; ?></p>
                                     <?php if($discountPercentage != 0) { ?> 
                                     <span class="product-discount"><del>Rs. <?php echo $value->products[$i]['Price']; ?></del></span>
