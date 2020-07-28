@@ -293,6 +293,12 @@ input:focus {
 .border-r-none {
    border-right: none !important;
 }
+.border-b-primary {
+   border-bottom: 1px solid #cccccc;
+}
+.border-b-none {
+   border-bottom: none !important;  
+}
 /* Padding */
 .pd-6 {
    padding: 6px;

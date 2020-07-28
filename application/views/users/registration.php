@@ -418,13 +418,13 @@
 							}, 2000);
 
 							if(data.user_details_available) {
-								$('#userId').val(localStorage.removeItem('UserId'));
 								if(!data.redirectUrl) {
 									window.location.href = "<?php echo base_url(); ?>Dashboard";	
 								}
 								else {
 									window.location.href = data.redirectUrl;
 								}
+								$('#userId').val(localStorage.removeItem('UserId'));
 							}
 
 							$('#registrationForm').hide();
@@ -485,11 +485,9 @@
 								$('.errorNotify').hide();
 							}, 2000);
 
-							$('#loginForm').hide();
-							$('#loginForm').css('display', 'none');
-							$("#userLoginForm").trigger("reset");
 							setTimeout(function() {
 								if(!data.redirectUrl) {
+									$("#userLoginForm").trigger("reset");
 								 	window.location = "<?php echo base_url(); ?>Dashboard"; 
 								}
 								else {
