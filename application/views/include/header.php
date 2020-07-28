@@ -109,7 +109,7 @@ if(is_array($users) && !empty($users[0])){
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                <a href="<?= is_null($users) ? base_url('Dashboard/user_authentication') : base_url('Dashboard/logout') ; ?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <img src="<?php echo base_url() ?>assets/img/sign-in.png" class="d-inline pr-4" alt="">
                                     <?php if(is_null($users)){?>
