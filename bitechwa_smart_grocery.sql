@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 28, 2020 at 06:06 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.31
+-- Host: localhost:3306
+-- Generation Time: Jul 28, 2020 at 12:08 PM
+-- Server version: 10.3.23-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `smart_grocery`
+-- Database: `bitechwa_smart_grocery`
 --
 
 -- --------------------------------------------------------
@@ -618,7 +619,8 @@ INSERT INTO `grocery_category` (`CategoryId`, `CatName`, `Alias`, `Img`, `Parent
 (13, 'Atta (Flour)', 'Atta & Flour', 'assets/img/category/868f874b0059a140826161b8a60fe0c2.jpg', 12, '2020-07-13 10:46:11', '2020-07-13 01:46:11', b'1'),
 (14, 'Cooking Oil', 'Cooking Oil', 'assets/img/category/43f2a5fd549a616fae43d48345ca2a94.jpg', 12, '2020-07-13 10:46:34', '2020-07-13 01:46:34', b'1'),
 (20, 'Fresh Fruits2', 'Fresh Fruits2', 'assets/img/product.png', 6, '2020-07-18 18:45:10', '2020-07-18 21:45:10', b'0'),
-(21, 'Fresh Vegetables2', 'Fresh Vegetables2', 'assets/img/product.png', 6, '2020-07-18 18:45:26', '2020-07-18 21:45:26', b'0');
+(21, 'Fresh Vegetables2', 'Fresh Vegetables2', 'assets/img/product.png', 6, '2020-07-18 18:45:26', '2020-07-18 21:45:26', b'0'),
+(22, 'Meat, Fish &  Poultry', '', 'assets/img/product.png', 0, '2020-07-27 11:39:21', '2020-07-27 07:39:21', b'1');
 
 -- --------------------------------------------------------
 
@@ -643,14 +645,8 @@ CREATE TABLE `grocery_order` (
 INSERT INTO `grocery_order` (`OrderId`, `CustomerId`, `OrderValue`, `Hash`, `CreatedOn`, `ModifiedOn`, `Status`) VALUES
 (7, 1, 375, '2831b4f50b42502790a0f6d18c8254ab991c7cbd', '2020-07-21 15:48:32', '2020-07-21 18:48:32', b'1'),
 (8, 1, 110, '8a021a1904e46b8bca5f504108a89e902d452404', '2020-07-21 16:00:26', '2020-07-21 19:00:26', b'1'),
-(9, 1, 180, '4258cbcc07d06841f0b70271bfc15753bae4baa2', '2020-07-27 13:00:13', '2020-07-27 16:00:13', b'1'),
-(10, 1, 140, '4271160ac2cf3c92b28ace99baf975dad742126e', '2020-07-28 13:41:38', '2020-07-28 16:41:38', b'1'),
-(11, 1, 1200, 'c28f8cf65c5c35c90f29623821b37da4223a572c', '2020-07-28 14:05:49', '2020-07-28 17:05:49', b'1'),
-(12, 1, 1410, '5d353480d2c6f6fc83baa8118b6b10c034343dc6', '2020-07-28 14:20:48', '2020-07-28 17:20:48', b'1'),
-(13, 1, 360, '631f337a6a0394746e42b4cf9f4a331e458c88c1', '2020-07-28 14:21:59', '2020-07-28 17:21:59', b'1'),
-(14, 0, 800, 'c90850b880e71c5af995554a027081c69e2408f3', '2020-07-28 16:52:25', '2020-07-28 19:52:25', b'1'),
-(15, 0, 1200, 'da0b3d37fb35ec432c69462a43d19bfd5081b0bb', '2020-07-28 16:54:22', '2020-07-28 19:54:22', b'1'),
-(16, 0, 2140, 'f67305b15a6ffa7c6056c55e6c1aafbca06450c1', '2020-07-28 17:11:06', '2020-07-28 20:11:06', b'1');
+(9, 1, 110, '7fb00aca0baf0d8652700d5a5cbbf9dac58a9367', '2020-07-24 16:49:17', '2020-07-24 12:49:17', b'1'),
+(10, 1, 780, 'a715b2d8848cd8b896c52d14e16f1b0a77e5b9a7', '2020-07-27 11:17:03', '2020-07-27 07:17:03', b'1');
 
 -- --------------------------------------------------------
 
@@ -677,43 +673,64 @@ INSERT INTO `grocery_order_detail` (`OrderDetailId`, `OrderId`, `ItemId`, `ItemQ
 (10, 7, 10, 3, 70, b'1', '2020-07-21 15:48:32', '2020-07-21 18:48:32'),
 (11, 7, 16, 3, 55, b'1', '2020-07-21 15:48:32', '2020-07-21 18:48:32'),
 (12, 8, 16, 2, 55, b'1', '2020-07-21 16:00:26', '2020-07-21 19:00:26'),
-(66, 9, 16, 2, 55, b'1', '2020-07-27 13:00:13', '2020-07-27 16:00:13'),
-(67, 9, 10, 1, 70, b'1', '2020-07-27 13:00:13', '2020-07-27 16:00:14'),
-(68, 0, 10, 2, 70, b'1', '2020-07-27 13:36:02', '2020-07-27 16:36:02'),
-(69, 0, 10, 2, 70, b'1', '2020-07-27 13:40:04', '2020-07-27 16:40:04'),
-(70, 0, 10, 2, 70, b'1', '2020-07-27 13:48:29', '2020-07-27 16:48:29'),
-(71, 0, 10, 2, 70, b'1', '2020-07-27 13:59:00', '2020-07-27 16:59:00'),
-(72, 0, 10, 2, 70, b'1', '2020-07-27 14:24:01', '2020-07-27 17:24:01'),
-(73, 0, 10, 2, 70, b'1', '2020-07-28 13:41:27', '2020-07-28 16:41:27'),
-(74, 10, 10, 2, 70, b'1', '2020-07-28 13:41:38', '2020-07-28 16:41:38'),
-(75, 11, 7, 2, 200, b'1', '2020-07-28 14:05:49', '2020-07-28 17:05:49'),
-(76, 11, 6, 2, 400, b'1', '2020-07-28 14:05:49', '2020-07-28 17:05:49'),
-(77, 12, 7, 2, 200, b'1', '2020-07-28 14:20:48', '2020-07-28 17:20:48'),
-(78, 12, 6, 2, 400, b'1', '2020-07-28 14:20:48', '2020-07-28 17:20:48'),
-(79, 12, 10, 3, 70, b'1', '2020-07-28 14:20:48', '2020-07-28 17:20:48'),
-(80, 13, 16, 4, 55, b'1', '2020-07-28 14:21:59', '2020-07-28 17:21:59'),
-(81, 13, 10, 2, 70, b'1', '2020-07-28 14:21:59', '2020-07-28 17:21:59'),
-(82, 14, 6, 2, 400, b'1', '2020-07-28 16:52:25', '2020-07-28 19:52:25'),
-(83, 15, 6, 3, 400, b'1', '2020-07-28 16:54:22', '2020-07-28 19:54:22'),
-(84, 16, 6, 4, 400, b'1', '2020-07-28 17:11:06', '2020-07-28 20:11:06'),
-(85, 16, 7, 2, 200, b'1', '2020-07-28 17:11:06', '2020-07-28 20:11:06'),
-(86, 16, 10, 2, 70, b'1', '2020-07-28 17:11:06', '2020-07-28 20:11:06');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `grocery_order_traking`
---
-
-CREATE TABLE `grocery_order_traking` (
-  `TrakingId` int(11) NOT NULL,
-  `OrderId` int(11) NOT NULL,
-  `StepId` int(11) NOT NULL,
-  `Remarks` int(11) NOT NULL,
-  `CreatedOn` datetime NOT NULL,
-  `ModifiedOn` datetime NOT NULL DEFAULT current_timestamp(),
-  `Status` bit(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(13, 0, 7, 2, 200, b'1', '2020-07-23 20:11:21', '2020-07-23 23:11:21'),
+(14, 0, 7, 2, 200, b'1', '2020-07-23 20:13:19', '2020-07-23 23:13:19'),
+(15, 0, 7, 2, 200, b'1', '2020-07-23 20:13:29', '2020-07-23 23:13:29'),
+(16, 0, 7, 2, 200, b'1', '2020-07-23 20:13:42', '2020-07-23 23:13:42'),
+(17, 0, 7, 2, 200, b'1', '2020-07-23 20:14:42', '2020-07-23 23:14:42'),
+(18, 0, 7, 2, 200, b'1', '2020-07-23 20:16:12', '2020-07-23 23:16:12'),
+(19, 0, 7, 2, 200, b'1', '2020-07-23 20:16:21', '2020-07-23 23:16:21'),
+(20, 0, 7, 2, 200, b'1', '2020-07-23 20:20:18', '2020-07-23 23:20:18'),
+(21, 0, 7, 2, 200, b'1', '2020-07-23 20:20:22', '2020-07-23 23:20:22'),
+(22, 0, 7, 2, 200, b'1', '2020-07-23 20:20:37', '2020-07-23 23:20:37'),
+(23, 0, 7, 2, 200, b'1', '2020-07-23 20:21:26', '2020-07-23 23:21:26'),
+(24, 0, 7, 2, 200, b'1', '2020-07-23 20:21:33', '2020-07-23 23:21:33'),
+(25, 0, 7, 2, 200, b'1', '2020-07-23 20:21:39', '2020-07-23 23:21:39'),
+(26, 0, 7, 2, 200, b'1', '2020-07-23 20:21:43', '2020-07-23 23:21:43'),
+(27, 0, 7, 2, 200, b'1', '2020-07-23 20:22:27', '2020-07-23 23:22:27'),
+(28, 0, 7, 2, 200, b'1', '2020-07-23 20:22:31', '2020-07-23 23:22:31'),
+(29, 0, 7, 2, 200, b'1', '2020-07-23 20:22:36', '2020-07-23 23:22:36'),
+(30, 0, 7, 2, 200, b'1', '2020-07-23 20:22:43', '2020-07-23 23:22:43'),
+(31, 0, 7, 2, 200, b'1', '2020-07-23 20:22:50', '2020-07-23 23:22:50'),
+(32, 0, 7, 2, 200, b'1', '2020-07-23 20:22:57', '2020-07-23 23:22:57'),
+(33, 0, 7, 2, 200, b'1', '2020-07-23 20:23:36', '2020-07-23 23:23:36'),
+(34, 0, 7, 2, 200, b'1', '2020-07-23 20:24:12', '2020-07-23 23:24:12'),
+(35, 0, 7, 2, 200, b'1', '2020-07-23 20:24:32', '2020-07-23 23:24:32'),
+(36, 0, 7, 2, 200, b'1', '2020-07-23 20:25:22', '2020-07-23 23:25:22'),
+(37, 0, 7, 2, 200, b'1', '2020-07-23 20:25:25', '2020-07-23 23:25:25'),
+(38, 0, 7, 2, 200, b'1', '2020-07-23 20:26:31', '2020-07-23 23:26:31'),
+(39, 0, 7, 2, 200, b'1', '2020-07-23 20:27:01', '2020-07-23 23:27:01'),
+(40, 0, 7, 2, 200, b'1', '2020-07-23 20:27:21', '2020-07-23 23:27:21'),
+(41, 0, 7, 2, 200, b'1', '2020-07-23 20:27:45', '2020-07-23 23:27:45'),
+(42, 0, 7, 2, 200, b'1', '2020-07-23 20:28:04', '2020-07-23 23:28:04'),
+(43, 0, 7, 2, 200, b'1', '2020-07-23 20:28:22', '2020-07-23 23:28:22'),
+(44, 0, 7, 2, 200, b'1', '2020-07-23 20:28:54', '2020-07-23 23:28:54'),
+(45, 0, 7, 2, 200, b'1', '2020-07-23 20:29:20', '2020-07-23 23:29:20'),
+(46, 0, 7, 2, 200, b'1', '2020-07-23 20:29:43', '2020-07-23 23:29:43'),
+(47, 0, 7, 2, 200, b'1', '2020-07-23 20:30:09', '2020-07-23 23:30:09'),
+(48, 0, 7, 2, 200, b'1', '2020-07-23 20:32:04', '2020-07-23 23:32:04'),
+(49, 0, 7, 2, 200, b'1', '2020-07-23 20:32:23', '2020-07-23 23:32:23'),
+(50, 0, 7, 2, 200, b'1', '2020-07-23 20:32:34', '2020-07-23 23:32:34'),
+(51, 0, 7, 2, 200, b'1', '2020-07-23 20:34:07', '2020-07-23 23:34:07'),
+(52, 0, 7, 2, 200, b'1', '2020-07-23 20:35:19', '2020-07-23 23:35:19'),
+(53, 0, 7, 2, 200, b'1', '2020-07-23 20:37:01', '2020-07-23 23:37:01'),
+(54, 0, 7, 2, 200, b'1', '2020-07-23 20:39:48', '2020-07-23 23:39:48'),
+(55, 0, 7, 2, 200, b'1', '2020-07-23 20:41:22', '2020-07-23 23:41:22'),
+(56, 0, 7, 2, 200, b'1', '2020-07-23 20:44:57', '2020-07-23 23:44:57'),
+(57, 0, 7, 2, 200, b'1', '2020-07-23 20:45:16', '2020-07-23 23:45:16'),
+(58, 0, 7, 2, 200, b'1', '2020-07-23 20:48:06', '2020-07-23 23:48:06'),
+(59, 0, 7, 2, 200, b'1', '2020-07-23 20:49:27', '2020-07-23 23:49:27'),
+(60, 0, 3, 2, 150, b'1', '2020-07-23 20:50:11', '2020-07-23 23:50:11'),
+(61, 0, 5, 1, 45, b'1', '2020-07-23 20:50:11', '2020-07-23 23:50:11'),
+(62, 0, 3, 2, 150, b'1', '2020-07-23 20:52:00', '2020-07-23 23:52:00'),
+(63, 0, 5, 1, 45, b'1', '2020-07-23 20:52:00', '2020-07-23 23:52:00'),
+(64, 0, 3, 2, 150, b'1', '2020-07-23 20:53:07', '2020-07-23 23:53:07'),
+(65, 0, 5, 1, 45, b'1', '2020-07-23 20:53:07', '2020-07-23 23:53:07'),
+(66, 9, 16, 2, 55, b'1', '2020-07-24 16:49:17', '2020-07-24 12:49:17'),
+(67, 10, 16, 2, 55, b'1', '2020-07-27 11:17:03', '2020-07-27 07:17:03'),
+(68, 10, 10, 1, 70, b'1', '2020-07-27 11:17:03', '2020-07-27 07:17:03'),
+(69, 10, 7, 1, 200, b'1', '2020-07-27 11:17:03', '2020-07-27 07:17:03'),
+(70, 10, 6, 1, 400, b'1', '2020-07-27 11:17:03', '2020-07-27 07:17:03');
 
 -- --------------------------------------------------------
 
@@ -743,7 +760,7 @@ CREATE TABLE `grocery_products` (
 --
 
 INSERT INTO `grocery_products` (`ProductId`, `ProductName`, `Category`, `Unit`, `UnitId`, `Price`, `SalePrice`, `Status`, `ProductImg`, `CreatedOn`, `ModifiedOn`, `IsFeatured`, `IsHot`, `Brand`) VALUES
-(1, 'Banana', 8, 1, 1, 60, 55, b'1', 'assets/img/products/banana.png', '2020-07-14 00:00:00', '2020-07-14 00:00:00', b'1', b'0', 1),
+(1, 'Banana', 8, 1, 1, 60, 55, b'1', 'assets/img/products/banana.png', '2020-07-14 00:00:00', '2020-07-14 00:00:00', b'0', b'1', 1),
 (2, 'Cauliflower', 7, 1, 1, 35, 35, b'1', 'assets/img/products/cauliflower.png', '2020-07-14 21:29:05', '2020-07-14 21:29:05', b'0', b'0', 1),
 (3, 'Orange', 8, 1, 1, 200, 150, b'1', 'assets/img/products/orange.png', '2020-07-14 21:30:04', '2020-07-14 21:30:04', b'1', b'0', 1),
 (5, 'Tomato', 7, 1, 1, 56, 45, b'1', 'assets/img/products/Tomato.png', '2020-07-14 21:31:52', '2020-07-14 21:31:52', b'1', b'0', 1),
@@ -753,31 +770,6 @@ INSERT INTO `grocery_products` (`ProductId`, `ProductName`, `Category`, `Unit`, 
 (10, 'Ginger', 7, 1, 1, 80, 70, b'1', 'assets/img/products/ginger.png', '2020-07-15 12:38:57', '2020-07-15 15:38:57', b'1', b'0', 1),
 (11, 'Cucumber', 7, 1, 1, 80, 70, b'0', 'assets/img/product/cucumber.jpg', '2020-07-15 12:39:58', '2020-07-15 15:39:58', b'0', b'0', 1),
 (16, 'Potato', 7, 1, 1, 50, 55, b'1', 'assets/img/products/2867b5b52ad4b082fae0ee4750924eb5.jpg', '2020-07-16 08:11:55', '2020-07-15 23:11:55', b'1', b'1', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `grocery_traking_steps`
---
-
-CREATE TABLE `grocery_traking_steps` (
-  `StepId` int(11) NOT NULL,
-  `StepName` varchar(50) NOT NULL,
-  `Status` bit(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `grocery_traking_steps`
---
-
-INSERT INTO `grocery_traking_steps` (`StepId`, `StepName`, `Status`) VALUES
-(1, 'Requested', b'1'),
-(2, 'Confirmed', b'1'),
-(3, 'In Transit', b'1'),
-(4, 'Item Received', b'1'),
-(5, 'Dispatched', b'1'),
-(6, 'Received By User', b'1'),
-(7, 'Canceled', b'1');
 
 -- --------------------------------------------------------
 
@@ -1578,32 +1570,6 @@ CREATE TABLE `notes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `otp`
---
-
-CREATE TABLE `otp` (
-  `phone_number` varchar(20) NOT NULL,
-  `user_id` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `code` int(4) NOT NULL,
-  `expiry_date` datetime NOT NULL,
-  `verified` bit(1) NOT NULL DEFAULT b'0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `otp`
---
-
-INSERT INTO `otp` (`phone_number`, `user_id`, `code`, `expiry_date`, `verified`) VALUES
-('03460030581', '485870e402584d1430da', 9653, '2020-07-28 16:44:49', b'1'),
-('03460030582', 'c221764f1203e26877fa', 4989, '2020-07-27 13:32:44', b'1'),
-('03460030583', 'ad18b67943cb87181b68', 8861, '2020-07-28 16:51:29', b'1'),
-('03460030584', 'feca6d9196533682d359', 4558, '2020-07-28 16:56:03', b'1'),
-('03460030586', '69f7be32cb243175e656', 9505, '2020-07-28 17:53:16', b'1'),
-('03460030587', 'dd85877dfcef5226c9c5', 7588, '2020-07-28 17:54:27', b'1');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `payment_trans`
 --
 
@@ -1685,34 +1651,6 @@ CREATE TABLE `pesonal_loan_information` (
   `person_address` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `places`
---
-
-CREATE TABLE `places` (
-  `place_name` varchar(20) NOT NULL,
-  `level` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `places`
---
-
-INSERT INTO `places` (`place_name`, `level`) VALUES
-('Pakistan', 0),
-('Karachi', 1),
-('Lahore', 1),
-('Islamabad', 1),
-('Peshawar', 1),
-('Quetta', 1),
-('Faisalabad', 1),
-('Rawalpindi', 1),
-('Hyderabad', 1),
-('Multan', 1),
-('Gujranwala', 1);
 
 -- --------------------------------------------------------
 
@@ -4776,32 +4714,22 @@ INSERT INTO `units` (`unit_id`, `unit_name`, `status`) VALUES
 --
 
 CREATE TABLE `users` (
-  `user_id` varchar(20) NOT NULL,
+  `user_id` varchar(15) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `gender` int(2) NOT NULL,
   `date_of_birth` varchar(255) NOT NULL,
   `logo` varchar(250) DEFAULT NULL,
-  `status` int(2) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `city` varchar(20) NOT NULL,
-  `country` varchar(20) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `address_details` text NOT NULL
+  `status` int(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `gender`, `date_of_birth`, `logo`, `status`, `phone`, `email`, `city`, `country`, `address`, `address_details`) VALUES
-('1', 'Mughal', 'Kashif', 1, '', 'http://localhost/smart_grocery/assets/dist/img/profile_picture/e47382e50e13ea6b7b1ab44be0439ffa.jpg', 1, '03460030582', 'test@test.com', '0', '0', 'House#90, st#02, liquatabad, Karachi', ''),
-('ad18b67943cb87181b68', '', 'mk021', 0, '', NULL, 1, '03460030583', 'mkmughal16@gmail.com', 'Karachi', 'Pakistan', 'house 1131', ';lkasjdf'),
-('485870e402584d1430da', '', 'Muhammad KAshif', 0, '', NULL, 1, '03460030581', 'mkmughal15@gmail.com', 'Karachi', 'Pakistan', 'house 1131', 'kjkj'),
-('feca6d9196533682d359', '', 'Mk 004', 0, '', NULL, 1, '03460030584', 'mkmughal17@gmail.com', 'Karachi', 'Pakistan', 'house 1131', 'lajsdlfkj'),
-('69f7be32cb243175e656', '', 'Mughal007', 0, '', NULL, 1, '03460030586', 'mkmughal17@gmail.com', 'Karachi', 'Pakistan', 'house 1131', ';alksdjf'),
-('dd85877dfcef5226c9c5', '', 'Muhammad KAshif', 0, '', NULL, 1, '03460030587', 'mkmughal20@gmail.com', 'Karachi', 'Pakistan', 'house 1131', ';lkajsd;flkj');
+INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `gender`, `date_of_birth`, `logo`, `status`) VALUES
+('1', 'Mughal', 'Kashif', 1, '', 'http://localhost/smart_grocery/assets/dist/img/profile_picture/e47382e50e13ea6b7b1ab44be0439ffa.jpg', 1),
+('oZTpXAmq4itvJmY', 'khan', 'Sourav', 0, '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -4810,7 +4738,7 @@ INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `gender`, `date_of_bi
 --
 
 CREATE TABLE `user_login` (
-  `user_id` varchar(30) NOT NULL,
+  `user_id` varchar(15) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_type` int(2) NOT NULL,
@@ -4823,12 +4751,8 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`user_id`, `username`, `password`, `user_type`, `security_code`, `status`) VALUES
-('1', 'test@test.com', 'e10adc3949ba59abbe56e057f20f883e', 1, '', 1),
-('485870e402584d1430da', 'mkmughal15@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '', 1),
-('ad18b67943cb87181b68', 'mkmughal16@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '', 1),
-('feca6d9196533682d359', 'mkmughal17@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '', 1),
-('69f7be32cb243175e656', 'mkmughal17@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '', 1),
-('dd85877dfcef5226c9c5', 'mkmughal20@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '', 1);
+('1', 'test@test.com', '2e44c76375b20f381945bccb735d80f0', 1, '', 1),
+('oZTpXAmq4itvJmY', 's@demo.com', 'e10adc3949ba59abbe56e057f20f883e', 2, '41d99b369894eb1ec3f461135132d8bb', 1);
 
 -- --------------------------------------------------------
 
@@ -4961,23 +4885,11 @@ ALTER TABLE `grocery_order_detail`
   ADD KEY `OrderId` (`OrderId`);
 
 --
--- Indexes for table `grocery_order_traking`
---
-ALTER TABLE `grocery_order_traking`
-  ADD PRIMARY KEY (`TrakingId`);
-
---
 -- Indexes for table `grocery_products`
 --
 ALTER TABLE `grocery_products`
   ADD PRIMARY KEY (`ProductId`),
   ADD KEY `FK_ProductCategory_GroceryCategoryId` (`Category`);
-
---
--- Indexes for table `grocery_traking_steps`
---
-ALTER TABLE `grocery_traking_steps`
-  ADD PRIMARY KEY (`StepId`);
 
 --
 -- Indexes for table `grocery_unit`
@@ -4996,12 +4908,6 @@ ALTER TABLE `language`
 --
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`note_id`);
-
---
--- Indexes for table `otp`
---
-ALTER TABLE `otp`
-  ADD UNIQUE KEY `phone_number` (`phone_number`);
 
 --
 -- Indexes for table `product_information`
@@ -5047,37 +4953,25 @@ ALTER TABLE `grocery_brand`
 -- AUTO_INCREMENT for table `grocery_category`
 --
 ALTER TABLE `grocery_category`
-  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `grocery_order`
 --
 ALTER TABLE `grocery_order`
-  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `OrderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `grocery_order_detail`
 --
 ALTER TABLE `grocery_order_detail`
-  MODIFY `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
-
---
--- AUTO_INCREMENT for table `grocery_order_traking`
---
-ALTER TABLE `grocery_order_traking`
-  MODIFY `TrakingId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `grocery_products`
 --
 ALTER TABLE `grocery_products`
   MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `grocery_traking_steps`
---
-ALTER TABLE `grocery_traking_steps`
-  MODIFY `StepId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `grocery_unit`

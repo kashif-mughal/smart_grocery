@@ -116,8 +116,8 @@ class Users extends CI_Model {
 
     //Change Password
     public function change_password($email, $old_password, $new_password) {
-        $user_name = md5("gef" . $new_password);
-        $password = md5("gef" . $old_password);
+        $user_name = md5($new_password);
+        $password = md5($old_password);
         $this->db->where(array('username' => $email, 'password' => $password, 'status' => 1));
         $query = $this->db->get('user_login');
         $result = $query->result_array();
