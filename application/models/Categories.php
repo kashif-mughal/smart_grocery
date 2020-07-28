@@ -72,7 +72,7 @@ class Categories extends CI_Model {
         }
     }
     //Get limited products inside all sub cat hierarchy
-    public function getCatPrducts($catId, $startFrom = 0, $limit = 10){
+    public function getCatPrducts($catId, $productName = null, $startFrom = 0, $limit = 10){
         $inCats = NULL;
         $func = function($value) {
             return $value["CategoryId"];
@@ -93,13 +93,14 @@ class Categories extends CI_Model {
         else{
             $inCats = $catId;
         }
+        $whereString = is_null($productName) ? " " : " AND gp.ProductName Like('%$productName%') ";
         $query = "SELECT 
                         gp.*, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     LEFT JOIN grocery_unit gu ON
                     gu.UnitId = gp.Unit
-                    WHERE gp.Status = 1 AND
+                    WHERE gp.Status = 1 $whereString AND 
                     gp.Category IN(
                         $inCats
                     )

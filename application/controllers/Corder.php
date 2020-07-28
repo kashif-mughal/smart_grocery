@@ -15,8 +15,21 @@ class Corder extends CI_Controller {
 
     //Default loading for order system.
     public function index() {
-        $content = $this->lorder->order_add_form();
-        $this->template->full_html_view($content);
+        //print_r("expression");die;
+        $CI = & get_instance();
+        if (!$this->auth->is_logged() || !$this->auth->is_admin()) {
+            $this->output->set_header("Location: " . base_url("Dashboard/user_authentication"), TRUE, 302);
+        }
+        //$content = $this->lorder->view_orders();
+        //print_r($_SERVER['QUERY_STRING']);
+        $paginationConfig = $this->Orders->get_pagination_config('Corder/index');
+        $this->pagination->initialize($paginationConfig);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $links = $this->pagination->create_links();
+        $content = $this->lorder->view_orders($links, $paginationConfig["per_page"], $page, "order/orders","Manage Orders");
+
+
+        $this->template->full_admin_html_view($content);
     }
 
     //Checkout formm
@@ -38,24 +51,23 @@ class Corder extends CI_Controller {
         }
         $result = $this->lorder->place_order();
         
-        if ($result == TRUE) {
+        if (is_numeric($result)) {
             $this->session->set_userdata(array('message' => 'Successfully Added'));
-            $content = $this->lorder->proceed_to_checkout();
+            $content = $this->lorder->proceed_to_checkout($result);
             $this->template->full_html_view($content);
         } else {
             $this->session->set_userdata(array('error_message' => $result));
             redirect(base_url('Corder/checkout'));
         }
     }
-    //Manage order form
-    public function manage_order() {
+    //User order form
+    public function my_order() {
         $CI = & get_instance();
         if (!$this->auth->is_logged()) {
             $this->output->set_header("Location: " . base_url() . 'login', TRUE, 302);
         }
         $content = $this->lorder->order_list();
         $this->template->full_html_view($content);
-        
     }
     //order Update Form
     public function order_detail_form($orderId = null) {

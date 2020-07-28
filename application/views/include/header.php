@@ -32,7 +32,7 @@ if(is_array($users) && !empty($users[0])){
     <div id="mySidenav" class="sidenav">
         <div class="sidenav-content">
             <a href="javascript:void(0)" class="closebtn" id="btn-close-sidebar">&times;</a>
-            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].' '.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
+            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].'&nbsp;'.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
 
             <div class="sidebar-menu">
                 <div class="accordion" id="accordionExample">
@@ -137,24 +137,30 @@ if(is_array($users) && !empty($users[0])){
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
                     <?php if(!is_null($users)){?>
-                     <li class="nav-item">
+                     <!-- <li class="nav-item">
                         <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Wishlist</a>
+                        <a class="nav-link" href="<?=base_url().'Corder/my_order'?>">Track your order</a>
+                     </li>
+                     <li>
+                        <p class="seperator">|</p>
+                     </li> -->
+                     <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);">Wellcome&nbsp;<?=$users['first_name'].'&nbsp;'.$users['last_name']?></a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url().'Corder/manage_order'?>">Track your order</a>
+                        <a class="nav-link" href="<?=base_url().'Dashboard/logout'?>">Logout</a>
                      </li>
                    <?php }else{?>
                      <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url().'Dashboard/login'?>">Register Or Login</a>
+                        <a class="nav-link" href="<?=base_url().'Dashboard/user_authentication'?>">Register Or Login</a>
                      </li>
                    <?php } ?>
                   </ul>
@@ -189,7 +195,7 @@ if(is_array($users) && !empty($users[0])){
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
-                           <form action="#">
+                           <form action="<?=base_url('cproduct/products')?>" method="get">
                               <div class="input-group mb-3">
                                  <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button" type="button"
@@ -198,16 +204,19 @@ if(is_array($users) && !empty($users[0])){
                                        <img src="<?php echo base_url() ?>assets/img/chevron.png" alt="" class="img-fluid">
                                     </button>
                                     <div class="dropdown-menu">
-                                    <?php foreach($CatList as $key => $value) {?>
-                                       <a class="dropdown-item" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
-                                    <?php } ?>
+                                      <?php foreach($CatList as $key => $value) {?>
+                                         <a class="dropdown-item" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
+                                      <?php } ?>
+                                   </div>
                                  </div>
-                                 </div>
-                                 <input type="text" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
+                                 <input type="text" name="q" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary btn-black border-none" type="button">Search</button>
+                                    <button class="btn btn-outline-secondary btn-black border-none" type="submit">Search</button>
                                  </div>
                               </div>
+                              </div>
+                              <div class="input-group mb-3" style="position: absolute; color: white;">
+                                <span>Searching in &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
                               </div>
                            </form>
                         </div>
@@ -547,6 +556,10 @@ function loadShoppingCart(){
       document.cookie = `baskit=[];path=/;expires=${oldDt}`;
       showEmptyResponse($('#shoppingCartBody'));
       loadCartData();
+   }
+   function changeSelectedCat(currentElem){
+      $('#categoryId').val($(currentElem).data('value'));
+      $('#searching-cat-name').html($(currentElem).text());
    }
 </script>
 

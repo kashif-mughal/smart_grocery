@@ -38,7 +38,7 @@ class Auths extends CI_Model {
     public function get_user_by_id($user_id) {
     	$this->db->where('user_id', $user_id);
         $this->db->where('status', 1);
-        $query = $this->db->get('user_login');
+        $query = $this->db->get('users');
 
         return $query;
     }
@@ -65,7 +65,7 @@ class Auths extends CI_Model {
 
     public function get_user_by_email($email) {
         $this->db->where('username', $email);
-        $query = $this->db->get('user_login');
+        $query = $this->db->get('users');
 
         return $query;
     }

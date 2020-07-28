@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller {
 
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
-            $value->products = $CI->Categories->getCatPrducts($value->catId, 0, 8);
+            $value->products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
         }
         $final_product_list = array();
         foreach($product_list as $prod => $value) {
@@ -110,7 +110,7 @@ class Dashboard extends CI_Controller {
 
     public function logout() {
         if ($this->auth->logout())
-            $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+            $this->output->set_header("Location: " . base_url(), TRUE, 302);
     }
 
     #=============Edit Profile======#

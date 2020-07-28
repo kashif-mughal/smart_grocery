@@ -9,7 +9,7 @@ class Orders extends CI_Model {
         parent::__construct('grocery_order');
     }
     private $tableName = 'grocery_order';
-    
+
     //order Search Item
     public function order_search_item($OrderId) {
         $this->db->select('*');
@@ -58,8 +58,32 @@ class Orders extends CI_Model {
         return false;
     }
 
+    public function retrieve_orders($perpage, $page, $orderId = null, $userEmail = null){
+        if(isset($_GET['ue']) && !empty($_GET['ue']))
+            $userEmail = $_GET['ue'];
+        if(isset($_GET['on']) && is_numeric($_GET['on']))
+            $orderId = $_GET['on'];
+
+        $wherePart = '';
+        if(!is_null($orderId) && !is_null($userEmail))
+            $wherePart = "WHERE a.OrderId = $orderId AND u.email = '$userEmail'";
+        else if(!is_null($orderId))
+            $wherePart = "WHERE a.OrderId = $orderId";
+        else if(!is_null($userEmail))
+            $wherePart = "WHERE u.email = '$userEmail'";
+        $queryText = "SELECT a.*, u.first_name, u.last_name, u.email from $this->tableName a join users u on u.user_id = a.CustomerId $wherePart ORDER BY a.ModifiedOn DESC LIMIT $page,$perpage";
+
+        //$query = $this->db->get();
+        //print_r($queryText);die;
+        $query = $this->db->query($queryText);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
     public function get_order_customer($orderId){
-        if(is_null($orderId))
+        if(is_null($orderId) || !is_numeric($orderId))
             return false;
         $this->db->select('CustomerId');
         $this->db->from($this->tableName);
@@ -75,9 +99,11 @@ class Orders extends CI_Model {
     public function retrieve_order_editdata($orderId){
         if(is_null($orderId))
             return false;
-        $this->db->select('b.*');
+        $this->db->select('b.*, c.ProductName, c.ProductImg, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
+        $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
+        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
         $this->db->where('a.Status', 1);
         $this->db->where('b.Status', 1);
         $this->db->where('a.OrderId', $orderId);

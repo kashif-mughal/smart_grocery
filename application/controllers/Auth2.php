@@ -95,9 +95,10 @@ class Auth2 extends CI_Controller {
                 // Update user_login [username, password]
                 //--------------------------------------- 
                 $this->auths->update_user_login($user_id, $email, $password);
-
                 // Update users [firstname, email, city, country, address, address_details]
                 $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
+                // Instant login user
+                $this->auths->user_login($email, $password);
             }
             else if($user_by_email->num_rows() > 0) {
                 $userDetails = $user_by_email->result_array();

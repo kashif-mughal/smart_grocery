@@ -16,7 +16,7 @@ class Lorder {
         return $CI->parser->parse('order/checkout', $data, true);
     }
 
-    public function proceed_to_checkout() {
+    public function proceed_to_checkout($orderId) {
         $CI = & get_instance();
         $orderData = json_decode($_POST['order']);
         $OV = 0;
@@ -28,6 +28,8 @@ class Lorder {
         $data = array(
             'title' => 'Proceed to checkout',
             'orderDetail' => $orderData,
+            'userData' => $CI->session->userdata(),
+            'orderId' => $orderId,
             'OV' => $OV
         );
         return $CI->parser->parse('order/proceed_to_checkout', $data, true);
@@ -51,7 +53,7 @@ class Lorder {
         $orderId = $CI->Orders->place_order($data);
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
-                return TRUE;
+                return $orderId;
             }else{
                 return 'Something went wrong!!';
             }
@@ -92,6 +94,24 @@ class Lorder {
             'orderData' => $orderData
         );
         return $CI->parser->parse('order/order_list', $data, true);
+    }
+
+    public function view_orders($links, $perpage, $page, $pageText, $pageTitle){
+        $CI = & get_instance();
+        $CI->load->model('Orders');
+        $orderData = $CI->Orders->retrieve_orders($perpage, $page);
+        if (!empty($orderData)) {
+            foreach ($orderData as $k => $v) {
+                $i++;
+                $orderData[$k]['sl'] = $i + $CI->uri->segment(3);
+            }
+        }
+        $data = array(
+            'title' => $pageTitle,
+            'orderData' => $orderData,
+            'links' => $links
+        );
+        return $CI->parser->parse($pageText, $data, true);
     }
 
     //order Edit Data

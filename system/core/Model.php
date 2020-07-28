@@ -122,7 +122,7 @@ class CI_Model extends Lic {
     	$this->db->select('count(*)');
 		$this->db->from($this->tableName);
     	$this->db->where('Status', 1);
-		echo $this->db->count_all_results();
+		return $this->db->count_all_results();
     }
 
     public function _list() {
@@ -145,5 +145,30 @@ class CI_Model extends Lic {
             return $query->result_array();
         }
         return false;
+    }
+
+    public function get_pagination_config($url, $per_page = 10, $count = null){
+        $config["base_url"] = base_url($url);
+        $config["total_rows"] = is_null($count) ? $this->count() : $count;
+        $config["per_page"] = $per_page;
+        //$config["enable_query_strings"] = true;
+        $config["uri_segment"] = 3;
+        $config["num_links"] = 5;
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tag_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        return $config;
     }
 }

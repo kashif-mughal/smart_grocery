@@ -47,7 +47,7 @@
             <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
 
                 <div class="container bg-transparent pr-0">
-                    <div class="row">
+                    <div class="row" id="products-area">
                         <?php foreach($ProdList as $value) { 
                             $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                             ?>
@@ -99,7 +99,9 @@
                                 </div>
                             </div>
                         <?php } ?>
-
+                    </div>
+                    <div class="product-info text-center">
+                        <button class="product-card-btn mx-auto" style="background-color: #17A18D;color: white;">Load More</button>
                     </div>
                 </div>
 

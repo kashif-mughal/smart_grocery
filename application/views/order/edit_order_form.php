@@ -157,7 +157,7 @@
                            <div class="row">
                               <div class="col-xl-12 col-lg-12 col-md-12 px-0">
                                  <div class="featured-products order-history-header">
-                                    <h5>My Orders History</h5>
+                                    <h5>My Orders Details</h5>
                                     <div class="accordion" id="orderHistoryaccordion">
                                        <div class="card order-history-card">
                                           <div class="card-header order-header d-flex justify-content-between">
@@ -172,68 +172,30 @@
                                                 <span class="order-header-text">9:00 am - 11:30 am</span>
                                              </div>
                                           </div>
-                                          <div id="orderHistoryCollapse1" class="collapse" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
+                                          <div id="orderHistoryCollapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
                                              <div class="card-body">
-                                                <div class="featured-products order-content align-item-center">
-                                                   <div class="order-history-checkbox align-self-center">
-                                                      <input type="checkbox">
-                                                   </div>
-                                                   <img src="img/products/cauliflower.png" alt="" class="order-item">
-                                                   <div class="order-product-name order-item">
-                                                      <p class="order-name">Onion</p>
-                                                      <p class="order-weight">1kg</p>
-                                                   </div>
-                                                   <div class="order-product-price text-center align-self-center order-item">
-                                                      <p class="order-price">Rs.45</p>
-                                                      <p class="order-discount"><del>Rs. 56</del></p>
-                                                   </div>
-                                                   <div class="quantity-area order-item align-self-center">
-                                                      <div class="d-flex justify-content-center p-4">
-                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                         <input type="text" value="1" class="d-inline-flex quantity-input">
-                                                         <span class="d-block quantity-button text-center">
-                                                            <a href="javascript:void(0)" class="d-block">+</a>
-                                                            <div class="separator"></div>
-                                                            <a href="javascript:void(0)" class="d-block">-</a>
-                                                         </span>
+                                                <?php if($OrderData['OrderDetail']){
+                                                   $products = $OrderData['OrderDetail'];
+                                                   for ($i=0; $i < count($products); $i++) {?>
+                                                   <div class="featured-products order-content align-item-center">
+                                                      <div class="order-history-checkbox align-self-center">
+                                                      </div>
+                                                      <img src="<?= base_url($products[$i]['ProductImg'])?>" alt="" class="card-img-bottom text-center">
+                                                      <div class="order-product-name order-item">
+                                                         <p class="order-name"><?=$products[$i]['ProductName']?></p>
+                                                      </div>
+                                                      <div class="order-product-price text-center align-self-center order-item">
+                                                         <p class="order-price">Rs.<?=$products[$i]['SoldPrice']?></p>
+                                                      </div>
+                                                      <div class="quantity-area order-item align-self-center">
+                                                         <div class="d-flex justify-content-center p-4">
+                                                            <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                            <span class="d-inline-flex quantity-text mr-3"><?=$products[$i]['ItemQuantity']?>&nbsp;<?=$products[$i]['UnitName']?></span>
+                                                            
+                                                         </div>
                                                       </div>
                                                    </div>
-                                                   <div class="order-button order-item text-center">
-                                                      <a href="#" class="d-block button-primary">Add to Cart</a>
-                                                      <a href="#" class="d-block button-secondary">Delete</a>
-                                                   </div>
-                                                </div>
-                                                <div class="featured-products order-content align-item-center">
-                                                   <div class="order-history-checkbox align-self-center">
-                                                      <input type="checkbox">
-                                                   </div>
-                                                   <img src="img/products/cauliflower.png" alt="" class="order-item">
-                                                   <div class="order-product-name order-item my-auto">
-                                                      <div class="align-self-center my-auto">
-                                                         <p class="order-name">Onion</p>
-                                                         <p class="order-weight">1kg</p>
-                                                      </div>
-                                                   </div>
-                                                   <div class="order-product-price text-center order-item">
-                                                      <p class="order-price">Rs.45</p>
-                                                      <p class="order-discount"><del>Rs. 56</del></p>
-                                                   </div>
-                                                   <div class="quantity-area order-item align-self-center">
-                                                      <div class="d-flex justify-content-center">
-                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                         <input type="text" value="1" class="d-inline-flex quantity-input">
-                                                         <span class="d-block quantity-button text-center">
-                                                            <a href="javascript:void(0)" class="d-block">+</a>
-                                                            <div class="separator"></div>
-                                                            <a href="javascript:void(0)" class="d-block">-</a>
-                                                         </span>
-                                                      </div>
-                                                   </div>
-                                                   <div class="order-button order-item text-center">
-                                                      <a href="javascript:void(0)" class="d-block button-primary">Add to Cart</a>
-                                                      <a href="javascript:void(0)" class="d-block button-secondary">Delete</a>
-                                                   </div>
-                                                </div>
+                                                <?php }} ?>
                                              </div>
                                           </div>
                                        </div>
