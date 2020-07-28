@@ -1549,6 +1549,12 @@ button.category-button:active {
    /* padding: 16px; */
 }
 
+/* Order : My Order */
+.sidenav a {
+    padding: 8px 8px 8px 16px;
+    font-size: 22px;
+}
+
 /* Sidebar */
 
 

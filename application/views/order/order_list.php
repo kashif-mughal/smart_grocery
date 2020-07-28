@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
-                <table id="orderDataTable" class="table table-bordered table-striped table-hover">
+                <table id="orderDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
                     <thead>
                         <tr>
                             <th>SL#</th>

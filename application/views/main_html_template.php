@@ -56,7 +56,8 @@
         <!-- Pe-icon -->
         <link href="<?php echo base_url() ?>assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css"/>
         <!-- Data Tables -->
-        <link href="<?php echo base_url() ?>assets/plugins/datatables/dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
         <!-- Theme style -->
         <link href="<?php echo base_url() ?>assets/css/select2.min.css" rel="stylesheet" type="text/css"/>
         <!-- jQuery -->
@@ -95,7 +96,8 @@
         <!-- SlimScroll -->
         <script src="<?php echo base_url() ?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- dataTables js -->
-        <script src="<?php echo base_url() ?>assets/plugins/datatables/dataTables.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>assets/plugins/dataTables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>assets/plugins/datatables/dataTables4.min.js" type="text/javascript"></script>
 
         <!-- Modal js -->
         <script src="<?php echo base_url() ?>assets/plugins/modals/classie.js" type="text/javascript"></script>
