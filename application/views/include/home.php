@@ -86,18 +86,18 @@
                   </div>
                </div>
                <div class="col-lg-12 col-md-6">
-                  <div class="grocery-features">
+                  <div class="grocery-features value-cart-feature">
                      <div class="card">
-                        <div class="card-body grocery-assistant-card">
+                        <div class="card-body value-cart">
                            <div class="container-fluid px-0">
-                              <h6 class="card-title mb-0">Use our shop assistant to help you build your cart</h6>
+                              <h4 class="card-heading">Value Cart</h4>
                               <div class="row">
-                                 <div class="col-md-7 pr-0">
-                                    <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
-                                    <button class="card-button">Use Assistant</button>
+                                 <div class="col-md-7 pr-0">                                    
+                                    <h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
+                                    <button class="card-button">Build Value Cart</button>
                                  </div>
                                  <div style="position: absolute;right: 0;max-width: 30%;">
-                                    <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
+                                    <img src="<?php echo base_url() ?>assets/img/value-cart.png ?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
                            </div>
