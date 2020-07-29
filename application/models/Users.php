@@ -78,7 +78,7 @@ class Users extends CI_Model {
     }
 
     //Update Profile
-    public function profile_update() {
+    public function profile_update($area = null) {
         $this->load->library('upload');
 
         if (($_FILES['logo']['name'])) {
@@ -96,7 +96,10 @@ class Users extends CI_Model {
             if (!$this->upload->do_upload('logo')) {
                 $sdata['error_message'] = $this->upload->display_errors();
                 $this->session->set_userdata($sdata);
-                redirect('Admin_dashboard/edit_profile');
+                if(is_null($area))
+                    redirect('Admin_dashboard/edit_profile');
+                else if($area == 'user')
+                    redirect('User/edit_profile');
             } else {
                 $view = $this->upload->data();
                 $logo = base_url($config['upload_path'] . $view['file_name']);

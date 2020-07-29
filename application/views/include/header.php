@@ -7,6 +7,9 @@ if(is_array($users) && !empty($users[0])){
 }else{
   $users = null;
 }
+
+$CI->load->library('lcategory');
+$menuCatList = $CI->lcategory->get_category_hierarchy();
 ?>
 <style type="text/css">
    .emptyCart{
@@ -38,7 +41,7 @@ if(is_array($users) && !empty($users[0])){
                 <div class="accordion border-b-primary" id="accordionExample">
                     <div class="card border-none">
                         <div class="card-header p-2 sidebar-menu-title p-0" id="headingOne">
-                            <a href="#" class="btn-block d-flex align-items-center p-0" type="button" data-toggle="collapse" 
+                            <a href="javascript:void(0)" class="btn-block d-flex align-items-center p-0" type="button" data-toggle="collapse" 
                                 data-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne">
                                 <img src="<?php echo base_url() ?>assets/img/sidenav-toggle.png" class="d-inline pr-4" alt="">
@@ -50,7 +53,7 @@ if(is_array($users) && !empty($users[0])){
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body p-0">
                                <ul class="sidebar-menu-items navbar-nav mb-3 ml-4">
-                                <?php foreach($CatList as $key => $value) {?>
+                                <?php foreach($menuCatList as $key => $value) {?>
                                    <li><a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value->catId) ?>"><?=$key?></a></li>
                                 <?php } ?>
                                </ul>
@@ -64,8 +67,7 @@ if(is_array($users) && !empty($users[0])){
                        <div class="card border-none">
                            <div class="card-header p-2" id="headingTwo"> 
                                <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button" data-toggle="collapse"
-                                       data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <a href="<?=base_url("User/edit_profile")?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button">
                                        <img src="<?php echo base_url() ?>assets/img/profile.png" class="d-inline pr-4" alt="">
                                        <h4 class="d-inline">Profile</h4>
                                    </a>
@@ -75,8 +77,8 @@ if(is_array($users) && !empty($users[0])){
                        <div class="card border-none">
                            <div class="card-header p-2" id="headingTwo">
                                <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
-                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <a href="<?=base_url("Corder/my_order")?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                       >
                                        <img src="<?php echo base_url() ?>assets/img/my_order_history.png" class="d-inline pr-4" alt="">
                                        <h4 class="d-inline">My Order History</h4>
                                    </a>
@@ -86,8 +88,8 @@ if(is_array($users) && !empty($users[0])){
                        <div class="card border-none">
                            <div class="card-header p-2" id="headingTwo">
                                <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                   <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
-                                       data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <a href="<?=base_url("Corder/track_order_form")?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                       >
                                        <img src="<?php echo base_url() ?>assets/img/track_your_order.png" class="d-inline pr-4" alt="">
                                        <h4 class="d-inline">Track Your Order</h4>
                                    </a>
@@ -98,8 +100,8 @@ if(is_array($users) && !empty($users[0])){
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="#" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <a href="tel:+92 300 123 1234" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                    >
                                     <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
                                     <h4 class="d-inline">Call Us</h4>
                                 </a>
@@ -138,20 +140,14 @@ if(is_array($users) && !empty($users[0])){
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
                     <?php if(!is_null($users)){?>
-                     <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url();?>Dashboard/user_authentication">My Account</a>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?=base_url("User/edit_profile");?>">My Account</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url().'Corder/my_order'?>">Track your order</a>
-                     </li>
-                     <li>
-                        <p class="seperator">|</p>
-                     </li> -->
-                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0);">Wellcome&nbsp;<?=$users['first_name'].'&nbsp;'.$users['last_name']?></a>
+                        <a class="nav-link" href="<?=base_url("Corder/track_order_form")?>">Track your order</a>
                      </li>
                      <li>
                         <p class="seperator">|</p>
@@ -180,7 +176,7 @@ if(is_array($users) && !empty($users[0])){
                         <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                               aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" alt="Toggle navigation">
+                              <i class="fa fa-bars" style="font-size: 40px;"></i>
                         </button>
                      </div>
                      <div class="logo ml-2">
@@ -205,7 +201,7 @@ if(is_array($users) && !empty($users[0])){
                                        <img src="<?php echo base_url() ?>assets/img/chevron.png" alt="" class="img-fluid">
                                     </button>
                                     <div class="dropdown-menu">
-                                      <?php foreach($CatList as $key => $value) {?>
+                                      <?php foreach($menuCatList as $key => $value) {?>
                                          <a class="dropdown-item" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
                                       <?php } ?>
                                    </div>
@@ -230,7 +226,9 @@ if(is_array($users) && !empty($users[0])){
                         <!-- Phone -->
                         <div class="phone mx-4 d-flex flex-row align-item-center justify-content-start">
                            <div class="phone_icon mr-2">
+                            <a href="tel:+92 300 123 1234">
                               <img src="<?php echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
+                            </a>
                            </div>
                            <div class="phone_content text-white">
                               <div class="phone_text">

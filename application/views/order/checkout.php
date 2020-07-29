@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                                 <a href="javascript:void(0);" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Proceed To Checkout</a>
-                                <a href="#"  style="display: none;" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
+                                <a href="#" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
                                 
                             </div>
                         </div>

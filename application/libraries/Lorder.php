@@ -124,8 +124,15 @@ class Lorder {
             'title' => 'Order Edit',
             'OrderData' => $order_detail
         );
-        $chapterList = $CI->parser->parse('order/edit_order_form', $data, true);
-        return $chapterList;
+        return $CI->parser->parse('order/edit_order_form', $data, true);
+    }
+    //order Traking Form
+    public function track_order_form() {
+        $CI = & get_instance();
+        $data = array(
+            'title' => 'Track your order'
+        );
+        return $CI->parser->parse('order/order_traking_form', $data, true);
     }
 
 }

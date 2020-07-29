@@ -76,6 +76,7 @@ class Ccategory extends CI_Controller {
         } else {
             $this->session->set_userdata(array('error_message' => 'Already Inserted'));
             redirect(base_url('Ccategory'));
+
         }
     }
 

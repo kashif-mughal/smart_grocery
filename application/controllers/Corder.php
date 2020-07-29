@@ -17,9 +17,7 @@ class Corder extends CI_Controller {
     public function index() {
         //print_r("expression");die;
         $CI = & get_instance();
-        if (!$this->auth->is_logged() || !$this->auth->is_admin()) {
-            $this->output->set_header("Location: " . base_url("Dashboard/user_authentication"), TRUE, 302);
-        }
+        $this->auth->check_auth();
         //$content = $this->lorder->view_orders();
         //print_r($_SERVER['QUERY_STRING']);
         $paginationConfig = $this->Orders->get_pagination_config('Corder/index');
@@ -41,10 +39,8 @@ class Corder extends CI_Controller {
     //Proceed to checkout
     public function proceed_to_checkout(){
         $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $retString = "?ret_url=".base_url('Corder/checkout');
-            $this->output->set_header("Location: " . base_url('Dashboard/user_authentication'.$retString), TRUE, 302);
-        }
+        $retString = "?ret_url=".base_url('Corder/checkout');
+        $this->auth->check_auth(base_url('Dashboard/user_authentication'.$retString));
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
             redirect(base_url('Corder/checkout'));
@@ -63,9 +59,7 @@ class Corder extends CI_Controller {
     //User order form
     public function my_order() {
         $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'login', TRUE, 302);
-        }
+        $this->auth->check_auth();
         $content = $this->lorder->order_list();
         $this->template->full_html_view($content);
     }
@@ -74,14 +68,13 @@ class Corder extends CI_Controller {
         if(empty($orderId))
             $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
         $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'login', TRUE, 302);
-        }
+        $this->auth->check_auth();
         $customerId = $this->Orders->get_order_customer($orderId);
-        if(!$this->auth->authenticated_user_or_admin()){
-            $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
+        if(!$this->auth->authenticated_user_or_admin($customerId)){
+            $this->session->set_userdata(array('error_message' => 'Not Found'));
+            $this->output->set_header("Location: " . base_url("Corder/my_order"), TRUE, 302);
         }
-        if(!is_array($customerId)){
+        if(!is_numeric($customerId)){
             $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
         }
         $content = $this->lorder->order_edit_data($orderId);
@@ -90,12 +83,22 @@ class Corder extends CI_Controller {
     // order delete
     public function order_delete() {
         $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'login', TRUE, 302);
-        }
+        $this->auth->check_auth();
         $orderId = $_POST['OrderId'];
         $this->Orders->soft_delete_by_key('OrderId', $orderId);
         return true;
     }
 
+    public function track_order_form(){
+        $CI = & get_instance();
+        $this->auth->check_auth();
+        $content = $this->lorder->track_order_form();
+        $this->template->full_html_view($content);
+    }
+    public function order_traking(){
+        $orderId = $this->input->post('OrderId');
+        if(empty($orderId))
+            $orderId = null;
+        redirect(base_url('Corder/order_detail_form/'.$orderId));
+    }
 }

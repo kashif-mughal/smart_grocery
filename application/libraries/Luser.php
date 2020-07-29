@@ -21,6 +21,21 @@ class Luser {
         return $profile_data;
     }
 
+    //Login....
+    public function edit_user_profile_form() {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        $edit_data = $CI->Users->profile_edit_data();
+        $data = array(
+            'title' => display('update_profile'),
+            'first_name' => $edit_data[0]['first_name'],
+            'last_name' => $edit_data[0]['last_name'],
+            'user_name' => $edit_data[0]['username'],
+            'logo' => $edit_data[0]['logo']
+        );
+        return $CI->parser->parse('user/user_edit_profile', $data, true);
+    }
+
 }
 
 ?>

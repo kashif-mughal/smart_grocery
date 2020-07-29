@@ -91,7 +91,8 @@ class Orders extends CI_Model {
         $this->db->where('Status', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $result = $query->result_array();
+            return $result[0]['CustomerId'];
         }
         return false;
     }

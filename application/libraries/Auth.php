@@ -99,8 +99,9 @@ class Auth {
     }
     function check_auth($url = '') {
         if ($url == '') {
-            $url = base_url() . 'Dashboard/login';
+            $url = base_url("Dashboard/user_authentication");
         }
+        //print_r($url);die;
         $CI = & get_instance();
         if (!$this->is_logged()) {
             $this->logout();
