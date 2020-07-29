@@ -753,6 +753,7 @@ button.category-button:active {
 .main-content .featured-products-content .card img {
    max-width: 190px;
    max-height: 110px;
+   height: 110px;
    text-align: center;
    padding: 0px 10px !important;
    margin-left: auto;
@@ -801,7 +802,7 @@ button.category-button:active {
 /* Inner Page Product Card */
 
 .main-content .featured-products-content .product-card-inner {
-   width: 220px;
+   width: 168px;
    max-width: 253px;
    height: 365px;
    border-radius: 10px 10px 0px 0px;
@@ -1988,15 +1989,18 @@ button.category-button:active {
 
 
    /* widget */
+   .grocery-features .card .grocery-assistant-card {
+      height: 201px;
+   }
    .grocery-features .card .grocery-assistant-card .card-heading {
-      font-size: 20px;
-      line-height: 20px;
+      font-size: 25px;
+      line-height: 24px;
    }
    .grocery-features .card .grocery-assistant-card .card-button {
-      width: 105px;
-      height: 28px;
-      font-size: 12px;
-      top: -36px;
+      width: 130px;
+      height: 30px;
+      font-size: 13px;
+      top: -32px;
    }
    .best_features .grid-container {
       grid-template-columns: 1fr 18fr;
@@ -2005,6 +2009,7 @@ button.category-button:active {
       grid-template-columns: 2fr 7fr;
    } */
    /* widget */
+
 }
 
 @media (min-width: 1200px) {
