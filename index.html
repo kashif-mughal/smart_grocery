@@ -233,6 +233,285 @@
       </div>
    </div>
 
+
+
+
+ <!-- Virtual Assistant -->
+   <div id="virtualAssistant" class="modal fades" role="dialog">
+      <div class="modal-dialog modal-lg">
+         <!-- Modal content-->
+         <div class="modal-content p-0">
+            <div class="modal-body p-0">
+               <a href="javascript:void(0)" class="close" data-dismiss="modal" data-target="virtualAssistant">
+                  <span>&times;</span>
+               </a>
+               <!-- <a href="javascript:void(0)" type="button" class="close mx-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </a> -->
+               <div id="va-panel">
+                  <div class="va-panel-header d-flex justify-content-between p-3">
+                     <img src="img/GroceryAssistant/logo_colored.png">
+                     <div class="d-flex align-items-center ml-2">
+                        <img src="img/GroceryAssistant/grocery_assistant_logo.png" class="d-block">
+                        <span class="va-panel-heading d-block">Grocery Assistant</span>
+                     </div>
+                  </div>
+                  <div class="va-panel-header-sub py-3 text-center">
+                     <span class="heading-primary d-block">Categoy: Edibles</span>
+                     <span class="heading-secondary d-block">Sub Category: Atta</span>
+                  </div> 
+                  <div class="va-panel-content">
+                     <div class="container-fluid">
+                        <div class="row">
+                           <div class="col-md-4 px-0">
+                              <div class="filter-sidebar">
+                                 <div class="filter-header d-flex px-4 py-3 border-b-primary">
+                                    <div class="filter-icon mr-2">
+                                       <img src="img/GroceryAssistant/filter.png">   
+                                    </div>                                    
+                                    <span class="filter-heading">Use Filters to Find your Product</span>
+                                 </div>
+
+                                 <div class="filter-brand px-4 py-3 border-b-primary">
+                                    <div class="heading-primary mb-3">Filter by Brand:</div>                                    
+                                    <div class="filter-brand-button">
+                                       <button class="btn btn-link mb-2">Punjab Atta</button>
+                                       <button class="btn btn-link mb-2">Floor Mill</button>
+                                       <button class="btn btn-link mb-2">Chakki Atta</button>
+                                       <button class="btn btn-link mb-2">Sindh Atta</button>
+                                       <button class="btn btn-link mb-2">Yousuf Floor Mill</button>
+                                    </div>
+                                 </div>
+
+                                 <div class="filter-weight px-4 py-3 border-b-primary">
+                                    <div class="heading-primary mb-3">Filter by Weight:</div>                                    
+                                    <div class="filter-weight-button">
+                                       <button class="btn btn-link mb-2">5KG</button>
+                                       <button class="btn btn-link mb-2">10KG</button>
+                                       <button class="btn btn-link mb-2">20KG</button>
+                                    </div>
+                                 </div>
+
+                                 <div class="filter-type px-4 py-3 border-b-primary">
+                                    <div class="heading-primary mb-3">Filter by Weight:</div>
+                                    <div class="filter-type-checkbox">
+                                       <div class="form-check">
+                                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                         <label class="form-check-label" for="exampleRadios1">
+                                           Chakki
+                                         </label>
+                                       </div>
+                                       <div class="form-check">
+                                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                         <label class="form-check-label" for="exampleRadios2">
+                                           Fine
+                                         </label>
+                                       </div>
+                                    </div>                                    
+                                 </div>
+
+                              </div>
+                           </div>
+                           <div class="col-md-8 pl-0 pt-3">
+                              <div class="product-content">
+                                 <div class="container-fluid">
+                                    <div class="row">
+                                       
+                                       <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+
+                                            <div class="mb-3">
+                                             <div class="card product-card">
+                                                <img class="card-img-top" src="img/products/edibles/Oil & Ghee.png" alt="Card image cap">
+                                                <div class="card-body p-0 text-center">
+                                                   <p class="product-card-title">Oil & Ghee</p>
+                                                   <p class="product-card-weight mb-0">20KG</p>
+                                                   <p class="card-text product-card-inner-price">Rs. 1000</p>
+                                                   <!-- <span class="product-discount"><del>Rs. 56</del></span> -->
+                                                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                      <input type="text" value="1" class="d-inline-flex quantity-input">
+                                                      <span class="d-block quantity-button">
+                                                          <a href="#" class="d-block">+</a>
+                                                          <div class="separator"></div>
+                                                          <a href="#" class="d-block">-</a>
+                                                      </span>
+                                                   </div>
+                                                   <a href="#" class="product-card-btn mt-2">Add to Cart</a>
+                                                </div>
+                                             </div>
+                                                
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="product-content-button my-4 text-center">
+                                 <button class="btn btn-link nav-btn-primary">1</button>
+                                 <button class="btn btn-link nav-btn-dismiss">2</button>
+                                 <button class="btn btn-link nav-btn-dismiss">3</button>
+                                 <button class="btn btn-link nav-btn-dismiss">4</button>
+                                 <button class="btn btn-link nav-btn-dismiss">5</button>
+                                 <button class="btn btn-link nav-btn-dismiss">6</button>
+                                 <button class="btn btn-link nav-btn-dismiss">7</button>
+                                 <button class="btn btn-link nav-btn-dismiss">8</button>
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>  
+
+                  <div class="va-panel-footer">
+                     <div class="d-flex justify-content-around align-items-center">
+                        <button class="btn btn-link va-panel-footer-btn-red text-center">Leave Grocery Assistant</button>
+                        <button class="btn btn-link va-panel-footer-btn-black">Previous Category</button>
+                        <button class="btn btn-link va-panel-footer-btn-black">Next Category</button>
+                        <button class="btn btn-link va-panel-footer-btn-green">Checkout</button>
+                     </div>
+                  </div>
+
+               </div>
+               
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Virtual Assistant -->
+
+
    <!-- Modal -->
 
    <!-- Content -->
@@ -509,7 +788,8 @@
                                  <div class="row">
                                     <div class="col-md-7 pr-0">
                                        <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
-                                       <button class="card-button">Use Assistant</button>
+                                       <a href="javascript:void(0)" data-toggle="modal" 
+                                          data-target="#virtualAssistant" class="card-button">Use Assistant</a>
                                     </div>
                                     <div class="col-md-5 pl-0">
                                        <img src="img/grocery-assitant-icon.png" alt="Grocery Assistant Icon"
