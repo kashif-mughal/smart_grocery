@@ -892,6 +892,9 @@ button.category-button:active {
    text-decoration: none;
    color: #ffffff;
 }
+.main-content .featured-products-content .card .remove-cart{
+   height: 50px;
+}
 .product-card-btn:hover {
    text-decoration: none;
    color: #ffffff;
@@ -1859,8 +1862,22 @@ button.category-button:active {
    color: #cccccc;
 }
 
+/* ========== LoadMore Button ============ */
+.loadmore{
+   background-color: #17A18D;
+   color: white;
+   border-radius: 5px;
+}
+.loadmore .btntext{
+   vertical-align: super;
+   padding: 10px;
+   margin-top: 5px;
+}
+/* ===================================== */
+
 /* ========== Timeline Ends ============ */
 /* ===================================== */
+
 
 
 

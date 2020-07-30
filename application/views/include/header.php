@@ -320,13 +320,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          return parts.pop()
       }
    }
-   function formatCurrency(total) {
+   function formatCurrency(total, toFixed = 2) {
      var neg = false;
      if(total < 0) {
        neg = true;
        total = Math.abs(total);
     }
-    return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+    return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
    loadCartData();
@@ -560,6 +560,17 @@ function loadShoppingCart(){
       $('#categoryId').val($(currentElem).data('value'));
       $('#searching-cat-name').html($(currentElem).text());
    }
+   function getUrlVars(){
+      var vars = [], hash;
+      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+      for(var i = 0; i < hashes.length; i++)
+      {
+          hash = hashes[i].split('=');
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+      }
+      return vars;
+  }
 </script>
 
    <!-- Cart Scripts End -->

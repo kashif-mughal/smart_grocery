@@ -6,7 +6,7 @@
 	
 	
 	<!-- Phone Verification -->
-	<div id="phoneForm">
+	<div id="phoneForm" style="display:none;">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 				<div class="card content-box my-5">
@@ -32,7 +32,7 @@
 	<!-- Phone Verification Ends -->
 
 	<!-- OTP Verfication -->
-	<div id="otpForm">
+	<div id="otpForm" style="display:none;">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 				<div class="card content-box my-5">
@@ -57,7 +57,7 @@
 	<!-- OTP Verification Ends -->
 
 	<!-- Phone Verification Confirm -->
-	<div id="phoneVerified">
+	<div id="phoneVerified" style="display:none;">
 		<div class="row mx-auto">
 			<div class="verifiedIcon mx-auto d-flex justify-items-center flex-column pd-75">
 				<i class="fas fa-check-circle fa-5x d-block mx-auto mb-4" style="color: green;"></i>
@@ -68,7 +68,7 @@
 	<!-- Phone Verification Confirm Ends -->
 
 	<!-- Registration Form -->
-	<div id="registrationForm">
+	<div id="registrationForm" style="display:none;">
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="card content-box mb-5">

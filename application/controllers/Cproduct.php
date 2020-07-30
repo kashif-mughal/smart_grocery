@@ -11,9 +11,7 @@ class Cproduct extends CI_Controller {
         parent::__construct();
         $this->load->database();
         
-        $this->load->library('auth');
         $this->load->library('lproduct');
-        $this->load->library('session');
         $this->load->model('Products');
     }
 
@@ -24,14 +22,41 @@ class Cproduct extends CI_Controller {
     }
 
     public function products($categoryId = null) {
-        
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
-
-        $content = $this->lproduct->products_by_category($catId, $name);
+        $page = $this->input->get('page');
+        $perpage = $this->input->get('perpage');
+        if(empty($page) || !is_numeric($page) || $page < 0)
+            $page = 0;
+        if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
+            $perpage = 8;
+        $content = $this->lproduct->products_by_category($catId, $name, $page, $perpage);
 
         $this->template->full_html_view($content);
 
+    }
+    public function fetch(){
+        $catId = $this->input->get('categoryId');
+        $name = $this->input->get('q');
+        $page = $this->input->get('page');
+        $perpage = $this->input->get('perpage');
+        if(empty($page) || !is_numeric($page) || $page < 0)
+            $page = 0;
+        if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
+            $perpage = 8;
+        $products = $this->lproduct->internal_products_by_category($catId, $name, $page, $perpage);
+        for ($i=0; $i < count($products['products']); $i++) { 
+            $productObject = (object) [
+                           'id' => $products['products'][$i]['ProductId'],
+                           'pName' => $products['products'][$i]['ProductName'],
+                           'price' => $products['products'][$i]['SalePrice'],
+                           'img' => base_url().$products['products'][$i]['ProductImg']
+                       ];
+                       $products['products'][$i]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
+        }
+
+        echo json_encode($products);
+        return;
     }
 
     //Insert Product and uload

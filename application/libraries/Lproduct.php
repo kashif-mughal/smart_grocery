@@ -224,12 +224,11 @@ class Lproduct {
         return $productList;
     }
 
-    public function products_by_category($catId, $productName = null){
+    public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
         $CI = & get_instance();
         $CI->load->model('Products');
-        $CI->load->model('Categories');
         $CI->load->library('lcategory');
-        $product_list = $CI->Categories->getCatPrducts($catId, $productName, 0, 8);
+        $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage);
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             for ($i=0; $i < count($value->childCats); $i++) { 
@@ -251,12 +250,19 @@ class Lproduct {
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
-            'ProdList' => $product_list,
-            'SelectCategory' => $selectedCategory
+            'ProdList' => $product_list["products"],
+            'TotalProducts' => $product_list["total"],
+            'SelectCategory' => $selectedCategory,
+            'PerPage' => $perpage
         );
         return $CI->parser->parse('product/products', $data, true);
     }
-
+    public function internal_products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
+        $CI = & get_instance();
+        $CI->load->model('Categories');
+        $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage);
+        return $result;
+    }
 }
 
 ?>

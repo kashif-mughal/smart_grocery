@@ -11,7 +11,7 @@
                </div>
                <div class="slider featured-product-slider">
                   <?php foreach($ProdList as $value) { ?>
-                  <div class="featured-products-content">
+                  <div class="featured-products-content pb-1">
                      <div class="card mr-2 each-prod product-card-inner">
                         <div class="card-body p-0">
                            <div class="header">
@@ -96,8 +96,8 @@
                                     <h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
                                     <button class="card-button">Build Value Cart</button>
                                  </div>
-                                 <div style="position: absolute;right: 0;max-width: 30%;">
-                                    <img src="<?php echo base_url() ?>assets/img/value-cart.png ?>" alt="Grocery Assistant Icon" class="img-fluid" />
+                                 <div style="position: absolute;right: 10px;max-width: 25%;">
+                                    <img src="<?= base_url("assets/img/value-cart.png") ?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
                            </div>
@@ -132,7 +132,7 @@
                      </div>
                      <div class="col-md-9">
                         <div class="container-fluid">
-                           <div class="row featured-products-content">
+                           <div class="row featured-products-content pb-1">
                               <?php for ($i=0; $i < count($value->products); $i++) {?>
                               <div class="card mr-2 each-prod product-card-inner">
                                  <?php if(!empty($value->products[$i]['ProductName'])){?>
@@ -182,7 +182,7 @@
                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                     >Remove From Cart</a>
                                  <?php }else{ ?>
-                                 <div class="card-img-bottom text-center" style="margin-top: 50%;background: #80808052;padding: 20%;">
+                                 <div class="card-img-bottom text-center" style="margin-top: 80%;background: #80808052;padding: 20%;">
                                     No Product
                                  </div>
                                  <?php } ?>

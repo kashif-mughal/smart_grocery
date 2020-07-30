@@ -106,11 +106,30 @@ class Categories extends CI_Model {
                     )
                     ORDER BY gp.ModifiedOn DESC
                     LIMIT $startFrom, $limit";
-        $query = $this->db->query($query);
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
+        $countQuery = "SELECT 
+                        count(1) total
+                    FROM grocery_products gp
+                    LEFT JOIN grocery_unit gu ON
+                    gu.UnitId = gp.Unit
+                    WHERE gp.Status = 1 $whereString AND 
+                    gp.Category IN(
+                        $inCats
+                    )";
+        $returnData["total"] = 0;
+        $countResult = $this->db->query($countQuery);
+        if ($countResult->num_rows() > 0) {
+            $returnData["total"] = $countResult->result()[0]->total;
         }
-        return false;
+        else{
+            return false;
+        }
+        $query = $this->db->query($query);
+        if ($query->num_rows() > 0) {
+            $returnData["products"] = $query->result_array();
+            return $returnData;
+        }
+        else{
+            return false;
+        }
     }
 }
