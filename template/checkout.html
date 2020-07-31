@@ -198,64 +198,198 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="content-box pd-50">
-                            <div class="checkout-header">
-                                <h3>Thank you for your order</h3>
-                                <h6>Read your details below</h6>
-                            </div>
-                            <div class="checkout-content mrgt-30">
-                                
-                                <div class="check-in-feature">
-                                    <div class="grid-container">
-                                        <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                        <div class="pd-50">
+                            <div id="accordion">
+                              <div class="card">
+                                <div class="card-header" id="headingOne">
+                                  <h5 class="mb-0">
+                                    <button class="btn btn-link d-flex" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fas fa-check mr-4"></i>
+                                        <div class="text-left">
+                                            <span class="verification-steps-heading d-block">Verified Mobile Number</span>
+                                            <span class="completed-content">0300 123 45678</span>
+                                            <a href="javascript:void(0)" class="change-button">Change</a>
                                         </div>
-                                        <div class="feature-content d-flex flex-column justify-content-center">
-                                            <h4 class="feature-text mb-0">Total</h4>
-                                            <h4 class="feature-text-price mb-0">Rs. 5,120.00</h4>
-                                        </div>
-                                    </div>
+                                    </button>
+                                  </h5>
                                 </div>
 
-                                <div class="check-in-feature">
-                                    <div class="grid-container">
-                                        <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                  <div class="card-body">
+                                    Verification Completed
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                  <h5 class="mb-0">
+                                    <button class="btn btn-link d-flex collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <span class="mr-4">2</span>
+                                        <div class="text-left">
+                                            <span class="verification-steps-heading d-block">Enter your Delivery Address</span>
+                                            <span class="completed-content">0300 123 45678</span>
+                                            <a href="javascript:void(0)" class="change-button">Change</a>
                                         </div>
-                                        <div class="feature-content d-flex flex-column justify-content-center">
-                                            <h4 class="feature-text mb-0">Estimated Delivery Time</h4>
-                                            <h4 class="feature-text-price mb-0">9:00 am - 11:30 am</h4>
+                                    </button>
+                                  </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <span>HOME</span>
+                                            <span>
+                                                aamirxyz@gmail.com
+                                                Mr. Muhammad Amir
+                                                Plot A XYZ, Khayaban-e-Ittehad
+                                                Defence Ph IV
+                                            </span>
+                                        </div>
+                                        <div class="card">
+                                            <span>
+                                                
+                                            </span>
+                                            <span>
+                                                Add new Delivery Address
+                                            </span>
                                         </div>
                                     </div>
+                                    <a href="javascript:void(0)" class="btn btn-link bg-dark text-white px-4 py-2">Next</a>
                                 </div>
-
-                                <div class="check-in-feature">
-                                    <div class="grid-container">
-                                        <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                              </div>
+                              <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link d-flex collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <span class="mr-4">3</span>
+                                            <div class="text-left">
+                                                <span class="verification-steps-heading d-block">Enter Delivery Date and Time</span>
+                                                <span class="completed-content">0300 123 45678</span>
+                                                <a href="javascript:void(0)" class="change-button">Change</a>
+                                            </div>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Date - Day</th>
+                                                    <th scope="col">Same Day Delivey - Additional Rs 150 will be charged</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Thursday, 17 June</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                          <input class="form-check-input" type="radio" name="exampleRadios" id="today1" value="option1" checked>
+                                                          <label class="form-check-label" for="today1">
+                                                            Today
+                                                          </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Date - Day</th>
+                                                    <th scope="col">Time Slot</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Thursday, 18 June</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                          <input class="form-check-input" type="radio" name="exampleRadios" id="today1" value="option1" checked>
+                                                          <label class="form-check-label" for="today1">
+                                                            10:00 am - 7:00 pm
+                                                          </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thursday, 19 June</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                          <input class="form-check-input" type="radio" name="exampleRadios" id="today1" value="option1" checked>
+                                                          <label class="form-check-label" for="today1">
+                                                            10:00 am - 7:00 pm
+                                                          </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Thursday, 20 June</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                          <input class="form-check-input" type="radio" name="exampleRadios" id="today1" value="option1" checked>
+                                                          <label class="form-check-label" for="today1">
+                                                            10:00 am - 7:00 pm
+                                                          </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>    
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn btn-link bg-dark text-white px-4 py-2">Next</a>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header" id="headingThree">
+                                  <h5 class="mb-0">
+                                    <button class="btn btn-link d-flex collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="headingFour">
+                                        <span class="mr-4">4</span>
+                                        <div class="text-left">
+                                            <span class="verification-steps-heading d-block">Select Payment System</span>
+                                            <span class="completed-content">0300 123 45678</span>
                                         </div>
-                                        <div class="feature-content d-flex flex-column justify-content-center">
-                                            <h4 class="feature-text mb-0">Delivery Date</h4>
-                                            <h4 class="feature-text-price mb-0">Tuesday, 23rd June 2020</h4>
+                                        <a href="javascript:void(0)" class="change-button">Change</a>
+                                    </button>
+                                  </h5>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                  <div class="card-body">
+                                    <div class="card content-box">
+                                        <div class="card-header">
+                                            <span>Payment Methods</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <span>Information for selected billing method</span>
+                                            <div class="bill-payment-methods">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="bill-method1" id="bill-method1" value="option1" checked>
+                                                    <label class="form-check-label" for="bill-method1">
+                                                        Cash on Delivery
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="bill-method2" id="bill-method2" value="option1" checked>
+                                                    <label class="form-check-label" for="bill-method2">
+                                                        JazzCash Mobile
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="bill-method3" id="bill-method3" value="option1" checked>
+                                                    <label class="form-check-label" for="bill-method3">
+                                                        Easy Paisa
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="bill-method4" id="bill-method4" value="option1" checked>
+                                                    <label class="form-check-label" for="bill-method4">
+                                                        Credit Card
+                                                    </label>
+                                                </div>
+                                                <a href="btn btn-link px-4 py-2 button-secondary">Place Order</a>
+                                            </div>
                                         </div>
                                     </div>
+                                  </div>
                                 </div>
-
-                                <div class="check-in-feature">
-                                    <div class="grid-container">
-                                        <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
-                                        </div>
-                                        <div class="feature-content d-flex flex-column justify-content-center">
-                                            <h4 class="feature-text mb-0">Delivery Address</h4>
-                                            <h4 class="feature-text-price mb-0">ABC Plaza Near XYZ Market, Khayaban-e-Ittehad Phase V, Karachi</h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <a href="#" class="button-secondary button-full-width mt-5 mb-3 p-3 
-                                                text-dec-none text-white font-size-18">View Order history</a>
-                                
+                              </div>
                             </div>
                         </div>
                     </div>
