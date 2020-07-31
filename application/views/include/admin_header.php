@@ -176,6 +176,28 @@ $users = $CI->Users->profile_edit_data();
             </li>
             <!-- Brand menu end -->
 
+            <!-- Asssistant menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Casssitant")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="fa fa-balance-scale "></i><span>Assistant</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Cassistant') ?>">Add Asssitant</a></li>
+                    <li><a href="<?php echo base_url('Cassistant/manage_assistant') ?>">Manage Assistant</a></li>
+
+                </ul>
+            </li>
+            <!-- Asssitant menu end -->
+
             <!-- Unit menu start -->
             <li class="treeview <?php
             if ($this->uri->segment('1') == ("Cunit")) {

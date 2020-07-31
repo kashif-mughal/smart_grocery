@@ -146,10 +146,6 @@ class Cproduct extends CI_Controller {
         
         $CI->load->library('lproduct');
         
-        $CI->load->model('Products');
-        
-        // $content = $this->lproduct->product_list();
-        // $this->template->full_admin_html_view($content);
         $content = $this->lproduct->product_list();
         
         $this->template->full_admin_html_view($content);

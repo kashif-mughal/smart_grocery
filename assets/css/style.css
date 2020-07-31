@@ -1875,6 +1875,17 @@ button.category-button:active {
 }
 /* ===================================== */
 
+.leftmenu > li > a{
+   text-transform: uppercase;
+   font-weight: 600 !important;
+}
+.leftmenu > li > ul > li{
+   list-style: none;
+   margin-left: -30px;
+}
+.leftmenu a{
+   text-decoration: none !important;
+}
 /* ========== Timeline Ends ============ */
 /* ===================================== */
 

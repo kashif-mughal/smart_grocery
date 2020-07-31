@@ -185,7 +185,7 @@
                                                          <p class="order-name"><?=$products[$i]['ProductName']?></p>
                                                       </div>
                                                       <div class="order-product-price text-center align-self-center order-item">
-                                                         <p class="order-price">Rs.<?=$products[$i]['SoldPrice']?></p>
+                                                         <p class="order-price"><script>document.write(formatCurrency('<?=$products[$i]['SoldPrice']?>', 0))</script></p>
                                                       </div>
                                                       <div class="quantity-area order-item align-self-center">
                                                          <div class="d-flex justify-content-center p-4">

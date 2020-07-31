@@ -59,7 +59,6 @@ class Products extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            print_r($query->result_array());
             return $query->result_array();
         }
         return false;
@@ -308,5 +307,18 @@ class Products extends CI_Model {
         $cache_file = './my-assets/js/admin_js/json/product.json';
         $productList = json_encode($json_product);
         file_put_contents($cache_file, $productList);
+    }
+    public function search($q, $limit = 10){
+        $this->db->select('p.*, c.CatName');
+        $this->db->from('grocery_products p');
+        $this->db->join('grocery_category c', 'p.Category = c.CategoryId');
+        $this->db->like('p.ProductName', $q);
+        $this->db->limit($limit);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+        return false;
     }
 }

@@ -10,26 +10,27 @@ if(is_array($users) && !empty($users[0])){
 $CI->load->library('lcategory');
 $menuCatList = $CI->lcategory->get_category_hierarchy();
 ?>
-<h3 class="sidebar-heading border-b-primary"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].' '.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
+<h3 class="sidebar-heading border-b-primary" data-toggle="collapse" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow">Shop Categories</h3>
 
 <div class="sidebar-menu">
     <div class="accordion border-b-primary" id="accordionExample">
         <div class="card border-none">
-            <div class="card-header p-0 sidebar-menu-title p-0" id="headingOne">
-                <a href="javascript:void(0)" class="btn-block d-flex align-items-center" type="button" data-toggle="collapse" 
-                    data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <img src="<?php echo base_url() ?>assets/img/sidenav-toggle.png" class="d-inline pr-4" alt="">
-                    <h4 class="d-inline">Shop Categories</h4>
-                    <img src="<?php echo base_url() ?>assets/img/sidenav-chevron.png" class="d-inline ml-auto" alt="">
-                </a>
-            </div>
     
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                   <ul class="sidebar-menu-items navbar-nav mb-3 ml-4">
-                    <?php foreach($menuCatList as $key => $value) {?>
-                       <li><a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value->catId) ?>"><?=$key?></a></li>
+            <div id="collapseTow" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body p-0">
+                   <ul class="sidebar-menu-items navbar-nav mb-3 leftmenu">
+                    <?php //echo '<pre>';print_r($menuCatList);die; 
+                    foreach($menuCatList as $key => $value) {?>
+                       <li>
+                        <a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value->catId) ?>"><?=$key?></a>
+                        <ul>
+                          <?php foreach($value->childCats as $key => $value2) {?>
+                          <li>
+                              <a target="_blank" href="<?=base_url('Cproduct/products?categoryId='.$value2['CategoryId']) ?>"><span class="hyphen">—</span><?=$value2['Alias']?></a>
+                          </li>
+                          <?php } ?>      
+                        </ul>
+                        </li>
                     <?php } ?>
                    </ul>
                 </div>

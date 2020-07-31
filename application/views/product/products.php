@@ -178,7 +178,7 @@
                     'perpage' : perpage
                 },
                 dataType:'json',
-                success : function(data) {console.log(data);
+                success : function(data) {
                     var baseUrl = '<?=base_url()?>';
                     if(!data){
                         currentElem.hide();
