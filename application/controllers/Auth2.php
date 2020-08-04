@@ -139,15 +139,6 @@ class Auth2 extends CI_Controller {
                 return;
             }
 
-            // Success Response
-            // $url = $_SERVER['HTTP_REFERER'];
-            // if(strpos($url,"?ret_url=")) {
-            //     $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
-            // }
-            // else {
-            //     $returnURL = FALSE;
-            // }
-
             
             $result['response'] = 'Form Validated';
             $result['user_details_available'] = false;
@@ -163,171 +154,160 @@ class Auth2 extends CI_Controller {
         }
     }
 
-    // Goto Welcome Page
-    public function welcome() {
-        //echo '<pre>';print_r($_SERVER['HTTP_REFERER']);die;
-        if($this->auth->is_logged()) {
-            echo "Welcome your are Logged In".`<a href='javascript:void(0)' id='userLoggedOut'>Logout</a>`;
-        }
-        else {
-            echo "You are not Logged In";
-        }
-    }
-
     public function logout() {
         if ($this->auth->logout())
             $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
     }
-
     
     // Verify One Time Password
     public function otpVerify() {
+
         $otp_code = $this->input->Post('code');
-        $user_id = $this->input->Post('userId');
-        if(!isset($otp_code) && !isset($user_id)) {
-            $result['response'] = 'OTP code is not valid';
+        $phone = $this->input->Post('phone');
+
+        if(!isset($otp_code) && !isset($phone)) {
+            $result['responseMessage'] = 'Please provide correct OTP code';
+            $result['loggedInStatus'] = false;
             $result['status'] = 'Error';
             echo json_encode($result);
+            return;
         }
         else {
-            $user_id = substr($user_id, 0, 20);
-            // Get otp data from otp table
-            $otpData = $this->auths->get_otp_by_user_id($user_id);
+            // Get otp Data from otp table
+            $otpData = $this->auths->get_otp_by_phone_number($phone);
+            $returnURL = false;
+            $url = $_SERVER['HTTP_REFERER'];
+            if(strpos($url,"?ret_url=")) {
+                $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+            }
 
             if($otpData->num_rows() > 0) {
                 $userData = $otpData->result_array();
-                $code = $userData[0]['code'];
-                $expiryDate = new DateTime($userData[0]['expiry_date']);
-                $expiryDateFinal = $expiryDate->format('Y-m-d H:i:s');
 
                 if($userData[0]['verified'] == 1) {
+                    // logged in user
+                    $userStatus = $this->auths->user_login_phone($phone);
 
-                    // check user details is available
-                    $userDetails = $this->auths->get_user_detail($user_id);
-                    if(!$userDetails) {
-                        // Response: Send to User Registration Form
-                        $result['response'] = 'Verification Completed, But User details is not available';
-                        $result['user_found_in_otp'] = true;
-                        $result['user_verified'] = true;
-                        $result['user_details_available'] = false;
-                        $result['redirectUrl'] = false;
+                    if($userStatus) {
+                        $result['responseMessage'] = 'Verification Completed';
+                        $result['loggedInStatus'] = true;
+                        $result['redirectURL'] = $returnURL;
                         $result['status'] = 'Success';
                         echo json_encode($result);
-                        return;       
-                    }
-
-                    if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
-                        // logged in user
-                        $this->auths->user_login($userDetails['username'], $userDetails['password']);
-
-                        $url = $_SERVER['HTTP_REFERER'];
-                        if(strpos($url,"?ret_url=")) {
-                            $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
-                        }
-                        else {
-                            $returnURL = false;
-                        }
-
-                        // Response
-                        $result['response'] = 'Verification Completed, User Already Exist';
-                        $result['user_found_in_otp'] = true;
-                        $result['user_verified'] = true;
-                        $result['user_details_available'] = true;
-                        $result['redirectUrl'] = $returnURL;
-                        $result['status'] = 'Success';
-                        echo json_encode($result);
+                        return;
                     }
                     else {
-                        $result['response'] = 'Verification Completed, User detail not available';
-                        $result['user_found_in_otp'] = true;
-                        $result['user_verified'] = true;
-                        $result['user_details_available'] = false;
-                        $result['redirectUrl'] = false;
-                        $result['status'] = 'Success';
+                        $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Not Verified)';
+                        $result['loggedInStatus'] = false;
+                        $result['redirectURL'] = $returnURL;
+                        $result['status'] = 'Error';
                         echo json_encode($result);
+                        return;
                     }
                 }
-                else {
-                    // Current Date
-                    $dateTime = new DateTime();
-                    $currDate = $dateTime->format('Y-m-d H:i:s');
+                else {// User is not Verified in db
 
-                    if($currDate >= $expiryDateFinal) {
+                    // Check otp expiry date
+                    $date = new DateTime();
+                    $currDate = $date->format('Y-m-d H:i:s');
+                    $expiryDate = $userData[0]['expiry_date'];
 
-                        $result['response'] = 'OTP code time expire';
-                        $result['status'] = 'Error';
-                        echo json_encode($result);    
-                    }
-                    else {
-                        if($otp_code == '5555' || $code == $otp_code) {// User Phone Verified
-                            // Set Verified
-                            $this->auths->update_otp_verified($user_id);
+                    if($expiryDate > $currDate) {
+                        // Check OTP code is correct 
+                        if($otp_code == '5555' || $userData[0]['code'] == $otp_code) { // otp code is correct
+                            // set verified on otp table
+                            $this->auths->update_otp_verified_phone($phone);
+                            
+                            // Check if user detail is available
+                            $userDetails = $this->auths->get_user_detail_by_phone($phone);
+                            
+                            if(!$userDetails) { // user record is not present in user_login table
+                                // Add users record in user_login and users table
+                                
+                                // insert record in user_login table
+                                $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+                                $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
+                                $user_id = substr($userId, 0, 20);
+                                // - Store User with UserId and phone number in table:(user_login)
+                                $this->auths->insert_user_login($user_id);
 
-                            // Check if user details available
-                            $userDetails = $this->auths->get_user_detail($user_id);
-
-                            if(!$userDetails) {
-                                // Response: Send to User Registration Form
-                                $result['response'] = 'Verification Completed, But User details is not available';
-                                $result['user_found_in_otp'] = true;
-                                $result['user_verified'] = true;
-                                $result['user_details_available'] = false;
-                                $result['redirectUrl'] = false;
-                                $result['status'] = 'Success';
-                                echo json_encode($result);
-                                return;       
-                            }
-
-                            if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
+                                // Insert record in users table
+                                $this->auths->insert_user($user_id, $phone);
+                                
                                 // logged in user
-                                $this->auths->user_login($userDetails['username'], $userDetails['password']);
+                                $userStatus = $this->auths->user_login_phone($phone);
 
-                                $url = $_SERVER['HTTP_REFERER'];
-                                if(strpos($url,"?ret_url=")) {
-                                    $returnURL = substr($url,(strpos($url,"?ret_url=") + 9));    
+                                if($userStatus) {
+                                    $result['responseMessage'] = 'Verification Completed';
+                                    $result['loggedInStatus'] = true;
+                                    $result['redirectURL'] = $returnURL;
+                                    $result['status'] = 'Success';
+                                    echo json_encode($result);
+                                    return;
                                 }
                                 else {
-                                    $returnURL = false;
+                                    $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Details Not Available)';
+                                    $result['loggedInStatus'] = false;
+                                    $result['redirectURL'] = $returnURL;
+                                    $result['status'] = 'Error';
+                                    echo json_encode($result);
+                                    return;
                                 }
-
-                                // Response
-                                $result['response'] = 'Verification Completed, User Already Exist';
-                                $result['user_found_in_otp'] = true;
-                                $result['user_verified'] = true;
-                                $result['user_details_available'] = true;
-                                $result['redirectUrl'] = $returnURL;
-                                $result['status'] = 'Success';
-                                echo json_encode($result);
                             }
-                            else {
-                                $result['response'] = 'Verification Completed, User detail not available';
-                                $result['user_found_in_otp'] = true;
-                                $result['user_verified'] = true;
-                                $result['user_details_available'] = false;
-                                $result['redirectUrl'] = false;
-                                $result['status'] = 'Success';
-                                echo json_encode($result);
+                            else { // User record is available in user_login table
+                                // logged in user
+                                $userStatus = $this->auths->user_login_phone($userDetails[0]['phone']);
+
+                                if($userStatus) {
+                                    $result['responseMessage'] = 'Verification Completed';
+                                    $result['loggedInStatus'] = true;
+                                    $result['redirectURL'] = $returnURL;
+                                    $result['status'] = 'Success';
+                                    echo json_encode($result);
+                                    return;
+                                }
+                                else {
+                                    $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Available)';
+                                    $result['loggedInStatus'] = false;
+                                    $result['redirectURL'] = $returnURL;
+                                    $result['status'] = 'Error';
+                                    echo json_encode($result);
+                                    return;
+                                }
                             }
 
                         }
-                        else {
-                            $result['response'] = 'Please enter correct code';
-                            $result['status'] = 'Error';
-                            echo json_encode($result);   
+                        else { // Otp code is wrong
+                            $result['responseMessage'] = "OTP Code is wrong";
+                            $result['loggedInStatus'] = true;
+                            $result['redirectURL'] = $returnURL;
+                            $result['status'] = 'Success';
+                            echo json_encode($result);
+                            return;                            
                         }
+
+
                     }
-                }               
-
+                    else { // OTP Code date is expired
+                        $result['responseMessage'] = "OTP Code time is expired";
+                        $result['loggedInStatus'] = false;
+                        $result['redirectURL'] = $returnURL;
+                        $result['status'] = 'Error';
+                        echo json_encode($result);
+                        return;
+                    }
+                }
             }
-            else {
-                $result['response'] = 'User '.'('. $user_id .') not found';
-                $result['user_found_in_otp'] = false;
-                $result['user_verified'] = false;
+            else { 
+                $result['responseMessage'] = 'User is not available in db';
+                $result['loggedInStatus'] = false;
+                $result['redirectURL'] = $returnURL;
                 $result['status'] = 'Error';
-                echo json_encode($result); 
+                echo json_encode($result);
+                return;
             }
-
         }
-    }    
+
+     }    
 
 }

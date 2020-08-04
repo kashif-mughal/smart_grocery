@@ -27,6 +27,25 @@ class Users extends CI_Model {
         return false;
     }
 
+    // Validate user using phone number
+    function check_valid_user_phone($phone_number) {
+        $dateTime = new DateTime();
+        $currDate = $dateTime->format('Y-m-d H:i:s');
+
+        $this->db->select('a.*,b.*');
+        $this->db->from('otp a');
+        $this->db->join('users b', 'b.phone = a.phone_number');
+        $this->db->where('a.phone_number', $phone_number);
+        $this->db->where('a.verified', 1);
+        $this->db->where('a.expiry_date > ', $currDate);
+        $query = $this->db->get();
+        
+        if($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;        
+    }
+
     /*
      * *User registration
      */

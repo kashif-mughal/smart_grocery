@@ -1,193 +1,241 @@
-
 <div class="container">
 	<div class="row mx-auto">
 		<img src="img/logo.png" alt="" class="mx-auto mt-3" style="background-color: #17a18d; border-radius: 47%;">
 	</div>
-	
-	
-	<!-- Phone Verification -->
-	<div id="phoneForm" style="display:none;">
-		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-				<div class="card content-box my-5">
-					<div class="card-body">
-						<div class="form-header text-center mb-3">
-							<h5 class="card-title text-center mb-0">Phone Verification</h5>
-							<small class="text-center text-info">Please verify you phone number to continue</small>
+	<div class="row">
+		<div class="col-xl-8 col-lg-8 col-md-12">
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+			<!-- Phone Verification -->
+			<div id="phoneForm">
+				<div class="card content-box">
+
+					<div class="sign-in d-flex justify-content-start align-items-start">
+						<div class="mt-2 step-number text-center">
+							<span>1</span>   
+						</div>                  
+						<div class="sign-in-content ml-4">
+							<h4 class="mb-1">Phone Number Verification</h4>
+							<div class="errorNotify my-4"></div>
+							<span class="d-block mb-4">We need your phone number so that we can update you about your order.</span>
+							<span class="d-block mb-3">Enter your mobile number</span>
+						
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text font-size-26 bg-white">+92</span>
+									<span class="input-group-text font-size-26 px-0 bg-white border-l-none">-</span>
+									<span class="input-group-text font-size-26 bg-white border-l-none">3</span>
+								</div>
+								<input type="text" class="form-control mr-0 border-l-none" id="inputPhone" autofocus>
+								<div class="input-group-append m-0">
+									<a href="javascript:void(0)" class="btn btn-dark px-4 py-3" type="submit" id="phoneSubmit">
+										Verify Number
+									</a>
+								</div>
+							</div>
+							<span class="d-block">* You will receive a sms shortly</span>
+							<span class="d-block">Existing user will log in right after verifying the confirmation code</span>
 						</div>
+					</div>
+
+					
+				</div>
+			</div>
+			<!-- Phone Verification Ends -->
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+			<!-- OTP Verfication -->
+			<div id="otpForm" style="display:none;">
+						
+				<div class="sign-in content-box d-flex justify-content-start align-items-start">
+				<div class="mt-2 step-number text-center">
+					<span>1</span>
+				</div>
+				<div class="sign-in-content ml-4">
+					<h4 class="mb-5">Phone Number Verification</h4>
+					<span class="d-block mb-3">Enter 4 digit code sent to your phone  0300 123 45678 (Edit)</span>
+					<div class="form-inline" id="inputOtp">
+						<form class="digit-group">
+							<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
+							<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
+							<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
+							<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
+						</form>
+					</div>
+					<span class="d-block mb-4">Resend Code again</span>
+					<a href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</a>
+				</div>
+
+			</div>
+			<!-- OTP Verification Ends -->
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+			<!-- Phone Verification Confirm -->
+			<!-- <div id="phoneVerified" style="display:none;">
+				<div class="row mx-auto">
+					<div class="verifiedIcon mx-auto d-flex justify-items-center flex-column pd-75">
+						<i class="fas fa-check-circle fa-5x d-block mx-auto mb-4" style="color: green;"></i>
+						<h2>Phone Verification Completed</h2>
+					</div>
+				</div>
+			</div> -->
+			<!-- Phone Verification Confirm Ends -->
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+			<!-- Registration Form -->
+			<div id="registrationForm" style="display:none;">
+				<div class="card content-box">
+					<div class="card-body">
+						<h5 class="card-title text-center">Register Member</h5>
 						<div class="errorNotify my-4"></div>
+					<form id="userRegistrationForm" method="post"> 
+						<!-- action="<?php //echo base_url('Auth/updateUserRegistration'); ?>"> -->
 						<div class="form-label-group mb-3">
-							<label for="inputPhone" class="mb-0"><h6>Phone Number</h6></label>
-							<input type="text" id="inputPhone" class="form-control" placeholder="Phone number" autofocus>
+							<label for="inputName" class="mb-0">Fullname</label>
+							<input type="text" id="inputName" name="inputName" class="form-control" placeholder="Fullname" required autofocus>
 						</div>
-						<a href="javascript:void(0)" class="btn btn-info button-secondary text-white p-2 text-dec-none 
-							btn-block text-uppercase" type="submit" id="phoneSubmit">
-							<i class="fab fa-register mr-2"></i>Send Code
+
+						<div class="form-label-group mb-3">
+							<label for="inputEmail" class="mb-0">Email address</label>
+							<input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address"
+								required autofocus>
+						</div>
+						
+						<div class="form-label-group mb-3">
+							<label for="inputAddress" class="mb-0">Address</label>
+							<input type="text" id="inputAddress" name="inputAddress" class="form-control" placeholder="Address" required autofocus>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-label-group mb-3">
+									<label for="selectCountry" class="mb-0">Country</label>
+									<select class="form-control form-control-sm" id="selectCountry" name="selectCountry">
+										<?php foreach($countries as $country) : ?>
+										<option value="<?php echo $country['place_name']; ?>"><?=$country['place_name']; ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-label-group mb-3">
+									<label for="selectCity" class="mb-0">City</label>
+									<select class="form-control form-control-sm" id="selectCity" name="selectCity">
+										<?php foreach($cities as $city) : ?>
+										<option value="<?php echo $city['place_name']; ?>"><?=$city['place_name'];?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="addressDetails">Address Details</label>
+							<textarea class="form-control" id="addressDetails" name="addressDetails" rows="3" placeholder="Address Details"></textarea>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="form-label-group mb-3">
+									<label for="inputPassword" class="mb-0">Password</label>
+									<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-label-group mb-3">
+									<label for="inputConfirmPassword" class="mb-0">Confirm Password</label>
+									<input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+								</div>
+							</div>
+						</div>
+						
+						<input type="hidden" name="userId" id="userId">
+						<input type="submit" name="registerSubmit" id="registerSubmit" class="btn btn-primary button-primary text-white p-2 text-dec-none btn-block text-uppercase" value="Register">
+						<hr class="my-2">
+						<a href="javascript:void(0)" id="SigninSwitch" class="p-2 text-dec-none btn-block" type="submit">
+							<i class="fab fa-register mr-2"></i> or Sign in
 						</a>
-					</div>
+					</form>
 				</div>
 			</div>
-		</div>
-	</div>
-	<!-- Phone Verification Ends -->
-
-	<!-- OTP Verfication -->
-	<div id="otpForm" style="display:none;">
-		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-				<div class="card content-box my-5">
+			<!-- Registration Form Ends -->
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+			<!-- Login Form -->
+			<div id="loginForm" style="display:none;">
+				<div class="card content-box">
 					<div class="card-body">
-						<div class="form-header text-center mb-3">
-							<h5 class="card-title text-center">OTP Verification</h5>
-							<small class="text-center text-info">Please enter 4 digit code send to your phone number</small>
-						</div>
+						<h5 class="card-title text-center">Sign In</h5>
 						<div class="errorNotify my-4"></div>
-					<div class="form-label-group mb-3">
-						<label for="inputOtp" class="mb-0">OTP Code</label>
-						<input type="text" id="inputOtp" class="form-control" placeholder="OTP Code" autofocus>
-					</div>
-					<a href="javascript:void(0)" class="btn btn-info button-secondary text-white p-2 text-dec-none btn-block 
-							text-uppercase" id="otpSubmit" 
-						type="submit"><i class="fab fa-register mr-2"></i>Verify</a>
+					
+					<form id="userLoginForm" method="post"> 
+						<div class="form-label-group mb-3">
+							<label for="inputLoginEmail" class="mb-0">Email address</label>
+							<input type="email" id="inputLoginEmail" name="inputLoginEmail" class="form-control" placeholder="Email address"
+								required autofocus>
+						</div>
+
+						<div class="form-label-group mb-3">
+							<label for="inputLoginPassword" class="mb-0">Password</label>
+							<input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control" placeholder="Password"
+								required>
+						</div>
+
+						<div class="custom-control custom-checkbox mb-3">
+							<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
+							<label class="custom-control-label" for="rememberMe">Remember me</label>
+						</div>
+						<input type="submit" name="signinSubmit" id="signinSubmit" class="btn btn-info button-secondary text-white p-2 text-dec-none btn-block text-uppercase" value="Sign in">
+						<hr class="my-2">
+						<a href="javascript:void(0)" id="RegisterSwitch" class="p-2 text-dec-none btn-block mx-auto" type="submit">
+							<i class="fab fa-register mr-2"></i> Register Here
+						</a>
+					</form>
 				</div>
 			</div>
+			<!-- Login Form Ends -->			
+			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 		</div>
-		</div>
-	</div>
-	<!-- OTP Verification Ends -->
-
-	<!-- Phone Verification Confirm -->
-	<div id="phoneVerified" style="display:none;">
-		<div class="row mx-auto">
-			<div class="verifiedIcon mx-auto d-flex justify-items-center flex-column pd-75">
-				<i class="fas fa-check-circle fa-5x d-block mx-auto mb-4" style="color: green;"></i>
-				<h2>Phone Verification Completed</h2>
-			</div>
-		</div>
-	</div>
-	<!-- Phone Verification Confirm Ends -->
-
-	<!-- Registration Form -->
-	<div id="registrationForm" style="display:none;">
+		<div class="col-xl-4 col-lg-4 col-md-12">
 			<div class="row">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-					<div class="card content-box mb-5">
-						<div class="card-body">
-							<h5 class="card-title text-center">Register Member</h5>
-							<div class="errorNotify my-4"></div>
-						<form id="userRegistrationForm" method="post"> 
-							<!-- action="<?php //echo base_url('Auth/updateUserRegistration'); ?>"> -->
-							<div class="form-label-group mb-3">
-								<label for="inputName" class="mb-0">Fullname</label>
-								<input type="text" id="inputName" name="inputName" class="form-control" placeholder="Fullname" required autofocus>
-							</div>
-
-							<div class="form-label-group mb-3">
-								<label for="inputEmail" class="mb-0">Email address</label>
-								<input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address"
-									required autofocus>
-							</div>
-							
-							<div class="form-label-group mb-3">
-								<label for="inputAddress" class="mb-0">Address</label>
-								<input type="text" id="inputAddress" name="inputAddress" class="form-control" placeholder="Address" required autofocus>
-							</div>
-							<div class="row">
-								<div class="col">
-									<div class="form-label-group mb-3">
-										<label for="selectCountry" class="mb-0">Country</label>
-										<select class="form-control form-control-sm" id="selectCountry" name="selectCountry">
-											<?php foreach($countries as $country) : ?>
-											<option value="<?php echo $country['place_name']; ?>"><?=$country['place_name']; ?></option>
-											<?php endforeach; ?>
-										</select>
-									</div>
-								</div>
-								<div class="col">
-									<div class="form-label-group mb-3">
-										<label for="selectCity" class="mb-0">City</label>
-										<select class="form-control form-control-sm" id="selectCity" name="selectCity">
-											<?php foreach($cities as $city) : ?>
-											<option value="<?php echo $city['place_name']; ?>"><?=$city['place_name'];?></option>
-											<?php endforeach; ?>
-										</select>
+				<div class="col-lg-12 col-md-6">
+					<div class="grocery-features">
+						<div class="card">
+							<div class="card-body grocery-assistant-card">
+								<div class="container-fluid px-0">
+									<h6 class="card-title mb-0">Use our shop assistant to help you build your cart</h6>
+									<div class="row">
+										<div class="col-md-7 pr-0">
+											<h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
+											<button class="card-button">Use Assistant</button>
+										</div>
+										<div style="position: absolute;right: 0;max-width: 30%;">
+											<img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
+										</div>
 									</div>
 								</div>
 							</div>
-
-							<div class="form-group">
-								<label for="addressDetails">Address Details</label>
-								<textarea class="form-control" id="addressDetails" name="addressDetails" rows="3" placeholder="Address Details"></textarea>
-							</div>
-
-							<div class="row">
-								<div class="col">
-									<div class="form-label-group mb-3">
-										<label for="inputPassword" class="mb-0">Password</label>
-										<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-6">
+					<div class="grocery-features value-cart-feature">
+						<div class="card">
+							<div class="card-body value-cart">
+								<div class="container-fluid px-0">
+									<h4 class="card-heading">Value Cart</h4>
+									<div class="row">
+										<div class="col-md-7 pr-0">                                    
+											<h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
+											<button class="card-button">Build Value Cart</button>
+										</div>
+										<div style="position: absolute;right: 10px;max-width: 25%;">
+											<img src="<?= base_url("assets/img/value-cart.png") ?>" alt="Grocery Assistant Icon" class="img-fluid" />
+										</div>
 									</div>
 								</div>
-								<div class="col">
-									<div class="form-label-group mb-3">
-										<label for="inputConfirmPassword" class="mb-0">Confirm Password</label>
-										<input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
-									</div>
-								</div>
 							</div>
-							
-							<input type="hidden" name="userId" id="userId">
-							<input type="submit" name="registerSubmit" id="registerSubmit" class="btn btn-primary button-primary text-white p-2 text-dec-none btn-block text-uppercase" value="Register">
-							<hr class="my-2">
-							<a href="javascript:void(0)" id="SigninSwitch" class="p-2 text-dec-none btn-block" type="submit">
-								<i class="fab fa-register mr-2"></i> or Sign in
-							</a>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Registration Form Ends -->
-			
-	<!-- Login Form -->
-	<div id="loginForm">
-			<div class="row">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-					<div class="card content-box my-5">
-						<div class="card-body">
-							<h5 class="card-title text-center">Sign In</h5>
-							<div class="errorNotify my-4"></div>
-						  
-						<form id="userLoginForm" method="post"> 
-							<div class="form-label-group mb-3">
-								<label for="inputLoginEmail" class="mb-0">Email address</label>
-								<input type="email" id="inputLoginEmail" name="inputLoginEmail" class="form-control" placeholder="Email address"
-									required autofocus>
-							</div>
-	
-							<div class="form-label-group mb-3">
-								<label for="inputLoginPassword" class="mb-0">Password</label>
-								<input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control" placeholder="Password"
-									required>
-							</div>
-	
-							<div class="custom-control custom-checkbox mb-3">
-								<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
-								<label class="custom-control-label" for="rememberMe">Remember me</label>
-							</div>
-							<input type="submit" name="signinSubmit" id="signinSubmit" class="btn btn-info button-secondary text-white p-2 text-dec-none btn-block text-uppercase" value="Sign in">
-							<hr class="my-2">
-							<a href="javascript:void(0)" id="RegisterSwitch" class="p-2 text-dec-none btn-block mx-auto" type="submit">
-								<i class="fab fa-register mr-2"></i> Register Here
-							</a>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Login Form Ends -->
 
+	</div>
 </div>
 
 <script>
@@ -195,8 +243,8 @@
 		localStorage.removeItem('UserId');
 		$('#registrationForm').hide();
 		$('#registrationForm').css('display', 'none');
-		$('#phoneForm').hide();
-		$('#phoneForm').css('display', 'none');
+		$('#loginForm').hide();
+		$('#loginForm').css('display', 'none');
 		$('#otpForm').hide();
 		$('#otpForm').css('display', 'none');
 		$('#phoneVerified').hide();
@@ -206,66 +254,37 @@
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
 			var phoneNumber = $('#inputPhone').val();
-			var phoneRegEx = /^[0-9]{10,13}$/;
+			var phoneRegEx = /^[0-9]{9}$/;
 			if(!phoneNumber.match(phoneRegEx)) {
 				$('.errorNotify').html("<small style='color: red;'>Error! Phone number is wronng</small>");
 			}
 			else {
+				phoneNumber = '923' + phoneNumber;
 				$.ajax({
 					url: "<?php echo base_url(); ?>Dashboard/phoneVerify",
 					method: "POST",
 					data: { phone: phoneNumber },
 					dataType: "json",
 					success: function(data) {
-						if(data.status == 'Error') {
-							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.response + "</small></div>");
-							$('.errorNotify').css('display', 'block');
+						if(data.success) {
+							//responseMessage
+							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
+							$('.errorNotify').show();
 							setTimeout(function() {
 								$('.errorNotify').hide();
+								$('#phoneForm').hide();
+								$('#otpForm').show();
 							}, 2000);
 						}
 						else {
-							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.response + `</small></div>`);
-							$('.errorNotify').css('display', 'block');
-							
-							localStorage.setItem('UserId',data.userId);
-							if(data.user_exist) {
-								$('#phoneForm').hide();
-								$('#phoneForm').css('display', 'none');
-
-								$('#loginForm').show();
-								$('#loginForm').css('display', 'block');
-							}
-							else if(data.phone_exist && data.phone_verified) {
-								// It means user exist and verified
-								// Send to Login Page
-								$('#phoneForm').hide();
-								$('#phoneForm').css('display', 'none');
-								$('#registrationForm').show();
-								$('#registrationForm').css('display', 'block');
-							}
-							else if(data.phone_exist && !data.phone_verified) {
-								// It means user exist but not verified
-								// Send to Phone Verification Page
-								$('#phoneForm').hide();
-								$('#phoneForm').css('display', 'none');
-								$('#otpForm').show();
-								$('#otpForm').css('display', 'block');
-							}
-							else {
-								$('#phoneForm').hide();
-								$('#phoneForm').css('display', 'none');
-								$('#otpForm').show();
-								$('#otpForm').css('display', 'block');
-							}
+							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.responseMessage + "</small></div>");
+							$('.errorNotify').hide();
 						}
+
 					},
 					error: function(data) {
-						$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.response + "</small></div>");
+						$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.success + "</small></div>");
 						$('.errorNotify').css('display', 'block');
-						setTimeout(function() {
-							$('.errorNotify').hide();
-						}, 2000);
 					}
 				});
 			}
@@ -273,8 +292,9 @@
 
 		// Submit OTP
 		$('#otpSubmit').click(function() {
-			var otpCode = $('#inputOtp').val();
+			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
 			var otpRegEx = /^[0-9]{4}$/;
+			var phone_number = '923' + $('#inputPhone').val();
 			if(!otpCode.match(otpRegEx)) {
 				$('.errorNotify').html("<small style='color: red;'>Error! OTP should be 4 digit number</small>");
 			}
@@ -282,60 +302,38 @@
 				$.ajax({
 					url: "<?php echo base_url(); ?>Auth2/otpVerify",
 					method: "POST",
-					data: { code: otpCode, userId: localStorage.getItem('UserId') },
+					data: { code: otpCode, phone: phone_number },
 					dataType: "json",
 					success: function(data) {
 						if(data.status == 'Error') {
-							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.response + "</small></div>");
-							$('.errorNotify').css('display', 'block');
+							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.responseMessage + "</small></div>");
+							$('.errorNotify').show();
 							setTimeout(function() {
 								$('.errorNotify').hide();
 							}, 2000); 
 						}
 						else {
-							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><i class='fas fa-check-square mr-3'></i><small>` + data.response + `</small></div>`);
-							$('.errorNotify').css('display', 'block');
+							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><i class='fas fa-check-square mr-3'></i><small>` + data.responseMessage + `</small></div>`);
+							$('.errorNotify').show();
 							setTimeout(function() {
 								$('.errorNotify').hide();
 							}, 2000);
+							if(data.loggedInStatus && data.redirectURL == false) {
+								// Welcome Screen
+								window.location.href = "<?php echo base_url('dashboard/welcome'); ?>";
+							}
+							else {
+								// Redirect URL
+								window.location.href = data.redirectURL;
+							}
 
-							if(data.user_found_in_otp && data.user_verified && data.user_details_available) {
-								console.log('If return URL is present goto return url else goto Dashboard');
-								if(!data.redirectUrl) {
-									window.location.href = "<?php echo base_url(); ?>Dashboard";
-								}
-								else {
-									window.location.href = data.redirectUrl;	
-								}
-							}
-							else if(data.user_found_in_otp && data.user_verified && !data.user_details_available) {
-								console.log('Goto user register details form, show phone verified animation');
-								$('#otpForm').hide();
-								$('#otpForm').css('display', 'none');
-								$('#phoneVerified').show(function() {
-									$("#phoneVerified").fadeIn(2000);
-								});
-								setTimeout(function() {
-									$('#phoneVerified').hide(function() {
-										$("#phoneVerified").fadeOut(2000);	
-									});
-									$('#registrationForm').show();
-								}, 5000);
-							}
-							else if(!data.user_found_in_otp && !data.user_verified && !data.user_details_available) {
-								console.log('Goto phone verify form');
-								$('#otpForm').hide();
-								$('#otpForm').css('display', 'none');
-
-								$('#phoneForm').show();
-								$('#phoneForm').css('display', 'block');
-							}
+							
 							
 						}
 					},
 					error: function(data) {
 						$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.response + "</small></div>");
-						$('.errorNotify').css('display', 'block');
+						$('.errorNotify').show();
 						setTimeout(function() {
 							$('.errorNotify').hide();
 						}, 2000);
@@ -433,7 +431,7 @@
 							if(!data.redirectUrl)
 								window.location = "<?php echo base_url(); ?>Dashboard";
 							else
-								window.location.href = data.redirectUrl
+								window.location.href = data.redirectUrl;
 						}
 					},
 					error: function(data) {
@@ -539,9 +537,53 @@
 			var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 			return (reg.test(email)) ? true : false;
 		}
+
+		// OTP inputs ============== 
+		$(function() {
+			'use strict';
+
+			var OTPinput = $('#inputOtp');
+			function goToNextInput(e) {
+				var key = e.which,
+				t = $(e.target),
+				sib = t.next('input');
+
+				if (key != 9 && (key < 48 || key > 57)) {
+				e.preventDefault();
+				return false;
+				}
+
+				if (key === 9) {
+				return true;
+				}
+
+				if (!sib || !sib.length) {
+				sib = OTPinput.find('input').eq(0);
+				}
+				sib.select().focus();
+			}
+
+			function onKeyDown(e) {
+				var key = e.which;
+
+				if (key === 9 || (key >= 48 && key <= 57)) {
+				return true;
+				}
+
+				e.preventDefault();
+				return false;
+			}
+			
+			function onFocus(e) {
+				$(e.target).select();
+			}
+
+			OTPinput.on('keyup', 'input', goToNextInput);
+			OTPinput.on('keydown', 'input', onKeyDown);
+			OTPinput.on('click', 'input', onFocus);
+
+		});
 		
 	});
 
 </script>
-</body>
-</html>

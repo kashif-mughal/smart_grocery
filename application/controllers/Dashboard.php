@@ -192,110 +192,62 @@ class Dashboard extends CI_Controller {
         $content = $this->parser->parse('users/registration', $data, true);
         $this->template->full_html_view($content);
     }
-
+   
     
-
     // Verify Phone Number
-    public function phoneVerify() {        
+    public function phoneVerify() {
+        
         $CI = & get_instance();
         $CI->load->model('Auths');
-
         $phone_number = $this->input->Post('phone');
 
         if(!isset($phone_number)) {
             $result['response'] = 'Phone number is not valid';
             $result['status'] = 'Error';
             echo json_encode($result);
-            return;     
+            return;
         }
 
-        // Check if this phone number is already registered
-        $db_phone = $CI->Auths->phone_registered($phone_number);
+        // step 1: add an entry in otp table
+        $fourRandomDigit = mt_rand(1000,9999);
+        $dateTime = new DateTime();
+        $date = $dateTime->format('Y-m-d H:i:s');
+        $currentDate = strtotime($date);
+        $futureDate = $currentDate+(40);
+        $formatDate = date("Y-m-d H:i:s", $futureDate);
 
-        if($db_phone->num_rows() > 0) {
-            $phoneExist = $db_phone->result_array();
-            // Verify Phone
-            if($phoneExist[0]['verified'] == 0) { // User Exist but phone not verified
-                $fourRandomDigit = mt_rand(1000,9999); // 4 digit OTP Code
-                $dateTime = new DateTime();
-                $date = $dateTime->format('Y-m-d H:i:s');
-                $currentDate = strtotime($date);
-                $futureDate = $currentDate+(60*5);
-                $formatDate = date("Y-m-d H:i:s", $futureDate); // Current Date + 5 minutes
-                
-                // Update new otp code and set expiry date
-                $CI->Auths->update_otp_code($fourRandomDigit, $formatDate, $phone_number);
+        $result = $CI->Auths->insert_otp_data($phone_number, $fourRandomDigit, $formatDate);
+        if($result == 1) {
+            $returnobj = (object)[
+                'success' => TRUE,
+                'responseMessage' => 'We have sent you a 4-digit code on you phone, Please Verify'
+            ];
+            echo json_encode($returnobj);
+            return;
+        } 
+        else {
+            $returnobj = (object)[
+                'success' => FALSE,
+                'responseMessage' => 'Something went wrong, Please resend code'
+            ];
+            echo json_encode($returnobj);
+            return;
+        }
+    
+    }
 
-                //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
-
-                $result['response'] = 'We have send message to your phone number, Please verify your account';
-                $result['status'] = 'Success';
-                $result['phone_exist'] = true;
-                $result['phone_verified'] = false;
-                $result['userId'] = $phoneExist[0]['user_id'];
-                echo json_encode($result);    
-                return;    
-                
-            }
-            else { // User Exist and Verified
-
-                $userDetails = $this->auths->get_user_detail($phoneExist[0]['user_id']);
-
-                if($userDetails[0]['username'] != '' && $userDetails[0]['password'] != '' && $userDetails[0]['address'] != '') {
-                    // Response
-                    $result['response'] = 'User by Email is Available, Logging in form';
-                    $result['phone_exist'] = true;
-                    $result['phone_verified'] = true;
-                    $result['user_exist'] = true;
-                    $result['userId'] = $phoneExist[0]['user_id'];
-                    $result['status'] = 'Success';
-                    echo json_encode($result);
-                    return;
-                }
-                else {
-                    $result['response'] = 'Please register your account';
-                    $result['status'] = 'Success';
-                    $result['phone_exist'] = false;
-                    $result['phone_verified'] = true;
-                    $result['user_exist'] = false;
-                    $result['userId'] = $phoneExist[0]['user_id'];
-                    echo json_encode($result);
-                    return;
-                }
-                
-            }
-            
+    // Welcome Screen
+    public function welcome() {
+        // echo 'Welcome Screen';
+        if($this->auth->is_logged()) {
+            $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+            // $data['countries'] = $CI->Auths->get_country();
+            // $data['cities'] = $CI->Auths->get_city();
+            $content = $this->parser->parse('users/welcome', $data, true);
+            $this->template->full_html_view($content);
         }
         else {
-            // Steps:
-            // ------
-            // - Create Hash for UserId
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
-            $user_id = substr($userId, 0, 20);
-            // - Store User with UserId and phone number in table:(user_login)
-            $CI->Auths->insert_user_login($user_id);            
-
-            // insert users table
-            $CI->Auths->insert_user($user_id, $phone_number);
-            
-            // - Add Entry in table:(otp) with randomly generated 4-digit code and 5 min expiry
-            $fourRandomDigit = mt_rand(1000,9999);
-            $dateTime = new DateTime();
-            $date = $dateTime->format('Y-m-d H:i:s');
-            $currentDate = strtotime($date);
-            $futureDate = $currentDate+(60*5);
-            $formatDate = date("Y-m-d H:i:s", $futureDate);
-            
-            $CI->Auths->insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate);
-
-            //$messageSend = $this->sendmessage($phone_number, $fourRandomDigit);
-
-            //Response
-            $result['response'] = 'We have send message to your phone number Please verify your account';
-            $result['userId'] = $user_id;
-            $result['status'] = 'Success';
-            echo json_encode($result);
-        }        
+            $this->output->set_header("Location: " . base_url() . 'dashboard/user_authentication', TRUE, 302);
+        }
     }
 }

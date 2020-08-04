@@ -3,8 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Auths extends CI_Model {	
-	public function __construct() {
+class Auths extends CI_Model {
+    public function __construct() {
         parent::__construct('Auth');
     }
 
@@ -14,7 +14,7 @@ class Auths extends CI_Model {
 
     // Get user from user_login table by email and password
     public function user_login($username, $password) {
-    	// $this->db->where('username', $email);
+        // $this->db->where('username', $email);
      //    $this->db->where('password', md5($password));
      //    $this->db->where('status', 1);
      //    $query = $this->db->get('user_login');
@@ -33,10 +33,23 @@ class Auths extends CI_Model {
         }
 
     }
+    // Login user by phone_number
+     public function user_login_phone($phone_number) {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        $check_user_login = $CI->Users->check_valid_user_phone($phone_number);
+        
+        if($check_user_login) {
+            return $this->auth->login_phone($phone_number);
+        }
+        else {
+            return false;
+        }
+    }
 
     // Get user from user_login table by user id
     public function get_user_by_id($user_id) {
-    	$this->db->where('user_id', $user_id);
+        $this->db->where('user_id', $user_id);
         $this->db->where('status', 1);
         $query = $this->db->get('users');
 
@@ -55,9 +68,28 @@ class Auths extends CI_Model {
         return false;   
     }
 
+    public function get_user_detail_by_phone($phone_number) {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('phone', $phone_number);
+        $query = $this->db->get();
+        if($query->num_rows() > 0) {
+            return $query->result_array();    
+        }
+        return false;     
+    }
+
+    public function get_otp_by_phone_number($phone_number) {
+        $this->db->where('phone_number', $phone_number);
+        $this->db->order_by('otp_id', 'DESC');
+        $query = $this->db->get('otp');
+
+        return $query;
+    }
+
     // Get OTP Data by User Id
     public function get_otp_by_user_id($user_id) {
-    	$this->db->where('user_id', $user_id);
+        $this->db->where('user_id', $user_id);
         $query = $this->db->get('otp');
 
         return $query;
@@ -81,7 +113,7 @@ class Auths extends CI_Model {
     // ======================================================================================
 
     public function update_user_login($user_id, $email, $password) {
-    	$this->db->where('user_id', $user_id);
+        $this->db->where('user_id', $user_id);
         $this->db->set('username',$email);
         $this->db->set('password',md5($password));
         $this->db->update('user_login');
@@ -89,7 +121,7 @@ class Auths extends CI_Model {
     }
 
     public function update_user($user_id, $full_name, $email, $city, $country, $address, $address_details) {
-    	$this->db->where('user_id', $user_id);
+        $this->db->where('user_id', $user_id);
         $this->db->set('first_name',$full_name);
         $this->db->set('email', $email);
         $this->db->set('city', $city);
@@ -101,7 +133,7 @@ class Auths extends CI_Model {
     }
 
     public function update_otp_code($fourRandomDigit, $formatDate, $phone_number) {
-    	$otp_data = array(
+        $otp_data = array(
             'code' => $fourRandomDigit,
             'expiry_date' => $formatDate
         );
@@ -113,14 +145,27 @@ class Auths extends CI_Model {
         $data = array(
             'verified' => 1
         );
-    	$this->db->where('user_id', $user_id);
+        $this->db->where('user_id', $user_id);
         $this->db->update('otp', $data);
 
         return TRUE;
     }
 
+    public function update_otp_verified_phone($phone_number) {
+        // Current Date
+        $dateTime = new DateTime();
+        $currDate = $dateTime->format('Y-m-d H:i:s');
+        $data = array(
+            'verified' => 1,
+            'verified_on' => $currDate
+        );
+        $this->db->where('phone_number', $phone_number);
+        $this->db->update('otp', $data);
+        return TRUE;
+    }
+
     public function phone_registered($phone_number) {
-    	$this->db->where('phone_number', $phone_number);
+        $this->db->where('phone_number', $phone_number);
         $db_phone = $this->db->get('otp');
 
         return $db_phone;
@@ -137,17 +182,17 @@ class Auths extends CI_Model {
     // ================================================================================
 
     public function insert_user_login($user_id) {
-    	$user_login_data = array(
-		    'user_id' => $user_id,
-		    'user_type' => 2,
-		    'status' => 1
-		);
-		$this->db->insert('user_login', $user_login_data);
-		return TRUE;
+        $user_login_data = array(
+            'user_id' => $user_id,
+            'user_type' => 1,
+            'status' => 1
+        );
+        $r = $this->db->insert('user_login', $user_login_data);
+        return TRUE;
     }
 
     public function insert_user($user_id, $phone_number) {
-    	$user_data = array(
+        $user_data = array(
             'user_id' => $user_id,
             'phone' => $phone_number,
             'status' => 1
@@ -155,10 +200,9 @@ class Auths extends CI_Model {
         $this->db->insert('users', $user_data);
     }
 
-    public function insert_otp_data($phone_number, $user_id, $fourRandomDigit, $formatDate) {
-    	$otp_data = array(
+    public function insert_otp_data($phone_number, $fourRandomDigit, $formatDate) {
+        $otp_data = array(
             'phone_number' => $phone_number,
-            'user_id' => $user_id,
             'code' => $fourRandomDigit,
             'expiry_date' => $formatDate,
             'verified' => 0
@@ -180,7 +224,7 @@ class Auths extends CI_Model {
     // ================================================================================
     // ****** GET COUNTRY *******
     public function get_country() {
-    	$country_Query = $this->db->query("SELECT * FROM places WHERE level = 0");
+        $country_Query = $this->db->query("SELECT * FROM places WHERE level = 0");
         if($country_Query->num_rows() > 0) {
            return $country_Query->result_array();
         }
@@ -188,7 +232,7 @@ class Auths extends CI_Model {
     }
     // ****** GET CITY ******
     public function get_city() {
-    	$city_Query = $this->db->query("SELECT * FROM places WHERE level = 1");
+        $city_Query = $this->db->query("SELECT * FROM places WHERE level = 1");
         if($city_Query->num_rows() > 0) {
             return $city_Query->result_array();
         }
