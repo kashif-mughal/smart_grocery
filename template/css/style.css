@@ -31,6 +31,109 @@ a:hover {
    color: #17a18d;
 }
 
+/*============== Checkout panels =================*/
+#checkout-panel {
+   margin-top: 20px;
+}
+#checkout-panel i.fa-check {
+   color: #ffffff;
+   background-color: rgb(0, 226, 0);
+   font-size: 24px;
+   padding: 10px;
+}
+#checkout-panel button {
+   text-decoration: none;
+   color: #000000;
+}
+#checkout-panel .verification-steps-heading {
+   font-size: 20px;
+   font-weight: 500;
+}
+#checkout-panel .process-number {
+   color: #ffffff;
+   background-color: #333333;
+   font-size: 28px;
+   padding: 10px;
+}
+#checkout-panel .completed-content {
+   font-size: 16px;
+   font-weight: 500;  
+}
+#checkout-panel .change-button {
+   padding: 2px 16px;
+   border: 1px solid red;
+   color: red;
+}
+#checkout-panel .address-panel {
+   color: #333333 !important;
+}
+#checkout-panel .address-panel .card {
+   height: 100%;
+   position: relative;
+}
+#checkout-panel .address-panel a {
+   text-decoration: none;
+   color: #333333;
+}
+#checkout-panel .address-panel i.fa-plus {
+   color: #333333 !important;
+   border-radius: 50%;
+   border: 1px solid #333333;
+}
+#checkout-panel .address-panel i.fa-check {
+   position: absolute;
+   background-color: transparent;
+   padding: 0px;
+   top: 10px;
+   right: 10px;
+   color: rgb(0, 226, 0);
+}
+#checkout-panel .address-panel textarea#newAddressEdit {
+   resize: none;
+   border: none;
+   color: #333333;
+}
+#checkout-panel #headingThree td {
+   font-weight: 500;
+}
+#checkout-panel th {
+   background-color: #ececec;
+   font-weight: 500;
+}
+#checkout-panel .bill-payment-methods {
+   border: 1px solid #ececec;
+}
+
+.bg-gray {
+   background-color: #ececec !important;
+}
+.text-gray {
+   color: #ececec !important;
+}
+a#newAddressAddBtn {
+   position: absolute;
+   bottom: 12px;
+   left: 36%;
+   padding: 2px 4px;
+   background-color: #17a18d;
+   color: #fff !important;
+   font-size: 12px;
+   border-radius: 3px;
+}
+a#newAddressCancelBtn {
+   position: absolute;
+   bottom: 12px;
+   left: 48%;
+   padding: 2px 4px;
+   background-color: #333333;
+   color: #fff !important;
+   font-size: 12px;
+   border-radius: 3px;
+}
+
+/*============== Checkout panels Ends =================*/
+
+
 /*Grocery Panel*/
 @keyframes moveInUp {
    0% {
