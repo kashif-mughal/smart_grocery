@@ -73,7 +73,7 @@ class Categories extends CI_Model {
     }
     //Get limited products inside all sub cat hierarchy
     public function getCatPrducts($catId, $productName = null, $startFrom = 0, $limit = 10){
-        $inCats = NULL;
+        $inCats = Array();
         $func = function($value) {
             return $value["CategoryId"];
         };
@@ -86,13 +86,14 @@ class Categories extends CI_Model {
                             where   find_in_set(ParentId, @pv) and Status = 1
                             and     length(@pv := concat(@pv, ',', CategoryId))";
         $firstQueryResult = $this->db->query($queryFirst);
+        // echo '<pre>';print_r($firstQueryResult->result_array());die;
         if ($firstQueryResult->num_rows() > 0) {
             $inCats = array_map($func, $firstQueryResult->result_array());
-            $inCats = join(",", $inCats);
+            //$inCats = join(",", $inCats);
         }
-        else{
-            $inCats = $catId;
-        }
+        array_push($inCats, $catId);
+        $inCats = join(",", $inCats);
+        
         $whereString = is_null($productName) ? " " : " AND gp.ProductName Like('%$productName%') ";
         $query = "SELECT 
                         gp.*, 

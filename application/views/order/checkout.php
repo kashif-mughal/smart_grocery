@@ -223,15 +223,6 @@
         form.method = "POST";
         form.action = url;
         form.style.display = "none";
-        // for (var i = 0; i < dataArr.length; i++) {
-        //     for (var key in dataArr[i]) {
-        //         var input = document.createElement("input");
-        //         input.type = "hidden";
-        //         input.name = key + '[]';
-        //         input.value = dataArr[i][key];
-        //         form.appendChild(input);
-        //     }   
-        // }
         var input = document.createElement("input");
         input.type = "hidden";
         input.name = 'order';

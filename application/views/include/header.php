@@ -23,11 +23,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       font-size: 20px;
       min-width: 360px;
    }
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
-    }
 </style>
 
 <!-- Sidebar -->
@@ -291,7 +286,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </tbody>
                   </table>
                   <div class="text-right">
-                     <a href="<?php echo base_url() ?>corder/checkout" target="_blank" class="checkout-btn btn btn-sm btn-primary">
+                     <a href="<?php echo base_url() ?>corder/checkout_form" target="_blank" class="checkout-btn btn btn-sm btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout
                      </a>
                      <a href="javascript:void(0);" onclick="emptyCart();" class="btn btn-sm btn-secondary">
@@ -346,7 +341,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    });
    $(document).on('click', '.add-cart', function () {
        var productJson = $(this).data('json');
-       var quantity = parseInt($(this).parent().find('.quantity')[0].value);
+       var quantity = parseInt($(this).parent().parent().parent().find('.quantity')[0].value);
        if(!isNaN(quantity) && quantity > 0){
          var cart = getCookie('baskit');
          if(cart)
@@ -541,7 +536,8 @@ function loadShoppingCart(){
       }   
    }
    function showEmptyResponse(cartBody){
-      $(cartBody).hide();
+      if(cartBody)
+        $(cartBody).hide();
       $($('.emptyCart')[0]).show();
       $(document).on('click', '.checkout-btn', handleCheckout(event));
    }

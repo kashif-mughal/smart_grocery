@@ -309,15 +309,38 @@ class Products extends CI_Model {
         file_put_contents($cache_file, $productList);
     }
     public function search($q, $limit = 10){
-        $this->db->select('p.*, c.CatName');
-        $this->db->from('grocery_products p');
-        $this->db->join('grocery_category c', 'p.Category = c.CategoryId');
-        $this->db->like('p.ProductName', $q);
-        $this->db->limit($limit);
+        $currentDate = date_format(new DateTime(), 'Y-m-d');
+        $query = "SELECT gp.*, gc.CatName from grocery_products gp join grocery_category gc on gp.category = gc.CategoryId where gp.ProductId NOT IN(SELECT ProductId from grocery_assistant ga WHERE ga.CreatedOn = '$currentDate' AND ga.Status = 1) AND gp.ProductName like('%$q%') limit $limit";
+        $query = $this->db->query($query);
+        
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+        return false;
+    }
+
+    public function get_value_cart_products($userId = null){
+        if(is_null($userId)){
+            $userId = $this->session->userdata('user_id');
+        }
+        if(empty($userId))
+            return false;
+        $this->db->select("gp.*, god.ItemQuantity, gu.UnitName");
+        $this->db->from($this->tableName." gp");
+        $this->db->join("grocery_order_detail god", "god.ItemId = gp.ProductId");
+        $this->db->join("grocery_order go", "go.OrderId = god.OrderId");
+        $this->db->join("grocery_unit gu", "gu.UnitId = gp.Unit");
+        $this->db->where("go.CustomerId", $userId);
+        $this->db->where("gp.Status", 1);
+        $this->db->where("god.Status", 1);
+        $this->db->where("go.Status", 1);
+        $this->db->distinct("gp.ProductName");
+        $this->db->order_by("go.CreatedOn", "DESC");
+
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            return $query->result();
+            return $query->result_array();
         }
         return false;
     }

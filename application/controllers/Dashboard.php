@@ -14,6 +14,7 @@ class Dashboard extends CI_Controller {
     public function index() {
         $CI = & get_instance();
         $this->load->library('lcategory');
+        $this->load->library('lassistant');
         $CI->load->model('Products');
         $CI->load->model('Units');
         $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
@@ -22,7 +23,7 @@ class Dashboard extends CI_Controller {
             $product_list =  $query->result_array();
         }
         // print_r($product_list);die;
-
+        $assistant = $CI->lassistant->last_assistant();
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
@@ -40,62 +41,63 @@ class Dashboard extends CI_Controller {
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
-            'ProdList' => $final_product_list
+            'ProdList' => $final_product_list,
+            'Assistant' => $assistant
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);
     }
 
-    public function login() {
-        if ($this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'Dashboard', TRUE, 302);
-        }
-        $data['title'] = 'login_area';
-        $content = $this->parser->parse('user/login_form', $data, true);
-        $this->template->full_html_view($content);
-    }
+    // public function login() {
+    //     if ($this->auth->is_logged()) {
+    //         $this->output->set_header("Location: " . base_url() . 'Dashboard', TRUE, 302);
+    //     }
+    //     $data['title'] = 'login_area';
+    //     $content = $this->parser->parse('user/login_form', $data, true);
+    //     $this->template->full_html_view($content);
+    // }
 
     #==============Valid user check=======#
 
-    public function do_login() {
-        $error = '';
-        $this->load->model('Web_settings');
-        $setting_detail = $this->Web_settings->retrieve_setting_editdata();
-        if ($setting_detail[0]['captcha'] == 0 && $setting_detail[0]['secret_key'] != null && $setting_detail[0]['site_key'] != null) {
+    // public function do_login() {
+    //     $error = '';
+    //     $this->load->model('Web_settings');
+    //     $setting_detail = $this->Web_settings->retrieve_setting_editdata();
+    //     if ($setting_detail[0]['captcha'] == 0 && $setting_detail[0]['secret_key'] != null && $setting_detail[0]['site_key'] != null) {
 
-            $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
-            $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
+    //         $this->form_validation->set_rules('g-recaptcha-response', 'recaptcha validation', 'required|callback_validate_captcha');
+    //         $this->form_validation->set_message('validate_captcha', 'Please check the the captcha form');
 
-            if ($this->form_validation->run() == FALSE) {
-                $this->session->set_userdata(array('error_message' => display('please_enter_valid_captcha')));
-                $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
-            } else {
-                $username = $this->input->post('username');
-                $password = $this->input->post('password');
-                if ($username == '' || $password == '' || $this->auth->login($username, $password) === FALSE) {
-                    $error = display('wrong_username_or_password');
-                }
-                if ($error != '') {
-                    $this->session->set_userdata(array('error_message' => $error));
-                    $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
-                } else {
-                    $this->output->set_header("Location: " . base_url(), TRUE, 302);
-                }
-            }
-        } else {
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
-            if ($username == '' || $password == '' || $this->auth->login($username, $password) === FALSE) {
-                $error = display('wrong_username_or_password');
-            }
-            if ($error != '') {
-                $this->session->set_userdata(array('error_message' => $error));
-                $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
-            } else {
-                $this->output->set_header("Location: " . base_url(), TRUE, 302);
-            }
-        }
-    }
+    //         if ($this->form_validation->run() == FALSE) {
+    //             $this->session->set_userdata(array('error_message' => display('please_enter_valid_captcha')));
+    //             $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+    //         } else {
+    //             $username = $this->input->post('username');
+    //             $password = $this->input->post('password');
+    //             if ($username == '' || $password == '' || $this->auth->login($username, $password) === FALSE) {
+    //                 $error = display('wrong_username_or_password');
+    //             }
+    //             if ($error != '') {
+    //                 $this->session->set_userdata(array('error_message' => $error));
+    //                 $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+    //             } else {
+    //                 $this->output->set_header("Location: " . base_url(), TRUE, 302);
+    //             }
+    //         }
+    //     } else {
+    //         $username = $this->input->post('username');
+    //         $password = $this->input->post('password');
+    //         if ($username == '' || $password == '' || $this->auth->login($username, $password) === FALSE) {
+    //             $error = display('wrong_username_or_password');
+    //         }
+    //         if ($error != '') {
+    //             $this->session->set_userdata(array('error_message' => $error));
+    //             $this->output->set_header("Location: " . base_url() . 'Dashboard/login', TRUE, 302);
+    //         } else {
+    //             $this->output->set_header("Location: " . base_url(), TRUE, 302);
+    //         }
+    //     }
+    // }
 
     //Valid captcha check
     function validate_captcha() {
@@ -182,15 +184,28 @@ class Dashboard extends CI_Controller {
 
     #============User Authentication=======#
 
-    public function user_authentication() {
+    public function user_login(){
         $CI = & get_instance();
         $CI->load->model('Auths');
-
         $data['title'] = 'Sauda Express | Buy each and everything home grocery';
         $data['countries'] = $CI->Auths->get_country();
         $data['cities'] = $CI->Auths->get_city();
         $content = $this->parser->parse('users/registration', $data, true);
         $this->template->full_html_view($content);
+    }
+    public function user_authentication() {
+        if(isset($_SERVER["HTTP_REFERER"])){
+            redirect(base_url("Dashboard/user_login?ret_url=".$_SERVER["HTTP_REFERER"]));
+        }
+        else
+            redirect(base_url("Dashboard/user_login"));
+        // $CI = & get_instance();
+        // $CI->load->model('Auths');
+        // $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        // $data['countries'] = $CI->Auths->get_country();
+        // $data['cities'] = $CI->Auths->get_city();
+        // $content = $this->parser->parse('users/registration', $data, true);
+        // $this->template->full_html_view($content);
     }
    
     

@@ -1928,6 +1928,392 @@ button.category-button:active {
 .leftmenu a{
    text-decoration: none !important;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+   -webkit-appearance: none; 
+   margin: 0; 
+}
+
+
+/*============== Checkout panels =================*/
+#checkout-panel {
+   margin-top: 20px;
+}
+#checkout-panel i.fa-check {
+   color: #ffffff;
+   background-color: rgb(0, 226, 0);
+   font-size: 24px;
+   padding: 10px;
+}
+#checkout-panel button {
+   text-decoration: none;
+   color: #000000;
+}
+#checkout-panel .verification-steps-heading {
+   font-size: 20px;
+   font-weight: 500;
+}
+#checkout-panel .process-number {
+   color: #ffffff;
+   background-color: #333333;
+   font-size: 28px;
+   padding: 10px;
+}
+#checkout-panel .completed-content {
+   font-size: 16px;
+   font-weight: 500;  
+}
+#checkout-panel .change-button {
+   padding: 2px 16px;
+   border: 1px solid red;
+   color: red;
+}
+#checkout-panel .address-panel {
+   color: #333333 !important;
+}
+#checkout-panel .address-panel .card {
+   height: 100%;
+   position: relative;
+}
+#checkout-panel .address-panel a {
+   text-decoration: none;
+   color: #333333;
+}
+#checkout-panel .address-panel i.fa-plus {
+   color: #333333 !important;
+   border-radius: 50%;
+   border: 1px solid #333333;
+}
+#checkout-panel .address-panel i.fa-check {
+   position: absolute;
+   background-color: transparent;
+   padding: 0px;
+   top: 10px;
+   right: 10px;
+   color: rgb(0, 226, 0);
+}
+#checkout-panel .address-panel textarea#newAddressEdit {
+   resize: none;
+   border: none;
+   color: #333333;
+}
+#checkout-panel #headingThree td {
+   font-weight: 500;
+}
+#checkout-panel th {
+   background-color: #ececec;
+   font-weight: 500;
+}
+#checkout-panel .bill-payment-methods {
+   border: 1px solid #ececec;
+}
+
+.bg-gray {
+   background-color: #ececec !important;
+}
+.text-gray {
+   color: #ececec !important;
+}
+a#newAddressAddBtn {
+   position: absolute;
+   bottom: 12px;
+   left: 36%;
+   padding: 2px 4px;
+   background-color: #17a18d;
+   color: #fff !important;
+   font-size: 12px;
+   border-radius: 3px;
+}
+a#newAddressCancelBtn {
+   position: absolute;
+   bottom: 12px;
+   left: 48%;
+   padding: 2px 4px;
+   background-color: #333333;
+   color: #fff !important;
+   font-size: 12px;
+   border-radius: 3px;
+}
+
+/*============== Checkout panels Ends =================*/
+
+
+
+
+/*Grocery Panel*/
+@keyframes moveInUp {
+   0% {
+      opacity: 0;
+      transform: translateY(100px);
+   }
+
+   100% {
+      opacity: 1;
+      transform: translate(0);
+   }
+}
+
+#virtualAssistant .modal-dialog {
+   position: relative;
+   animation-name: moveInUp;
+   animation-duration: 0.5s;
+}
+#virtualAssistant .close {
+   width: 36px !important;
+   height: 36px !important;
+   position: absolute;
+   top: -16px;
+   right: -16px;
+   opacity: 1;
+   border-radius: 18px !important;
+   background-color: #000000 !important;
+   align-items: center;
+   vertical-align: middle;
+} 
+#virtualAssistant .close span {
+   display: block;
+   font-size: 28px;
+   color: #ffffff;
+   font-weight: 100;
+   font-family: "Work Sans";
+   align-items: center;
+   width: 100%;
+   position: absolute;
+   top: 2px;
+   right: -9px;
+}
+
+#va-panel .va-panel-header .va-panel-heading {
+   font-size: 26px;
+   line-height: 25px;
+   color: #333333;
+   font-weight: 800;
+   font-family: "Raleway";
+   max-width: 150px;
+}
+.va-panel-content .filter-heading {
+   font-size: 16px;
+   color: #000000;
+   font-weight: 600;
+   font-family: "Work Sans";
+}
+.va-panel-header-sub {
+   font-size: 17px;
+   font-weight: 700;
+   font-family: "Work Sans";
+   background-color: #f0f0f0 !important;
+   border: 1px solid #dcdcdc;
+}
+.va-panel-header-sub .heading-primary {
+   color: #000000;
+}
+.panel-header-sub .heading-secondary {
+   color: #333333;
+}
+.filter-sidebar {
+   border-right: 1px solid #dcdcdc;
+   border-bottom: 1px solid #dcdcdc;
+}
+.border-r-primary {
+   border-right: : 1px solid #dcdcdc;
+}
+.border-b-primary {
+   border-bottom: 1px solid #dcdcdc;
+}
+.border-t-primary {
+   border-top: 1px solid #dcdcdc;
+}
+.heading-primary {
+   font-size: 18px;
+   color: #000000;
+   font-weight: 700;
+   font-family: "Work Sans";
+}
+.filter-brand-button button {
+   background-color: #25bfa9 !important;
+   font-size: 15px !important;
+   color: #ffffff !important;
+   font-weight: 500 !important;
+   font-family: "Work Sans" !important;
+   border-radius: 0px !important;
+   padding: 2px 6px !important;
+}
+.filter-weight-button button {
+   font-size: 15px !important;
+   color: #000000 !important;
+   font-weight: 500 !important;
+   font-family: "Work Sans" !important;
+   border: 1px solid #cccccc !important;
+   border-radius: 0px;
+   padding: 2px 8px;
+}
+.filter-type-checkbox input {
+   width: 17px !important;
+   height: 17px !important;
+   border-radius: 8px !important;
+   background-color: #ffffff;
+   border: 1px solid #909090;
+}
+.filter-type-checkbox label {
+   font-size: 16px;
+   color: #000000;
+   font-weight: 500;
+   font-family: "Work Sans";
+}
+
+.va-products-content .card {
+   width: 200px;
+   height: 327px;
+   border-radius: 10px 10px 0px 0px;
+   background-color: #ffffff;
+   border: 1px solid #cccccc;
+}
+.va-products-content .card {
+   width: 200px;
+   height: 327px;
+   border-radius: 10px 10px 0px 0px;
+   background-color: #ffffff;
+   border: 1px solid #cccccc;
+}
+.va-products-content .card .header .add_to_favorite {
+   outline: none;
+}
+.va-products-content .card .header .add_to_favorite i:hover {
+   color: #FAB301;
+}
+.va-panel-content .product-card .card-img-top{
+   width: 170px !important;
+}
+.va-products-content .product-card-inner {
+   height: 355px;
+   border-radius: 10px 10px 0px 0px;
+   background-color: #ffffff;
+   border: 1px solid #cccccc;
+}
+.va-panel-content .product-card {
+   height: 305px !important;
+   width: 200px !important;
+}
+.va-panel-content .product-content-button button.nav-btn-primary {
+   padding: 2px 8px !important;
+   background-color: #333333;
+   border: 1px solid #909090;
+   border-radius: 0px;
+   color: #ffffff;
+}
+.va-panel-content .product-content-button button.nav-btn-dismiss {
+   padding: 2px 8px !important;
+   background-color: #dedede;
+   border: 1px solid #dedede;
+   border-radius: 0px;
+   color: #ffffff;
+}
+.va-products-content .product-card-btn {
+   width: 88%;
+   height: 24px;
+   background-color: #25bfa9;
+   text-align: center;
+   text-decoration: none;
+   color: #ffffff;
+   margin-bottom:10px;
+}
+.va-products-content .product-card-title {
+   font-size: 15px !important;
+   letter-spacing: 0px !important;
+   color: #000000 !important;
+   font-weight: 500 !important;
+   font-family: "Work Sans" !important;
+}
+.va-products-content .product-card-weight {
+   font-size: 12px !important;
+   color: #999999 !important;
+   font-weight: 500 !important;
+   font-family: "Work Sans" !important;
+}
+.va-products-content .product-card-inner-price {
+   font-size: 15px;
+   letter-spacing: 0px;
+   color: #000000;
+   font-weight: 500;
+   font-family: "Work Sans";
+}
+.va-panel-content .product-card {
+   height: 305px !important;
+}
+.va-panel-content .product-card-btn {
+   background-color: #25bfa9;
+   font-size: 14px;
+   color: #ffffff;
+   font-weight: 600;
+   font-family: "Work Sans";
+   display: block;
+}
+.va-panel-footer {
+   background-color: #fffbe8;
+   padding: 16px;
+   border-top: 1px solid #dcdcdc;
+}
+.va-panel-footer button {
+   font-family: "Work Sans";
+   font-weight: 600;
+}
+.va-panel-footer-btn-red {
+   font-size: 18px;
+   line-height: 18px;
+   color: #ffffff;
+   text-align: center;
+   max-width: 198px;
+   height: 47px;
+   background-color: #ec0000;
+   border-radius: 0px;
+   /*padding: 2px 6px;*/
+   overflow-wrap: break-word !important;
+   text-decoration: none;
+}
+.va-panel-footer-btn-red:hover {
+   background-color: #ec0000;
+   color: #ffffff;
+}
+.va-panel-footer-btn-black {
+   background-color: #333333;
+   font-size: 16px;
+   line-height: 18px;
+   color: #ffffff;
+   text-align: center;
+   border-radius: 0px;
+   padding: 2px 6px;
+   width: 179px;
+   height: 40px;
+   text-decoration: none;
+}
+.va-panel-footer-btn-black:hover {
+   background-color: #333333;
+   color: #ffffff;
+}
+.va-panel-footer-btn-green {
+   background-color: #009900;
+   font-size: 18px;
+   color: #ffffff;
+   border-radius: 0px;
+   padding: 2px 6px;
+   width: 198px;
+   height: 47px;
+   text-decoration: none;
+}
+.va-panel-footer-btn-green:hover {
+   background-color: #009900;
+   color: #ffffff;
+}
+
+.modal-lg {
+    max-width: 76% !important;
+}
+
+
+/*Grocery Panel*/
+
+
 /* ========== Timeline Ends ============ */
 /* ===================================== */
 

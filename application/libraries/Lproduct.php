@@ -226,7 +226,6 @@ class Lproduct {
 
     public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
         $CI = & get_instance();
-        $CI->load->model('Products');
         $CI->load->library('lcategory');
         $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage);
         $catArray = $CI->lcategory->get_category_hierarchy();

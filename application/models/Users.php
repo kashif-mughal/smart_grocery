@@ -8,6 +8,7 @@ class Users extends CI_Model {
     public function __construct() {
         parent::__construct('users');
     }
+    private $tableName = 'users';
     // private $tableName = 'users';
     function check_valid_user($username, $password) {
         // $password = md5("gef" . $password);
@@ -151,6 +152,23 @@ class Users extends CI_Model {
             $this->db->update('user_login');
 
             return true;
+        }
+        return false;
+    }
+
+    public function get_user_address($userId = null){
+        if(is_null($userId)){
+            $userId = $this->session->userdata('user_id');
+        }
+        $this->db->select("ua.*");
+        $this->db->from($this->tableName." u");
+        $this->db->join("grocery_user_address ua", "u.user_id = ua.UserId");
+        $this->db->where("u.user_id", $userId);
+        $this->db->where("u.Status", 1);
+        $this->db->where("ua.Status", 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
         }
         return false;
     }

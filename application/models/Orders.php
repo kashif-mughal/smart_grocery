@@ -29,6 +29,7 @@ class Orders extends CI_Model {
         $this->db->where('Status', 1);
         $this->db->where('Hash', $data['Hash']);
         $this->db->where('CustomerId', $data['CustomerId']);
+        $this->db->where("Date(CreatedOn)", date_format(new DateTime(), 'Y-m-d'));
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return false;

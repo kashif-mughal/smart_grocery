@@ -15,6 +15,16 @@ class Lorder {
         );
         return $CI->parser->parse('order/checkout', $data, true);
     }
+    public function checkout_detail_form() {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        $userAddress = $CI->Users->get_user_address();
+        $data = array(
+            'title' => 'Checkout',
+            'userAddress' => $userAddress
+        );
+        return $CI->parser->parse('order/checkout_form', $data, true);
+    }
 
     public function proceed_to_checkout($orderId) {
         $CI = & get_instance();

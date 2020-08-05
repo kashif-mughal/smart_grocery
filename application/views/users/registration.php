@@ -42,26 +42,25 @@
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 			<!-- OTP Verfication -->
 			<div id="otpForm" style="display:none;">
-						
 				<div class="sign-in content-box d-flex justify-content-start align-items-start">
-				<div class="mt-2 step-number text-center">
-					<span>1</span>
-				</div>
-				<div class="sign-in-content ml-4">
-					<h4 class="mb-5">Phone Number Verification</h4>
-					<span class="d-block mb-3">Enter 4 digit code sent to your phone  0300 123 45678 (Edit)</span>
-					<div class="form-inline" id="inputOtp">
-						<form class="digit-group">
-							<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
-							<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
-							<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
-							<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
-						</form>
+					<div class="mt-2 step-number text-center">
+						<span>1</span>
 					</div>
-					<span class="d-block mb-4">Resend Code again</span>
-					<a href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</a>
+					<div class="sign-in-content ml-4">
+						<h4 class="mb-5">Phone Number Verification</h4>
+						<span class="d-block mb-3">Enter 4 digit code sent to your phone  0300 123 45678 (Edit)</span>
+						<div class="form-inline" id="inputOtp">
+							<form class="digit-group">
+								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
+								<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
+								<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
+								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
+							</form>
+						</div>
+						<span class="d-block mb-4">Resend Code again</span>
+						<a href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</a>
+					</div>
 				</div>
-
 			</div>
 			<!-- OTP Verification Ends -->
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
@@ -82,73 +81,74 @@
 					<div class="card-body">
 						<h5 class="card-title text-center">Register Member</h5>
 						<div class="errorNotify my-4"></div>
-					<form id="userRegistrationForm" method="post"> 
-						<!-- action="<?php //echo base_url('Auth/updateUserRegistration'); ?>"> -->
-						<div class="form-label-group mb-3">
-							<label for="inputName" class="mb-0">Fullname</label>
-							<input type="text" id="inputName" name="inputName" class="form-control" placeholder="Fullname" required autofocus>
-						</div>
+							<form id="userRegistrationForm" method="post"> 
+								<!-- action="<?php //echo base_url('Auth/updateUserRegistration'); ?>"> -->
+								<div class="form-label-group mb-3">
+									<label for="inputName" class="mb-0">Fullname</label>
+									<input type="text" id="inputName" name="inputName" class="form-control" placeholder="Fullname" required autofocus>
+								</div>
 
-						<div class="form-label-group mb-3">
-							<label for="inputEmail" class="mb-0">Email address</label>
-							<input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address"
-								required autofocus>
-						</div>
-						
-						<div class="form-label-group mb-3">
-							<label for="inputAddress" class="mb-0">Address</label>
-							<input type="text" id="inputAddress" name="inputAddress" class="form-control" placeholder="Address" required autofocus>
-						</div>
-						<div class="row">
-							<div class="col">
 								<div class="form-label-group mb-3">
-									<label for="selectCountry" class="mb-0">Country</label>
-									<select class="form-control form-control-sm" id="selectCountry" name="selectCountry">
-										<?php foreach($countries as $country) : ?>
-										<option value="<?php echo $country['place_name']; ?>"><?=$country['place_name']; ?></option>
-										<?php endforeach; ?>
-									</select>
+									<label for="inputEmail" class="mb-0">Email address</label>
+									<input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address"
+										required autofocus>
 								</div>
-							</div>
-							<div class="col">
+								
 								<div class="form-label-group mb-3">
-									<label for="selectCity" class="mb-0">City</label>
-									<select class="form-control form-control-sm" id="selectCity" name="selectCity">
-										<?php foreach($cities as $city) : ?>
-										<option value="<?php echo $city['place_name']; ?>"><?=$city['place_name'];?></option>
-										<?php endforeach; ?>
-									</select>
+									<label for="inputAddress" class="mb-0">Address</label>
+									<input type="text" id="inputAddress" name="inputAddress" class="form-control" placeholder="Address" required autofocus>
 								</div>
-							</div>
-						</div>
+								<div class="row">
+									<div class="col">
+										<div class="form-label-group mb-3">
+											<label for="selectCountry" class="mb-0">Country</label>
+											<select class="form-control form-control-sm" id="selectCountry" name="selectCountry">
+												<?php foreach($countries as $country) : ?>
+												<option value="<?php echo $country['place_name']; ?>"><?=$country['place_name']; ?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-label-group mb-3">
+											<label for="selectCity" class="mb-0">City</label>
+											<select class="form-control form-control-sm" id="selectCity" name="selectCity">
+												<?php foreach($cities as $city) : ?>
+												<option value="<?php echo $city['place_name']; ?>"><?=$city['place_name'];?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+									</div>
+								</div>
 
-						<div class="form-group">
-							<label for="addressDetails">Address Details</label>
-							<textarea class="form-control" id="addressDetails" name="addressDetails" rows="3" placeholder="Address Details"></textarea>
-						</div>
+								<div class="form-group">
+									<label for="addressDetails">Address Details</label>
+									<textarea class="form-control" id="addressDetails" name="addressDetails" rows="3" placeholder="Address Details"></textarea>
+								</div>
 
-						<div class="row">
-							<div class="col">
-								<div class="form-label-group mb-3">
-									<label for="inputPassword" class="mb-0">Password</label>
-									<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+								<div class="row">
+									<div class="col">
+										<div class="form-label-group mb-3">
+											<label for="inputPassword" class="mb-0">Password</label>
+											<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-label-group mb-3">
+											<label for="inputConfirmPassword" class="mb-0">Confirm Password</label>
+											<input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="col">
-								<div class="form-label-group mb-3">
-									<label for="inputConfirmPassword" class="mb-0">Confirm Password</label>
-									<input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
-								</div>
-							</div>
-						</div>
-						
-						<input type="hidden" name="userId" id="userId">
-						<input type="submit" name="registerSubmit" id="registerSubmit" class="btn btn-primary button-primary text-white p-2 text-dec-none btn-block text-uppercase" value="Register">
-						<hr class="my-2">
-						<a href="javascript:void(0)" id="SigninSwitch" class="p-2 text-dec-none btn-block" type="submit">
-							<i class="fab fa-register mr-2"></i> or Sign in
-						</a>
-					</form>
+								
+								<input type="hidden" name="userId" id="userId">
+								<input type="submit" name="registerSubmit" id="registerSubmit" class="btn btn-primary button-primary text-white p-2 text-dec-none btn-block text-uppercase" value="Register">
+								<hr class="my-2">
+								<a href="javascript:void(0)" id="SigninSwitch" class="p-2 text-dec-none btn-block" type="submit">
+									<i class="fab fa-register mr-2"></i> or Sign in
+								</a>
+							</form>
+					</div>
 				</div>
 			</div>
 			<!-- Registration Form Ends -->
@@ -160,34 +160,36 @@
 						<h5 class="card-title text-center">Sign In</h5>
 						<div class="errorNotify my-4"></div>
 					
-					<form id="userLoginForm" method="post"> 
-						<div class="form-label-group mb-3">
-							<label for="inputLoginEmail" class="mb-0">Email address</label>
-							<input type="email" id="inputLoginEmail" name="inputLoginEmail" class="form-control" placeholder="Email address"
-								required autofocus>
-						</div>
+						<form id="userLoginForm" method="post"> 
+							<div class="form-label-group mb-3">
+								<label for="inputLoginEmail" class="mb-0">Email address</label>
+								<input type="email" id="inputLoginEmail" name="inputLoginEmail" class="form-control" placeholder="Email address"
+									required autofocus>
+							</div>
 
-						<div class="form-label-group mb-3">
-							<label for="inputLoginPassword" class="mb-0">Password</label>
-							<input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control" placeholder="Password"
-								required>
-						</div>
+							<div class="form-label-group mb-3">
+								<label for="inputLoginPassword" class="mb-0">Password</label>
+								<input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control" placeholder="Password"
+									required>
+							</div>
 
-						<div class="custom-control custom-checkbox mb-3">
-							<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
-							<label class="custom-control-label" for="rememberMe">Remember me</label>
-						</div>
-						<input type="submit" name="signinSubmit" id="signinSubmit" class="btn btn-info button-secondary text-white p-2 text-dec-none btn-block text-uppercase" value="Sign in">
-						<hr class="my-2">
-						<a href="javascript:void(0)" id="RegisterSwitch" class="p-2 text-dec-none btn-block mx-auto" type="submit">
-							<i class="fab fa-register mr-2"></i> Register Here
-						</a>
-					</form>
+							<div class="custom-control custom-checkbox mb-3">
+								<input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe">
+								<label class="custom-control-label" for="rememberMe">Remember me</label>
+							</div>
+							<input type="submit" name="signinSubmit" id="signinSubmit" class="btn btn-info button-secondary text-white p-2 text-dec-none btn-block text-uppercase" value="Sign in">
+							<hr class="my-2">
+							<a href="javascript:void(0)" id="RegisterSwitch" class="p-2 text-dec-none btn-block mx-auto" type="submit">
+								<i class="fab fa-register mr-2"></i> Register Here
+							</a>
+						</form>
+					</div>
 				</div>
 			</div>
 			<!-- Login Form Ends -->			
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 		</div>
+		
 		<div class="col-xl-4 col-lg-4 col-md-12">
 			<div class="row">
 				<div class="col-lg-12 col-md-6">
@@ -232,12 +234,12 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 
 <script>
 	$(document).ready(function() {
+		document.getElementById("digit-1").autofocus;
 		localStorage.removeItem('UserId');
 		$('#registrationForm').hide();
 		$('#registrationForm').css('display', 'none');

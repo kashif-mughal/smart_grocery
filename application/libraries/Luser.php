@@ -36,6 +36,34 @@ class Luser {
         return $CI->parser->parse('user/user_edit_profile', $data, true);
     }
 
+    public function user_value_cart(){
+        $CI = & get_instance();
+        $CI->load->model('Products');
+        $products = $CI->Products->get_value_cart_products();
+        $finalProducts = Array();
+        for ($i=0; $i < count($products); $i++) {
+            $pid = $products[$i]['ProductId'];
+            $filteredArray = array_filter($finalProducts, function($toCheck) use ($pid) { 
+                return $toCheck['ProductId'] == $pid; 
+            });
+            if(count($filteredArray) > 0)
+                continue;
+            $productObject = (object) [
+                           'id' => $products[$i]['ProductId'],
+                           'pName' => $products[$i]['ProductName'],
+                           'price' => $products[$i]['SalePrice'],
+                           'img' => base_url().$products[$i]['ProductImg']
+                       ];
+                       $products[$i]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
+            array_push($finalProducts, $products[$i]);
+        }
+        $data = array(
+            'title' => 'Sauda Express | Value cart',
+            'products' => $finalProducts
+        );
+        return $CI->parser->parse('user/value_cart', $data, true);
+    }
+
 }
 
 ?>

@@ -81,6 +81,7 @@ class Lcategory
                 $catArray[$category_list[$i]['ParentName']]->catId = $category_list[$i]['ParentId'];
               }
           }
+          //echo '<pre>';print_r($catArray);die;
         return $catArray;
       }
   }

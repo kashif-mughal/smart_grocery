@@ -57,7 +57,7 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4>Manage Assistant</h4>
+                            <h4>Recent Assistant</h4>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -65,9 +65,10 @@
                             <table id="dataTableExample3" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL#</th>
-                                        <th class="text-center">Assistant Name</th>
-                                        <th class="text-center">Last Modified</th>
+                                        <th class="text-center">SL#</th>
+                                        <th class="text-center">Logo</th>
+                                        <th class="text-center">Product Name</th>
+                                        <th class="text-center">Price</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -76,16 +77,15 @@
                                     if ($assistant_list) {
                                         ?>
                                         {assistant_list}
-                                        <tr id="{Id}">
+                                        <tr id="{AssistantId}">
                                             <td class="text-center">{sl}</td>
-                                            <td class="text-center">{AssistantName}</td>
-                                            <td class="text-center">{ModifiedOn}</td>
+                                            <td class="text-center"><img width="50px;" src="<?=base_url()?>{ProductImg}"></td>
+                                            <td class="text-center">{ProductName}</td>
+                                            <td class="text-center">{SalePrice}</td>
                                             <td>
                                                 <center>
                                                     <?php echo form_open() ?>
-                                                    <a href="<?php echo base_url() . 'Cassistant/assistant_update_form/{AssistantId}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-                                                    <a href="" class="Deleteassistant btn btn-danger btn-sm" name="{AssistantId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href="javascript:void(0);" class="Deleteassistant btn btn-danger btn-sm" name="{AssistantId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                         <?php echo form_close() ?>
                                                 </center>
                                             </td>
@@ -110,21 +110,23 @@
     //Delete assistant 
     $(".Deleteassistant").click(function ()
     {
-        var AssistantId = $(this).attr('name');
+        var currentElem = $(this);
+        var AssistantId = currentElem.attr('name');
         var csrf_test_name = $("[name=csrf_test_name]").val();
         var x = confirm("Are You Sure,Want to Delete ?");
-        if (x == true) {
+        if (x) {
             $.ajax
-                    ({
-                        type: "POST",
-                        url: '<?php echo base_url('Cassistant/assistant_delete') ?>',
-                        data: {AssistantId: AssistantId, csrf_test_name: csrf_test_name},
-                        cache: false,
-                        success: function (datas)
-                        {
-                            alert(datas);
-                        }
-                    });
+            ({
+                type: "POST",
+                url: '<?php echo base_url('Cassistant/assistant_delete') ?>',
+                data: {AssistantId: AssistantId, csrf_test_name: csrf_test_name},
+                cache: false,
+                success: function (datas)
+                {
+                    currentElem.closest('tr').remove();
+                    alert(datas);
+                }
+            });
         }
     });
 </script>

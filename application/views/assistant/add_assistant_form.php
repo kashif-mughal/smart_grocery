@@ -101,9 +101,6 @@
 <!-- Add new grocery assistant end -->
 <script type="text/javascript">
     $(document).ready(function(){
-        function triggerAdd(thisElem){
-            alert("reached");
-        }
         $('#select-grocery').select2({
           ajax: {
             url: '<?=base_url('Cassistant/product_select');?>',
@@ -135,6 +132,7 @@
             var productArea = $('#product-area');
             var cartMarkup = `<div class="col-md-3 col-lg-3 col-sm-6">
                                 <div class="card customCart">
+                                    <i class='fa fa-times' style='float:right;cursor:pointer;'></i>
                                     <img src="{productImg}">
                                     <h5>{productName}</h5>
                                     <h6>in {productCategory}</h6>
@@ -146,6 +144,12 @@
             cartMarkup = cartMarkup.replace(/{productCategory}/g, productJson.CatName);
             cartMarkup = cartMarkup.replace(/{productId}/g, productJson.ProductId);
             productArea.append(cartMarkup);
+        });
+
+        $(document).ready(function(){
+            $(document).on('click', '.fa-times', function () {
+                $(this).closest('.col-sm-6').remove();
+            });
         });
     });
 </script>

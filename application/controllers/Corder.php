@@ -17,7 +17,7 @@ class Corder extends CI_Controller {
     public function index() {
         //print_r("expression");die;
         $CI = & get_instance();
-        $this->auth->check_auth();
+        $this->auth->check_admin_auth();
         //$content = $this->lorder->view_orders();
         //print_r($_SERVER['QUERY_STRING']);
         $paginationConfig = $this->Orders->get_pagination_config('Corder/index');
@@ -32,6 +32,7 @@ class Corder extends CI_Controller {
 
     //Checkout formm
     public function checkout() {
+        $this->auth->check_auth();
         $content = $this->lorder->checkout_form();
         $this->template->full_html_view($content);
     }
@@ -100,5 +101,10 @@ class Corder extends CI_Controller {
         if(empty($orderId))
             $orderId = null;
         redirect(base_url('Corder/order_detail_form/'.$orderId));
+    }
+    public function checkout_form(){
+        $this->auth->check_auth();
+        $content = $this->lorder->checkout_detail_form();
+        $this->template->full_html_view($content);
     }
 }

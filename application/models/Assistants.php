@@ -10,12 +10,13 @@ class Assistants extends CI_Model {
     }
     private $tableName = 'grocery_assistant';
     
-    //assistant Search Item
-    public function assistant_search_item($AssistantId) {
-        $this->db->select('*');
-        $this->db->from($this->tableName);
-        $this->db->where('AssistantId', $AssistantId);
-        $this->db->limit('500');
+    public function search_last_assistant($key, $value) {
+        $this->db->select("*, CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName ");
+        $this->db->from($this->tableName." ga");
+        $this->db->join("grocery_products gp", "gp.ProductId = ga.ProductId");
+        $this->db->join("grocery_unit gu", "gu.UnitId = gp.Unit");
+        $this->db->where('ga.'.$key, $value);
+        $this->db->where('ga.Status', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
