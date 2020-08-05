@@ -1,5 +1,10 @@
-[contenteditable="true"]:focus {
-    outline: none !important;
+.form-control {
+   border-color: #cccccc !important;
+}
+
+input:focus {
+   box-shadow: none !important;
+   outline: none;
 }
 body {
    font-family: 'Work Sans', sans-serif;

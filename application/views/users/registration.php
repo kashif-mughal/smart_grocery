@@ -21,11 +21,11 @@
 						
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text font-size-26 bg-white">+92</span>
-									<span class="input-group-text font-size-26 px-0 bg-white border-l-none">-</span>
-									<span class="input-group-text font-size-26 bg-white border-l-none">3</span>
+									<span class="input-group-text font-size-26 bg-white" id="countryCode">+92</span>
+									<span class="input-group-text font-size-26 px-0 bg-white border-l-none" id="dash">-</span>
+									<span class="input-group-text font-size-26 bg-white border-l-none" id="startingCode">3</span>
 								</div>
-								<input type="text" class="form-control mr-0 border-l-none" id="inputPhone" autofocus>
+								<input type="number" class="form-control mr-0 border-l-none" id="inputPhone" autofocus>
 								<div class="input-group-append m-0">
 									<a href="javascript:void(0)" class="btn btn-dark px-4 py-3" type="submit" id="phoneSubmit">
 										Verify Number
@@ -36,8 +36,6 @@
 							<span class="d-block">Existing user will log in right after verifying the confirmation code</span>
 						</div>
 					</div>
-
-					
 				</div>
 			</div>
 			<!-- Phone Verification Ends -->
@@ -251,12 +249,33 @@
 		$('#phoneVerified').css('display', 'none');
 		$('.errorNotify').css('display', 'none');
 
+		// Check Valid Phone Number
+		$('#inputPhone').keyup(function() {
+			var phoneNumber = $('#inputPhone').val();
+			var phoneRegEx = /^[0-9]{9}$/;
+			if(phoneNumber.match(phoneRegEx)) {
+				// if phone is validated
+				$('#inputPhone').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
+				$('#countryCode').attr("style", "border: 1.3px solid green !important; border-right: none !important;");
+				$('#dash').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
+				$('#startingCode').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
+			}
+			else {
+				// if phone is not validated
+				$('#inputPhone').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
+				$('#countryCode').attr("style", "border: 1.3px solid red !important; border-right: none !important;");
+				$('#dash').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
+				$('#startingCode').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
+			}
+		});
+
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
 			var phoneNumber = $('#inputPhone').val();
 			var phoneRegEx = /^[0-9]{9}$/;
 			if(!phoneNumber.match(phoneRegEx)) {
-				$('.errorNotify').html("<small style='color: red;'>Error! Phone number is wronng</small>");
+				$.notify("Phone number is wronng", "error");
+				// $('.errorNotify').html("<small style='color: red;'>Error! Phone number is wronng</small>");
 			}
 			else {
 				phoneNumber = '923' + phoneNumber;
@@ -268,6 +287,7 @@
 					success: function(data) {
 						if(data.success) {
 							//responseMessage
+							
 							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
 							$('.errorNotify').show();
 							setTimeout(function() {
@@ -277,14 +297,12 @@
 							}, 2000);
 						}
 						else {
-							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.responseMessage + "</small></div>");
-							$('.errorNotify').hide();
+							$.notify(data.responseMessage, "error");
 						}
 
 					},
 					error: function(data) {
-						$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.success + "</small></div>");
-						$('.errorNotify').css('display', 'block');
+						$.notify(data.responseMessage, "error");
 					}
 				});
 			}
@@ -296,7 +314,7 @@
 			var otpRegEx = /^[0-9]{4}$/;
 			var phone_number = '923' + $('#inputPhone').val();
 			if(!otpCode.match(otpRegEx)) {
-				$('.errorNotify').html("<small style='color: red;'>Error! OTP should be 4 digit number</small>");
+				$.notify("OTP should be 4 digit number", "error");
 			}
 			else {
 				$.ajax({
@@ -306,37 +324,28 @@
 					dataType: "json",
 					success: function(data) {
 						if(data.status == 'Error') {
-							$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.responseMessage + "</small></div>");
-							$('.errorNotify').show();
-							setTimeout(function() {
-								$('.errorNotify').hide();
-							}, 2000); 
+							$.notify(data.responseMessage, "error");
 						}
 						else {
-							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><i class='fas fa-check-square mr-3'></i><small>` + data.responseMessage + `</small></div>`);
-							$('.errorNotify').show();
-							setTimeout(function() {
-								$('.errorNotify').hide();
-							}, 2000);
+							$.notify(data.responseMessage, "success");
 							if(data.loggedInStatus && data.redirectURL == false) {
 								// Welcome Screen
-								window.location.href = "<?php echo base_url('dashboard/welcome'); ?>";
+								$.notify("Verification completed, User Logged In", "success");
+								setTimeout(function() {
+									window.location.href = "<?php echo base_url('dashboard/welcome'); ?>";
+								}, 2000);
 							}
 							else {
 								// Redirect URL
-								window.location.href = data.redirectURL;
+								$.notify("Verification completed, Redirecting to your previous location", "success");
+								setTimeout(function() {
+									window.location.href = data.redirectURL;
+								}, 2000);
 							}
-
-							
-							
 						}
 					},
 					error: function(data) {
-						$('.errorNotify').html("<div style='background-color:#ffcccb; border-radius:3px; color:red; padding:5px;'><i class='fas fa-times-circle mr-3'></i><small>" + data.response + "</small></div>");
-						$('.errorNotify').show();
-						setTimeout(function() {
-							$('.errorNotify').hide();
-						}, 2000);
+						$.notify(data.responseMessage, "error");
 				}
 				});
 			}
