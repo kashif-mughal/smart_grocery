@@ -279,9 +279,9 @@ class Auth2 extends CI_Controller {
                         }
                         else { // Otp code is wrong
                             $result['responseMessage'] = "OTP Code is wrong";
-                            $result['loggedInStatus'] = true;
+                            $result['loggedInStatus'] = false;
                             $result['redirectURL'] = $returnURL;
-                            $result['status'] = 'Success';
+                            $result['status'] = 'Error';
                             echo json_encode($result);
                             return;                            
                         }

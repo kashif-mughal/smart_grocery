@@ -48,7 +48,7 @@
 					</div>
 					<div class="sign-in-content ml-4">
 						<h4 class="mb-5">Phone Number Verification</h4>
-						<span class="d-block mb-3">Enter 4 digit code sent to your phone  0300 123 45678 (Edit)</span>
+						<span class="d-block mb-3 currentPhoneMessage">Enter 4 digit code sent to your phone </span>
 						<div class="form-inline" id="inputOtp">
 							<form class="digit-group">
 								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
@@ -277,7 +277,6 @@
 			var phoneRegEx = /^[0-9]{9}$/;
 			if(!phoneNumber.match(phoneRegEx)) {
 				$.notify("Phone number is wronng", "error");
-				// $('.errorNotify').html("<small style='color: red;'>Error! Phone number is wronng</small>");
 			}
 			else {
 				phoneNumber = '923' + phoneNumber;
@@ -289,7 +288,6 @@
 					success: function(data) {
 						if(data.success) {
 							//responseMessage
-							
 							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
 							$('.errorNotify').show();
 							setTimeout(function() {
