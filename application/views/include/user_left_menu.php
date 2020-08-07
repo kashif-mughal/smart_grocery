@@ -10,7 +10,7 @@ if(is_array($users) && !empty($users[0])){
 $CI->load->library('lcategory');
 $menuCatList = $CI->lcategory->get_category_hierarchy();
 ?>
-<h3 class="sidebar-heading border-b-primary font-size-22 pb-2" data-toggle="collapse" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow">Shop Categories</h3>
+<h3 class="sidebar-heading border-b-primary font-size-22 left-menu-head" data-toggle="collapse" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow">Shop Categories</h3>
 
 <div class="sidebar-menu">
     <div class="accordion border-b-primary" id="accordionExample">

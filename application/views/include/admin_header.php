@@ -83,7 +83,7 @@ $users = $CI->Users->profile_edit_data();
                     echo " ";
                 }
                 ?>">
-                <a href="<?php echo base_url() ?>"><i class="ti-dashboard"></i> <span><?php echo display('dashboard') ?></span>
+                <a href="<?php echo base_url() ?>" target="_blank"><i class="ti-dashboard"></i> <span>LIVE WEBSITE</span>
                     <span class="pull-right-container">
                         <span class="label label-success pull-right"></span>
                     </span>

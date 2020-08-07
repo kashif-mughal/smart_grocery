@@ -11,7 +11,6 @@ class Cbrand extends CI_Controller {
         parent::__construct();
         $this->load->library('auth');
         $this->load->library('lbrand');
-        $this->load->library('session');
         $this->load->model('Brands');
     }
 

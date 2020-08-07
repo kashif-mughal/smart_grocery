@@ -9,9 +9,7 @@ class Cunit extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->library('auth');
         $this->load->library('lunit');
-        $this->load->library('session');
         $this->load->model('Units');
     }
 

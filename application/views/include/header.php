@@ -23,6 +23,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       font-size: 20px;
       min-width: 360px;
    }
+   .nothing-to-show{
+    background: #cc0808;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+   }
+   .left-menu-head{
+    padding: 20px 40px !important;
+   }
 </style>
 
 <!-- Sidebar -->
@@ -144,6 +154,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <li class="nav-item">
                         <a class="nav-link" href="<?=base_url("Corder/track_order_form")?>">Track your order</a>
                      </li>
+                     <?php if($_SESSION['user_type'] == 1){?>
+                      <li>
+                        <p class="seperator">|</p>
+                     </li>
+                       <li class="nav-item">
+                          <a class="nav-link" href="<?=base_url("Admin_dashboard")?>">Admin Panal</a>
+                       </li>
+                     <?php } ?>
                      <li>
                         <p class="seperator">|</p>
                      </li>

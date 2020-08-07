@@ -2362,7 +2362,10 @@ a#newAddressCancelBtn {
 
 
 @media (max-width: 768px) {
-
+   .hidden-sm-down{
+      display: none;
+   }
+   
    .logo .logo_content img {
       max-width: 190px !important;
    }

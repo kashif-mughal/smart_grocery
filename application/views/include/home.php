@@ -133,7 +133,7 @@
                      <div class="col-md-9">
                         <div class="container-fluid">
                            <div class="row featured-products-content pb-1">
-                              <?php for ($i=0; $i < count($value->products); $i++) {?>
+                              <?php if(is_array($value->products)) for ($i=0; $i < count($value->products); $i++) {?>
                               <div class="card mr-2 each-prod product-card-inner">
                                  <?php if(!empty($value->products[$i]['ProductName'])){?>
                                  <div class="card-body p-0">

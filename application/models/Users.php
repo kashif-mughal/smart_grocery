@@ -93,6 +93,16 @@ class Users extends CI_Model {
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
+        }else{
+            $this->db->select('*');
+            $this->db->from('users');
+            $this->db->where('user_id', $user_id);
+            $query2 = $this->db->get();
+            if ($query2->num_rows() > 0) {
+                return $query->result_array();
+            }
+            else
+                return false;
         }
         return false;
     }
@@ -173,4 +183,20 @@ class Users extends CI_Model {
         return false;
     }
 
+    public function update_address(){
+        $addresses = $this->input->post('selectedAddress');
+        $userId = $this->session->userdata('user_id');
+        $insertedAddresses = Array();
+        for ($i=0; $i < count($addresses); $i++) { 
+            $data = array(
+                'Address' => $addresses[$i],
+                'UserId' => $userId,
+                'Status' => 1
+            );
+            $this->db->insert("grocery_user_address", $data);
+            
+            array_push($insertedAddresses, $this->db->insert_id());
+        }
+        return $insertedAddresses;
+    }
 }

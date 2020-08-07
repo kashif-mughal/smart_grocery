@@ -6,5 +6,5 @@
 <footer class="main-footer">
     <strong>
     	<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
-   	</strong><i class="fa fa-heart color-green"></i>
+   	</strong>
 </footer>

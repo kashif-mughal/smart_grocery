@@ -48,6 +48,19 @@ class Lorder {
     public function place_order(){
         $CI = & get_instance();
         $CI->load->model('Orders');
+
+        $addressId = $CI->session->userdata("addressId");
+        $deliveryTime = $CI->session->userdata("deliveryTime");
+        $addressText = $CI->session->userdata("addressText");
+        $addressId = $CI->session->userdata("addressId");
+        if(!is_numeric($addressId) || empty($deliveryTime) || empty($addressText))
+            redirect(base_url("Corder/checkout_form"));
+
+        $parts = explode("__" , $deliveryTime);
+        $deliveryDate = date('Y-m-d', strtotime($parts[0]));
+        $dtFrom = date('Y-m-d H:i a', strtotime($parts[0]));
+        $dtUpto = date('Y-m-d H:i a', strtotime($parts[1]));
+
         $orderDetail = json_decode($_POST['order']);
         $OV = 0;
         foreach ($orderDetail as $key => $eachProd) {
@@ -58,6 +71,10 @@ class Lorder {
             'OrderValue' => $OV,
             'Hash' => sha1($_POST['order']),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+            'DeliveryDate' => $deliveryDate,
+            'DeliveryFrom' => $dtFrom,
+            'DeliveryUpto' => $dtUpto,
+            'DeliveryAddress' => $addressId,
             'Status' => 1,
         );
         $orderId = $CI->Orders->place_order($data);
@@ -129,13 +146,31 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Orders');
         $order_detail = $CI->Orders->retrieve_order_editdata($OrderId);
-//echo '<pre>';print_r($order_detail);die;
         $data = array(
             'title' => 'Order Edit',
             'OrderData' => $order_detail
         );
+        //echo "<pre>";print_r($data);die;
         return $CI->parser->parse('order/edit_order_form', $data, true);
     }
+
+    public function admin_order_edit_data($OrderId) {
+        $CI = & get_instance();
+        $CI->load->model('Orders');
+        $order_detail = $CI->Orders->retrieve_order_editdata($OrderId, true);
+        foreach ($order_detail['OrderDetail'] as $k => $v) {
+                $i++;
+                $order_detail['OrderDetail'][$k]['sl'] = $i;
+            }
+        $data = array(
+            'title' => 'Order Edit',
+            'OrderData' => $order_detail,
+            'OrderId' => $OrderId
+        );
+        //echo "<pre>";print_r($data);die;
+        return $CI->parser->parse('order/admin_order_detail', $data, true);
+    }
+    
     //order Traking Form
     public function track_order_form() {
         $CI = & get_instance();

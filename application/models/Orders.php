@@ -48,6 +48,7 @@ class Orders extends CI_Model {
             $CI = & get_instance();
             $userId = $CI->session->userdata('user_id');
         }
+        //print_r($userId);die;
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('CustomerId', $userId);
@@ -98,10 +99,10 @@ class Orders extends CI_Model {
         return false;
     }
 
-    public function retrieve_order_editdata($orderId){
+    public function retrieve_order_editdata($orderId, $requireAllSteps = false){
         if(is_null($orderId))
             return false;
-        $this->db->select('b.*, c.ProductName, c.ProductImg, d.UnitName');
+        $this->db->select('a.*, b.*, c.ProductName, c.ProductImg, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
@@ -114,24 +115,12 @@ class Orders extends CI_Model {
         if ($query->num_rows() > 0) {
             $orderDetailObj['OrderDetail'] = $query->result_array();
 
-            //getting order traking
-            $this->db->select('b.*');
-            $this->db->from($this->tableName.' a');
-            $this->db->join('grocery_order_traking b', 'a.OrderId = b.OrderId');
-            $this->db->join('grocery_traking_steps c', 'b.StepId = c.StepId');
-            $this->db->where('a.Status', 1);
-            $this->db->where('b.Status', 1);
-            $this->db->where('c.Status', 1);
-            $this->db->where('a.OrderId', $orderId);
-            $query2 = $this->db->get();
-            if ($query2->num_rows() > 0) {
-                $orderDetailObj['OrderTrakingDetail'] = $query2->result_array();
-            }
-
             //getting traking steps
             $this->db->select('*');
             $this->db->from('grocery_traking_steps');
             $this->db->where('Status', 1);
+            if(!$requireAllSteps)
+                $this->db->where('StepName !=', 'Canceled');
             $query3 = $this->db->get();
             if ($query3->num_rows() > 0) {
                 $orderDetailObj['TrakingSteps'] = $query3->result_array();
@@ -140,5 +129,10 @@ class Orders extends CI_Model {
             return $orderDetailObj;
         }
         return false;
+    }
+    public function update_order_status($orderId, $status){
+        $query = "UPDATE `grocery_order` go set  `PreviousOrderStep` = go.`OrderStep`, `OrderStep` = $status WHERE `OrderId` = $orderId";
+        $this->db->query($query);
+        return true;
     }
 }

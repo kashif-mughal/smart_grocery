@@ -1,6 +1,5 @@
 <div id="main-page">
         <!-- Bread Crumb -->
-
         <div class="bread_crumb">
             <div class="container">
                 <div class="row d-block">
@@ -57,7 +56,7 @@
                                                 <div class="text-left">
                                                     <span class="verification-steps-heading d-block">Verified Mobile
                                                         Number</span>
-                                                    <span class="completed-content">0300 123 45678</span>
+                                                    <span class="completed-content"><?=$_SESSION['phone']?></span>
                                                 </div>
                                             </button>
                                         </h5>
@@ -76,12 +75,12 @@
                                             <button class="btn btn-link d-flex w-100" data-toggle="collapse"
                                                 data-target="#collapseTwo" aria-expanded="false"
                                                 aria-controls="collapseTwo">
-                                                <span class="mr-4 process-number">2</span>
+                                                <i class="fas fa-check mr-4" id="address-success" style="display: none;"></i>
+                                                <span class="mr-4 process-number" id="address-process">2</span>
                                                 <div class="text-left">
                                                     <span
-                                                        class="verification-steps-heading d-block align-self-start">Enter
-                                                        your Delivery Address</span>
-                                                    <span class="completed-content">0300 123 45678</span>
+                                                        class="verification-steps-heading d-block align-self-start" id="deliveryAddressTitle">Enter your Delivery Address</span>
+                                                    <span class="completed-content" id="deliveryAddressText"></span>
                                                 </div>
                                                 <div class="change-button ml-auto">Change</div>
                                             </button>
@@ -91,56 +90,54 @@
                                         data-parent="#accordion">
                                         <div class="card-body p-5">
                                             <div class="container-fluid">
-                                                <div class="row address-panel my-2">
-                                                    <div id="address-area">
+                                                <form id="addressForm" action="<?=base_url('user/submit_address')?>">
+                                                    <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
+                                                    <div class="row address-panel my-2">
                                                         <?php if($userAddress){?>
                                                             {userAddress}
-                                                            <div class="col-md-6 my-2" data-addressId="{AddressId}">
+                                                            <div class="col-md-6 my-2">
                                                                 <div class="card p-5 text-center">
-                                                                    <i class="fas fa-check" style="display: none;"></i>
-                                                                    <a href="javascript:void(0)" class="singleAddress">
-                                                                        <span>
-                                                                            {Address}
-                                                                        </span>
+                                                                    <i class="fas fa-check" style="display:none;"></i>
+                                                                    <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
+                                                                        <span class="internalAddressContent">{Address}</span>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             {/userAddress}
                                                         <?php } ?>
-                                                    </div>
-                                                    <div class="col-md-6 my-2">
-                                                        <div class="card">
-                                                            <a href="javascript:void(0)" class="text-center p-5"
-                                                                id="addNewAddress">
-                                                                <textarea name="newAddressEdit" id="newAddressEdit"
-                                                                    cols="20" rows="5"
-                                                                    style="display: none;"></textarea>
-                                                                <!-- <div id="addAddressBtn"> -->
-                                                                <div id="newAddressContent">
-                                                                    <span class="mb-2 d-block">
-                                                                        <i class="fas fa-plus fa-2x p-3 bg-gray"></i>
-                                                                    </span>
-                                                                    <span id="addAddressBtn">
-                                                                        Add new Delivery Address
-                                                                    </span>
-                                                                </div>
-                                                                <!-- <div class="d-flex justify-content-center"> -->
-                                                                <a href="javascript:void(0)" id="newAddressAddBtn"
-                                                                    style="display: none;">Add</a>
-                                                                <a href="javascript:void(0)" id="newAddressCancelBtn"
-                                                                    style="display: none;">Cancel</a>
-                                                                <!-- </div> -->
+                                                        <div class="col-md-6 my-2">
+                                                            <div class="card">
+                                                                <a href="javascript:void(0)" class="text-center p-5"
+                                                                    id="addNewAddress">
+                                                                    <textarea name="newAddressEdit" id="newAddressEdit"
+                                                                        cols="20" rows="5"
+                                                                        style="display: none;"></textarea>
+                                                                    <!-- <div id="addAddressBtn"> -->
+                                                                    <div id="newAddressContent">
+                                                                        <span class="mb-2 d-block">
+                                                                            <i class="fas fa-plus fa-2x p-3 bg-gray"></i>
+                                                                        </span>
+                                                                        <span id="addAddressBtn">
+                                                                            Add new Delivery Address
+                                                                        </span>
+                                                                    </div>
+                                                                    <!-- <div class="d-flex justify-content-center"> -->
+                                                                    <a href="javascript:void(0)" id="newAddressAddBtn"
+                                                                        style="display: none;">Add</a>
+                                                                    <a href="javascript:void(0)" id="newAddressCancelBtn"
+                                                                        style="display: none;">Cancel</a>
+                                                                    <!-- </div> -->
 
-                                                            </a>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <a href="javascript:void(0)"
-                                                            class="btn btn-link button-secondary px-4 py-2">Next</a>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <input type="submit" class="btn btn-link button-secondary px-4 py-2" value="Next" id="submitAddress">
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -151,11 +148,11 @@
                                             <button class="btn btn-link d-flex w-100 collapsed" data-toggle="collapse"
                                                 data-target="#collapseThree" aria-expanded="false"
                                                 aria-controls="collapseThree">
-                                                <span class="mr-4 process-number">3</span>
+                                                <i class="fas fa-check mr-4" id="time-success" style="display: none;"></i>
+                                                <span class="mr-4 process-number" id="time-process">3</span>
                                                 <div class="text-left">
-                                                    <span class="verification-steps-heading d-block">Enter Delivery Date
-                                                        and Time</span>
-                                                    <span class="completed-content">0300 123 45678</span>
+                                                    <span class="verification-steps-heading d-block" id="deliveryDateTitle">Enter Delivery Date and Time</span>
+                                                    <span class="completed-content" id="deliveryDateText"></span>
                                                 </div>
                                                 <div class="change-button ml-auto">Change</div>
                                             </button>
@@ -164,73 +161,8 @@
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                         data-parent="#accordion">
                                         <div class="card-body">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Date - Day</th>
-                                                        <th scope="col">Same Day Delivey - Additional Rs 150 will be
-                                                            charged</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Thursday, 17 June</td>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="deliveryDate" id="today1" value="option1"
-                                                                    checked>
-                                                                <label class="form-check-label" for="today1">
-                                                                    Today
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Date - Day</th>
-                                                        <th scope="col">Time Slot</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Thursday, 18 June</td>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="deliveryDate" id="today2" value="option2">
-                                                                <label class="form-check-label" for="today2">
-                                                                    10:00 am - 7:00 pm
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Thursday, 19 June</td>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="deliveryDate" id="today3" value="option3">
-                                                                <label class="form-check-label" for="today3">
-                                                                    10:00 am - 7:00 pm
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Thursday, 20 June</td>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="deliveryDate" id="today4" value="option4">
-                                                                <label class="form-check-label" for="today4">
-                                                                    10:00 am - 7:00 pm
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                            <table class="table table-bordered" id="timeSlotArea">
+                                                
                                             </table>
                                             <a href="javascript:void(0)"
                                                 class="btn btn-link button-secondary px-4 py-2">Next</a>
@@ -245,9 +177,9 @@
                                                 aria-controls="headingFour">
                                                 <span class="mr-4 process-number">4</span>
                                                 <div class="text-left">
-                                                    <span class="verification-steps-heading d-block">Select Payment
+                                                    <span class="verification-steps-heading d-block" id="paymentMethodTitle">Select Payment
                                                         System</span>
-                                                    <span class="completed-content">0300 123 45678</span>
+                                                    <span class="completed-content" id="paymentMethodText"></span>
                                                 </div>
                                                 <div class="change-button ml-auto">Change</div>
                                             </button>
@@ -270,8 +202,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <a href="#" class="btn btn-link px-4 py-2 button-primary">Place Order
-                                                    Here</a>
+                                                <a href="javascript:void(0)" id="proceed" class="btn btn-link px-4 py-2 button-primary">Place Order Here</a>
                                             </div>
                                         </div>
                                     </div>
@@ -331,33 +262,200 @@
     </div>
 <script type="text/javascript">
     var baskit = getCookie('baskit');
+    var selectedAddress = false;
+    var deliveryTime = false;
+    var step1Verified = true;
+    var step2Verified = false;
+    var step3Verified = false;
+    var step4Verified = true;
     if(!baskit || JSON.parse(baskit).length == 0)
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
         loadCheckoutCartArea();
-        $('#addAddressBtn').on("click", function(){
-            var addressElem = $("#address-area");
-            // `<div class="col-md-6 my-2"">
-            //     <div class="card p-5 text-center">
-            //         <i class="fas fa-check" style="display: none;"></i>
-            //         <a href="javascript:void(0)" class="singleAddress">
-            //             <span>
-            //                 {Address}
-            //             </span>
-            //         </a>
-            //     </div>
-            // </div>`;
-            var addressTemplate = `<div class="card">
-                                        <span>HOME</span>
-                                        <span>
-                                            <input type="text" name="userAddress[]" />
-                                            <input type="hidden" name="selectedAddress[]" />
-                                        </span>
-                                    </div>`;
-            addressElem.append(addressTemplate);
+        $("#addressForm").submit(function(e) {
+            e.preventDefault();
+            if(!selectedAddress){
+                $.notify("Kindly select at least one address", "error");
+                return false;
+            }
+            if(($('input[name="selectedAddress[]"]')).length == 0){
+                $('#deliveryAddressTitle').html("Your Delivery Address Is");
+                $('#deliveryAddressText').html($('#selectedFinalAddress').val());
+                $('#address-success').show();
+                $('#address-process').hide();
+                $('#collapseTwo').collapse('hide');
+                step2Verified = true;
+                return true;
+                //close tab
+            }
+            submitForm($(this));
+        });
+        setTimeSlots();
+        $("#proceed").on("click", function(){
+            proceedToCheckout();
         });
     });
+    function proceedToCheckout(){
+        if(!step1Verified || !step2Verified || !step3Verified || !step4Verified){
+            $.notify("Please verify all the steps", "error");
+                return false;
+        }else{
+            var form = document.createElement("form");
+            //form.target = "_blank";
+            form.method = "POST";
+            form.action = "<?=base_url('Corder/checkout')?>";
+            form.style.display = "none";
 
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = 'ad';
+            input.value = selectedAddress.data("addressid");
+            form.appendChild(input);
+
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = 'dt';
+            input.value = deliveryTime;
+            form.appendChild(input);
+
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = 'dtt';
+            input.value = selectedAddress.text().trim();
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+        }
+    }
+    function setTimeSlots(){
+        var timeSlotAreaElem = $('#timeSlotArea');
+        timeSlotAreaElem.empty();
+        var currentDt = new Date();
+        var cart = getCookie('baskit');
+        if(!cart)
+            cart = "[]";
+        cart = JSON.parse(cart);
+        if(cart.length <= 15){
+        var todayTemplate = `<thead>
+                                <tr>
+                                    <th scope="col">Date - Day</th>
+                                    <th scope="col">Same Day Delivey - Additional Rs 150 will be
+                                        charged</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${currentDt.toDateString()}</td>
+                                    <td>
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="today1" onclick="setTimeSlotInternal(this);">
+                                                <input class="form-check-input" type="radio"
+                                                name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
+                                                today
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>`;
+                            timeSlotAreaElem.append(todayTemplate);
+                        }
+        var otherDTemplateHead =    `<thead>
+                                        <tr>
+                                            <th scope="col">Date - Day</th>
+                                            <th scope="col">Time Slot</th>
+                                        </tr>
+                                    </thead>`;
+        currentDt.setDate(currentDt.getDate() + 1);
+        var otherDTemplateBody =    `<tbody>
+                                        <tr>
+                                            <td>${currentDt.toDateString()}</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="today2" onclick="setTimeSlotInternal(this);">
+                                                        <input class="form-check-input" type="radio"
+                                                        name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
+                                                        <span>10:00 am - 7:00 pm</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>`;
+        currentDt.setDate(currentDt.getDate() + 1);
+        otherDTemplateBody +=           `<tr>
+                                            <td>${currentDt.toDateString()}</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="today2"  onclick="setTimeSlotInternal(this);">
+                                                        <input class="form-check-input" type="radio"
+                                                        name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
+                                                        <span>10:00 am - 7:00 pm</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>`;
+        currentDt.setDate(currentDt.getDate() + 1);
+        otherDTemplateBody +=           `<tr>
+                                            <td>${currentDt.toDateString()}</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label" for="today2" onclick="setTimeSlotInternal(this);">
+                                                        <input class="form-check-input" type="radio"
+                                                        name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
+                                                        <span>10:00 am - 7:00 pm</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>`;
+        timeSlotAreaElem.append(otherDTemplateHead);
+        timeSlotAreaElem.append(otherDTemplateBody);
+    }
+    function setTimeSlotInternal(currentElem){
+        deliveryTime = $(currentElem).find('input').first().val();
+        var deliveryTimeArr = deliveryTime.split('__');
+        var dt = new Date(deliveryTimeArr[0]);
+        var dt1 = new Date(deliveryTimeArr[1]);
+        var deliverText = dt.toDateString() + "<br>" + dt.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + " to " + dt1.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+        $('#deliveryDateTitle').html("Deliver On");
+        $('#deliveryDateText').html(deliverText);
+        $('#time-success').show();
+        $('#time-process').hide();
+        $('#collapseThree').collapse('hide');
+        step3Verified = true;
+    }
+    function submitForm(form){
+        $.ajax({
+           type: "POST",
+           url: form.attr('action'),
+           data: form.serialize(),
+           dataType: "JSON",
+           success: function(data)
+           {
+            if(data.status == 0){
+                $.notify("Something went wrong", "error");
+                console.log(data);
+                return false;
+            }
+            console.log("address submit successfully");
+            var newlyAddresses = $('input[name="selectedAddress[]"]');
+            for(counter = 0; counter < newlyAddresses.length; counter++){
+                newlyAddresses.parent().attr('data-addressId', data.insertedIds[counter]);
+                newlyAddresses.remove();
+            }
+
+            $('#deliveryAddressTitle').html("Your Delivery Address Is");
+            $('#deliveryAddressText').html($('#selectedFinalAddress').val());
+            $('#address-success').show();
+            $('#address-process').hide();
+            $('#collapseTwo').collapse('hide');
+            step2Verified = true;
+           },
+           error: function(a,b){
+                $.notify("Something went wrong!!!", "error");
+           }
+        });
+    }
     function loadCheckoutCartArea(){
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
@@ -396,4 +494,57 @@
             return false;
          }
     }
+
+    var addressCounter = 1;
+
+    $(document).on("click", "a.singleAddress", function () {
+        $('.address-panel i.fa-check').hide();
+        $(this).prev('i.fa-check').toggle();
+        $('.selectedAddress').removeClass("selectedAddress");
+        $(this).addClass("selectedAddress");
+        $('#selectedFinalAddress').val($(this).find('.internalAddressContent')[0].innerText);
+        selectedAddress = $(this);
+    });
+
+    $('#addNewAddress').click(function (e) {
+        e.preventDefault();
+        $('#newAddressContent').hide();
+        $('#newAddressEdit').show();
+        $('#newAddressEdit').focus();
+        $('#newAddressAddBtn').show();
+        $('#newAddressCancelBtn').show();
+    });
+
+    $('#newAddressAddBtn').click(function () {
+        addressCounter++;
+        var content = $('#newAddressEdit').val();
+        // Add Address in DB
+
+        // Add Address in Delivery Address Panel
+
+        //                                 <input type="text" name="userAddress[]" />
+        //                                 <input type="hidden" name="selectedAddress[]" />
+        $('.address-panel').prepend(`<div class="col-md-6 my-2">
+            <div class="card p-5 text-center">
+                <i class="fas fa-check" style="display:none;"></i>
+                <a href="javascript:void(0)" class="singleAddress" id="address${addressCounter}">
+                    <span class="internalAddressContent">${content}</span>
+                    <input type="hidden" value="${content}" name="selectedAddress[]" />
+                </a></div></div>`);
+
+        // reset add address panel
+        $('#newAddressEdit').val('');
+        $('#newAddressEdit').hide();
+        $('#newAddressAddBtn').hide();
+        $('#newAddressCancelBtn').hide();
+        $('#newAddressContent').show();
+    });
+
+    $('#newAddressCancelBtn').click(function () {
+        $('#newAddressEdit').val('');
+        $('#newAddressEdit').hide();
+        $('#newAddressAddBtn').hide();
+        $('#newAddressCancelBtn').hide();
+        $('#newAddressContent').show();
+    });
 </script>

@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Estimated Delivery Time</h4>
-                                            <h4 class="feature-text-price mb-0">9:00 am - 11:30 am</h4>
+                                            <h4 class="feature-text-price mb-0"><?=$_SESSION['userDeliveryTime']?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Date</h4>
-                                            <h4 class="feature-text-price mb-0" id="delivery-date"></h4>
+                                            <h4 class="feature-text-price mb-0" id="delivery-date"><?=$_SESSION['userDeliveryDate']?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Address</h4>
-                                            <h4 class="feature-text-price mb-0"><?php echo empty($_SESSION['address']) ? 'Not Specified' : $_SESSION['address'];?></h4>
+                                            <h4 class="feature-text-price mb-0"><?php echo empty($_SESSION['addressText']) ? 'Not Specified' : $_SESSION['addressText'];?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -193,11 +193,6 @@
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
             $('.sub-total').html(formatCurrency(sum));
-            if(cart.length >= 15){
-                $('#delivery-date').html('Next working day');
-            }else{
-                $('#delivery-date').html('Today');
-            }
          }
          else{
             //show empty message
@@ -213,13 +208,13 @@
         }
 
         openWindowWithPost(
-            "proceed_to_checkout", JSON.parse(baskit)
+            "<?=base_url('Corder/proceed_to_checkout')?>", JSON.parse(baskit)
         );
     }
 
     function openWindowWithPost(url, dataArr) {
         var form = document.createElement("form");
-        form.target = "_blank";
+        //form.target = "_blank";
         form.method = "POST";
         form.action = url;
         form.style.display = "none";

@@ -96,9 +96,7 @@
                                         <td>
                                             <center>
                                                 <?php echo form_open()?>
-                                                    <a href="<?php echo base_url().'Corder/order_detail_form/{OrderId}'; ?>" class="btn btn-info btn-sm" data-title="Order Detail" data-toggle="tooltip" data-placement="left" title="Order Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>
-
-                                                    <a href="" class="deleteOrder btn btn-danger btn-sm" name="Cancel order" data-toggle="tooltip" data-placement="right" title="Cancel Order" data-original-title="Cancel Order "><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    <a href="<?php echo base_url().'Corder/admin_order_detail_form/{OrderId}'; ?>" class="btn btn-info btn-sm" data-title="Order Detail" data-toggle="tooltip" data-placement="left" title="Order Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                                 <?php echo form_close()?>
                                             </center>

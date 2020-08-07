@@ -41,6 +41,7 @@ class Luser {
         $CI->load->model('Products');
         $products = $CI->Products->get_value_cart_products();
         $finalProducts = Array();
+        if($products)
         for ($i=0; $i < count($products); $i++) {
             $pid = $products[$i]['ProductId'];
             $filteredArray = array_filter($finalProducts, function($toCheck) use ($pid) { 

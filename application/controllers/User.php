@@ -46,4 +46,27 @@ class User extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
+    public function submit_address(){
+        $this->auth->check_auth();
+        $addresses = $this->input->post('selectedAddress');
+        if(empty($addresses) || count($addresses) == 0){
+            $result['status'] = 0;
+            $result['message'] = 'Add atleast one address';
+            print_r(json_encode($result));
+            exit();
+        }
+        $insertedIds = $this->Users->update_address();
+        if($insertedIds){
+            $result['status'] = 1;
+            $result['message'] = 'Address updated successfully';
+            $result['insertedIds'] = $insertedIds;
+            print_r(json_encode($result));
+            exit();
+        }else{
+            $result['status'] = 0;
+            $result['message'] = 'Something went wrong';
+            print_r(json_encode($result));
+            exit();
+        }
+    }
 }

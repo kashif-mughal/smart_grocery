@@ -39,9 +39,9 @@
          }
          ?>
       <div class="row">
-         <div class="col-xl-3 col-lg-3 col-md-12 pr-0">
+         <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
             <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
-               <div class="sidenav-content">
+               <div>
                   <?php 
                      if(empty($CatList))
                          $CatList = Array();
@@ -62,28 +62,20 @@
                      <a class="nav-link" data-toggle="tab" href="#detail" role="tab">Order Detail</a>
                   </li>
                </ul>
-               <?php //echo '<pre>'; print_r($OrderData);die;?>
+               <?php ?>
                <!-- Tab panes -->
                <div class="tab-content">
                   <div class="tab-pane active" id="traking" role="tabpanel">
                      <div class="orderprogress">
                         <div class="row">
                            <ul class="timeline" style="margin-left: 60px;">
-                              <?php $elem = null; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
+                              <?php $skip = false; $elem = null; $canceledStepId = 7; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
                                  <li>
-                                    <?php 
-                                    $cls = 'notDone';
-                                    if(!empty($OrderData['OrderTrakingDetail'])){
-                                       $key = array_search($OrderData['TrakingSteps'][$i]['StepId'], array_column($OrderData['OrderTrakingDetail'], 'StepId'));
-                                       
-                                       if(!is_numeric($key)){
-                                          $cls = 'notDone';
-                                          $elem = null;
-                                       }
-                                       else{
-                                          $elem = $OrderData['OrderTrakingDetail'][$key];
-                                       }
-                                    }
+                                    <?php
+                                    if($skip)
+                                       $cls = "notDone";
+                                    else
+                                    $cls = $OrderData['TrakingSteps'][$i]['StepId'] <= $OrderData["OrderDetail"][0]["OrderStep"] ? "" : "notDone";
                                     ?>
                                     <div class="item <?=$cls?>">
                                        <span>
@@ -96,56 +88,21 @@
                                        <h4><?=$OrderData['TrakingSteps'][$i]['StepName']?></h4>
                                     </div>
                                  </li>
+                                 <?php
+                                    if($OrderData["OrderDetail"][0]["OrderStep"] == $canceledStepId){
+                                       if($OrderData['TrakingSteps'][$i]['StepId'] == $OrderData["OrderDetail"][0]["PreviousOrderStep"]){
+                                          $skip = true;?>
+                                          <li>
+                                             <div class="item">
+                                                <span style="color: red; border: 2px solid red;">
+                                                <i class="fas fa-circle"></i>
+                                                </span>
+                                                <h5></h5>
+                                                <h4 style="color: red;">Canceled</h4>
+                                             </div>
+                                          </li>
+                                       <?php }} ?>
                               <?php } ?>
-                              <!-- <li>
-                                 <div class="item">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>Mailed to you</h4>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="item">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>In transit</h4>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="item">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>Items received</h4>
-                                    <p>
-                                       The estimated processing date for this bag is
-                                       9/27 (46 days)
-                                    </p>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="item">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>Processing</h4>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="item notDone">
-                                    <span>
-                                    <i class="fas fa-circle"></i>
-                                    </span>
-                                    <h5>18/7/20</h5>
-                                    <h4>Processed</h4>
-                                 </div>
-                              </li> -->
                            </ul>
                         </div>
                      </div>
@@ -164,12 +121,14 @@
                                              <div class="order-date">
                                                 <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
                                                 <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                                <span class="order-header-text">Tuesday, 23rd June 2020</span>    
+                                                <span class="order-header-text" id="orderDeliverDt"></span>    
                                                 </button>                                                
                                              </div>
                                              <div class="order-time">
                                                 <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
-                                                <span class="order-header-text">9:00 am - 11:30 am</span>
+                                                <span class="order-header-text">
+                                                   <?=date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryUpto"]))?>
+                                                </span>
                                              </div>
                                           </div>
                                           <div id="orderHistoryCollapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
@@ -206,6 +165,10 @@
                            <!-- Order History Content Ends -->
                         </div>
                      </section>
+                     <script type="text/javascript">
+                        var deliveryDt = new Date('<?=$OrderData["OrderDetail"][0]["DeliveryDate"]?>');
+                        $('#orderDeliverDt').html(deliveryDt.toDateString());
+                     </script>
                   </div>
                </div>
             </div>

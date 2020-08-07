@@ -8,13 +8,13 @@ class Dashboard extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->template->current_menu = 'home';
-        $this->load->model('auths');
+        $this->load->model('Auths');
     }
 
     public function index() {
         $CI = & get_instance();
-        $this->load->library('lcategory');
-        $this->load->library('lassistant');
+        $CI->load->library('lcategory');
+        $CI->load->library('lassistant');
         $CI->load->model('Products');
         $CI->load->model('Units');
         $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
@@ -185,11 +185,9 @@ class Dashboard extends CI_Controller {
     #============User Authentication=======#
 
     public function user_login(){
-        $CI = & get_instance();
-        $CI->load->model('Auths');
         $data['title'] = 'Sauda Express | Buy each and everything home grocery';
-        $data['countries'] = $CI->Auths->get_country();
-        $data['cities'] = $CI->Auths->get_city();
+        $data['countries'] = $this->Auths->get_country();
+        $data['cities'] = $this->Auths->get_city();
         $content = $this->parser->parse('users/registration', $data, true);
         $this->template->full_html_view($content);
     }

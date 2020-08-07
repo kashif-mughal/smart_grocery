@@ -73,6 +73,7 @@ class Lcategory
           {
             if ($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']]->childCats))
               {
+                $catArray[$category_list[$i]['ParentName']] = new stdClass();
                 $catArray[$category_list[$i]['ParentName']]->childCats = Array();
               }
             if (is_array($catArray[$category_list[$i]['ParentName']]->childCats))

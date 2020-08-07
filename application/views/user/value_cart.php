@@ -55,9 +55,9 @@
         }
         ?>
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-12 pr-0">
+            <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
                 <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
-                    <div class="sidenav-content">
+                    <div>
                         <?php 
                             if(empty($CatList))
                                 $CatList = Array();
@@ -70,9 +70,9 @@
             <div class="col-xl-9 col-lg-9 col-md-9">
                 <div class="order-history-top my-4">
                     <h4>Sauda Express Value Cart</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis amet cumque sunt libero iste repudiandae ullam, ut ipsam fugiat architecto et repellendus minus non impedit dolorum! Nobis pariatur aut necessitatibus?</p>
+                    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis amet cumque sunt libero iste repudiandae ullam, ut ipsam fugiat architecto et repellendus minus non impedit dolorum! Nobis pariatur aut necessitatibus?</p> -->
                 </div>
-                <?php if($products){?>
+                <?php if($products && count($products > 0)){?>
                     <?php foreach($products as $value) {?>
                     <div class="order-history-header mt-3 p-0">
                         <div class="card order-history-card each-prod">
@@ -122,7 +122,9 @@
                         </div>
                     </div>
                     <?php } ?>
-                <?php } ?>
+                <?php }else{
+                    echo '<h3 class="nothing-to-show">Nothing to show</h3>';
+                }?>
             </div>
         </div>
     </div>

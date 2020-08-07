@@ -69,7 +69,8 @@ class Auth {
                 'user_type' => $result[0]['user_type'],
                 'user_name' => $result[0]['first_name'] . " " . $result[0]['last_name'],
                 'user_email' => $result[0]['username'],
-                'address' => $result[0]['address']
+                'address' => $result[0]['address'],
+                'phone' => $result[0]['phone']
             );
 
             $CI->session->set_userdata($user_data);

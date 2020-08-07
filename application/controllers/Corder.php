@@ -33,13 +33,34 @@ class Corder extends CI_Controller {
     //Checkout formm
     public function checkout() {
         $this->auth->check_auth();
+        if(empty($_SERVER["HTTP_REFERER"]) || !strpos($_SERVER["HTTP_REFERER"], "/checkout_form"))
+            redirect(base_url());
+        
+        $addressId = $this->input->post("ad");
+        $deliveryTime = $this->input->post("dt");
+        $addressText = $this->input->post("dtt");
+        if(!is_numeric($addressId) || empty($deliveryTime) || empty($addressText))
+            redirect(base_url("Corder/checkout_form"));
+        
+        $parts = explode("__" , $deliveryTime);
+        $dt = date('Y-m-d', strtotime($parts[0]));
+        $t1 = date('h:i a', strtotime($parts[0]));
+        $t2 = date('h:i a', strtotime($parts[1]));
+        $this->session->set_userdata(
+            array(
+                'addressId' => $addressId,
+                'addressText' => $addressText,
+                'deliveryTime' => $deliveryTime,
+                'userDeliveryTime' =>  $t1 . " - " . $t2,
+                'userDeliveryDate' => $dt
+            ));
+
         $content = $this->lorder->checkout_form();
         $this->template->full_html_view($content);
     }
 
     //Proceed to checkout
     public function proceed_to_checkout(){
-        $CI = & get_instance();
         $retString = "?ret_url=".base_url('Corder/checkout');
         $this->auth->check_auth(base_url('Dashboard/user_authentication'.$retString));
         if(empty($this->input->post('order'))){
@@ -59,31 +80,45 @@ class Corder extends CI_Controller {
     }
     //User order form
     public function my_order() {
-        $CI = & get_instance();
         $this->auth->check_auth();
         $content = $this->lorder->order_list();
         $this->template->full_html_view($content);
     }
     //order Update Form
     public function order_detail_form($orderId = null) {
-        if(empty($orderId))
+        if(empty($orderId)){
             $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
-        $CI = & get_instance();
+            return;
+        }
         $this->auth->check_auth();
         $customerId = $this->Orders->get_order_customer($orderId);
         if(!$this->auth->authenticated_user_or_admin($customerId)){
             $this->session->set_userdata(array('error_message' => 'Not Found'));
             $this->output->set_header("Location: " . base_url("Corder/my_order"), TRUE, 302);
-        }
-        if(!is_numeric($customerId)){
-            $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
+            return;
         }
         $content = $this->lorder->order_edit_data($orderId);
         $this->template->full_html_view($content);
     }
+
+    public function admin_order_detail_form($orderId = null) {
+        if(empty($orderId))
+            $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
+        $this->auth->check_admin_auth();
+        $customerId = $this->Orders->get_order_customer($orderId);
+        if(!$this->auth->authenticated_user_or_admin($customerId)){
+            $this->session->set_userdata(array('error_message' => 'Not Found'));
+            $this->output->set_header("Location: " . base_url("Corder"), TRUE, 302);
+        }
+        if(!is_numeric($customerId)){
+            $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
+        }
+        $content = $this->lorder->admin_order_edit_data($orderId);
+        $this->template->full_admin_html_view($content);
+    }
+
     // order delete
     public function order_delete() {
-        $CI = & get_instance();
         $this->auth->check_auth();
         $orderId = $_POST['OrderId'];
         $this->Orders->soft_delete_by_key('OrderId', $orderId);
@@ -91,7 +126,6 @@ class Corder extends CI_Controller {
     }
 
     public function track_order_form(){
-        $CI = & get_instance();
         $this->auth->check_auth();
         $content = $this->lorder->track_order_form();
         $this->template->full_html_view($content);
@@ -106,5 +140,25 @@ class Corder extends CI_Controller {
         $this->auth->check_auth();
         $content = $this->lorder->checkout_detail_form();
         $this->template->full_html_view($content);
+    }
+    public function update_traking(){
+        if(!$this->session->userdata('sid_web') || !$this->session->userdata('user_type') == 1 || empty($this->input->post('orderId')) || empty($this->input->post('OrderStep'))){
+            $data['status'] = 0;
+            $data['message'] = 'You are not authorized';
+            print_r(json_encode($data));
+            exit();
+        }
+        if($this->Orders->update_order_status($this->input->post('orderId'), $this->input->post('OrderStep'))){
+            $data['status'] = 1;
+            $data['message'] = 'Order Tracking Updated';
+            print_r(json_encode($data));
+            exit();   
+        }
+        else{
+            $data['status'] = 0;
+            $data['message'] = 'Something went wrong';
+            print_r(json_encode($data));
+            exit();
+        }
     }
 }
