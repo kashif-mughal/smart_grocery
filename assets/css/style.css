@@ -1802,7 +1802,7 @@ button.category-button:active {
 .quantity-area {
    padding-top: 7px;
    padding-bottom: 7px;
-   height: 100%;
+   /*height: 100%;*/
 }
 .quantity-area .quantity-button {
    margin-left: 2px;
