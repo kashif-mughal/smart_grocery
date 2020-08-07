@@ -136,18 +136,17 @@
                                                 <?php if($OrderData['OrderDetail']){
                                                    $products = $OrderData['OrderDetail'];
                                                    for ($i=0; $i < count($products); $i++) {?>
-                                                   <div class="featured-products order-content align-item-center">
-                                                      <div class="order-history-checkbox align-self-center">
-                                                      </div>
-                                                      <img src="<?= base_url($products[$i]['ProductImg'])?>" alt="" class="card-img-bottom text-center">
+                                                   <div class="featured-products d-flex justify-content-between align-items-center order-content">
+                                                      <img src="<?= base_url($products[$i]['ProductImg'])?>" 
+                                                         alt="" class="card-img-bottom text-center" style="width:70px; height: 80px;">
                                                       <div class="order-product-name order-item">
                                                          <p class="order-name"><?=$products[$i]['ProductName']?></p>
                                                       </div>
-                                                      <div class="order-product-price text-center align-self-center order-item">
+                                                      <div class="order-product-price text-center order-item">
                                                          <p class="order-price"><script>document.write(formatCurrency('<?=$products[$i]['SoldPrice']?>', 0))</script></p>
                                                       </div>
-                                                      <div class="quantity-area order-item align-self-center">
-                                                         <div class="d-flex justify-content-center p-4">
+                                                      <div class="quantity-area order-item">
+                                                         <div class="d-flex justify-content-center">
                                                             <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                             <span class="d-inline-flex quantity-text mr-3"><?=$products[$i]['ItemQuantity']?>&nbsp;<?=$products[$i]['UnitName']?></span>
                                                             

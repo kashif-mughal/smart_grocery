@@ -57,7 +57,7 @@
 								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
 							</form>
 						</div>
-						<span class="d-block mb-4">Resend Code again</span>
+						<a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
 						<a href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</a>
 					</div>
 				</div>
@@ -294,6 +294,7 @@
 								$('.errorNotify').hide();
 								$('#phoneForm').hide();
 								$('#otpForm').show();
+								$('#digit-1').focus();
 							}, 2000);
 						}
 						else {
@@ -501,9 +502,6 @@
 									window.location = data.redirectUrl; 	
 								}
 							}, 2000);
-							
-							// $('.errorNotify').html("<small>" + data.redirectUrl + "</small>");
-
 						}
 					},
 					error: function(data) {
@@ -516,9 +514,6 @@
 				});
 			}
 		});
-
-		
-
 
 		// Logout
 		$('#userLoggedOut').click(function() {
@@ -537,6 +532,16 @@
 			// $('#registrationForm').css('z-index', '1');
 			$('#loginForm').show();
 			// $('#loginForm').css('z-index', '-10');
+		});
+
+		$('#resendCode').click(function() {
+			$('#digit-1').val('');
+			$('#digit-2').val('');
+			$('#digit-3').val('');
+			$('#digit-4').val('');
+
+			$('#otpForm').hide();
+			$('#phoneForm').show();
 		});
 
 

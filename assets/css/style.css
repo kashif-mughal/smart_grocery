@@ -49,6 +49,12 @@ html,body
    margin-bottom: 12px;
    align-items: center;
 }
+.sign-in {
+   height: 420px;
+}
+#otpForm .sign-in {
+   height: 461px;
+}
 .sign-in .step-number {
    background-color: #333333;
    color: #ffffff;
@@ -1405,10 +1411,6 @@ button.category-button:active {
 .order-history-card img {
    max-width: 100px;
 }
-.order-item {
-   padding-left: 20px;
-   border-left: 1px solid #cccccc;
-}
 .order-button a {
    font-size: 14px;
    font-weight: 600;
@@ -1473,6 +1475,10 @@ button.category-button:active {
    display: grid;
    grid-template-columns: 1fr 2fr 5fr 3fr 3fr 3fr;
    /* place-items: center; */
+}
+.order-content .order-item {
+   padding-top: 16px;
+   padding-bottom: 16px;
 }
 /* Theme Buttons */
 .button-primary {
@@ -1740,8 +1746,10 @@ button.category-button:active {
    height: 100%;
    padding-left: 20px;
    border-left: 1px solid #cccccc;
-   margin-top: auto;
-   margin-bottom: auto;
+   /*margin-top: auto;*/
+   /*margin-bottom: auto;*/
+   padding-left: 20px;
+   border-left: 1px solid #cccccc;
 }
 .order-product-name .order-name {
    font-size: 16px;
@@ -1750,7 +1758,6 @@ button.category-button:active {
    margin-bottom: 0px;
    font-weight: 500;
    font-family: "Work Sans";
-   padding-top: 17px;
 }
 .order-product-name .order-weight {
    font-size: 14px;
@@ -1772,7 +1779,6 @@ button.category-button:active {
    margin-bottom: 0px;
    font-weight: 500;
    font-family: "Work Sans";
-   padding-top: 17px;
 }
 .order-history-header h5 {
    font-size: 20px;
@@ -1786,13 +1792,17 @@ button.category-button:active {
    font-weight: 400;
    font-family: "Work Sans";
 }
-.order-content {
+/*.order-content {
    display: grid;
    grid-template-columns: 1fr 2fr 5fr 3fr 3fr 3fr;
-   /* place-items: center; */
-}
+}*/
 .quantity-text {
    font-weight: 600;
+}
+.quantity-area {
+   padding-top: 7px;
+   padding-bottom: 7px;
+   height: 100%;
 }
 .quantity-area .quantity-button {
    margin-left: 2px;
@@ -2092,6 +2102,11 @@ a#newAddressCancelBtn {
    font-family: "Raleway";
    max-width: 150px;
 }
+#va-panel .va-panel-content .quantity-area {
+   padding-top: 3px;
+   padding-bottom: 3px;
+   height: 22%;
+}
 .va-panel-content .filter-heading {
    font-size: 16px;
    color: #000000;
@@ -2116,7 +2131,7 @@ a#newAddressCancelBtn {
    border-bottom: 1px solid #dcdcdc;
 }
 .border-r-primary {
-   border-right: : 1px solid #dcdcdc;
+   border-right: 1px solid #dcdcdc;
 }
 .border-b-primary {
    border-bottom: 1px solid #dcdcdc;

@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-9 col-md-9">
+            <div class="col-xl-9 col-lg-9 col-md-12">
                 <div class="order-history-top my-4">
                     <h4>Sauda Express Value Cart</h4>
                     <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis amet cumque sunt libero iste repudiandae ullam, ut ipsam fugiat architecto et repellendus minus non impedit dolorum! Nobis pariatur aut necessitatibus?</p> -->
@@ -77,7 +77,7 @@
                     <div class="order-history-header mt-3 p-0">
                         <div class="card order-history-card each-prod">
                             
-                            <div class="featured-products mt-0 border-none d-flex justify-content-between align-item-center">
+                            <div class="featured-products mt-0 border-none d-flex justify-content-between align-items-center">
                                 <?php 
                                  if($value['IsFeatured'] == 1) {
                                   $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
@@ -88,7 +88,7 @@
                                     <p class="order-name"><?=$value['ProductName']?></p>
                                     <p class="order-weight"><?=$value['ItemQuantity']?>&nbsp;<?=$value['UnitName']?></p>
                                 </div>
-                                <div class="order-product-price order-item align-self-center">
+                                <div class="order-product-price order-item">
                                     <p class="order-price"><script type="text/javascript">
                                         document.write(formatCurrency('<?=$value["SalePrice"]?>'));
                                     </script></p>
@@ -96,16 +96,18 @@
                                         <p class="order-discount"><del><script type="text/javascript">
                                         document.write(formatCurrency('<?=$value["Price"]?>'));
                                     </script></del></p>
-                                    <?php }?>
+                                    <?php } ?>
                                 </div>
-                                <div class="quantity-area d-flex justify-content-center align-items-center order-item mt-2">
-                                    <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                    <input type="number" value="<?=$value['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
-                                    <span class="d-block quantity-button">
-                                        <a href="javascript:void(0);" class="qty-pls d-block">+</a>
-                                        <div class="separator"></div>
-                                        <a href="javascript:void(0);" class="qty-mns d-block">-</a>
-                                    </span>
+                                <div class="quantity-area order-item">
+                                    <div class="d-flex">
+                                        <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                        <input type="number" value="<?=$value['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
+                                        <span class="d-block quantity-button">
+                                            <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
+                                            <div class="separator"></div>
+                                            <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="order-button order-item text-center">
                                     <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart"

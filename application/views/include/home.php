@@ -297,7 +297,7 @@
                                                        'price' => $Assistant[$i]['SalePrice'],
                                                        'img' => base_url($Assistant[$i]['ProductImg'])
                                                       ];
-                                                      ?>
+                                                   ?>
                                                    <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                    <input type="number" min="0" class="d-inline-flex quantity quantity-input">
                                                    <span class="d-block quantity-button">
