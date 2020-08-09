@@ -110,36 +110,36 @@
 
         <!-- Print Area -->
 
-        <div class="row">
+        <div class="row" style="display: none;">
             <div class="col-md-12">
                 <div id="receipt-content">
                     <div style="width: 60%; margin: 0 auto; margin-top: 100px;">
                         <style type="text/css">
-                            .center {
+                            .styl-center {
                                 text-align: center;
                                 width: 40%;
                             }
-                            .ten {
+                            .styl-ten {
                                 width: 10% !important;
                             }
-                            .fifty {
-                                width: 50% !important;
+                            .styl-fifty {
+                                width: 40% !important;
                             }
-                            .left {
+                            .styl-left {
                                 text-align: left;
-                                width: 20%;
+                                width: 25%;
                             }
-                            .right {
+                            .styl-right {
                                 text-align: right;
-                                width: 20%;
+                                width: 25%;
                             }
-                            .inline {
+                            .styl-inline {
                                 display: table-cell;
                                 vertical-align: top;
                             }
                         </style>
                         <div>
-                            <div class="inline" style="width: 30%;">
+                            <div class="styl-inline" style="width: 20%;">
                                 <p style="font-size: 12px;">
                                     <script>
                                         var siteInfo = `<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>`;
@@ -149,25 +149,27 @@
                                     </script>
                                 </p>
                             </div>
-                            <div class="inline" style="width: 40%;text-align: center;font-weight: 500;font-size: 40px;">
+                            <div class="styl-inline" style="width: 60%;text-align: center;font-weight: 500;font-size: 30px;">
                                 DAILY REPORT
                             </div>
-                            <div class="inline" style="width: 30%; text-align: right;">
+                            <div class="styl-inline" style="width: 20%; text-align: right;">
                                 <img style="background-color: #25bfa9;border-radius: 200px;" src="<?php echo base_url() ?>assets/img/logo.png">
                             </div>
                         </div>
-                        <div style="width: 30%;">
+                        <div style="width: 70%;">
                             <h3 style="font-size: 17px;" id="printReportType">Products</h3> 
-                            <h3 style="font-size: 17px;" id="printReportDate">Date: 28-07-2020 to 30-07-2020</h3>
+                            <h3 style="font-size: 17px;" id="printReportDate">
+                                Date: (<span class="reportStartDate">Start Date</span>) to (<span class="reportEndDate">End Date</span>)
+                            </h3>
                         </div>
                         <div style="min-height: 400px;">
                             <table style="width: 100%;" id="printReportTable">
                                 <thead>
                                     <tr style="border-top: 2px solid #008000;border-bottom: 2px solid #008000;font-weight: 500;">
-                                        <td class="left ten">SL#</td>
-                                        <td class="left fifty" id="printhead1">Product Id</td>
-                                        <td class="right" id="printhead2">Product Name</td>
-                                        <td class="right" id="printhead3">Total Price</td>
+                                        <td class="styl-left styl-ten">SL#</td>
+                                        <td class="styl-left styl-fifty" id="printhead1">Product Id</td>
+                                        <td class="styl-right" id="printhead2">Product Name</td>
+                                        <td class="styl-right" id="printhead3">Total Price</td>
                                     </tr>
                                 </thead>
                                 <tbody id="printReportTableBody">
@@ -194,7 +196,10 @@
     // Date Range
     $(function() {
       $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
+        opens: 'left',
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
       }, function(start, end, label) {
         startDate = start.format('YYYY-MM-DD');
         endDate = end.format('YYYY-MM-DD');
@@ -204,12 +209,15 @@
     $('#daterange').on('apply.daterangepicker',function(ev, picker) {
         startDate = picker.startDate.format('YYYY-MM-DD');
         endDate = picker.endDate.format('YYYY-MM-DD');
+
+        $('.reportStartDate').text(startDate);
+        $('.reportEndDate').text(endDate);
     });
 
-    $(document).ready(function() {
+    $(document).ready(function() { // Document Ready Start
         var today = new Date();
-        startDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        endDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        startDate = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
+        endDate = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
 
         filltable('Products');
 
@@ -260,7 +268,7 @@
                 jQuery(this).attr({ 'download': filename, 'href': csvData, 'target': '_blank' }); 
               }
         }
-    });
+    }); // Document Ready Ends
 
     // Get Data by product
     $("#generateReport").click(function(e) {
@@ -281,6 +289,7 @@
             cache: false,
             success: function(data) {
                 var content = "";
+                var reportContent = "";
                 var grand_total = 0;
                 $('#printReportType').text(reportType);
                 if(reportType == 'Products') {
@@ -299,10 +308,15 @@
                                         <td class="text-right">${data[i].total_price}</td>
                                     </tr>`;
                     }
+                    reportContent = content;
                     content += `<tr>
                                 <td colspan="3" class="text-right">Grand Total</td>
                                 <td class="text-right">${grand_total}</td>
                             </tr>`;
+                    reportContent += `<tr style="border-top: 2px solid #008000">
+                                        <td colspan="3" class="text-right">Grand Total</td>
+                                        <td class="text-right">${grand_total}</td>
+                                    </tr>`;
                     haveData = true;
                 }
                 else if(reportType == 'Orders') {
@@ -321,10 +335,15 @@
                                         <td class="text-right">${data[i].OrderValue}</td>
                                     </tr>`;
                     }
+                    reportContent = content;
                     content += `<tr>
                                 <td colspan="3" class="text-right">Grand Total</td>
                                 <td class="text-right">${grand_total}</td>
-                            </tr>`;
+                            </tr>`;                    
+                    reportContent += `<tr style="border-top: 2px solid #008000">
+                                    <td colspan="3" class="text-right">Grand Total</td>
+                                    <td class="text-right">${grand_total}</td>
+                                </tr>`;
                     haveData = true;
                 }
                 else {
@@ -334,7 +353,7 @@
                 
                 // Final Append
                 $('#DailyReportsTable').append(content);
-                $('#printReportTable').append(content);
+                $('#printReportTable').append(reportContent);
                 content = "";
             },
             error: function(data) {
