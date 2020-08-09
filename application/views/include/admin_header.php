@@ -220,6 +220,27 @@ $users = $CI->Users->profile_edit_data();
             </li>
             <!-- Unit menu end -->
 
+            <!-- Unit menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Creport")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="fas fa-file-contract"></i><span>Report</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Creport') ?>">Daily Report</a></li>
+
+                </ul>
+            </li>
+            <!-- Unit menu end -->
+
     </ul>
 </div> <!-- /.sidebar -->
 </aside>

@@ -10,6 +10,41 @@ if (!defined('BASEPATH'))
 
 class Lreport {
 
+    // Retrieve Daily Report
+    public function daily_report() {
+        $CI =& get_instance();
+        $CI->load->model('Reports');
+        $daily_report = $CI->Reports->daily_report(); //It will get only Credit categorys
+        // $i             = 0;
+        // $total         = 0;
+        // if (!empty($daily_report))
+        //   {
+        //     foreach ($daily_report as $k => $v)
+        //       {
+        //         $i++;
+        //         $daily_report[$k]['sl'] = $i + $CI->uri->segment(3);
+        //         if (empty($daily_report[$k]['ParentName']))
+        //           {
+        //             $daily_report[$k]['ParentName'] = 'None';
+        //           }
+        //       }
+        //   }
+        $data         = array(
+            'title' => 'Daily Report',
+            'daily_report' => $daily_report
+        );
+        $dailyReportList = $CI->parser->parse('report/report', $data, true);
+        return $dailyReportList;
+    }
+
+    public function daily_report2($type, $start, $end) {
+        $CI =& get_instance();
+        $CI->load->model('Reports');
+        $daily_report = $CI->Reports->daily_report2($type, $start, $end);
+        
+        return $daily_report;
+    }
+
 
 
 // Retrieve All Stock Report

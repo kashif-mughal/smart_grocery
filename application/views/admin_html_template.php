@@ -63,6 +63,14 @@
         <!-- jQuery -->
         <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
+
+
+        <!-- Date Time Picker -->
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/dateRangePicker/daterangepicker.css" />
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/dateRangePicker/moment.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/dateRangePicker/daterangepicker.min.js"></script>
+        
+
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="se-pre-con"></div>
