@@ -54,11 +54,11 @@
 								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
 								<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
 								<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
-								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
+								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off" last="true">
 							</form>
 						</div>
 						<a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
-						<a href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</a>
+						<button href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</button>
 					</div>
 				</div>
 			</div>
@@ -239,7 +239,6 @@
 
 <script>
 	$(document).ready(function() {
-		document.getElementById("digit-1").autofocus;
 		localStorage.removeItem('UserId');
 		$('#registrationForm').hide();
 		$('#registrationForm').css('display', 'none');
@@ -252,7 +251,7 @@
 		$('.errorNotify').css('display', 'none');
 
 		// Check Valid Phone Number
-		$('#inputPhone').keyup(function() {
+		$('#inputPhone').keyup(function(e) {
 			var phoneNumber = $('#inputPhone').val();
 			var phoneRegEx = /^[0-9]{9}$/;
 			if(phoneNumber.match(phoneRegEx)) {
@@ -269,6 +268,9 @@
 				$('#dash').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
 				$('#startingCode').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
 			}
+			console.log(e.keyCode);
+			if(e.keyCode == 13)
+				$('#phoneSubmit').trigger("click");
 		});
 
 		// Phone Verification Submit
@@ -294,7 +296,7 @@
 								$('.errorNotify').hide();
 								$('#phoneForm').hide();
 								$('#otpForm').show();
-								$('#digit-1').focus();
+								$("digit-1").select().focus();
 							}, 2000);
 						}
 						else {
@@ -307,6 +309,7 @@
 					}
 				});
 			}
+			$("digit-1").select().focus();
 		});
 
 		// Submit OTP
@@ -561,7 +564,11 @@
 				var key = e.which,
 				t = $(e.target),
 				sib = t.next('input');
-
+				if(t.attr('last') == "true"){
+					$('#otpSubmit').select().focus();
+					$('#otpSubmit').trigger('click');
+					return true;
+				}
 				if (key != 9 && (key < 48 || key > 57)) {
 				e.preventDefault();
 				return false;

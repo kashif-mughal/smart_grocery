@@ -1,4 +1,38 @@
 <!-- Manage Category Start -->
+<style type="text/css">
+    .in-circle{
+        box-shadow: 1px 1px 1px 1px #10ff0061;
+        background-color: #cdffcc !important;
+    }
+    .pending-action{
+        box-shadow: 1px 1px 1px 1px #fbff0061;
+        background-color: #fff1aa !important;
+    }
+    .canceled{
+        box-shadow: 1px 1px 1px 1px #ff000061;
+        background-color: #ffdbdb !important;
+    }
+    .info-box{
+        display: inline-block;
+        float: right;
+        width: 85px;
+        height: 30px;
+        text-align: center;
+        margin: 1px;
+        border-radius: 5px;
+        color: indigo;
+        padding: 5px;
+    }
+    .green{
+        background-color: #cdffcc;
+    }
+    .red{
+        background-color: #ffdbdb;
+    }
+    .yellow{
+        background-color: #fff1aa;
+    }
+</style>
 <div class="content-wrapper">
     <section class="content-header">
         <div class="header-icon">
@@ -61,8 +95,13 @@
             <div class="col-sm-12">
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
-                        <div class="panel-title">
+                        <div class="panel-title" style="display: inline-block;">
                             <h4>Manage Order</h4>
+                        </div>
+                        <div style="display: inline-block; float: right;">
+                            <div class="info-box green">In Process</div>
+                            <div class="info-box yellow">Pending</div>
+                            <div class="info-box red">Canceled</div>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -75,8 +114,7 @@
                                         <th>SL</th>
                                         <th>Order No</th>
                                         <th>Total Amount</th>
-                                        <th>Customer Name</th>
-                                        <th>Email</th>
+                                        <th>Customer</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -84,26 +122,24 @@
                                 <tbody>
                                 <?php
                                     if ($orderData) {
-                                ?>
-                                {orderData}
-                                    <tr>
-                                        <td>{sl}</td>
-                                        <td>{OrderId}</td>
-                                        <td>{OrderValue}</td>
-                                        <td>{first_name} {last_name}</td>
-                                        <td>{email}</td>
-                                        <td>{ModifiedOn}</td>
-                                        <td>
-                                            <center>
-                                                <?php echo form_open()?>
-                                                    <a href="<?php echo base_url().'Corder/admin_order_detail_form/{OrderId}'; ?>" class="btn btn-info btn-sm" data-title="Order Detail" data-toggle="tooltip" data-placement="left" title="Order Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        foreach ($orderData as $key => $value) {?>
+                                            <tr class="<?= $value['OrderStep'] == 7 ? 'canceled' : ($value['OrderStep'] == 1 ? 'in-circle' : 'pending-action')?>">
+                                                <td><?=$value['sl']?></td>
+                                                <td><?= $value['OrderId']?></td>
+                                                <td><?= $value['OrderValue']?></td>
+                                                <td><?= $value['email'] ? "("+ $value['email'] +") " + $value['phone'] : $value['phone']?></td>
+                                                <td><?= $value['ModifiedOn']?></td>
+                                                <td>
+                                                    <center>
+                                                        <?php echo form_open()?>
+                                                            <a href="<?php echo base_url("Corder/admin_order_detail_form/").$value['OrderId']; ?>" class="btn btn-info btn-sm" data-title="Order Detail" data-toggle="tooltip" data-placement="left" title="Order Detail"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                                <?php echo form_close()?>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                {/orderData}
+                                                        <?php echo form_close()?>
+                                                    </center>
+                                                </td>
+                                            </tr>
                                 <?php
+                                        }
                                     }
                                 ?>
                                 </tbody>

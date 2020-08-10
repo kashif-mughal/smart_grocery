@@ -9,6 +9,7 @@ class Cbrand extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->auth->check_admin_auth();
         $this->load->library('auth');
         $this->load->library('lbrand');
         $this->load->model('Brands');

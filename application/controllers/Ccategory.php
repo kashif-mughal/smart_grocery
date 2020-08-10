@@ -15,12 +15,14 @@ class Ccategory extends CI_Controller {
 
     //Default loading for Category system.
     public function index() {
+        $this->auth->check_admin_auth();
         $content = $this->lcategory->category_add_form();
         $this->template->full_admin_html_view($content);
     }
 
     //Manage category form
     public function manage_category() {
+        $this->auth->check_admin_auth();
         $content = $this->lcategory->category_list();
         $this->template->full_admin_html_view($content);
         

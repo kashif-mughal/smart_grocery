@@ -17,6 +17,7 @@ class Cproduct extends CI_Controller {
 
     //Index page load
     public function index() {
+        $this->auth->check_admin_auth();
         $content = $this->lproduct->product_add_form();
         $this->template->full_admin_html_view($content);
     }

@@ -34,7 +34,7 @@ class Users extends CI_Model {
         $currDate = $dateTime->format('Y-m-d H:i:s');
 
         $this->db->select('a.*,b.*');
-        $this->db->from('otp a');
+        $this->db->from('grocery_otp a');
         $this->db->join('users b', 'b.phone = a.phone_number');
         $this->db->where('a.phone_number', $phone_number);
         $this->db->where('a.verified', 1);

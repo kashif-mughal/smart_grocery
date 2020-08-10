@@ -52,6 +52,7 @@ class Orders extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('CustomerId', $userId);
+        $this->db->where('Status', 1);
         $this->db->order_by('ModifiedOn', 'DESC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -73,7 +74,7 @@ class Orders extends CI_Model {
             $wherePart = "WHERE a.OrderId = $orderId";
         else if(!is_null($userEmail))
             $wherePart = "WHERE u.email = '$userEmail'";
-        $queryText = "SELECT a.*, u.first_name, u.last_name, u.email from $this->tableName a join users u on u.user_id = a.CustomerId $wherePart ORDER BY a.ModifiedOn DESC LIMIT $page,$perpage";
+        $queryText = "SELECT a.*, u.phone, u.email from $this->tableName a join users u on u.user_id = a.CustomerId $wherePart ORDER BY a.ModifiedOn DESC LIMIT $page,$perpage";
 
         //$query = $this->db->get();
         //print_r($queryText);die;
@@ -107,8 +108,12 @@ class Orders extends CI_Model {
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
         $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
-        $this->db->where('a.Status', 1);
-        $this->db->where('b.Status', 1);
+        $CI = & get_instance();
+        $userRole = $CI->session->userdata('user_type');
+        if($userRole != 1){
+            $this->db->where('a.Status', 1);
+            $this->db->where('b.Status', 1);
+        }
         $this->db->where('a.OrderId', $orderId);
         $query = $this->db->get();
         $orderDetailObj = Array();
@@ -131,6 +136,19 @@ class Orders extends CI_Model {
         return false;
     }
     public function update_order_status($orderId, $status){
+        $this->db->select('OrderStep');
+        $this->db->from('grocery_order');
+        $this->db->where('OrderId', $orderId);
+        $this->db->where('Status', 1);
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            $result1 = $query1->result();
+            //5 is for dispatch we will not allow to cancel the order after dispatch
+            //7 is for cancel the order
+            if($result1[0]->OrderStep >= 5 && $status == 7)
+                return "Order is dispatched it can not be cancel now.";
+        }
+
         $query = "UPDATE `grocery_order` go set  `PreviousOrderStep` = go.`OrderStep`, `OrderStep` = $status WHERE `OrderId` = $orderId";
         $this->db->query($query);
         return true;

@@ -94,7 +94,7 @@ class Corder extends CI_Controller {
         $customerId = $this->Orders->get_order_customer($orderId);
         if(!$this->auth->authenticated_user_or_admin($customerId)){
             $this->session->set_userdata(array('error_message' => 'Not Found'));
-            $this->output->set_header("Location: " . base_url("Corder/my_order"), TRUE, 302);
+            $this->output->set_header("Location: " . base_url("Corder/track_order_form"), TRUE, 302);
             return;
         }
         $content = $this->lorder->order_edit_data($orderId);
@@ -109,9 +109,6 @@ class Corder extends CI_Controller {
         if(!$this->auth->authenticated_user_or_admin($customerId)){
             $this->session->set_userdata(array('error_message' => 'Not Found'));
             $this->output->set_header("Location: " . base_url("Corder"), TRUE, 302);
-        }
-        if(!is_numeric($customerId)){
-            $this->output->set_header("Location: " . base_url() . 'dashboard', TRUE, 302);
         }
         $content = $this->lorder->admin_order_edit_data($orderId);
         $this->template->full_admin_html_view($content);
@@ -148,15 +145,16 @@ class Corder extends CI_Controller {
             print_r(json_encode($data));
             exit();
         }
-        if($this->Orders->update_order_status($this->input->post('orderId'), $this->input->post('OrderStep'))){
+        $updateResult = $this->Orders->update_order_status($this->input->post('orderId'), $this->input->post('OrderStep'));
+        if(!is_string($updateResult) && $updateResult){
             $data['status'] = 1;
             $data['message'] = 'Order Tracking Updated';
             print_r(json_encode($data));
             exit();   
         }
-        else{
+        else if(is_string($updateResult)){
             $data['status'] = 0;
-            $data['message'] = 'Something went wrong';
+            $data['message'] = $updateResult;
             print_r(json_encode($data));
             exit();
         }

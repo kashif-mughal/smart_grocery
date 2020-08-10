@@ -9,9 +9,9 @@ class Cassistant extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->auth->check_admin_auth();
         $this->load->library('lassistant');
         $this->load->model('Assistants');
-
     }
 
     //Default loading for assistant system.

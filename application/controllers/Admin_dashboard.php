@@ -12,19 +12,18 @@ class Admin_dashboard extends CI_Controller {
     }
 
     public function index() {
-        $CI = & get_instance();
-        if (!$this->auth->is_logged()) {
-            $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
-        }
-        //$this->auth->check_admin_auth();
-
-        //'purchase_amount' => number_format($sales_report[0]['total_supplier_rate'], 2, '.', ','),
-        
-        $data = array(
-            'title' => display('dashboard')
-        );
-        $content = $CI->parser->parse('include/admin_home', $data, true);
-        $this->template->full_admin_html_view($content);
+        $this->auth->check_admin_auth();
+        redirect(base_url("Corder"));
+        return;
+        // $CI = & get_instance();
+        // if (!$this->auth->is_logged()) {
+        //     $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
+        // }
+        // $data = array(
+        //     'title' => display('dashboard')
+        // );
+        // $content = $CI->parser->parse('include/admin_home', $data, true);
+        // $this->template->full_admin_html_view($content);
     }
 
     public function login() {

@@ -94,7 +94,7 @@
                                     <tr>
                                         <th>SL#</th>
                                         <th class="text-left" id="headerCol1">Product Id</th>
-                                        <th class="text-right" id="headerCol2">Product Name</th>
+                                        <th class="text-center" id="headerCol2">Product Name</th>
                                         <th class="text-right" id="headerCol3">Total Price</th>
                                     </tr>
                                 </thead>
@@ -168,7 +168,7 @@
                                     <tr style="border-top: 2px solid #008000;border-bottom: 2px solid #008000;font-weight: 500;">
                                         <td class="styl-left styl-ten">SL#</td>
                                         <td class="styl-left styl-fifty" id="printhead1">Product Id</td>
-                                        <td class="styl-right" id="printhead2">Product Name</td>
+                                        <td class="styl-center" id="printhead2">Product Name</td>
                                         <td class="styl-right" id="printhead3">Total Price</td>
                                     </tr>
                                 </thead>
@@ -304,7 +304,7 @@
                         content += `<tr>
                                         <td>${i+1}</td>
                                         <td class="text-left">${data[i].ItemId}</td>
-                                        <td class="text-right">${data[i].ProductName}</td>
+                                        <td class="text-center">${data[i].ProductName}</td>
                                         <td class="text-right">${data[i].total_price}</td>
                                     </tr>`;
                     }
@@ -321,17 +321,17 @@
                 }
                 else if(reportType == 'Orders') {
                     $('#headerCol1').text('Order Id');
-                    $('#headerCol2').text('Customer Id');
+                    $('#headerCol2').text('Customer');
                     $('#headerCol3').text('Total Amount');
                     $('#printhead1').text('Order Id');
-                    $('#printhead2').text('Customer Id');
+                    $('#printhead2').text('Customer');
                     $('#printhead3').text('Total Amount');
                     for(i = 0; i < data.length; i++) {
                         grand_total += parseInt(data[i].OrderValue);
                         content += `<tr>
                                         <td>${i+1}</td>
-                                        <td class="text-left">${data[i].OrderId}</td>
-                                        <td class="text-right">${data[i].CustomerId}</td>
+                                        <td class="text-center">${data[i].OrderId}</td>
+                                        <td class="text-center">${data[i].email ? "("+ data[i].email +") " + data[i].phone : data[i].phone}</td>
                                         <td class="text-right">${data[i].OrderValue}</td>
                                     </tr>`;
                     }

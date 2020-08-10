@@ -7,6 +7,7 @@ class CReport extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
+        $this->auth->check_admin_auth();
         $this->load->library('lreport');
         $this->load->library('session');
         $this->load->model('Reports');
