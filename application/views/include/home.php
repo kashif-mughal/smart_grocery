@@ -309,7 +309,7 @@
                                                 <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
                                                    data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                                    >Add to Cart</a>
-                                                <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart"
+                                                <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
                                                    data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                                    >Remove From Cart</a>
                                              </div>

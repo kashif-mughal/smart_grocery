@@ -943,6 +943,9 @@ button.category-button:active {
 .main-content .featured-products-content .card .remove-cart{
    height: 50px;
 }
+.va-panel-remove-cart {
+   width: 90%;
+}
 .product-card-btn:hover {
    text-decoration: none;
    color: #ffffff;
