@@ -61,21 +61,9 @@
                     <div class="panel-body">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-6 pull-left">
-                                    <div class="form-group form-inline pull-left" style="width:200px;">
-                                      <label for="reportBy">Report By:</label>
-                                      <select class="form-control" id="reportBy">
-                                        <option>Products</option>
-                                        <option>Orders</option>
-                                      </select>
-                                    </div>
-                                    <a href="javascript:void(0)" class="btn btn-primary pull-left" id="generateReport" style="margin-bottom: 14px;">
-                                        <i class="fas fa-sync"></i>
-                                        Generate
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group form-inline pull-right">
+                                <div>
+                                    <div class="form-group form-inline pull-left">
+                                        <label for="reportBy">Range :</label>
                                         <?php 
                                             $todays_date = date("d/m/Y");
                                          ?>
@@ -83,7 +71,19 @@
                                             value="<?php echo $todays_date. ' - ' .$todays_date ?>" style="width: 300px;" />
                                     </div>
                                 </div>    
-                                
+                                <div class="pull-right">
+                                    <div class="form-group form-inline pull-left">
+                                      <label for="reportBy">Report By:</label>
+                                      <select class="form-control" id="reportBy" style="width:150px;">
+                                        <option>Products</option>
+                                        <option>Orders</option>
+                                      </select>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn btn-primary pull-left" id="generateReport" style="margin-left: 10px; margin-bottom: 14px;">
+                                        <i class="fas fa-sync"></i>
+                                        Generate
+                                    </a>
+                                </div>
                             </div>
                             
                         </div>
@@ -310,12 +310,12 @@
                     }
                     reportContent = content;
                     content += `<tr>
-                                <td colspan="3" class="text-right">Grand Total</td>
-                                <td class="text-right">${grand_total}</td>
+                                <td colspan="3" class="text-right"><b>Grand Total</b></td>
+                                <td class="text-right"><b>${grand_total}</b></td>
                             </tr>`;
                     reportContent += `<tr style="border-top: 2px solid #008000">
-                                        <td colspan="3" class="text-right">Grand Total</td>
-                                        <td class="text-right">${grand_total}</td>
+                                        <td colspan="3" class="text-right"><b>Grand Total</b></td>
+                                        <td class="text-right"><b>${grand_total}</b></td>
                                     </tr>`;
                     haveData = true;
                 }
@@ -337,12 +337,12 @@
                     }
                     reportContent = content;
                     content += `<tr>
-                                <td colspan="3" class="text-right">Grand Total</td>
-                                <td class="text-right">${grand_total}</td>
+                                <td colspan="3" class="text-right"><b>Grand Total</b></td>
+                                <td class="text-right"><b>${grand_total}</b></td>
                             </tr>`;                    
                     reportContent += `<tr style="border-top: 2px solid #008000">
-                                    <td colspan="3" class="text-right">Grand Total</td>
-                                    <td class="text-right">${grand_total}</td>
+                                    <td colspan="3" class="text-right"><b>Grand Total</b></td>
+                                    <td class="text-right"><b>${grand_total}</b></td>
                                 </tr>`;
                     haveData = true;
                 }
@@ -375,6 +375,5 @@
         document.body.innerHTML = originalContents;
         document.title = tempTitle;
     }
-    emptyCart();
 
 </script>

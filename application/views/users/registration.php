@@ -340,7 +340,7 @@
 								// Redirect URL
 								$.notify("Verification completed, Redirecting to your previous location", "success");
 								setTimeout(function() {
-									window.location.href = data.redirectURL;
+									window.location.href = decodeURIComponent(data.redirectURL);
 								}, 2000);
 							}
 						}
@@ -430,7 +430,7 @@
 									window.location.href = "<?php echo base_url(); ?>Dashboard";	
 								}
 								else {
-									window.location.href = data.redirectUrl;
+									window.location.href = decodeURIComponent(data.redirectURL);
 								}
 								$('#userId').val(localStorage.removeItem('UserId'));
 							}
@@ -441,7 +441,7 @@
 							if(!data.redirectUrl)
 								window.location = "<?php echo base_url(); ?>Dashboard";
 							else
-								window.location.href = data.redirectUrl;
+								window.location.href = decodeURIComponent(data.redirectURL);
 						}
 					},
 					error: function(data) {
@@ -499,7 +499,7 @@
 								 	window.location = "<?php echo base_url(); ?>Dashboard"; 
 								}
 								else {
-									window.location = data.redirectUrl; 	
+									window.location = decodeURIComponent(data.redirectURL); 	
 								}
 							}, 2000);
 						}
