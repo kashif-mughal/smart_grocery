@@ -176,31 +176,9 @@
 
 			<div class="top-brands my-4">
 				<h4>Top Brands</h4>
-				<a href="#">Unilever (151)</a>
-				<a href="#">Reckitt (105)</a>
-				<a href="#">National (73)</a>
-				<a href="#">Nestle (68)</a>
-				<a href="#">Reckitt-Health (59)</a>
-				<a href="#">Peek-Freans (50)</a>
-				<a href="#">Mitchell's (47)</a>
-				<a href="#">Reckitt-RB-Hygiene (39)</a>
-				<a href="#">Dawn (38)</a>
-				<a href="#">Bake-Parlor (30)</a>
-				<a href="#">Dettol (30)</a>
-				<a href="#">K&N's (29)</a>
-				<a href="#">Kolson (28)</a>
-				<a href="#">Shezan (26)</a>
-				<a href="#">Bunnys (26)</a>
-				<a href="#">Shangrilla (25)</a>
-				<a href="#">Youngs (24)</a>
-				<a href="#">LifeBuoy (23)</a>
-				<a href="#">Marhaba (22)</a>
-				<a href="#">Cnabebe (21)</a>
-				<a href="#">Kausar (20)</a>
-				<a href="#">Lux (20)</a>
-				<a href="#">Guard-Rice (20)</a>
-				<a href="#">Scotch-Brite (20)</a>
-				<a href="#">Colgate (19)</a>
+				<?php foreach($TopBrandList as $key => $value)  { ?>
+				<a href="#" id="<?=$value['BrandId']?>"><?=$value['BrandName']?> (<?=$value['Total_Products']?>)</a>
+				<?php } ?>
 			</div>
 
 			<div class="company-address">

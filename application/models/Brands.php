@@ -38,5 +38,18 @@ class Brands extends CI_Model {
         }
     }
 
+    // Get Top Brands
+    public function top_brands() {
+        $query = $this->db->query('SELECT b.BrandId, b.BrandName, COUNT(p.ProductId) As Total_Products FROM grocery_brand b 
+            JOIN grocery_products p ON b.BrandId = p.Brand WHERE b.Status = 1 AND p.Status = 1 GROUP BY b.BrandName 
+            ORDER BY Total_Products DESC LIMIT 20');
+        if($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        else {
+            return false;
+        }
+    }
+
 
 }

@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
         $CI->load->library('lassistant');
         $CI->load->model('Products');
         $CI->load->model('Units');
+        $CI->load->model('Brands');
         $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
         $product_list;
         if ($query->num_rows() > 0) {
@@ -25,6 +26,7 @@ class Dashboard extends CI_Controller {
         // print_r($product_list);die;
         $assistant = $CI->lassistant->last_assistant();
         $catArray = $CI->lcategory->get_category_hierarchy();
+        $top_brand_list = $CI->Brands->top_brands();
         foreach($catArray as $key => $value) {
             $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
             if($products)
@@ -42,7 +44,8 @@ class Dashboard extends CI_Controller {
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
             'ProdList' => $final_product_list,
-            'Assistant' => $assistant
+            'Assistant' => $assistant,
+            'TopBrandList' => $top_brand_list
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);
