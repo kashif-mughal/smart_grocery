@@ -193,7 +193,7 @@ class Dashboard extends CI_Controller {
     }
     public function user_authentication() {
         if(isset($_SERVER["HTTP_REFERER"])){
-            redirect(base_url("Dashboard/user_login?ret_url=".$_SERVER["HTTP_REFERER"]));
+            redirect(base_url("Dashboard/user_login?ret_url=".urlencode($_SERVER["HTTP_REFERER"])));
         }
         else
             redirect(base_url("Dashboard/user_login"));
