@@ -114,7 +114,7 @@
 								
 								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
 									<a href="#">
-										<span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
+										<span class="hyphen">-</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
 									</a>
 								<?php } ?>
 

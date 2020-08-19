@@ -221,7 +221,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  </div>
                                  <input type="text" name="q" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary btn-black border-none" type="submit">Search</button>
+                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">Search</button>
                                  </div>
                               </div>
                               </div>
@@ -233,11 +233,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                   <!-- Phone Number & Add to Cart Button -->
-                  <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-2 order-lg-3 order-2 text-lg-left text-left">
-                     <div class="phone_cart mb-1 d-flex flex-row align-item-center 
+                  <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1">
+                     <div class="phone_cart d-flex flex-row align-item-center 
                         justify-content-start justify-content-md-start justify-content-sm-center">
                         <!-- Phone -->
-                        <div class="phone mx-4 d-flex flex-row align-item-center justify-content-start">
+                        <div class="phone ml-1 mr-4 d-flex flex-row align-item-center justify-content-start">
                            <div class="phone_icon mr-2">
                             <a href="tel:+92 300 123 1234">
                               <img src="<?php echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
@@ -260,7 +260,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  <a href="javascript:void(0)" id="cartBtn" data-toggle="modal" data-target="#shoppingCartModal">
                                     <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
                                     <div class="cart_icon_text">
-                                       <span id="add_to_cart_items" class="badge badge-pill badge-light">0</span>
+                                       <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
                                     </div>
                                  </a>
                               </div>

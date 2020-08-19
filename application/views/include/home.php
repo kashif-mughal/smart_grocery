@@ -1,7 +1,7 @@
 <section class="main-content">
    <div class="container">
       <div class="row">
-         <div class="col-xl-8 col-lg-8 col-md-12">
+         <div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
             <div class="featured-products">
                <div class="header">
                   <h2 class="d-inline">FEATURED PRODUCTS</h2>
@@ -76,7 +76,7 @@
                                     <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
                                     <button class="card-button" data-toggle="modal" data-target="#virtualAssistant">Use Assistant</button>
                                  </div>
-                                 <div style="position: absolute;right: 0;max-width: 30%;">
+                                 <div style="position: absolute;right: 21px;max-width: 36%;top:56px;">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -96,7 +96,7 @@
                                     <h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
                                     <button class="card-button" onclick="window.location.href = '<?=base_url("user/value_cart")?>'">Build Value Cart</button>
                                  </div>
-                                 <div style="position: absolute;right: 10px;max-width: 25%;">
+                                 <div class="value-cart-feature-image">
                                     <img src="<?= base_url("assets/img/value-cart.png") ?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -130,7 +130,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-9 px-0">
                         <div class="container-fluid">
                            <div class="row featured-products-content pb-1">
                               <?php if(is_array($value->products)) for ($i=0; $i < count($value->products); $i++) {?>

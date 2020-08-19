@@ -262,6 +262,14 @@ input:focus, textarea:focus, select:focus{
 }
 .header_search_form_container input {
    min-height: 24px !important;
+   font-size: 14px;
+   color: #99999f;
+   padding: 20px 12px;
+   font-weight: 400;
+   font-family: "Work Sans";
+}
+.header_search_form_container input:focus {
+   border-left: 1px solid #cccccc !important;
 }
 .main-search-bar button {
    font-size: 14px !important;
@@ -668,6 +676,8 @@ button.category-button {
    border-radius: 5px 0px 0px 5px;
    width: 80px !important;
    color: #000000;
+   font-size: 13px;
+   font-weight: 400;
    background-color: #ffffff;
    outline: none !important;
 }
@@ -706,7 +716,7 @@ button.category-button:active {
    border: 1px solid #cccccc;
 }
 .slick-dots {
-   bottom: -38px !important;
+   bottom: -26px !important;
 }
 .slick-dots li {
    width: 12px !important;
@@ -808,11 +818,11 @@ button.category-button:active {
    margin-right: auto;
 }
 .main-content .featured-products .header {
-   margin-bottom: 5px;
+   margin-bottom: 17px;
 }
 .product-info {
-   margin-top: 18px;
-   padding: 8px 12px;
+   margin-top: 4px;
+   padding: 8px 12px 0px 12px;
 }
 .product-name {
    font-size: 16px;
@@ -852,11 +862,15 @@ button.category-button:active {
 .main-content .featured-products-content .product-card-inner {
    width: 168px;
    max-width: 253px;
-   height: 365px;
+   height: 348px;
    border-radius: 10px 10px 0px 0px;
    background-color: #ffffff;
    border: 1px solid #cccccc;
    margin-bottom: 10px; 
+}
+
+.edibles-main .product-card-inner {
+   width: 190px !important;
 }
 
 .product-card-inner-info {
@@ -934,11 +948,12 @@ button.category-button:active {
 }
 .main-content .featured-products-content .card .product-card-btn {
    width: 88%;
-   height: 24px;
+   height: 29px;
    background-color: #25bfa9;
    text-align: center;
    text-decoration: none;
    color: #ffffff;
+   padding: 2px;
 }
 .main-content .featured-products-content .card .remove-cart{
    height: 50px;
@@ -967,6 +982,12 @@ button.category-button:active {
    border: 5px solid #778d89;
    background-color: #fdfff3;
 }
+.value-cart .value-cart-feature-image {
+   position: absolute;
+   right: 16px;
+   max-width: 39%;
+   top: 42px;
+}
 
 .card-heading {
    font-size: 28px;
@@ -990,8 +1011,8 @@ button.category-button:active {
 .grocery-features .card .value-cart .card-heading {
    color: #c59541 !important;
 }
-.grocery-assistant-card .card .card-body .card-title {
-   font-size: 16px;
+.grocery-assistant-card .card-title {
+   font-size: 18px !important;
    color: #333333;
    margin-bottom: 20px;
    font-weight: 500;
@@ -1002,27 +1023,31 @@ button.category-button:active {
    width: 155px;
    height: 32px;
    background-color: #333333;
-   font-size: 14px;
+   font-size: 17px;
    color: #ffffff;
    font-weight: bold;
    font-family: "Arial";
 }
-.value-cart .card .card-body .card-title {
-   font-size: 16px;
-   color: #c59541;
-   margin-bottom: 20px;
+.value-cart .card-title {
+   font-size: 18px;
+   color: #333333;
    font-weight: 500;
    font-family: "Raleway";
+   margin-bottom: 20px;
    position: relative;
+}
+.value-cart .card-heading {
+   margin-bottom: 4px;
 }
 .grocery-features .card .value-cart .card-button {
    width: 155px;
    height: 32px;
    background-color: #c59541;
-   font-size: 14px;
+   font-size: 17px;
    color: #ffffff;
    font-weight: bold;
    font-family: "Arial";
+   border: #7d8485;
 }
 
 /* =================================== */
@@ -1297,6 +1322,8 @@ button.category-button:active {
    color: #666666;
    font-weight: 600;
    font-family: "Work Sans";
+   margin-bottom: 2px;
+   text-transform: uppercase;
 }
 .categories .category-grid .sub-category .sub-category-content a {
    font-size: 14px;
@@ -1312,8 +1339,8 @@ button.category-button:active {
    border-bottom: 1px solid #ececec;
 }
 .categories .category-grid .sub-category {
-   border-right: 1px solid #ececec;
-   margin-right: 20px;
+   /*border-right: 1px solid #ececec;*/
+   margin-right: 10px;
    margin-bottom: 20px !important;
 }
 .categories .category-grid .sub-category:last-child {
@@ -1510,6 +1537,9 @@ button.category-button:active {
    font-weight: 700 !important;
 }
 /* Font Size */
+.font-size-14 {
+   font-size: 14px !important;
+}
 .font-size-15 {
    font-size: 15px !important;
 }
@@ -1536,6 +1566,9 @@ button.category-button:active {
 }
 .font-size-30 {
    font-size: 30px !important;
+}
+.b-r-50 {
+   border-radius: 50% !important;
 }
 /* Text Decoration */
 .text-dec-none {
@@ -2452,6 +2485,13 @@ a#newAddressCancelBtn {
       margin-bottom: 16px;
    }
 
+   .value-cart .card-title {
+      width: 50%;
+   }
+   .value-cart .value-cart-feature-image {
+      right: 6%;
+      top: 21px !important;
+   }
 
 }
 
@@ -2487,6 +2527,12 @@ a#newAddressCancelBtn {
    .phone_cart .phone {
       margin-left: 0px !important;
       margin-right: 0px !important;
+   }
+   .phone_text h6 {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 400;
+      font-family: "Work Sans";
    }
    /* Phone Cart */
 
