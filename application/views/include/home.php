@@ -130,68 +130,37 @@
                            </div>
                         </div>
                      </div>
+
                      <div class="col-md-9 px-0">
+
                         <div class="container-fluid">
-                           <div class="row featured-products-content pb-1">
-                              <?php if(is_array($value->products)) for ($i=0; $i < count($value->products); $i++) {?>
-                              <div class="card mr-2 each-prod product-card-inner">
-                                 <?php if(!empty($value->products[$i]['ProductName'])){?>
-                                 <div class="card-body p-0">
-                                    <div class="header">
-                                       <?php 
-                                          if($value->products[$i]['IsFeatured'] == 1) {
-                                           $discountPercentage = (($value->products[$i]['Price'] - $value->products[$i]['SalePrice'])/$value->products[$i]['Price']) * 100;
-                                          }
-                                          if($discountPercentage != 0) { ?> 
-                                       <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
-                                       <?php } ?>
-                                       <a href="#" class="add_to_favorite">
-                                       <i class="fas fa-heart float-right"></i>
-                                       </a>
+                           <div class="container-fluid">
+                              <div class="row d-flex align-items-center justify-content-start">
+                                 <?php if(is_array($value->childCats)) for ($i=0; $i < count($value->childCats); $i++) {?>
+                                 <div class="card product-card mx-2">
+                                    <?php if(!empty($value->childCats[$i]['CatName'])){?>
+                                    <img class="card-img-top" src="<?php echo base_url().$value->childCats[$i]['Img']; ?>" alt="Card image cap">
+                                    <div class="card-body p-0">
+                                       <p class="product-card-title"><?php echo $value->childCats[$i]['CatName']; ?></p>
+                                       <a href="#" class="product-card-details-btn">View more details</a>
                                     </div>
-                                 </div>
-                                 <img class="card-img-bottom text-center" src="<?php echo base_url().$value->products[$i]['ProductImg']; ?>" alt="Card image cap">
-                                 <div class="product-info text-center">
-                                    <p class="card-text product-card-inner-name"><?php echo $value->products[$i]['ProductName']; ?></p>
-                                    <p class="card-text product-card-inner-weight"><?php echo $value->products[$i]['UnitName']; ?></p>
-                                    <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value->products[$i]['SalePrice']; ?></p>
-                                    <?php if($discountPercentage != 0) { ?> 
-                                    <span class="product-discount"><del>Rs. <?php echo $value->products[$i]['Price']; ?></del></span>
-                                    <?php } 
-                                       $productObject = (object) [
-                                        'id' => $value->products[$i]['ProductId'],
-                                        'pName' => $value->products[$i]['ProductName'],
-                                        'price' => $value->products[$i]['SalePrice'],
-                                        'img' => base_url().$value->products[$i]['ProductImg']
-                                       ];
-                                       ?>
-                                    <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                                       <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                       <input type="text" class="d-inline-flex quantity quantity-input">
-                                       <span class="d-block quantity-button">
-                                          <a href="javascript:void(0);" class="qty-pls d-block">+</a>
-                                          <div class="separator"></div>
-                                          <a href="javascript:void(0);" class="qty-mns d-block">-</a>
-                                       </span>
+                                    <div class="card-footer p-0">
+                                       <a href="<?php echo base_url().'Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId']; ?>"
+                                          class="product-card-viewmore-btn">View more</a>
                                     </div>
-                                 </div>
-                                 <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
-                                    data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                    >Add to Cart</a>
-                                 <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                                    data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                    >Remove From Cart</a>
-                                 <?php }else{ ?>
-                                 <div class="card-img-bottom text-center" style="margin-top: 80%;background: #80808052;padding: 20%;">
-                                    No Product
+                                    <?php } else { ?>
+                                    <div class="card-img-bottom text-center" style="margin-top: 80%;background: #80808052;padding: 20%;">
+                                       No Product
+                                    </div>
+                                    <?php } ?>
                                  </div>
                                  <?php } ?>
                               </div>
-                              <?php } ?>
-                           </div>
+                           </div>  
                         </div>
-                     </div>
+
                   </div>
+
                </div>
             </section>
          </div>

@@ -613,7 +613,7 @@ input:focus {
 .products-widget {
    background-color: #ffffff;
    margin-top: 20px;
-   margin-bottom: 20px;
+   /* margin-bottom: 20px; */
    border-radius: 10px 10px 0 0;
    padding: 20px;
    border: 1px solid #cccccc;
@@ -862,6 +862,16 @@ button.category-button:active {
 .main-content .featured-products-content .product-card-inner {
    width: 168px;
    max-width: 253px;
+   height: 348px;
+   border-radius: 10px 10px 0px 0px;
+   background-color: #ffffff;
+   border: 1px solid #cccccc;
+   margin-bottom: 10px; 
+}
+
+#products-area .featured-products-content .product-card-inner {
+   width: 100% !important;
+   max-width: 400px !important;
    height: 348px;
    border-radius: 10px 10px 0px 0px;
    background-color: #ffffff;
