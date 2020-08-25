@@ -65,6 +65,28 @@ html,body
 /*================ Phone Verification Ends =================*/
 
 
+/*================ New Address Form ==================*/
+
+.newFormItem {
+   padding: 24px 20px;
+   margin-bottom: 12px;
+}
+.loctionDropdown label {
+   display: block !important;
+}
+.loctionDropdown input {
+   width: 100% !important;
+}
+.loctionDropdown span.select2, 
+.loctionDropdown span.select2-container,
+.loctionDropdown span.select2-container--default {
+   width: 100% !important;
+   /*padding: 24px 20px;*/
+   margin-bottom: 12px;
+}
+
+/*================ New Address Form Ends ==================*/
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
    width: 10px;
@@ -1462,12 +1484,14 @@ button.category-button:active {
 }
 .order-button .button-primary {
    background-color: #25bfa9;
+   color: #fff;
 }
 .order-button .button-primary:hover {
    background-color: #23b19c !important;
 }
 .order-button .button-secondary {
    background-color: #333333;
+   color: #fff;
 }
 .order-button .button-secondary:hover {
    background-color: #464646 !important;

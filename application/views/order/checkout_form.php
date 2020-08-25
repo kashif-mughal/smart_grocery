@@ -90,21 +90,46 @@
                                         data-parent="#accordion">
                                         <div class="card-body p-5">
                                             <div class="container-fluid">
+                                                <?php if(!$userAddress) { ?>
+                                                <form id="newAddressForm">
+                                                    <input type="email" name="newAddressEmail" class="form-control newFormItem" placeholder="Enter your Email Address">
+                                                    <div class="checkbox ml-4">
+                                                      <label><input type="checkbox" value="" class="mr-2 p-2">Keep me up to date on news and exclusive offers</label>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                          <input type="text" name="newAddressFirstName" class="form-control newFormItem" placeholder="First Name">
+                                                        </div>
+                                                        <div class="col">
+                                                          <input type="text" name="newAddressLastName" class="form-control newFormItem" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Flat, House No. Building, Company, Apartment">
+                                                    <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street">
+                                                    <div class="form-group loctionDropdown">
+                                                      <label for="newAddressLocation" class="ml-4">Delivery Location</label>
+                                                      <select class="form-control newFormItem" id="newAddressLocation">
+                                                        <option>Home</option>
+                                                        <option>Office</option>
+                                                      </select>
+                                                    </div>
+                                                    <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
+                                                </form>
+                                                <?php } else { ?>
                                                 <form id="addressForm" action="<?=base_url('user/submit_address')?>">
                                                     <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
                                                     <div class="row address-panel my-2">
-                                                        <?php if($userAddress){?>
-                                                            {userAddress}
-                                                            <div class="col-md-6 my-2">
-                                                                <div class="card p-5 text-center">
-                                                                    <i class="fas fa-check" style="display:none;"></i>
-                                                                    <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
-                                                                        <span class="internalAddressContent">{Address}</span>
-                                                                    </a>
-                                                                </div>
+                                                        {userAddress}
+                                                        <div class="col-md-6 my-2">
+                                                            <div class="card p-5 text-center">
+                                                                <i class="fas fa-check" style="display:none;"></i>
+                                                                <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
+                                                                    <span class="internalAddressContent">{Address}</span>
+                                                                </a>
                                                             </div>
-                                                            {/userAddress}
-                                                        <?php } ?>
+                                                        </div>
+                                                        {/userAddress}
                                                         <div class="col-md-6 my-2">
                                                             <div class="card">
                                                                 <a href="javascript:void(0)" class="text-center p-5"
@@ -134,10 +159,11 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <input type="submit" class="btn btn-link button-secondary px-4 py-2" value="Next" id="submitAddress">
+                                                            <input type="submit" class="btn btn-link button-primary text-white px-5 py-2" value="Next" id="submitAddress">
                                                         </div>
                                                     </div>
                                                 </form>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +191,7 @@
                                                 
                                             </table>
                                             <a href="javascript:void(0)"
-                                                class="btn btn-link button-secondary px-4 py-2">Next</a>
+                                                class="btn btn-link button-primary text-white px-5 py-2">Next</a>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +228,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <a href="javascript:void(0)" id="proceed" class="btn btn-link px-4 py-2 button-primary">Place Order Here</a>
+                                                <a href="javascript:void(0)" id="proceed" class="btn btn-link px-5 py-2 button-secondary text-white">Place Order Here</a>
                                             </div>
                                         </div>
                                     </div>
