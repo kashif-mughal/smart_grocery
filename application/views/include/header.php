@@ -189,7 +189,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                               aria-expanded="false" aria-label="Toggle navigation">
-                              <i class="fa fa-bars" style="font-size: 40px;"></i>
+                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" style="width: 44px;">
+                              <!-- <i class="fa fa-bars" style="font-size: 40px;"></i> -->
                         </button>
                      </div>
                      <div class="logo ml-2">
