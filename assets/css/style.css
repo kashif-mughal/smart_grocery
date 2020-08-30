@@ -1207,6 +1207,12 @@ button.category-button:active {
    margin-top: 19px;
    box-shadow: 0px 6px 4.5px rgba(0,0,0,0.07);
 }
+.grocery-features .grocery-assistant-card .image-container {
+   position: absolute;
+   right: 21px;
+   max-width: 36%;
+   top: 77px;
+}
 .grocery-features .card {
    border-radius: 6px 6px 0 0;
    border: 5px solid #25bfa9;
@@ -1220,7 +1226,7 @@ button.category-button:active {
    position: absolute;
    right: 16px;
    max-width: 39%;
-   top: 42px;
+   top: 28px;
 }
 
 .card-heading {
@@ -1246,7 +1252,7 @@ button.category-button:active {
    color: #c59541 !important;
 }
 .grocery-assistant-card .card-title {
-   font-size: 18px !important;
+   font-size: 18px;
    color: #333333;
    margin-bottom: 20px;
    font-weight: 500;
@@ -2729,18 +2735,87 @@ a#newAddressCancelBtn {
       top: 21px !important;
    }
 
+   .grocery-features-columns {
+      padding-right: 15px !important;
+   } 
+
 }
 
 
 @media (max-width: 991px) {
+   .grocery-features-columns {
+      padding-right: 0px;
+   } 
    .tag-line {
       font-size: calc(0.7rem + 0.3vw) !important;
+   }
+   .grocery-features .value-cart {
+      height: 200px !important;
+   }
+   .grocery-features .grocery-assistant-card .image-container {
+      height: 201px !important;
+   }
+   .grocery-features .grocery-assistant-card .image-container {
+      width: 92px;
+   }
+   .value-cart .value-cart-feature-image {
+       position: absolute;
+       right: 12px !important;
+       max-width: 38% !important;
+       top: 48px !important;
+   }
+   .value-cart .card-heading {
+      margin-bottom: 10px;
+   }
+   .value-cart .card-title {
+      margin-bottom: 18px !important;
    }
 }
 
 @media (max-width: 636px) {
    .tag-line {
       font-size: calc(0.6rem + 0.3vw) !important;
+   }
+}
+
+@media (max-width: 1139px) {
+   .grocery-features-columns {
+      padding-right: 0px;
+      height: 50%;
+   }
+  .grocery-assistant-card .card-title {
+      font-size: 15px;
+   }
+   .grocery-assistant-card .card-heading {
+     font-size: 24px;
+   }
+  .grocery-features .card .grocery-assistant-card .card-button {
+      width: 132px;
+      font-size: 14px;
+   }
+   .grocery-features .grocery-assistant-card .image-container {
+      right: 14px;
+   }
+   .value-cart .card-title {
+      font-size: 15px;
+   }
+   .grocery-features .card .value-cart .card-button {
+      width: 132px;
+      font-size: 14px;
+   }
+   .grocery-features .value-cart {
+      height: 196px;
+   }
+   .value-cart .card-heading {
+      margin-bottom: 20px;
+   }
+   .value-cart .card-title {
+      margin-bottom: 18px;
+   }
+   .value-cart .value-cart-feature-image {
+       right: 12px;
+       max-width: 40%;
+       top: 52px;
    }
 }
 

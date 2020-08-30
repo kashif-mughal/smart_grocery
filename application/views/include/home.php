@@ -65,18 +65,18 @@
          </div>
          <div class="col-xl-4 col-lg-4 col-md-12">
             <div class="row">
-               <div class="col-lg-12 col-md-6">
+               <div class="col-lg-12 col-md-6 grocery-features-columns">
                   <div class="grocery-features">
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">
-                              <h6 class="card-title mb-0">Use our shop assistant to help you build your cart</h6>
+                              <h6 class="card-title mb-0">Our Shop Assistant will systematically walk you through all sections of the store</h6>
                               <div class="row">
                                  <div class="col-md-7 pr-0">
-                                    <h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
+                                    <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
                                     <button class="card-button" data-toggle="modal" data-target="#virtualAssistant">Use Assistant</button>
                                  </div>
-                                 <div style="position: absolute;right: 21px;max-width: 36%;top:56px;">
+                                 <div class="image-container">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
                                  </div>
                               </div>
@@ -85,7 +85,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-lg-12 col-md-6">
+               <div class="col-lg-12 col-md-6 grocery-features-columns">
                   <div class="grocery-features value-cart-feature">
                      <div class="card">
                         <div class="card-body value-cart">
@@ -93,7 +93,7 @@
                               <h4 class="card-heading">Value Cart</h4>
                               <div class="row">
                                  <div class="col-md-7 pr-0">                                    
-                                    <h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
+                                    <h6 class="card-title mb-3">Let us assist you in building the most economical cart</h6>
                                     <button class="card-button" onclick="window.location.href = '<?=base_url("user/value_cart")?>'">Build Value Cart</button>
                                  </div>
                                  <div class="value-cart-feature-image">
