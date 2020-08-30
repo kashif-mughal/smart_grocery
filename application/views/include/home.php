@@ -74,7 +74,7 @@
                               <div class="row">
                                  <div class="col-md-7 pr-0">
                                     <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
-                                    <button class="card-button" data-toggle="modal" data-target="#virtualAssistant">Use Assistant</button>
+                                    <button class="card-button" id="shopAssistantButton" data-toggle="modal" data-target="#virtualAssistant">Use Assistant</button>
                                  </div>
                                  <div class="image-container">
                                     <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
@@ -175,7 +175,7 @@
       <!-- Modal content-->
       <div class="modal-content p-0">
          <div class="modal-body p-0">
-            <a href="javascript:void(0)" class="close" data-dismiss="modal" data-target="virtualAssistant">
+            <a href="javascript:void(0)" class="close" data-dismiss="modal" data-target="virtualAssistant" id="virtualAssistantDismiss">
                <span>&times;</span>
             </a>
             <!-- <a href="javascript:void(0)" type="button" class="close mx-auto" data-dismiss="modal" aria-label="Close">
@@ -343,6 +343,18 @@
             $.notify(`Please add some product before checkout`, "error");
          }
       }
+
+      $('#shopAssistantButton').click(function() {
+         document.body.style.position = 'fixed';
+         document.body.style.top = `-${window.scrollY}px`;
+      });
+
+      $('#virtualAssistantDismiss').click(function() {
+         const scrollY = document.body.style.top;
+         document.body.style.position = '';
+         document.body.style.top = '';
+         window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      });
       
    });
 </script>
