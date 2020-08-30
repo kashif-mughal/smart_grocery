@@ -19,6 +19,7 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Users');
         $userAddress = $CI->Users->get_user_address();
+        // print_r($userAddress);die;
         $data = array(
             'title' => 'Checkout',
             'userAddress' => $userAddress
