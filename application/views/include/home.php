@@ -354,7 +354,7 @@
          document.body.style.top = `-${window.scrollY}px`;
       });
 
-      $('#virtualAssistantDismiss').click(function() {
+      $('#virtualAssistant').on('hidden.bs.modal', function (e) {
          const scrollY = document.body.style.top;
          document.body.style.position = '';
          document.body.style.top = '';
