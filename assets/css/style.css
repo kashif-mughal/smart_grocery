@@ -1192,6 +1192,40 @@ button.category-button:active {
 .main-content .featured-products-content .card .remove-cart{
    height: 50px;
 }
+
+.va-panel .filter-sidebar {
+   position: relative;
+}
+.va-panel-content .filter-sidebar .ribbon {
+   width: 145px;
+   height: 37px;
+   position: absolute;
+   background: #333333;
+   color: #fff;
+   text-align: center;
+   z-index: 999;
+   bottom: 265px;
+   right: -145px;
+}
+.va-panel-content .filter-sidebar .ribbon::before {
+   content: "";
+   position: absolute;
+   left: -15px;
+   width: 0;
+   height: 0;
+   border-top: 18px solid transparent;
+   border-right: 15px solid #333333;
+   border-bottom: 19px solid transparent;
+   z-index: 1000;
+}
+.va-panel-content .filter-sidebar .ribbon-content {
+   font-size: 16px;
+   color: #ffffff;
+   font-weight: 600;
+   font-family: "Work Sans";
+}
+
+
 .va-panel-remove-cart {
    width: 90%;
 }

@@ -198,6 +198,11 @@
                      <div class="row">
                         <div class="col-md-4 px-0">
                            <div class="filter-sidebar">
+                              <a href="#">
+                                 <h4 class="ribbon">
+                                    <strong class="ribbon-content">SHOW RESULT</strong>
+                                 </h4>
+                              </a>
                               <div class="filter-header d-flex px-4 py-3 border-b-primary">
                                  <div class="filter-icon mr-2">
                                     <img src="<?=base_url("assets/img/GroceryAssistant/filter.png")?>">   
