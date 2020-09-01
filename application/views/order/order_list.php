@@ -117,7 +117,7 @@
 
                 <?php if($orderData){?>
                     <?php foreach ($orderData as $key => $value) {?>
-                        <div class="accordion" id="orderHistoryaccordion">
+                        <div class="accordion" id="orderHistoryaccordion" style="margin-bottom: 10px;">
                            <div class="card order-history-card">
                               <div class="card-header order-header d-flex justify-content-between">
                                  <div class="order-date">
