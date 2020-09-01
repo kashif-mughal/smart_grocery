@@ -2315,6 +2315,56 @@ input[type=number]::-webkit-outer-spin-button {
    right: 10px;
    color: rgb(0, 226, 0);
 }
+#checkout-panel .address-panel .addressClass {
+   position: absolute;
+   padding: 0px;
+   top: 12px;
+   left: 12px;
+   width: 20px;
+   height: 20px;
+}
+#checkout-panel #newAddressForm #newAddressLocation {
+   width: 100%;
+   padding-left: 20px;
+   padding-right: 20px;
+   height: 48px;
+   box-shadow: none;
+
+   display: block;
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5;
+   color: #495057;
+   background-color: #fff;
+   background-clip: padding-box;
+   border: 1px solid #ced4da;
+   border-radius: 0.25rem;
+   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+
+   background-image: linear-gradient(45deg, transparent 50%, #495057 50%), 
+                     linear-gradient(135deg, #495057 50%, transparent 50%), 
+                     linear-gradient(to right, #ececec, #ececec);
+    background-position: calc(100% - 28px) 
+                         calc(1em + 6px), 
+                         calc(100% - 23px) calc(1em + 6px), 100% 0;
+    background-size: 
+      5px 5px, 
+      6px 6px, 
+      3.5em 3.5em;
+    background-repeat: no-repeat;
+}
+#checkout-panel #newAddressForm #newAddressLocation .dropdown-toggle::after {
+   display: none !important;
+}
+#checkout-panel #newAddressForm #newAddressLocation option {
+   font-size: 18px;
+}
 #checkout-panel .address-panel textarea#newAddressEdit {
    resize: none;
    border: none;

@@ -108,11 +108,18 @@
                                                     <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Flat, House No. Building, Company, Apartment">
                                                     <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street">
                                                     <div class="form-group loctionDropdown">
-                                                      <label for="newAddressLocation" class="ml-4">Delivery Location</label>
-                                                      <select class="form-control newFormItem" id="newAddressLocation">
+                                                        <label for="newAddressLocation" class="ml-4">Delivery Location</label>
+
+                                                        <select class="selectpicker" id="newAddressLocation">
+                                                            <option value="1" selected>Home</option>
+                                                            <option value="2">Office</option>
+                                                        </select>
+
+                                                      <!-- <select class="form-control newFormItem" id="newAddressLocation">
                                                         <option>Home</option>
                                                         <option>Office</option>
-                                                      </select>
+                                                      </select> -->
+
                                                     </div>
                                                     <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
                                                 </form>
@@ -124,6 +131,7 @@
                                                         <div class="col-md-6 my-2">
                                                             <div class="card p-5 text-center">
                                                                 <i class="fas fa-check" style="display:none;"></i>
+                                                                <input type="radio" name="addressRadio" class="addressClass">
                                                                 <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
                                                                     <span class="internalAddressContent">{Address}</span>
                                                                 </a>
@@ -573,4 +581,5 @@
         $('#newAddressCancelBtn').hide();
         $('#newAddressContent').show();
     });
+
 </script>
