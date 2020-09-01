@@ -55,11 +55,41 @@ class User extends CI_Controller {
             print_r(json_encode($result));
             exit();
         }
-        $insertedIds = $this->Users->update_address();
+        $insertedIds = $this->Users->update_address($this->input->post('selectedAddress'));
         if($insertedIds){
             $result['status'] = 1;
             $result['message'] = 'Address updated successfully';
             $result['insertedIds'] = $insertedIds;
+            print_r(json_encode($result));
+            exit();
+        }else{
+            $result['status'] = 0;
+            $result['message'] = 'Something went wrong';
+            print_r(json_encode($result));
+            exit();
+        }
+    }
+
+    public function submit_address_info(){
+        $this->auth->check_auth();
+        
+        $email = $this->input->post('newAddressEmail');
+        $address = $this->input->post('newAddress') . ' ' . $this->input->post('newAddress2');
+        if(empty($address)){
+            $result['status'] = 0;
+            $result['message'] = 'Add atleast one address';
+            print_r(json_encode($result));
+            exit();
+        }
+        $this->Users->profile_update();
+        $addresses = Array();
+        array_push($addresses, $address);
+        $insertedIds = $this->Users->update_address($addresses);
+        if($insertedIds){
+            $result['status'] = 1;
+            $result['message'] = 'Address updated successfully';
+            $result['id'] = $insertedIds[0];
+            $result['address'] = $address;
             print_r(json_encode($result));
             exit();
         }else{

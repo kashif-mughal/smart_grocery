@@ -90,32 +90,26 @@
                                         data-parent="#accordion">
                                         <div class="card-body p-5">
                                             <div class="container-fluid">
-                                                <?php if(!$userAddress) { ?>
-                                                <form id="newAddressForm">
-                                                    <input type="email" name="newAddressEmail" class="form-control newFormItem" placeholder="Enter your Email Address">
+                                                <form id="newAddressForm" style="display: <?=!$userAddress ? 'block' : 'none';?>" action="<?=base_url('user/submit_address_info')?>">
+                                                    <input type="email" name="user_email" class="form-control newFormItem" placeholder="Enter your Email Address" required>
                                                     <div class="checkbox ml-4">
                                                       <label><input type="checkbox" value="" class="mr-2 p-2">Keep me up to date on news and exclusive offers</label>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col">
-                                                          <input type="text" name="newAddressFirstName" class="form-control newFormItem" placeholder="First Name">
+                                                          <input type="text" name="first_name" class="form-control newFormItem" placeholder="First Name" required>
                                                         </div>
                                                         <div class="col">
-                                                          <input type="text" name="newAddressLastName" class="form-control newFormItem" placeholder="Last Name">
+                                                          <input type="text" name="last_name" class="form-control newFormItem" placeholder="Last Name" required>
+                                                          <input type="hidden" name="user_name">
                                                         </div>
                                                     </div>
                                                     
-                                                    <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Flat, House No. Building, Company, Apartment">
-                                                    <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street">
+                                                    <input type="text" name="newAddress" class="form-control newFormItem" placeholder="Flat, House No. Building, Company, Apartment" required>
+                                                    <input type="text" name="newAddress2" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street" required>
                                                     <div class="form-group loctionDropdown">
-                                                        <label for="newAddressLocation" class="ml-4">Delivery Location</label>
-
-                                                        <select class="selectpicker" id="newAddressLocation">
-                                                            <option value="1" selected>Home</option>
-                                                            <option value="2">Office</option>
-                                                        </select>
-
-                                                      <!-- <select class="form-control newFormItem" id="newAddressLocation">
+                                                      <label for="newAddressLocation" class="ml-4">Delivery Location</label>
+                                                      <select class="form-control newFormItem" id="newAddressLocation" required>
                                                         <option>Home</option>
                                                         <option>Office</option>
                                                       </select> -->
@@ -123,21 +117,21 @@
                                                     </div>
                                                     <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
                                                 </form>
-                                                <?php } else { ?>
-                                                <form id="addressForm" action="<?=base_url('user/submit_address')?>">
+                                                <form id="addressForm" style="display: <?=$userAddress ? 'block' : 'none';?>"  action="<?=base_url('user/submit_address')?>">
                                                     <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
                                                     <div class="row address-panel my-2">
-                                                        {userAddress}
-                                                        <div class="col-md-6 my-2">
-                                                            <div class="card p-5 text-center">
-                                                                <i class="fas fa-check" style="display:none;"></i>
-                                                                <input type="radio" name="addressRadio" class="addressClass">
-                                                                <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
-                                                                    <span class="internalAddressContent">{Address}</span>
-                                                                </a>
+                                                        <?php if($userAddress){?>
+                                                            {userAddress}
+                                                            <div class="col-md-6 my-2">
+                                                                <div class="card p-5 text-center">
+                                                                    <i class="fas fa-check" style="display:none;"></i>
+                                                                    <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
+                                                                        <span class="internalAddressContent">{Address}</span>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        {/userAddress}
+                                                            {/userAddress}
+                                                        <?php } ?>
                                                         <div class="col-md-6 my-2">
                                                             <div class="card">
                                                                 <a href="javascript:void(0)" class="text-center p-5"
@@ -171,7 +165,6 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -305,6 +298,7 @@
     if(!baskit || JSON.parse(baskit).length == 0)
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
+        $('#newAddressForm').validate();
         loadCheckoutCartArea();
         $("#addressForm").submit(function(e) {
             e.preventDefault();
@@ -581,5 +575,41 @@
         $('#newAddressCancelBtn').hide();
         $('#newAddressContent').show();
     });
+    $('#newAddressForm').submit(function(e) {
+        e.preventDefault();
+        if($('#newAddressForm').validate()){
+            submitFirstAddress($(this));
+        }
+    });
 
+    function submitFirstAddress(form){
+        $.ajax({
+           type: "POST",
+           url: form.attr('action'),
+           data: form.serialize(),
+           dataType: "JSON",
+           success: function(data)
+           {
+            if(data.status == 0){
+                $.notify("Something went wrong", "error");
+                console.log(data);
+                return false;
+            }
+            console.log("address submit successfully");
+            $('.address-panel').prepend(`<div class="col-md-6 my-2">
+                                            <div class="card p-5 text-center">
+                                                <i class="fas fa-check" style="display:none;"></i>
+                                                <a href="javascript:void(0)" data-addressid="${data.id}" class="singleAddress" id="address">
+                                                    <span class="internalAddressContent">${data.address}</span>
+                                                </a>
+                                            </div>
+                                        </div>`);
+            $('#newAddressForm').hide();
+            $('#addressForm').show();
+           },
+           error: function(a,b){
+                $.notify("Something went wrong!!!", "error");
+           }
+        });
+    }
 </script>

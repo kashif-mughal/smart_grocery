@@ -142,9 +142,10 @@ class Users extends CI_Model {
         $first_name = $this->input->post('first_name');
         $last_name = $this->input->post('last_name');
         $user_name = $this->input->post('user_name');
+        $email = $this->input->post('user_email');
         $new_logo = (!empty($logo) ? $logo : $old_logo);
 
-        return $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b` SET `a`.`first_name` = '$first_name', `a`.`last_name` = '$last_name', `b`.`username` = '$user_name',`a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id' AND `a`.`user_id` = `b`.`user_id`");
+        return $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b` SET `a`.`first_name` = '$first_name', `a`.`email` = '$email', `a`.`last_name` = '$last_name', `b`.`username` = '$user_name',`a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id' AND `a`.`user_id` = `b`.`user_id`");
     }
 
     //Change Password
@@ -183,8 +184,7 @@ class Users extends CI_Model {
         return false;
     }
 
-    public function update_address(){
-        $addresses = $this->input->post('selectedAddress');
+    public function update_address($addresses){
         $userId = $this->session->userdata('user_id');
         $insertedAddresses = Array();
         for ($i=0; $i < count($addresses); $i++) { 

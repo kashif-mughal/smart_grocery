@@ -66,6 +66,13 @@
                                 <input class="form-control" name ="unit" id="unit" type="text" placeholder="Unit"  required="" value="{unit}">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="OriginalPrice" class="col-sm-3 col-form-label">Original Price </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" value="{OriginalPrice}" type="text" placeholder="Original Price">
+                            </div>
+                        </div>
                         
                         <div class="form-group row">
                             <label for="price" class="col-sm-3 col-form-label">Price <i class="text-danger">*</i></label>
@@ -130,7 +137,7 @@
                             </div>
                         </div>
                         <script type="text/javascript">
-                            $('#BrandId').val(<?=$brand?>);
+                            $('#BrandId').val('<?=$brand?>');
                         </script>
 
                         <div class="form-group row">
@@ -155,6 +162,20 @@
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Img" class="col-sm-3 col-form-label">Icon </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="image" class="form-control" id="image">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Img" class="col-sm-3 col-form-label">&nbsp; </label>
+                            <div class="col-sm-6">
+                                <img style="background: green; max-width: 100px;" src="<?=base_url()?>{ProductImg}">
                             </div>
                         </div>
 

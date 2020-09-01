@@ -83,9 +83,9 @@
                                             <td>
                                                 <center>
                                                     <?php echo form_open() ?>
-                                                    <a href="<?php echo base_url() . 'Cunit/unit_update_form/{UnitId}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="<?php echo base_url() . 'Cunit/unit_update_form/{UnitId}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
-                                                    <a href="" class="Deleteunit btn btn-danger btn-sm" name="{UnitId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a href="" class="Deleteunit btn btn-danger btn-sm" name="{UnitId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                         <?php echo form_close() ?>
                                                 </center>
                                             </td>

@@ -111,15 +111,15 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Orders');
         $orderData = $CI->Orders->retrieve_user_orders();
-        if (!empty($orderData)) {
-            foreach ($orderData as $k => $v) {
-                $i++;
-                $orderData[$k]['sl'] = $i + $CI->uri->segment(3);
-            }
+        $orderDetailFormattedArr = Array();
+        for ($i=0; $i < count($orderData); $i++) { 
+            if(!$orderDetailFormattedArr[$orderData[$i]["OrderId"]])
+                $orderDetailFormattedArr[$orderData[$i]["OrderId"]] = Array();
+            array_push($orderDetailFormattedArr[$orderData[$i]["OrderId"]], $orderData[$i]);
         }
         $data = array(
             'title' => 'Manage Order',
-            'orderData' => $orderData
+            'orderData' => $orderDetailFormattedArr
         );
         return $CI->parser->parse('order/order_list', $data, true);
     }

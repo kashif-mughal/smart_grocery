@@ -77,6 +77,7 @@ class Lproduct {
             'product_id' => $product_detail[0]['ProductId'],
             'product_name' => $product_detail[0]['ProductName'],
             'unit' => $product_detail[0]['Unit'],
+            'OriginalPrice' => $product_detail[0]['OriginalPrice'],
             'price' => $product_detail[0]['Price'],
             'sale_price' => $product_detail[0]['SalePrice'],
             'is_featured' => $product_detail[0]['IsFeatured'],
@@ -87,7 +88,8 @@ class Lproduct {
             'brands' => $brands,
             'status' => $product_detail[0]['status'],
             'units' => $units,
-            'unit' => $product_detail[0]['UnitId']
+            'unit' => $product_detail[0]['UnitId'],
+            'ProductImg' => $product_detail[0]['ProductImg']
         );
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);

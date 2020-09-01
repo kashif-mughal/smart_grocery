@@ -48,17 +48,30 @@ class Orders extends CI_Model {
             $CI = & get_instance();
             $userId = $CI->session->userdata('user_id');
         }
-        //print_r($userId);die;
-        $this->db->select('*');
-        $this->db->from($this->tableName);
-        $this->db->where('CustomerId', $userId);
-        $this->db->where('Status', 1);
-        $this->db->order_by('ModifiedOn', 'DESC');
+
+        $this->db->select('a.*, b.*, c.ProductName, c.ProductImg, c.Price, d.UnitName');
+        $this->db->from($this->tableName.' a');
+        $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
+        $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
+        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
+        $CI = & get_instance();
+        $userRole = $CI->session->userdata('user_type');
+        if($userRole != 1){
+            $this->db->where('a.Status', 1);
+            $this->db->where('b.Status', 1);
+        }
+        $this->db->where('a.CustomerId', $userId);
+        $this->db->order_by('a.ModifiedOn', 'DESC');
         $query = $this->db->get();
+        $orderDetailObj = Array();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
+    }
+
+    public function retrieve_user_orders_details($userId){
+
     }
 
     public function retrieve_orders($perpage, $page, $orderId = null, $userEmail = null){

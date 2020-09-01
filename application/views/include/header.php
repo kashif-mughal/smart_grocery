@@ -33,6 +33,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    .left-menu-head{
     padding: 20px 40px !important;
    }
+   .error{
+    color: red;
+   }
 </style>
 
 <!-- Sidebar -->

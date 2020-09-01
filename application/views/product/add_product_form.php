@@ -78,6 +78,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="OriginalPrice" class="col-sm-3 col-form-label">Original Price </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" type="text" placeholder="Original Price">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="Price" class="col-sm-3 col-form-label">Price </label>
                             <div class="col-sm-6">
                                 <input class="form-control" name ="Price" id="Price" type="text" placeholder="Price">
@@ -93,16 +100,13 @@
 
                         <div class="form-group row">
                             <label for="IsFeatured" class="col-sm-3 col-form-label">IsFeatured </label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="IsFeatured" name="IsFeatured">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="IsHot" class="col-sm-3 col-form-label">IsHot </label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="IsHot" name="IsHot">
                                 </div>

@@ -22,7 +22,7 @@ class Products extends CI_Model {
                         CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot, 
                         -- p.IsFeatured, p.IsHot,
                         p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId 
-                        where c.Status = 1 AND p.Status = 1";
+                        where c.Status = 1 AND p.Status = 1 order by p.ModifiedOn desc";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {

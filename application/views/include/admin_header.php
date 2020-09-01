@@ -238,6 +238,10 @@ $users = $CI->Users->profile_edit_data();
                     <li><a href="<?php echo base_url('Creport') ?>">Daily Report</a></li>
 
                 </ul>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Creport/profit_margin_form') ?>">Profit Margin</a></li>
+
+                </ul>
             </li>
             <!-- Unit menu end -->
 

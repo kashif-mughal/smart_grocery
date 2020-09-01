@@ -86,6 +86,7 @@ class Cproduct extends CI_Controller {
         $data = array(
             'ProductName' => $this->input->post('ProductName'),
             'Unit' => $this->input->post('Unit'),
+            'OriginalPrice' => $this->input->post('OriginalPrice'),
             'Price' => $this->input->post('Price'),
             'SalePrice' => $this->input->post('SalePrice'),
             'IsFeatured' => $isFeatured,
@@ -116,6 +117,25 @@ class Cproduct extends CI_Controller {
     }
     // Product Update [POST]
     public function product_update() {
+        if ($_FILES['image']['name']) {
+
+            $config['upload_path'] = './assets/img/products/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+            $config['max_size'] = "*";
+            $config['max_width'] = "*";
+            $config['max_height'] = "*";
+            $config['encrypt_name'] = TRUE;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('image')) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+                redirect(base_url('Cproduct'));
+            } else {
+                $image = $this->upload->data();
+                $image_url = "assets/img/products/" . $image['file_name'];
+            }
+        }
         $this->load->model('Products');
         $product_id = $this->input->post('product_id');
         $isFeatured = ($this->input->post('isFeatured') == 1) ? 1 : 0;
@@ -124,15 +144,19 @@ class Cproduct extends CI_Controller {
         $data = array(
             'ProductName' => $this->input->post('product_name'),
             'Unit' => $this->input->post('unit'),
+            'OriginalPrice' => $this->input->post('OriginalPrice'),
             'Price' => $this->input->post('price'),
             'SalePrice' => $this->input->post('salePrice'),
             'IsFeatured' => $isFeatured,
             'IsHot' => $isHot,
             'Category' => $this->input->post('CategoryId'),
-            'Status' => $status
+            'Status' => $status,
+            'Brand' => $this->input->post('BrandId'),
+            'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s')
             //'status' => $this->input->post('status')
         );
-        
+        if($_FILES['image']['name'])
+            $data['ProductImg'] = (!empty($image_url) ? $image_url : 'assets/img/brand.jpg');
         $this->Products->update($data, 'ProductId', $product_id);
 
         $this->session->set_userdata(array('message' => display('successfully_updated')));

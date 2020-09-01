@@ -14,21 +14,7 @@ class Lreport {
     public function daily_report() {
         $CI =& get_instance();
         $CI->load->model('Reports');
-        $daily_report = $CI->Reports->daily_report(); //It will get only Credit categorys
-        // $i             = 0;
-        // $total         = 0;
-        // if (!empty($daily_report))
-        //   {
-        //     foreach ($daily_report as $k => $v)
-        //       {
-        //         $i++;
-        //         $daily_report[$k]['sl'] = $i + $CI->uri->segment(3);
-        //         if (empty($daily_report[$k]['ParentName']))
-        //           {
-        //             $daily_report[$k]['ParentName'] = 'None';
-        //           }
-        //       }
-        //   }
+        $daily_report = $CI->Reports->daily_report();
         $data         = array(
             'title' => 'Daily Report',
             'daily_report' => $daily_report
@@ -37,10 +23,30 @@ class Lreport {
         return $dailyReportList;
     }
 
+    // Retrieve Profit Margin Report
+    public function profit_margin_form() {
+        $CI =& get_instance();
+        $CI->load->model('Reports');
+        $data         = array(
+            'title' => 'Profit Margin Report',
+            'daily_report' => null
+        );
+        $dailyReportList = $CI->parser->parse('report/profit_margin', $data, true);
+        return $dailyReportList;
+    }
+
     public function daily_report2($type, $start, $end) {
         $CI =& get_instance();
         $CI->load->model('Reports');
         $daily_report = $CI->Reports->daily_report2($type, $start, $end);
+        
+        return $daily_report;
+    }
+
+    public function profit_margin_report($type, $start, $end) {
+        $CI =& get_instance();
+        $CI->load->model('Reports');
+        $daily_report = $CI->Reports->profit_margin_report($type, $start, $end);
         
         return $daily_report;
     }
