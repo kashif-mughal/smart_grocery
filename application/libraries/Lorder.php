@@ -111,6 +111,16 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Orders');
         $orderData = $CI->Orders->retrieve_user_orders();
+        
+        foreach ($orderData as $key => $value) {
+            $productObject = (object) [
+                           'id' => $value['ItemId'],
+                           'pName' => $value['ProductName'],
+                           'price' => $value['Price'],
+                           'img' => base_url().$value['ProductImg']
+                       ];
+            $orderData[$key]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
+        }
         $orderDetailFormattedArr = Array();
         for ($i=0; $i < count($orderData); $i++) { 
             if(!$orderDetailFormattedArr[$orderData[$i]["OrderId"]])

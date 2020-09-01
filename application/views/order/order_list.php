@@ -122,8 +122,8 @@
                               <div class="card-header order-header d-flex justify-content-between">
                                  <div class="order-date">
                                     <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
-                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                    <span class="order-header-text" id="orderDeliverDt"></span>    
+                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse<?=$value[0]['OrderId']?>" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
+                                    <span class="order-header-text" id="orderDeliverDt"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script></span>    
                                     </button>                                                
                                  </div>
                                  <div class="order-time">
@@ -133,7 +133,7 @@
                                     </span>
                                  </div>
                               </div>
-                              <div id="orderHistoryCollapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
+                              <div id="orderHistoryCollapse<?=$value[0]['OrderId']?>" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
                                  <div class="card-body">
                                     <?php
                                        for ($i=0; $i < count($value); $i++) {?>
