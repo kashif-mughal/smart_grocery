@@ -5,8 +5,11 @@
             <div class="featured-products">
                <div class="header">
                   <h2 class="d-inline">FEATURED PRODUCTS</h2>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                   <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="float-right" alt="">
+                  </a>
+                  <a href="javascript:void(0)">
+                  <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 65px;position:absolute;top: 30px;" alt="">
                   </a>
                </div>
                <div class="slider featured-product-slider">
@@ -363,3 +366,23 @@
       
    });
 </script>
+<style type="text/css">
+   .slick-next{
+       top: -34px !important;
+       right: 0px !important;
+   }
+   .slick-prev{
+      top: -34px !important;
+      right: 40px !important;
+      left: auto !important;
+   }
+
+   .slick-next:before{
+      color: black;
+      content: '';
+   }
+   .slick-prev:before{
+      color: black;
+      content: '';
+   }
+</style>

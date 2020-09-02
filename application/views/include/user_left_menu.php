@@ -73,7 +73,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <div class="card border-none">
             <div class="card-header p-2" id="headingTwo">
                 <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                    <a href="tel:+92 300 123 1234" class="btn-block bg-transparent d-flex align-items-center p-0" type="button">
+                    <a href="tel:+92 318 2294472" class="btn-block bg-transparent d-flex align-items-center p-0" type="button">
                         <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
                         <h4 class="d-inline">Call Us</h4>
                     </a>

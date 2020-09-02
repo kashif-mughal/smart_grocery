@@ -108,7 +108,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="tel:+92 300 123 1234" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                <a href="tel:+92 318 2294472" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
                                     >
                                     <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
                                     <h4 class="d-inline">Call Us</h4>
@@ -199,7 +199,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <img src="<?php echo base_url() ?>assets/img/logo.png" alt="Sauda Express" class="img-fluid d-block">
-                           <p class="text-white tag-line mb-0">Where technology meets tradition</p> 
+                           <p class="text-white tag-line mb-0">Inventing Tomorrow</p> 
                         </div>
                      </div>
                   </div>
@@ -230,7 +230,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                               </div>
                               </div>
                               <div class="input-group mb-3" style="position: absolute; color: white;">
-                                <span>Searching in &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
+                                <span>"Searching in" &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
                               </div>
                            </form>
                         </div>
@@ -243,7 +243,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <!-- Phone -->
                         <div class="phone ml-1 mr-4 d-flex flex-row align-item-center justify-content-start">
                            <div class="phone_icon mr-2">
-                            <a href="tel:+92 300 123 1234">
+                            <a href="tel:+92 318 2294472">
                               <img src="<?php echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
                             </a>
                            </div>
@@ -252,7 +252,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  <h6 class="mb-0">Hotline</h6>
                               </div>
                               <div class="phone_number">
-                                 <h6 class="font-weight-bold">+92 300 123 1234</h6>
+                                 <h6 class="font-weight-bold">+92 318 2294472</h6>
                               </div>
                            </div>
                         </div>
