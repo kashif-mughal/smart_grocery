@@ -124,7 +124,9 @@
                                                             {userAddress}
                                                             <div class="col-md-6 my-2">
                                                                 <div class="card p-5 text-center">
-                                                                    <i class="fas fa-check" style="display:none;"></i>
+                                                                    <a href="#" class="removeAddress">x</a>
+                                                                    <input type="radio" name="optradio" class="selectRadio">
+                                                                    <!-- <i class="fas fa-check" style="display:none;"></i> -->
                                                                     <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
                                                                         <span class="internalAddressContent">{Address}</span>
                                                                     </a>
@@ -526,6 +528,7 @@
     var addressCounter = 1;
 
     $(document).on("click", "a.singleAddress", function () {
+        $(this).prev('.address-panel .selectRadio').prop('checked', true);
         $('.address-panel i.fa-check').hide();
         $(this).prev('i.fa-check').toggle();
         $('.selectedAddress').removeClass("selectedAddress");
@@ -552,9 +555,11 @@
 
         //                                 <input type="text" name="userAddress[]" />
         //                                 <input type="hidden" name="selectedAddress[]" />
+        if(content)
         $('.address-panel').prepend(`<div class="col-md-6 my-2">
             <div class="card p-5 text-center">
-                <i class="fas fa-check" style="display:none;"></i>
+                <a href="#" class="removeAddress">x</a>
+                <input type="radio" name="optradio" class="selectRadio">
                 <a href="javascript:void(0)" class="singleAddress" id="address${addressCounter}">
                     <span class="internalAddressContent">${content}</span>
                     <input type="hidden" value="${content}" name="selectedAddress[]" />
@@ -598,7 +603,8 @@
             console.log("address submit successfully");
             $('.address-panel').prepend(`<div class="col-md-6 my-2">
                                             <div class="card p-5 text-center">
-                                                <i class="fas fa-check" style="display:none;"></i>
+                                                <a href="#" class="removeAddress">x</a>
+                                                <input type="radio" name="optradio" class="selectRadio">
                                                 <a href="javascript:void(0)" data-addressid="${data.id}" class="singleAddress" id="address">
                                                     <span class="internalAddressContent">${data.address}</span>
                                                 </a>
