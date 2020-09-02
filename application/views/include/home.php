@@ -69,7 +69,7 @@
          <div class="col-xl-4 col-lg-4 col-md-12">
             <div class="row">
                <div class="col-lg-12 col-md-6 grocery-features-columns">
-                  <div class="grocery-features">
+                  <div class="grocery-features shop-assistant-feature">
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">

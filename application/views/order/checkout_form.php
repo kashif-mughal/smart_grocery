@@ -109,10 +109,10 @@
                                                     <input type="text" name="newAddress2" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street" required>
                                                     <div class="form-group loctionDropdown">
                                                       <label for="newAddressLocation" class="ml-4">Delivery Location</label>
-                                                      <select class="form-control newFormItem" id="newAddressLocation" required>
+                                                      <select class="form-control" id="newAddressLocation" required>
                                                         <option>Home</option>
                                                         <option>Office</option>
-                                                      </select> -->
+                                                      </select> 
 
                                                     </div>
                                                     <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
@@ -300,6 +300,7 @@
     if(!baskit || JSON.parse(baskit).length == 0)
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
+        $('#newAddressLocation').select2('destroy');
         $('#newAddressForm').validate();
         loadCheckoutCartArea();
         $("#addressForm").submit(function(e) {
@@ -529,8 +530,8 @@
 
     $(document).on("click", "a.singleAddress", function () {
         $(this).prev('.address-panel .selectRadio').prop('checked', true);
-        $('.address-panel i.fa-check').hide();
-        $(this).prev('i.fa-check').toggle();
+        // $('.address-panel i.fa-check').hide();
+        // $(this).prev('i.fa-check').toggle();
         $('.selectedAddress').removeClass("selectedAddress");
         $(this).addClass("selectedAddress");
         $('#selectedFinalAddress').val($(this).find('.internalAddressContent')[0].innerText);
@@ -618,4 +619,6 @@
            }
         });
     }
+
+    
 </script>
