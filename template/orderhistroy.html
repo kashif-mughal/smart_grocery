@@ -364,17 +364,36 @@
                                 <h5>My Orders History</h5>
 
                                 <div class="accordion" id="orderHistoryaccordion">
-                                    <div class="card order-history-card">
-                                        <div class="card-header order-header d-flex justify-content-between">
-                                            <div class="order-date">
-                                                <img src="img/orderhistory/calendar_icon.png" alt="Calendar">
-                                                <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                                    <span class="order-header-text">Tuesday, 23rd June 2020</span>    
-                                                </button>                                                
-                                            </div>
-                                            <div class="order-time">
-                                                <img src="img/orderhistory/clock_icon.png" alt="Clock">
-                                                <span class="order-header-text">9:00 am - 11:30 am</span>
+                                    <div class="card order-history-card ">
+                                        <div class="card-header order-header">
+                                            <div class="container-fluid">
+                                                <div class="row py-3">
+                                                    <div class="col-md-8">
+                                                        <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
+                                                            <div class="d-flex justify-content-between">    
+                                                                <div class="order-id border-r-secondary pr-4 mr-4">
+                                                                    <img src="img/orderhistory/track_id.png" alt="Track_Id" style="width: 40px; height: 34px;">
+                                                                    <span class="order-header-text">#333393</span>
+                                                                </div>
+                                                                <div class="order-date border-r-secondary pr-4 mr-4">
+                                                                    <img src="img/orderhistory/calendar_icon.png" alt="Calendar">
+                                                                    <span class="order-header-text">Tuesday, 23rd June 2020<span>     
+                                                                </div>
+                                                                <div class="order-time">
+                                                                    <img src="img/orderhistory/clock_icon.png" alt="Clock">
+                                                                    <span class="order-header-text">9:00 am - 11:30 am</span>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4 d-flex justify-content-end align-items-center">
+                                                        <div>
+                                                            <span class="orderTrackingIcon mr-3" style="width: 40px;">Track your Order</span>
+                                                            <img src="img/orderhistory/track_id_icon.png">    
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div id="orderHistoryCollapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">

@@ -211,6 +211,9 @@ a#newAddressCancelBtn {
 .border-r-primary {
    border-right: : 1px solid #dcdcdc;
 }
+.border-r-secondary {
+   border-right: : 1px solid #333333 !important;
+}
 .border-b-primary {
    border-bottom: 1px solid #dcdcdc;
 }
@@ -1765,6 +1768,12 @@ button.category-button:active {
    font-weight: 400;
    font-family: "Work Sans";
 }
+.order-history-header .order-header .orderTrackingIcon {
+   font-size: 18px;
+   color: #666666;
+   font-weight: 600;
+   text-decoration: underline;
+}
 .order-content {
    display: grid;
    grid-template-columns: 1fr 2fr 5fr 3fr 3fr 3fr;
@@ -1998,8 +2007,18 @@ button.category-button:active {
 .order-button .button-secondary:hover {
    background-color: #464646 !important;
 }
+.order-history-card {
+   border-radius: 5px !important;
+}
 .order-history-card img {
    max-width: 100px;
+}
+.order-history-card .fa-chevron-up {
+   background-color: #cccccc;
+   border-radius: 50%;
+   width: 20px;
+   height: 20px;
+   margin: auto;
 }
 .order-item {
    height: 100%;

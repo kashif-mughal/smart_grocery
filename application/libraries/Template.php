@@ -41,7 +41,6 @@ class Template {
 
     //Admin Html View....
     public function full_admin_html_view($content) {
-
         $CI = & get_instance();
         $message = $this->message_html();
         $logged_info = '';

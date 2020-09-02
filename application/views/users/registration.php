@@ -3,11 +3,11 @@
 		<img src="img/logo.png" alt="" class="mx-auto mt-3" style="background-color: #17a18d; border-radius: 47%;">
 	</div>
 	<div class="row">
-		<div class="col-xl-8 col-lg-8 col-md-12">
+		<div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 			<!-- Phone Verification -->
 			<div id="phoneForm">
-				<div class="card content-box">
+				<div class="card content-box" style="padding-bottom: 11px;">
 
 					<div class="sign-in d-flex justify-content-start align-items-start">
 						<div class="mt-2 step-number text-center">
@@ -191,49 +191,52 @@
 		</div>
 		
 		<div class="col-xl-4 col-lg-4 col-md-12">
-			<div class="row">
-				<div class="col-lg-12 col-md-6">
-					<div class="grocery-features">
-						<div class="card">
-							<div class="card-body grocery-assistant-card">
-								<div class="container-fluid px-0">
-									<h6 class="card-title mb-0">Use our shop assistant to help you build your cart</h6>
-									<div class="row">
-										<div class="col-md-7 pr-0">
-											<h4 class="card-heading pt-3">GROCERY ASSISTANT</h4>
-											<button class="card-button">Use Assistant</button>
-										</div>
-										<div style="position: absolute;right: 0;max-width: 30%;">
-											<img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-6">
-					<div class="grocery-features value-cart-feature">
-						<div class="card">
-							<div class="card-body value-cart">
-								<div class="container-fluid px-0">
-									<h4 class="card-heading">Value Cart</h4>
-									<div class="row">
-										<div class="col-md-7 pr-0">                                    
-											<h6 class="card-title mb-2">Let us assist you in building the most economical cart for you</h6>
-											<button class="card-button">Build Value Cart</button>
-										</div>
-										<div style="position: absolute;right: 10px;max-width: 25%;">
-											<img src="<?= base_url("assets/img/value-cart.png") ?>" alt="Grocery Assistant Icon" class="img-fluid" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="row">
+               <div class="col-lg-12 col-md-6 grocery-features-columns">
+                  <div class="grocery-features">
+                     <div class="card">
+                        <div class="card-body grocery-assistant-card">
+                           <div class="container-fluid px-0">
+                              <h6 class="card-title mb-0">Our Shop Assistant will systematically walk you through all sections of the store</h6>
+                              <div class="row">
+                                 <div class="col-md-7 pr-0">
+                                    <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
+                                    <button class="card-button" id="shopAssistantButton" data-toggle="modal" data-target="#virtualAssistant">Use Assistant</button>
+                                 </div>
+                                 <div class="image-container">
+                                    <img src="<?php echo base_url() ?>assets/img/grocery-assitant-icon.png?>" alt="Grocery Assistant Icon" class="img-fluid" />
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-6 grocery-features-columns">
+                  <div class="grocery-features value-cart-feature">
+                     <div class="card">
+                        <div class="card-body value-cart">
+                           <div class="container-fluid px-0">
+                              <h4 class="card-heading">Value Cart</h4>
+                              <div class="row">
+                                 <div class="col-md-7 pr-0">                                    
+                                    <h6 class="card-title mb-3">Let us assist you in building the most economical cart</h6>
+                                    <button class="card-button" onclick="window.location.href = '<?=base_url("user/value_cart")?>'">Build Value Cart</button>
+                                 </div>
+                                 <div class="value-cart-feature-image">
+                                    <img src="<?= base_url("assets/img/value-cart.png") ?>" alt="Grocery Assistant Icon" class="img-fluid" />
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+		
 	</div>
 </div>
 

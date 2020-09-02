@@ -89,7 +89,7 @@
                                     <?php if(!$placed && $OrderData["OrderDetail"][0]["PreviousOrderStep"] == 0){
                                        $placed = true;
                                        ?>
-                                       <img style="left: 170px;" src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
+                                       <img style="left: 70px;" src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
                                     <?php } ?>
 
 

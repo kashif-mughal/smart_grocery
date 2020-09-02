@@ -54,8 +54,9 @@
             $this->session->unset_userdata('error_message');
         }
         ?>
-        <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
+        <div class="row content-box pd-4">
+            <h5 class="ml-4 mt-4 mb-2">My Orders History</h5>
+            <!-- <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
                 <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
                     <div>
                         <?php 
@@ -66,8 +67,8 @@
                         ?>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
+            </div> -->
+            <div class="col-xl-12 col-lg-12 col-md-12 my-3 pr-0">
 
                 <!-- <table id="orderDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
                     <thead>
@@ -119,20 +120,41 @@
                     <?php foreach ($orderData as $key => $value) {?>
                         <div class="accordion" id="orderHistoryaccordion" style="margin-bottom: 10px;">
                            <div class="card order-history-card">
-                              <div class="card-header order-header d-flex justify-content-between">
-                                 <div class="order-date">
-                                    <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
-                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse<?=$value[0]['OrderId']?>" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                    <span class="order-header-text" id="orderDeliverDt"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script></span>    
-                                    </button>                                                
-                                 </div>
-                                 <div class="order-time">
-                                    <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
-                                    <span class="order-header-text">
-                                       <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
-                                    </span>
-                                 </div>
-                              </div>
+                              <div class="card-header order-header">
+                                    <div class="container-fluid">
+                                        <div class="row py-3">
+                                            <div class="col-md-8">
+                                                <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
+                                                    <div class="d-flex justify-content-between">    
+                                                        <div class="order-id border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
+                                                            <img src="<?=base_url("assets/img/orderhistory/track_id.png")?>" alt="Track_Id" style="width: 40px; height: 34px;">
+                                                            <span class="order-header-text"><?='#'.$value[0]['OrderId']?></span>
+                                                        </div>
+                                                        <div class="order-date border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
+                                                            <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
+                                                            <span class="order-header-text"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script><span>     
+                                                        </div>
+                                                        <div class="order-time">
+                                                            <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
+                                                            <span class="order-header-text">
+                                                                <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
+                                                            </span>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4 d-flex justify-content-end align-items-center">
+                                                <div>
+                                                    <a href="<?=base_url("Corder/order_detail_form/$key")?>" class="orderTrackingIcon pr-2">Track your Order</a>
+                                                    <img src="<?=base_url("assets/img/orderhistory/track_id_icon.png")?>" alt="TrackIcon">    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                               <div id="orderHistoryCollapse<?=$value[0]['OrderId']?>" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
                                  <div class="card-body">
                                     <?php

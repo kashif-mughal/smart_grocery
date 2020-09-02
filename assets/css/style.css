@@ -91,11 +91,12 @@ html,body
 .ordertrackingprogress ul {
    text-align: center;
    position: relative;
+   align-content: flex-start;
 }
 .ordertrackingprogress ul li {
    display: inline-block;
    position: relative;
-   width: 180px;
+   width: 145px;
 }
 .ordertrackingprogress ul li::before {
    width: 10px;
@@ -176,7 +177,7 @@ html,body
 .ordertrackingprogress ul img.truck {
    position: absolute;
    top: -11px;
-   left: 340px;
+   left: 125px;
 }
 
 #order_form .table thead tr td {
@@ -1244,8 +1245,8 @@ button.category-button:active {
 .grocery-features .grocery-assistant-card .image-container {
    position: absolute;
    right: 21px;
-   max-width: 36%;
-   top: 77px;
+   max-width: 35%;
+   top: 68px;
 }
 .grocery-features .card {
    border-radius: 6px 6px 0 0;
@@ -1711,6 +1712,9 @@ button.category-button:active {
    color: #99999f;
 }
 /* Bread Crumb */
+.order-history-card {
+   border-radius: 5px !important;
+}
 
 .order-history-card img {
    max-width: 100px;
@@ -1723,6 +1727,7 @@ button.category-button:active {
    text-decoration: none;
    color: #ffffff;
    margin: 4px 0px;
+   width: 169px;
 }
 .order-button .button-primary {
    background-color: #25bfa9;
@@ -1776,6 +1781,12 @@ button.category-button:active {
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
+}
+.orderTrackingIcon {
+   font-size: 18px;
+   color: #666666;
+   font-weight: 600;
+   text-decoration: underline;
 }
 .order-content {
    display: grid;
@@ -2271,6 +2282,7 @@ input[type=number]::-webkit-outer-spin-button {
 #checkout-panel button {
    text-decoration: none;
    color: #000000;
+   box-shadow: none;
 }
 #checkout-panel .verification-steps-heading {
    font-size: 20px;
@@ -2814,14 +2826,30 @@ a#newAddressCancelBtn {
    .value-cart .card-title {
       width: 50%;
    }
-   .value-cart .value-cart-feature-image {
-      right: 6%;
-      top: 21px !important;
-   }
 
    .grocery-features-columns {
       padding-right: 15px !important;
    } 
+
+   .grocery-features .grocery-assistant-card .image-container {
+      width: 28%;
+      top: 45px;
+   }
+
+   .grocery-assistant-card .card-heading {
+      padding-bottom: 10px;
+   }
+   .grocery-features .card .grocery-assistant-card .card-button {
+      width: 136px;
+      height: 32px;
+      font-size: 14px;
+   }
+   .value-cart .value-cart-feature-image {
+      right: 7%;
+      top: 21px;
+      max-width: 40%;
+      top: 50px;
+   }
 
 }
 
@@ -2838,21 +2866,19 @@ a#newAddressCancelBtn {
    }
    .grocery-features .grocery-assistant-card .image-container {
       height: 201px !important;
-   }
-   .grocery-features .grocery-assistant-card .image-container {
-      width: 92px;
+      width: 32%;
    }
    .value-cart .value-cart-feature-image {
        position: absolute;
-       right: 12px !important;
-       max-width: 38% !important;
-       top: 48px !important;
+       right: 12px;
+       max-width: 38%;
+       top: 48px;
    }
    .value-cart .card-heading {
       margin-bottom: 10px;
    }
    .value-cart .card-title {
-      margin-bottom: 18px !important;
+      margin-bottom: 22px;
    }
 }
 
@@ -2882,6 +2908,7 @@ a#newAddressCancelBtn {
    }
    .value-cart .card-title {
       font-size: 15px;
+      margin-bottom: 22px;
    }
    .grocery-features .card .value-cart .card-button {
       width: 132px;
@@ -2893,13 +2920,10 @@ a#newAddressCancelBtn {
    .value-cart .card-heading {
       margin-bottom: 20px;
    }
-   .value-cart .card-title {
-      margin-bottom: 18px;
-   }
    .value-cart .value-cart-feature-image {
-       right: 12px;
+       right: 14px;
        max-width: 40%;
-       top: 52px;
+       top: 35px;
    }
 }
 
