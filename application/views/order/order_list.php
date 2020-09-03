@@ -123,29 +123,32 @@
                               <div class="card-header order-header">
                                     <div class="container-fluid">
                                         <div class="row py-3">
-                                            <div class="col-md-8">
-                                                <button data-toggle="collapse" data-target="#orderHistoryCollapse1" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                                    <div class="d-flex justify-content-between">    
-                                                        <div class="order-id border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
-                                                            <img src="<?=base_url("assets/img/orderhistory/track_id.png")?>" alt="Track_Id" style="width: 40px; height: 34px;">
-                                                            <span class="order-header-text"><?='#'.$value[0]['OrderId']?></span>
+                                            <div class="col-md-8 col-12">
+                                                <!-- <div class=> -->
+                                                
+                                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse<?=$value[0]['OrderId']?>" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
+                                                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">    
+                                                            <div class="order-id border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
+                                                                <img src="<?=base_url("assets/img/orderhistory/track_id.png")?>" alt="Track_Id" style="width: 40px; height: 34px;">
+                                                                <span class="order-header-text"><?='#'.$value[0]['OrderId']?></span>
+                                                            </div>
+                                                            <div class="order-date border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
+                                                                <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
+                                                                <span class="order-header-text"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script><span>     
+                                                            </div>
+                                                            <div class="order-time">
+                                                                <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
+                                                                <span class="order-header-text">
+                                                                    <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
+                                                                </span>
+                                                            </div>
+                                                        
                                                         </div>
-                                                        <div class="order-date border-r-secondary pr-4 mr-4" style="border-right: 1px solid #ccc;">
-                                                            <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
-                                                            <span class="order-header-text"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script><span>     
-                                                        </div>
-                                                        <div class="order-time">
-                                                            <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
-                                                            <span class="order-header-text">
-                                                                <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
-                                                            </span>
-                                                        </div>
-                                                    
-                                                    </div>
-                                                </button>
+                                                    </button>
+                                                <!-- </div> -->
                                             </div>
                                             <div class="col-md-4 d-flex justify-content-end align-items-center">
-                                                <div>
+                                                <div class="orderTrackingLink">
                                                     <a href="<?=base_url("Corder/order_detail_form/$key")?>" class="orderTrackingIcon pr-2">Track your Order</a>
                                                     <img src="<?=base_url("assets/img/orderhistory/track_id_icon.png")?>" alt="TrackIcon">    
                                                 </div>
@@ -163,17 +166,17 @@
                                             <div class="order-history-header mt-3 p-0">
                                                 <div class="card order-history-card each-prod">
                                                     
-                                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-items-center">
+                                                    <div class="featured-products mt-0 border-none d-flex flex-column flex-md-row justify-content-between align-items-center">
                                                         <?php 
                                                           $discountPercentage = (($value[$i]['Price'] - $value[$i]['SoldPrice'])/$value[$i]['Price']) * 100;
                                                         ?> 
 
                                                         <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 70px; max-height: 60px;" alt="">
-                                                        <div class="order-product-name order-item align-self-center">
+                                                        <div class="order-product-name order-item align-self-center text-center text-md-left">
                                                             <p class="order-name"><?=$value[$i]['ProductName']?></p>
                                                             <p class="order-weight"><?=$value[$i]['ItemQuantity']?>&nbsp;<?=$value[$i]['UnitName']?></p>
                                                         </div>
-                                                        <div class="order-product-price order-item">
+                                                        <div class="order-product-price order-item text-center text=md-left">
                                                             <p class="order-price"><script type="text/javascript">
                                                                 document.write(formatCurrency('<?=$value[$i]["SoldPrice"]?>'));
                                                             </script></p>

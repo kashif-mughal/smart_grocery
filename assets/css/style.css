@@ -2080,7 +2080,6 @@ button.category-button:active {
    /*margin-top: auto;*/
    /*margin-bottom: auto;*/
    padding-left: 20px;
-   border-left: 1px solid #cccccc;
 }
 .order-product-name .order-name {
    font-size: 16px;
@@ -2911,6 +2910,41 @@ a#newAddressCancelBtn {
    }
    .value-cart-feature {
       margin-top: 19px;
+   }
+   .order-item {
+      width: 100%;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #cccccc;
+      padding-top: 20px;
+      text-align: center;
+      border-left: none;
+   }
+   .order-item:last-child {
+      border-bottom: none;
+   }
+   .quantity-area {
+      padding-left: 38%;
+   }
+   .order-button {
+      padding-left: 30%;
+   }
+   .order-history-button {
+      text-align: center;
+      width: 100%;
+      padding-top: 0px;
+   }
+   .order-history-button .order-id,
+   .order-history-button .order-date,
+   .order-history-button .order-time {
+      width: 100%;
+      border-right: none !important;
+      padding: 20px 0;
+      border-bottom: 1px solid #cccccc;
+   }
+   #orderHistoryaccordion .orderTrackingLink {
+      width: 100%;
+      text-align: center;
+      padding-top: 20px;
    }
 }
 
