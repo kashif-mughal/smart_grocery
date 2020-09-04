@@ -96,7 +96,7 @@ html,body
 .ordertrackingprogress ul li {
    display: inline-block;
    position: relative;
-   width: 145px;
+   width: 23%;
 }
 .ordertrackingprogress ul li::before {
    width: 10px;
@@ -2879,7 +2879,48 @@ a#newAddressCancelBtn {
       top: 50px;
    }
 
+   .ordertrackingprogress ul {
+      padding-left: 0px;
+   }
+
+   .ordertrackingprogress ul li {
+      width: 23% !important;
+   }
+
+   .ordertrackingprogress ul li .check-container {
+      width: 40px;
+      height: 40px;
+   }
+
+   .ordertrackingprogress ul li i {
+      padding: 5px;
+   }
+
+   .ordertrackingprogress ul img.truck {
+      top: -7px;
+      left: 82px;
+      width: 34px;
+   }
+   .ordertrackingprogress ul li::after {
+      height: 10px;
+      top: 15px;
+   }
+   .ordertrackingprogress ul li::before {
+      width: 8px;
+      height: 8px;   
+   }
+   .ordertrackingprogress ul li:last-child {
+      top: 19px;
+   }
+
 }
+
+@media only screen and (max-width: 575px) and (min-width: 521px)  {
+   .ordertrackingprogress ul li:last-child {
+      top: 0px;
+   }
+}
+
 
 
 @media (max-width: 991px) {
@@ -2945,6 +2986,9 @@ a#newAddressCancelBtn {
       width: 100%;
       text-align: center;
       padding-top: 20px;
+   }
+   .ordertrackingprogress ul li {
+      width: 22%;
    }
 }
 

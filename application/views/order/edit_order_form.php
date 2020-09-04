@@ -53,10 +53,10 @@
             </div>
          </div> -->
          
-         <div class="col-xl-12 col-lg-12 col-md-12 my-3 pr-0">
-            <div class="container bg-transparent pr-0">
+         <div class="col-xl-12 col-lg-12 col-md-12 my-3 px-0">
+            <div class="container bg-transparent px-0">
 
-               <div class="card p-5 content-box" style="z-index: -20; border: 3px 3px 0 0;">
+               <div class="card p-sm-5 content-box" style="z-index: -20; border: 3px 3px 0 0;">
                   <div class="d-flex flex-column pb-5 mb-4 border-b-primary">
                      <div id="orderNumberTitle">
                         <span>Order No.</span>
