@@ -124,7 +124,7 @@
                                                             {userAddress}
                                                             <div class="col-md-6 my-2">
                                                                 <div class="card p-5 text-center">
-                                                                    <a href="#" class="removeAddress">x</a>
+                                                                    <a href="javascript:void(0)" class="removeAddress">x</a>
                                                                     <input type="radio" name="optradio" class="selectRadio">
                                                                     <!-- <i class="fas fa-check" style="display:none;"></i> -->
                                                                     <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
@@ -487,6 +487,36 @@
            }
         });
     }
+    function deleteAddress(currentElem){
+        var addressId = currentElem.parent().find(".singleAddress").data("addressid");
+        debugger;
+        if(!addressId)
+        {
+            console.log("address removed inmem successfully");
+            currentElem.parent().parent().remove();
+        }
+        if(!confirm("Confirm to delete address?"))
+            return;
+        $.ajax({
+           type: "POST",
+           url: "<?=base_url("user/delete_address");?>",
+           data: {addressId : addressId},
+           dataType: "JSON",
+           success: function(data)
+           {
+            if(data.status == 0){
+                $.notify("Something went wrong", "error");
+                console.log(data);
+                return false;
+            }
+            console.log("address removed successfully");
+            currentElem.parent().parent().remove();
+           },
+           error: function(a,b){
+                $.notify("Something went wrong!!!", "error");
+           }
+        });
+    }
     function loadCheckoutCartArea(){
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
@@ -536,6 +566,14 @@
         $(this).addClass("selectedAddress");
         $('#selectedFinalAddress').val($(this).find('.internalAddressContent')[0].innerText);
         selectedAddress = $(this);
+        $('#submitAddress').trigger("click");
+    });
+    $(document).on("click", "input[name='optradio']", function () {
+        $(this).parent().find(".singleAddress").trigger("click");
+    });
+
+    $(document).on("click", ".removeAddress", function () {
+        deleteAddress($(this));
     });
 
     $('#addNewAddress').click(function (e) {

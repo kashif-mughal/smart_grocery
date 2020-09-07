@@ -25,6 +25,7 @@ class Dashboard extends CI_Controller {
         }
         // print_r($product_list);die;
         $assistant = $CI->lassistant->last_assistant();
+        //echo '<pre>'; print_r($assistant);die;
         $catArray = $CI->lcategory->get_category_hierarchy();
         $top_brand_list = $CI->Brands->top_brands();
         foreach($catArray as $key => $value) {

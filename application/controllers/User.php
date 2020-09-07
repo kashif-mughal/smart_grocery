@@ -69,6 +69,28 @@ class User extends CI_Controller {
             exit();
         }
     }
+    public function delete_address(){
+        $this->auth->check_auth();
+        $addressId = $this->input->post('addressId');
+        if(empty($addressId)){
+            $result['status'] = 0;
+            $result['message'] = 'Select a proper address';
+            print_r(json_encode($result));
+            exit();
+        }
+        $success = $this->Users->soft_delete_user_address($addressId);
+        if($success){
+            $result['status'] = 1;
+            $result['message'] = 'Address Removed successfully';
+            print_r(json_encode($result));
+            exit();
+        }else{
+            $result['status'] = 0;
+            $result['message'] = 'Record not found';
+            print_r(json_encode($result));
+            exit();
+        }
+    }
 
     public function submit_address_info(){
         $this->auth->check_auth();

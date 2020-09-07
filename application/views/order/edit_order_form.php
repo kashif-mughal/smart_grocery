@@ -89,11 +89,11 @@
                                     <?php if(!$placed && $OrderData["OrderDetail"][0]["PreviousOrderStep"] == 0){
                                        $placed = true;
                                        ?>
-                                       <img style="left: 70px;" src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
+                                       <img src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
                                     <?php } ?>
 
 
-                                    <?php if(!$placed && ($OrderData['TrakingSteps'][$i]['StepId'] == $OrderData["OrderDetail"][0]["PreviousOrderStep"] && $OrderData["OrderDetail"][0]["OrderStep"] != 4 && $OrderData["OrderDetail"][0]["OrderStep"] != 7)){
+                                    <?php if(!$placed && ($OrderData['TrakingSteps'][$i]['StepId'] == $OrderData["OrderDetail"][0]["OrderStep"] && $OrderData["OrderDetail"][0]["OrderStep"] != 4 && $OrderData["OrderDetail"][0]["OrderStep"] != 7)){
                                        $placed = true;
                                        ?>
                                        <img src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
