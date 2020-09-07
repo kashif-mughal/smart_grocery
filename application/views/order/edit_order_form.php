@@ -71,7 +71,7 @@
                   </div>
                   <!-- Order Details Form -->
                   <div class="ordertrackingprogress my-4">
-                     <ul >
+                     <ul class="px-0">
 
                         <?php $skip = false; $elem = null; $canceledStepId = 7; $placed = false; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
                                  <li>

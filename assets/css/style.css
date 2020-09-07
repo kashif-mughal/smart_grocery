@@ -2777,8 +2777,13 @@ a#newAddressCancelBtn {
    }
 }
 
+@media (max-width: 425px) {
+   .ordertrackingprogress ul li {
+      width: 18%;
+   }
+}
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
    .hidden-sm-down{
       display: none;
    }
@@ -2915,13 +2920,23 @@ a#newAddressCancelBtn {
 
 }
 
+@media only screen and (min-width: 768px and max-width: 768px) {
+   .ordertrackingprogress ul li:last-child {
+      top: 0px;
+   }
+}
+
 @media only screen and (max-width: 575px) and (min-width: 521px)  {
    .ordertrackingprogress ul li:last-child {
       top: 0px;
    }
 }
 
-
+@media (max-width: 340px)  {
+   .ordertrackingprogress ul li {
+      width: 19% !important;
+   }
+}
 
 @media (max-width: 991px) {
    .grocery-features-columns {
