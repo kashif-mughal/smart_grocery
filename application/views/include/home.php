@@ -54,12 +54,15 @@
                               </span>
                            </div>
                         </div>
-                        <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
-                           data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                           >Add to Cart</a>
-                        <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                           data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                           >Remove From Cart</a>
+                        <div class="card-footer p-1" style="border-top: none; background-color: transparent;">
+                           <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart d-block"
+                              data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                              >Add to Cart</a>
+                           <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                              data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                              >Remove From Cart</a>   
+                        </div>
+                        
                      </div>
                   </div>
                   <?php }} ?>
@@ -73,7 +76,7 @@
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">
-                              <h6 class="card-title mb-0">Our Shop Assistant will systematically walk you through all sections of the store</h6>
+                              <h6 class="card-title mb-0">Walk through all sections of the store with our assistant</h6>
                               <div class="row">
                                  <div class="col-md-7 pr-0">
                                     <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
@@ -124,12 +127,12 @@
                            <div class="card-body product-card-category-list">
                               <?php for ($i=0; $i < count($value->childCats); $i++) {?>
                               <div>
-                                 <a href="<?='Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId'] ?>" target="_blank"><?=$value->childCats[$i]['Alias']?></a>
+                                 <a href="<?='Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId'] ?>"><?=$value->childCats[$i]['Alias']?></a>
                               </div>
                               <?php } ?>
                            </div>
                            <div class="card-footer">
-                              <a href="javascript:void(0)">VIEW ALL</a>
+                              <a href="<?='Cproduct/products?categoryId='.$value->childCats[0]['ParentId'] ?>">VIEW ALL</a>
                            </div>
                         </div>
                      </div>
@@ -384,5 +387,20 @@
    .slick-prev:before{
       color: black;
       content: '';
+   }
+   .grocery-features .grocery-assistant-card .image-container {
+      top: 48px;
+   }
+   .grocery-features .card {
+      height: 224px;
+   }
+   .grocery-features .grocery-assistant-card .image-container {
+      top: 48px;
+   }
+   .product-card-inner-name {
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
    }
 </style>

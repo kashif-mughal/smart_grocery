@@ -1,3 +1,51 @@
+<style type="text/css">
+
+    #TagPool a.tag {
+        background: #eee;
+        border-radius: 3px 0 0 3px;
+        color: #999;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 20px 0 23px;
+        position: relative;
+        margin: 0 10px 10px 0;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+    }
+
+    a.tag::before {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        content: '';
+        height: 6px;
+        left: 10px;
+        position: absolute;
+        width: 6px;
+        top: 10px;
+    }
+
+    a.tag::after {
+        background: #fff;
+        border-bottom: 13px solid transparent;
+        border-left: 10px solid #eee;
+        border-top: 13px solid transparent;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    #TagPool a.tag:hover {
+        background-color: crimson;
+        color: white;
+    }
+
+    #TagPool a.tag:hover::after {
+        border-left-color: crimson; 
+    }
+</style>
 <!--Edit customer start -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -179,6 +227,27 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="Tags" class="col-sm-3 col-form-label">Tags </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input class="form-control" name ="Tags" id="Tags" type="text" placeholder="Tags" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" id="addTag" type="button">Add</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6" id="TagPool">
+                                
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="allTags" id="allTags" value="{tags}" />
+
                         <input type="hidden" value="{product_id}" name="product_id">
 
                         <div class="form-group row">
@@ -201,7 +270,52 @@
 $(document).ready(function() {
     $('#is_featured').val(<?=$is_featured; ?>);
     $('#is_hot').val(<?=$is_hot; ?>);
+
+    var tagsList = $('#allTags').val();
+    if(tagsList) {
+        var tagsArrayList = tagsList.split(",");
+        for(var i = 0; i < tagsArrayList.length; i++) {
+            $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}">${tagsArrayList[i]}</a>`);
+        }
+    }
+
+    var tags = '';
+    $('#addTag').click(function(e) {
+        if($('#Tags').val()) {
+            var singleTag = $('#Tags').val();
+            if(!isDuplicate(singleTag)) {
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}">${singleTag}</a>`);
+                $('#Tags').val('');
+            }
+        }
+    });
+
+    $(document).on("click", "a.tag", function (e) { $(this).remove(); });
+
+    $('#product_update').submit(function() {
+        var tagsData = $('#TagPool a');
+        var tagsDatalength = $('#TagPool a').length;
+        var arrayTags = [];
+        var arrayList = "";
+        for(var i = 0; i < tagsDatalength; i++) {
+            arrayTags.push($('#TagPool a')[i].text);
+        }
+        arrayList = arrayTags.join(',');
+        $('#allTags').val(arrayList);
+    });
+
 });
+
+function isDuplicate(tag) {debugger;
+    var tagsData = $('#TagPool a');
+    var tagsDatalength = $('#TagPool a').length;
+    for(var i = 0; i < tagsDatalength; i++) {
+        if($('#TagPool a')[i].text == tag) {
+            return true;
+        }
+    }
+    return false;
+}
 </script>
 
 

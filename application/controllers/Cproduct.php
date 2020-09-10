@@ -94,7 +94,8 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
             'status' => 1,
-            'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png')
+            'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
+            'tags' => $this->input->post('allTags')
         );
         $result = $this->Products->product_entry($data);
         if ($result == TRUE) {
@@ -152,7 +153,8 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'Status' => $status,
             'Brand' => $this->input->post('BrandId'),
-            'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s')
+            'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+            'tags' => $this->input->post('allTags')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])
