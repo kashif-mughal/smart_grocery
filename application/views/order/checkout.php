@@ -141,12 +141,9 @@
                                             <h6 class="subtotal-price font-size-15 sub-total"></h6>
                                         </div>
                                         <div class="orderbox-content">
-                                            <div class="orderbox-content-title mb-3">
-                                                <h6>Shipping</h6>
-                                            </div>
                                             <div class="orderbox-content-charges d-flex justify-content-between mb-3">
                                                 <h6>Delivery Charges</h6>
-                                                <h6></h6>
+                                                <h6><?=$_SESSION["deliveryCharges"];?></h6>
                                             </div>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
@@ -215,7 +212,7 @@
                cartBody.append(eachProdTemplateCopy);
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
-            $('.sub-total').html(formatCurrency(sum));
+            $('.sub-total').html(formatCurrency('<?=$_SESSION["OV"]?>'));
          }
          else{
             //show empty message

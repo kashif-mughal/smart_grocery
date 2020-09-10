@@ -49,7 +49,7 @@ class Lorder {
     public function place_order(){
         $CI = & get_instance();
         $CI->load->model('Orders');
-
+        date_default_timezone_set('Asia/Karachi');
         $addressId = $CI->session->userdata("addressId");
         $deliveryTime = $CI->session->userdata("deliveryTime");
         $addressText = $CI->session->userdata("addressText");
@@ -67,6 +67,8 @@ class Lorder {
         foreach ($orderDetail as $key => $eachProd) {
             $OV += $eachProd->quantity * $eachProd->price;
         }
+        $currentDate = date('Y-m-d');
+        $deliveryCharges = $deliveryDate == $currentDate ? 150 : 0;
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
             'OrderValue' => $OV,
@@ -76,11 +78,14 @@ class Lorder {
             'DeliveryFrom' => $dtFrom,
             'DeliveryUpto' => $dtUpto,
             'DeliveryAddress' => $addressId,
+            'deliveryCharges' => $deliveryCharges,
             'Status' => 1,
         );
         $orderId = $CI->Orders->place_order($data);
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
+                $CI->session->set_userdata("OV", $OV + $deliveryCharges);
+                $CI->session->set_userdata("deliveryCharges", $deliveryCharges);
                 return $orderId;
             }else{
                 return 'Something went wrong!!';

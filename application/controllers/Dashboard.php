@@ -27,7 +27,6 @@ class Dashboard extends CI_Controller {
         $assistant = $CI->lassistant->last_assistant();
         //echo '<pre>'; print_r($assistant);die;
         $catArray = $CI->lcategory->get_category_hierarchy();
-        $top_brand_list = $CI->Brands->top_brands();
         foreach($catArray as $key => $value) {
             $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
             if($products)
@@ -45,8 +44,7 @@ class Dashboard extends CI_Controller {
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
             'ProdList' => $final_product_list,
-            'Assistant' => $assistant,
-            'TopBrandList' => $top_brand_list
+            'Assistant' => $assistant
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);

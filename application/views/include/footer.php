@@ -1,3 +1,17 @@
+<?php
+$CI = & get_instance();
+$CI->load->model('Brands');
+$CI->load->library('lcategory');
+$TopBrandList = $CI->Brands->top_brands();
+
+$CatList = $CI->lcategory->get_category_hierarchy();
+foreach($CatList as $key => $value) {
+    $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
+    if($products)
+        $products = $products['products'];
+    $value->products = $products;
+}
+?>
 <div id="main-page">
 	<div class="container">
 

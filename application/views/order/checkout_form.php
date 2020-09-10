@@ -250,12 +250,9 @@
                                             <h6 class="subtotal-price font-size-15 sub-total"></h6>
                                         </div>
                                         <div class="orderbox-content">
-                                            <div class="orderbox-content-title mb-3">
-                                                <h6>Shipping</h6>
-                                            </div>
                                             <div class="orderbox-content-charges d-flex justify-content-between mb-3">
                                                 <h6>Delivery Charges</h6>
-                                                <h6></h6>
+                                                <h6 id="dCharges">RS. 0.00</h6>
                                             </div>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
@@ -401,7 +398,7 @@
                                     <td>${currentDt.toDateString()}</td>
                                     <td>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="today1" onclick="setTimeSlotInternal(this);">
+                                            <label class="form-check-label" for="today1" data-day="today" onclick="setTimeSlotInternal(this);">
                                                 <input class="form-check-input" type="radio"
                                                 name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
                                                 today
@@ -473,6 +470,13 @@
         $('#time-success').show();
         $('#time-process').hide();
         $('#collapseThree').collapse('hide');
+
+        if(currentElem.dataset.day == "today"){
+            $("#dCharges").html(formatCurrency(150));
+            subTotal += 150;
+            $('.sub-total').html(formatCurrency(subTotal));
+        }
+
         step3Verified = true;
     }
     function submitForm(form){
@@ -509,7 +513,6 @@
     }
     function deleteAddress(currentElem){
         var addressId = currentElem.parent().find(".singleAddress").data("addressid");
-        debugger;
         if(!addressId)
         {
             console.log("address removed inmem successfully");
@@ -563,6 +566,7 @@
                cartBody.append(eachProdTemplateCopy);
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
+            subTotal = sum;
             $('.sub-total').html(formatCurrency(sum));
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
@@ -575,7 +579,7 @@
             return false;
          }
     }
-
+    var subTotal = 0;
     var addressCounter = 1;
 
     $(document).on("click", "a.singleAddress", function () {

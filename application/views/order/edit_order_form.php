@@ -167,7 +167,7 @@
                            <h6 class="shippingHeading">Shipping</h6>
                            <div class="shippingContent pb-3 d-flex justify-content-between align-items-center">
                               <span>Delivery Charges</span>
-                              <span>Rs. 0.00</span>
+                              <span><script type="text/javascript">document.write(formatCurrency('<?=$OrderData["OrderDetail"][0]["DeliveryCharges"]?>'));</script></span>
                            </div>
                            <div class="shippingContentSub pb-3 border-b-primary">
                               <p>Shipping options will be updated during checkout.</p>
