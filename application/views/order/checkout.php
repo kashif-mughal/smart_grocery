@@ -58,7 +58,19 @@
                                             <h4 class="feature-img-text m-0">Rs.</h4>
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
-                                            <h4 class="feature-text mb-0">Total</h4>
+                                            <h4 class="feature-text mb-0">Order ID</h4>
+                                            <h4 class="feature-text-price mb-0"><?=$_SESSION["orderId"];?></h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="check-in-feature">
+                                    <div class="grid-container">
+                                        <div class="feature-img">
+                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                        </div>
+                                        <div class="feature-content d-flex flex-column justify-content-center">
+                                            <h4 class="feature-text mb-0">Total Order</h4>
                                             <h4 class="feature-text-price mb-0 sub-total"></h4>
                                         </div>
                                     </div>
@@ -83,7 +95,19 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Date</h4>
-                                            <h4 class="feature-text-price mb-0" id="delivery-date"><?=$_SESSION['userDeliveryDate']?></h4>
+                                            <h4 class="feature-text-price mb-0" id="delivery-date"><script type="text/javascript">document.write((new Date("<?=$_SESSION['userDeliveryDate']?>")).toDateString());</script></h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="check-in-feature">
+                                    <div class="grid-container">
+                                        <div class="feature-img">
+                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                        </div>
+                                        <div class="feature-content d-flex flex-column justify-content-center">
+                                            <h4 class="feature-text mb-0">Payment Option</h4>
+                                            <h4 class="feature-text-price mb-0" id="delivery-date"><?=$_SESSION['paymentMode']?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +123,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="javascript:void(0);" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Proceed To Checkout</a>
+
+                                <a href="<?=base_url();?>" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Done</a>
                                 <a href="<?=base_url('Corder/my_order');?>" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
                                 
                             </div>
@@ -161,9 +186,7 @@
         window.location.href = '<?=base_url();?>';
     $(document).ready(() => {
         loadCheckoutCartArea();
-        $(document).on('click', '#checkout', function () {
-          proceedToCheckout();
-       });
+        emptyCart();
     });
 
     function loadCheckoutCartArea(){
@@ -200,32 +223,4 @@
          }   
     }
 
-    function proceedToCheckout(){
-        var baskit = getCookie('baskit');
-        if(!baskit || JSON.parse(baskit).length == 0){
-            $.notify("The Cart is empty, please add some item in cart", "error");
-            return false;
-        }
-
-        openWindowWithPost(
-            "<?=base_url('Corder/proceed_to_checkout')?>", JSON.parse(baskit)
-        );
-    }
-
-    function openWindowWithPost(url, dataArr) {
-        var form = document.createElement("form");
-        //form.target = "_blank";
-        form.method = "POST";
-        form.action = url;
-        form.style.display = "none";
-        var input = document.createElement("input");
-        input.type = "hidden";
-        input.name = 'order';
-        input.value = JSON.stringify(dataArr);
-        form.appendChild(input);
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-    }
 </script>

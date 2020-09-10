@@ -53,7 +53,7 @@ class Orders extends CI_Model {
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
-        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
+        $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
         $CI = & get_instance();
         $userRole = $CI->session->userdata('user_type');
         if($userRole != 1){
@@ -120,7 +120,7 @@ class Orders extends CI_Model {
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
-        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
+        $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
         $CI = & get_instance();
         $userRole = $CI->session->userdata('user_type');
         if($userRole != 1){

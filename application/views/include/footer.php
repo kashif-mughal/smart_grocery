@@ -113,7 +113,7 @@
 								<h6><?=$key?></h6>
 								
 								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
-									<a href="#">
+									<a href="<?=base_url('Cproduct/products?categoryId=').$value->childCats[$i]['CategoryId']?>">
 										<span class="hyphen">-</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
 									</a>
 								<?php } ?>
@@ -147,28 +147,28 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-2 pl-0">
-							<a href="#">Mission & Vision</a>
+							<a href="<?=base_url("cpage/vision");?>">Mission & Vision</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Brand Stores</a>
+							<a href="<?=base_url("cpage/brandstore");?>">Brand Stores</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Privacy Policy</a>
+							<a href="<?=base_url("cpage/privacy");?>">Privacy Policy</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Terms & Conditions</a>
+							<a href="<?=base_url("cpage");?>">Terms & Conditions</a>
 						</div>
 						
 						<div class="w-100"></div>
 
 						<div class="col-md-2 pl-0">
-							<a href="#">FAQs</a>
+							<a href="<?=base_url("cpage/faq");?>">FAQs</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Return & Refund</a>
+							<a href="<?=base_url("cpage/returnandrefund");?>">Return & Refund</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Categories</a>
+							<a href="<?=base_url("cpage/categories");?>">Categories</a>
 						</div>
 					</div>
 				</div>

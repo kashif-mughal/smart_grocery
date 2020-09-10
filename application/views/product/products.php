@@ -50,15 +50,15 @@
                     <div class="row" id="products-area">
                         <div style="display: none;">
                             <script type="text" id="clone-cart">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 px-0">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 px-0">
                                 <div class="featured-products-content mb-2 d-flex justify-content-between">
                                     <div class="card mr-2 each-prod product-card-inner">
                                         <div class="card-body p-0">
                                             <div class="header">
                                                 {discountString}
-                                                <a href="#" class="add_to_favorite">
+                                                <!--<a href="#" class="add_to_favorite">
                                                     <i class="fas fa-heart float-right"></i>
-                                                </a>
+                                                </a>-->
                                             </div>
                                         </div>
                                         <img class="card-img-bottom text-center" src="{imgUrl}" alt="Card image cap">
@@ -99,9 +99,9 @@
                                                 <?php if($discountPercentage != 0) { ?> 
                                                     <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
                                                 <?php } ?>
-                                                <a href="#" class="add_to_favorite">
+                                                <!--<a href="#" class="add_to_favorite">
                                                     <i class="fas fa-heart float-right"></i>
-                                                </a>
+                                                </a>-->
                                             </div>
                                         </div>
                                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">

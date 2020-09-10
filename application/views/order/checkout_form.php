@@ -325,17 +325,36 @@
         $("#proceed").on("click", function(){
             proceedToCheckout();
         });
-    });
-    function proceedToCheckout(){
-        if(!step1Verified || !step2Verified || !step3Verified || !step4Verified){
-            $.notify("Please verify all the steps", "error");
+
+        function proceedToCheckout(){
+            if(!step1Verified || !step2Verified || !step3Verified || !step4Verified){
+                $.notify("Please verify all the steps", "error");
+                    return false;
+            }
+            var baskit = getCookie('baskit');
+            if(!baskit || JSON.parse(baskit).length == 0){
+                $.notify("The Cart is empty, please add some item in cart", "error");
                 return false;
-        }else{
+            }
+
+            openWindowWithPost(
+                "<?=base_url('Corder/checkout')?>", JSON.parse(baskit)
+            );
+        }
+        
+    });
+
+    function openWindowWithPost(url, dataArr) {
             var form = document.createElement("form");
             //form.target = "_blank";
             form.method = "POST";
-            form.action = "<?=base_url('Corder/checkout')?>";
+            form.action = url;
             form.style.display = "none";
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = 'order';
+            input.value = JSON.stringify(dataArr);
+            form.appendChild(input);
 
             var input = document.createElement("input");
             input.type = "hidden";
@@ -355,11 +374,12 @@
             input.value = selectedAddress.text().trim();
             form.appendChild(input);
 
+
             document.body.appendChild(form);
             form.submit();
             document.body.removeChild(form);
         }
-    }
+
     function setTimeSlots(){
         var timeSlotAreaElem = $('#timeSlotArea');
         timeSlotAreaElem.empty();

@@ -94,6 +94,8 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
             'status' => 1,
+            'SaleUnitQty' => $this->input->post('SaleUnitQty'),
+            'SaleUnit' => $this->input->post('SaleUnit'),
             'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
             'tags' => $this->input->post('allTags')
         );
@@ -153,6 +155,8 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'Status' => $status,
             'Brand' => $this->input->post('BrandId'),
+            'SaleUnitQty' => $this->input->post('SaleUnitQty'),
+            'SaleUnit' => $this->input->post('SaleUnit'),
             'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
             'tags' => $this->input->post('allTags')
             //'status' => $this->input->post('status')

@@ -37,7 +37,25 @@ class Lassistant {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
-        return $assistant_list;
+        $assistantObj = Array();
+        $assistantObj["Assistant"] = Array();
+        $assistantObj["Cat"] = Array();
+        $assistantObj["SaleUnitQty"] = Array();
+        $assistantObj["Brands"] = Array();
+        for ($i=0; $i < count($assistant_list); $i++) { 
+            if(!$assistantObj["Assistant"][$assistant_list[$i]["CatName"]])
+                $assistantObj["Assistant"][$assistant_list[$i]["CatName"]] = Array();
+            array_push($assistantObj["Assistant"][$assistant_list[$i]["CatName"]], $assistant_list[$i]);
+            array_push($assistantObj["Cat"], $assistant_list[$i]["CatName"]);
+            array_push($assistantObj["SaleUnitQty"], $assistant_list[$i]["SaleUnitQuantity"]);
+            array_push($assistantObj["Brands"], $assistant_list[$i]["BrandName"]);
+        }
+        $assistantObj["Cat"] = array_unique($assistantObj["Cat"]);
+        $assistantObj["Brands"] = array_unique($assistantObj["Brands"]);
+        $assistantObj["Brands"] = array_filter($assistantObj["Brands"]);
+        $assistantObj["SaleUnitQty"] = array_unique($assistantObj["SaleUnitQty"]);
+        //echo '<pre>'; print_r($assistantObj);die;
+        return $assistantObj;
     }
 
     //Sub assistant Add

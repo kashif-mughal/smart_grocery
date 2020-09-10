@@ -24,9 +24,9 @@
                                   if($discountPercentage != 0) { ?> 
                               <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
                               <?php } ?>
-                              <a href="#" class="add_to_favorite">
+                              <!-- <a href="javascript:void(0)" class="add_to_favorite">
                               <i class="fas fa-heart float-right"></i>
-                              </a>
+                              </a> -->
                            </div>
                         </div>
                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
@@ -148,7 +148,7 @@
                                     <img class="card-img-top" src="<?php echo base_url().$value->childCats[$i]['Img']; ?>" alt="Card image cap">
                                     <div class="card-body p-0">
                                        <p class="product-card-title"><?php echo $value->childCats[$i]['CatName']; ?></p>
-                                       <a href="#" class="product-card-details-btn">View more details</a>
+                                       <a href="javascript:void(0)" class="product-card-details-btn">View more details</a>
                                     </div>
                                     <div class="card-footer p-0">
                                        <a href="<?php echo base_url().'Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId']; ?>"
@@ -204,7 +204,7 @@
                      <div class="row">
                         <div class="col-md-4 px-0">
                            <div class="filter-sidebar">
-                              <a href="#">
+                              <a href="javascript:void(0)">
                                  <h4 class="ribbon">
                                     <strong class="ribbon-content">SHOW RESULT</strong>
                                  </h4>
@@ -219,20 +219,18 @@
                               <div class="filter-brand px-4 py-3 border-b-primary">
                                  <div class="heading-primary mb-3">Filter by Brand:</div>                                    
                                  <div class="filter-brand-button">
-                                    <button class="btn btn-link mb-2">Punjab Atta</button>
-                                    <button class="btn btn-link mb-2">Floor Mill</button>
-                                    <button class="btn btn-link mb-2">Chakki Atta</button>
-                                    <button class="btn btn-link mb-2">Sindh Atta</button>
-                                    <button class="btn btn-link mb-2">Yousuf Floor Mill</button>
+                                    <?php foreach ($Assistant["Brands"] as $key => $value) {?>
+                                       <button class="btn btn-link mb-2"><?=$value?></button>
+                                    <?php } ?>
                                  </div>
                               </div>
 
                               <div class="filter-weight px-4 py-3 border-b-primary">
                                  <div class="heading-primary mb-3">Filter by Weight:</div>                                    
                                  <div class="filter-weight-button">
-                                    <button class="btn btn-link mb-2">5KG</button>
-                                    <button class="btn btn-link mb-2">10KG</button>
-                                    <button class="btn btn-link mb-2">20KG</button>
+                                    <?php foreach ($Assistant["SaleUnitQty"] as $key => $value) {?>
+                                       <button class="btn btn-link mb-2"><?=$value?></button>
+                                    <?php } ?>
                                  </div>
                               </div>
 
@@ -260,42 +258,44 @@
                            <div class="product-content">
                               <div class="container-fluid">
                                  <div class="row">
-                                    <?php for ($i=0; $i < count($Assistant); $i++) { ?>
-                                    <div class="col-sm-4">
-                                         <div class="mb-3">
-                                          <div class="card product-card each-prod">
-                                             <img class="card-img-top" src="<?=base_url($Assistant[$i]['ProductImg']);?>" alt="Card image cap">
-                                             <div class="card-body p-0 text-center">
-                                                <p class="product-card-title"><?=$Assistant[$i]['ProductName']?></p>
-                                                <p class="product-card-weight mb-0"><?=$Assistant[$i]['UnitName']?></p>
-                                                <p class="card-text product-card-inner-price"><script type="text/javascript">document.write(formatCurrency('<?=$Assistant[$i]['SalePrice']?>', 0));</script></p>
-                                                <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                                                   <?php
-                                                      $productObject = (object) [
-                                                       'id' => $Assistant[$i]['ProductId'],
-                                                       'pName' => $Assistant[$i]['ProductName'],
-                                                       'price' => $Assistant[$i]['SalePrice'],
-                                                       'img' => base_url($Assistant[$i]['ProductImg'])
-                                                      ];
-                                                   ?>
-                                                   <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                   <input type="number" min="0" class="d-inline-flex quantity quantity-input">
-                                                   <span class="d-block quantity-button">
-                                                       <a href="#" class="qty-pls d-block">+</a>
-                                                       <div class="separator"></div>
-                                                       <a href="#" class="qty-mns d-block">-</a>
-                                                   </span>
+                                    <?php foreach ($Assistant["Assistant"] as $key => $value) {
+                                       for ($i=0; $i < count($value); $i++) { ?>
+                                          <div class="col-sm-4">
+                                               <div class="mb-3">
+                                                <div class="card product-card each-prod">
+                                                   <img class="card-img-top" src="<?=base_url($value[$i]['ProductImg']);?>" alt="Card image cap">
+                                                   <div class="card-body p-0 text-center">
+                                                      <p class="product-card-title"><?=$value[$i]['ProductName']?></p>
+                                                      <p class="product-card-weight mb-0"><?=$value[$i]['UnitName']?></p>
+                                                      <p class="card-text product-card-inner-price"><script type="text/javascript">document.write(formatCurrency('<?=$value[$i]['SalePrice']?>', 0));</script></p>
+                                                      <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                                         <?php
+                                                            $productObject = (object) [
+                                                             'id' => $value[$i]['ProductId'],
+                                                             'pName' => $value[$i]['ProductName'],
+                                                             'price' => $value[$i]['SalePrice'],
+                                                             'img' => base_url($value[$i]['ProductImg'])
+                                                            ];
+                                                         ?>
+                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                         <input type="number" min="0" class="d-inline-flex quantity quantity-input">
+                                                         <span class="d-block quantity-button">
+                                                             <a href="javascript:void(0)" class="qty-pls d-block">+</a>
+                                                             <div class="separator"></div>
+                                                             <a href="javascript:void(0)" class="qty-mns d-block">-</a>
+                                                         </span>
+                                                      </div>
+                                                      <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
+                                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                                         >Add to Cart</a>
+                                                      <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
+                                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                                         >Remove From Cart</a>
+                                                   </div>
                                                 </div>
-                                                <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
-                                                   data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                                   >Add to Cart</a>
-                                                <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
-                                                   data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                                   >Remove From Cart</a>
-                                             </div>
+                                               </div>
                                           </div>
-                                         </div>
-                                    </div>
+                                       <?php } ?>
                                     <?php } ?>
                                  </div>
                               </div>

@@ -120,30 +120,23 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Unit" class="col-sm-3 col-form-label">Unit </label>
-                            <div class="col-sm-6">
-                                <input class="form-control" name ="Unit" id="Unit" type="text" placeholder="Unit">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="OriginalPrice" class="col-sm-3 col-form-label">Original Price </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" type="text" placeholder="Original Price">
+                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" type="text" placeholder="Original Price" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="Price" class="col-sm-3 col-form-label">Price </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="Price" id="Price" type="text" placeholder="Price">
+                                <input class="form-control" name ="Price" id="Price" type="text" placeholder="Price" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="SalePrice" class="col-sm-3 col-form-label">Sale Price </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="SalePrice" id="SalePrice" type="text" placeholder="Sale Price">
+                                <input class="form-control" name ="SalePrice" id="SalePrice" type="text" placeholder="Sale Price" required>
                             </div>
                         </div>
 
@@ -165,7 +158,7 @@
                         <div class="form-group row">
                             <label for="CategoryId" class="col-sm-3 col-form-label">Category </label>
                             <div class="col-sm-6">
-                                <select class="form-control" name ="CategoryId" id="CategoryId">
+                                <select class="form-control" name ="CategoryId" id="CategoryId" required>
                                     <option value="0">None</option>
                                     {categories}
                                         <option value="{CategoryId}">{CatName}</option>
@@ -187,9 +180,28 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="UnitId" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
+                            <label for="Unit" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name ="UnitId" id="UnitId">
+                                <select class="form-control" name ="Unit" id="Unit" required>
+                                    <option value="0">None</option>
+                                    {units}
+                                        <option value="{UnitId}">{UnitName}</option>
+                                    {/units}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="SaleUnitQty" class="col-sm-3 col-form-label">Sale Unit Quantity </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="SaleUnitQty" id="SaleUnitQty" type="number" required placeholder="SaleUnitQty">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="SaleUnit" class="col-sm-3 col-form-label">Sale Unit <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="SaleUnit" id="SaleUnit" required>
                                     <option value="0">None</option>
                                     {units}
                                         <option value="{UnitId}">{UnitName}</option>
