@@ -116,8 +116,9 @@
                     </tfoot>
                 </table> -->
 
-                <?php if($orderData){?>
-                    <?php foreach ($orderData as $key => $value) {?>
+                <?php if($orderData){$orderCounter = -1;?>
+                    
+                    <?php foreach ($orderData as $key => $value) { $orderCounter++;?>
                         <div class="accordion" id="orderHistoryaccordion" style="margin-bottom: 10px;">
                            <div class="card order-history-card">
                               <div class="card-header order-header">
@@ -158,7 +159,7 @@
                                     </div>
                                 </div>
 
-                              <div id="orderHistoryCollapse<?=$value[0]['OrderId']?>" class="collapse show" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
+                              <div id="orderHistoryCollapse<?=$value[0]['OrderId']?>" class="collapse <?= $orderCounter == 0? "show" : ""; ?>" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
                                  <div class="card-body">
                                     <?php
                                        for ($i=0; $i < count($value); $i++) {?>

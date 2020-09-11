@@ -26,7 +26,7 @@ class Lpage {
     public function brandstore() {
         $CI = & get_instance();
         $data = array(
-            'title' => 'Mission & Vision'
+            'title' => 'Brand Store'
         );
         $brandList = $CI->parser->parse('pages/brandstore', $data, true);
         return $brandList;

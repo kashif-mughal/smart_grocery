@@ -21,7 +21,7 @@
                               <?php 
                                  if($value['IsFeatured'] == 1) {
                                   $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
-                                  if($discountPercentage != 0) { ?> 
+                                  if($discountPercentage > 0) { ?> 
                               <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
                               <?php } ?>
                               <!-- <a href="javascript:void(0)" class="add_to_favorite">
@@ -34,7 +34,7 @@
                            <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
                            <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
                            <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
-                           <?php if($discountPercentage != 0) { ?> 
+                           <?php if($discountPercentage > 0) { ?> 
                            <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
                            <?php } 
                               $productObject = (object) [

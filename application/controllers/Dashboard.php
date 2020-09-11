@@ -36,8 +36,10 @@ class Dashboard extends CI_Controller {
         $final_product_list = array();
         foreach($product_list as $prod => $value) {
             $unitId = $prod['UnitId'];
-            $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
+            $currentUnit = $CI->Units->unit_search_item($value['Unit']);
             $value['UnitName'] = $currentUnit[0]['UnitName'];
+            if(!$value['UnitName'])
+                $value['UnitName'] = "KG";
             array_push($final_product_list,$value);
         }
         $data = array(
