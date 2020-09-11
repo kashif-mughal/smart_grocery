@@ -55,7 +55,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/OrderID.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Order ID</h4>
@@ -67,7 +67,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/TotalOrder.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Total Order</h4>
@@ -79,7 +79,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/Estimated-Delivery-Time.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Estimated Delivery Time</h4>
@@ -91,7 +91,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/Delivery-Date.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Date</h4>
@@ -103,7 +103,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/Payment-Option.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Payment Option</h4>
@@ -115,7 +115,7 @@
                                 <div class="check-in-feature">
                                     <div class="grid-container">
                                         <div class="feature-img">
-                                            <h4 class="feature-img-text m-0">Rs.</h4>
+                                            <img src="<?=base_url('assets/img/Checkout/Address.png')?>" alt="">
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Delivery Address</h4>

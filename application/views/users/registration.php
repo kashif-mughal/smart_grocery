@@ -59,7 +59,7 @@
 								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
 								<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
 								<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
-								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off" last="true">
+								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
 							</form>
 						</div>
 						<a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
@@ -198,11 +198,11 @@
 		<div class="col-xl-4 col-lg-4 col-md-12">
             <div class="row">
                <div class="col-lg-12 col-md-6 grocery-features-columns">
-                  <div class="grocery-features">
+                  <div class="grocery-features mt-0">
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">
-                              <h6 class="card-title mb-0">Our Shop Assistant will systematically walk you through all sections of the store</h6>
+                              <h6 class="card-title mb-0">Walk through all sections of the store with our assistant</h6>
                               <div class="row">
                                  <div class="col-md-7 pr-0">
                                     <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
@@ -569,7 +569,7 @@
 
 			var OTPinput = $('#inputOtp');
 			function goToNextInput(e) {
-				var key = e.which,
+				var key = e.which || e.keyCode,
 				t = $(e.target),
 				sib = t.next('input');
 				if(t.attr('last') == "true"){
@@ -577,13 +577,13 @@
 					$('#otpSubmit').trigger('click');
 					return true;
 				}
-				if (key != 9 && (key < 48 || key > 57)) {
-				e.preventDefault();
-				return false;
+				if (key != 9 && (key < 48 || key > 57 || key >= 96 && key <= 105)) {
+					e.preventDefault();
+					return false;
 				}
 
 				if (key === 9) {
-				return true;
+					return true;
 				}
 
 				if (!sib || !sib.length) {
@@ -595,8 +595,8 @@
 			function onKeyDown(e) {
 				var key = e.which;
 
-				if (key === 9 || (key >= 48 && key <= 57)) {
-				return true;
+				if (key === 9 || (key >= 48 && key <= 57 || key >= 96 && key <= 105)) {
+					return true;
 				}
 
 				e.preventDefault();

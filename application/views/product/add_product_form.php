@@ -255,18 +255,29 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        var tagsList = $('#allTags').val();
+        if(tagsList) {
+            var tagsArrayList = tagsList.split(",");
+            for(var i = 0; i < tagsArrayList.length; i++) {
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}">${tagsArrayList[i]}</a>`);
+            }
+        }
+
         var tags = '';
         $('#addTag').click(function(e) {
             if($('#Tags').val() != '' || $('#Tags').val() != 'undefined') {
                 var singleTag = $('#Tags').val();
-                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}">${singleTag}</a>`);
-                $('#Tags').val('');
+                if(!isDuplicate(singleTag)) {
+                    $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}">${singleTag}</a>`);
+                    $('#Tags').val('');
+                }
             }
         });
 
         $(document).on("click", "a.tag", function (e) { $(this).remove(); });
 
-        $('#insert_product').submit(function() {debugger
+        $('#insert_product').submit(function() {
             var tagsData = $('#TagPool a');
             var tagsDatalength = $('#TagPool a').length;
             var arrayTags = [];
@@ -278,6 +289,17 @@
             $('#allTags').val(arrayList);
         });
     });
+
+    function isDuplicate(tag) {
+        var tagsData = $('#TagPool a');
+        var tagsDatalength = $('#TagPool a').length;
+        for(var i = 0; i < tagsDatalength; i++) {
+            if($('#TagPool a')[i].text == tag) {
+                return true;
+            }
+        }
+        return false;
+    }
 </script>
 
 

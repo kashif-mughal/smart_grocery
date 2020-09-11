@@ -403,4 +403,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
    }
+   .product-card-title {
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
 </style>

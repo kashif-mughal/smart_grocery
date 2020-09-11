@@ -327,7 +327,7 @@ $(document).ready(function() {
 
 });
 
-function isDuplicate(tag) {debugger;
+function isDuplicate(tag) {
     var tagsData = $('#TagPool a');
     var tagsDatalength = $('#TagPool a').length;
     for(var i = 0; i < tagsDatalength; i++) {

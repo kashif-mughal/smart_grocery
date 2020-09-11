@@ -49,11 +49,13 @@ html,body
    margin-bottom: 12px;
    align-items: center;
 }
-.sign-in {
-   height: 420px;
-}
-#otpForm .sign-in {
-   height: 461px;
+.sign-in {	
+   height: 385px;	
+   margin-top: 35px;	
+}	
+#otpForm .sign-in {	
+   height: 451px;	
+   padding-top: 50px;	
 }
 .sign-in .step-number {
    background-color: #333333;
@@ -177,7 +179,7 @@ html,body
 .ordertrackingprogress ul img.truck {
    position: absolute;
    top: -11px;
-   left: 200px;
+   left: 125px;
 }
 
 #order_form .table thead tr td {
@@ -829,18 +831,21 @@ input:focus {
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
+   letter-spacing: -0.4px;
 }
 .product-category .card-footer a {
-   font-size: 16px;
-   border-bottom: 1px solid #666666;
-   text-decoration: none;
+   font-size: 15px;	
+   border-bottom: 1px solid #666666;	
+   text-decoration: none;	
+   font-weight: 600;	
+   letter-spacing: -0.6px;
 }
 .products-widget {
    background-color: #ffffff;
    margin-top: 20px;
    /* margin-bottom: 20px; */
    border-radius: 10px 10px 0 0;
-   padding: 20px;
+   padding: 35px 25px 20px 35px;
    border: 1px solid #cccccc;
 }
 .products-widget-heading {
@@ -979,44 +984,46 @@ button.category-button:active {
 }
 
 .product-card {
-   width: 200px;
-   height: 280px;
-   border-radius: 10px 10px 0px 0px !important;
-   background-color: #ffffff;
-   padding: 14px;
-   border: 1px solid #cccccc;
-   margin-bottom: 12px;
+   width: 185px;	
+   height: 250px;	
+   border-radius: 10px 10px 0px 0px !important;	
+   background-color: #ffffff;	
+   padding: 18px;	
+   border: 1px solid #cccccc;	
+   margin-bottom: 8px;
 }
 .product-card img {
-   width: 180px;
-   height: 120px;
+   width: 170px;	
+   height: 130px;	
+   margin: -12px 0px 0px -11px;
 }
 .product-card-title {
-   font-size: 16px !important;
-   letter-spacing: 0px !important;
-   color: #000000;
-   font-family: "Arial" !important;
-   margin-bottom: 2px;
-   margin-top: 10px;
+   font-size: 15px !important;	
+   letter-spacing: 0px !important;	
+   color: #000000;	
+   font-family: "Arial" !important;	
+   margin-bottom: 2px;	
+   margin-top: 7px;	
+   line-height: 18px;
 }
 .product-card-details-btn {
    font-size: 13px !important;
    letter-spacing: 0px;
-   color: #999999;
+   color: #fff;
    font-family: "Arial";
    margin-bottom: 8px !important;
 }
 .product-card-details-btn:hover {
-   color: #17A18D;
+   color: #fff;
 }
 .product-card-viewmore-btn {
    width: 100% !important;
    height: 32px;
    background-color: #25bfa9;
-   padding: 5px 40px;
+   padding: 6px 34px;
    margin-top: 12px !important;
    /* margin: 6px auto !important; */
-   font-size: 17px;
+   font-size: 15px;
    color: #ffffff;
    font-weight: 500;
    font-family: "Work Sans";
@@ -1031,23 +1038,24 @@ button.category-button:active {
 
 
 .main-content .featured-products-content .card .card-body {
-   max-height: 50px;
+   max-height: 39px;
 }
 .main-content .featured-products-content .card img {
-   max-width: 190px;
-   max-height: 110px;
-   height: 110px;
-   text-align: center;
-   padding: 0px 10px !important;
-   margin-left: auto;
-   margin-right: auto;
+   max-width: 190px;	
+   max-height: 120px;	
+   height: 120px;	
+   text-align: center;	
+   padding: 0px 10px !important;	
+   margin-left: auto;	
+   margin-right: auto;	
+   margin-top: -4px;
 }
 .main-content .featured-products .header {
    margin-bottom: 17px;
 }
 .product-info {
    margin-top: 4px;
-   padding: 8px 12px 0px 12px;
+   padding: 8px 4px 0px 4px;
 }
 .product-name {
    font-size: 16px;
@@ -1080,6 +1088,7 @@ button.category-button:active {
 .quantity-area input {
    max-width: 50px !important;
    text-align: center;
+   height: 30px;
 }
 
 /* Inner Page Product Card */
@@ -1112,20 +1121,22 @@ button.category-button:active {
    margin-top: 10px;
    padding: 8px 12px;
 }
-.product-card-inner-name {
-   font-size: 20px;
-   letter-spacing: 0px;
-   color: #000000;
-   margin-bottom: 0px;
-   font-weight: 500;
-   font-family: "Work Sans";
-}
-.product-card-inner-weight {
-   font-size: 16px;
-   color: #999999;
-   margin-bottom: 0px;
-   font-weight: 500;
-   font-family: "Work Sans";
+.product-card-inner-name {	
+   font-size: 15px;	
+   letter-spacing: -0.3px;	
+   color: #000000;	
+   margin-bottom: 0px;	
+   font-weight: 600;	
+   font-family: "Work Sans";	
+   margin-bottom: 0px;	
+}	
+.product-card-inner-weight {	
+   font-size: 16px;	
+   color: #999999;	
+   margin-top: 0px;	
+   margin-bottom: 0px;	
+   font-weight: 500;	
+   font-family: "Work Sans";	
 }
 .product-card-inner-price {
    font-size: 18px;
@@ -1172,11 +1183,11 @@ button.category-button:active {
    font-family: "Arial";
    background-color: #ff3030;
    padding: 6px 8px;
-   margin-top: 12px;
+   margin-top: 8px;
    z-index: 500;
 }
 .main-content .featured-products-content .card .header i {
-   margin-top: 15px;
+   margin-top: 9px;
    margin-right: 18px;
    font-size: 22px;
    color: #dedede;
@@ -1188,10 +1199,10 @@ button.category-button:active {
    text-align: center;
    text-decoration: none;
    color: #ffffff;
-   padding: 2px;
+   padding: 4px;
 }
 .main-content .featured-products-content .card .remove-cart{
-   height: 50px;
+   height: 30px;
 }
 
 .va-panel .filter-sidebar {
@@ -1239,27 +1250,21 @@ button.category-button:active {
    background-color: #ffffff;
    border-radius: 10px 10px 0 0;
    padding: 4px;
+   margin-top: 19px;	
+   margin-bottom: -11px;
    box-shadow: 0px 6px 4.5px rgba(0,0,0,0.07);
 }
 .grocery-features .grocery-assistant-card .image-container {
    position: absolute;
    right: 21px;
    max-width: 35%;
-   top: 68px;
+   top: 48px;
 }
-.shop-assistant-feature {
-   margin-top: 19px;
-}
-.grocery-features .card {
-   border-radius: 6px 6px 0 0;
-   border: 5px solid #25bfa9;
-   background-color: #e7f8f9;
-}
-.value-cart-feature {
-   margin-top: 10px;
-}
-.value-cart-feature .value-cart {
-   padding-bottom: 32px;
+.grocery-features .card {	
+   border-radius: 6px 6px 0 0;	
+   border: 5px solid #778d89;	
+   background-color: #fdfff3;	
+   height: 216px !important;
 }
 .value-cart-feature .card {   
    border: 5px solid #778d89;
@@ -1360,6 +1365,7 @@ button.category-button:active {
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
+   letter-spacing: -0.3px;
 }
 .call_to_action_image {
    width: 54px;
@@ -1370,6 +1376,7 @@ button.category-button:active {
    align-items: center;
    justify-content: center;
    align-self: center;
+   margin-right: 12px;
 }
 .call_to_action_custom_img {
    font-size: 26px;
@@ -1499,7 +1506,7 @@ button.category-button:active {
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
-
+   letter-spacing: -0.5px
 }
 .main-footer .main-content .mission_vision .mission_vision_content h6 {
    margin-bottom: 0px;
@@ -1511,7 +1518,7 @@ button.category-button:active {
 /* Feature Details */
 .main-footer .main-content .feature-details {
    font-size: 20px;
-   letter-spacing: -1px;
+   letter-spacing: -0.5px;
    color: #666666;
    font-weight: 600;
    font-family: "Work Sans";
@@ -1527,7 +1534,7 @@ button.category-button:active {
 }
 .main-footer .main-content .feature-details .feature_details_content h6 {
    margin-bottom: 0px;
-   font-weight: 700;
+   font-weight: 600;
    letter-spacing: 0px;
 }
 /* Feature Details */
@@ -1593,7 +1600,7 @@ button.category-button:active {
 
 /* Categories */
 .categories h4 {
-   font-size: 20px;
+   font-size: 23px;
    letter-spacing: -1px;
    color: #666666;
    font-weight: 600;
@@ -1605,7 +1612,7 @@ button.category-button:active {
    color: #666666;
    font-weight: 600;
    font-family: "Work Sans";
-   margin-bottom: 2px;
+   margin-bottom: 8px;
    text-transform: uppercase;
 }
 .categories .category-grid .sub-category .sub-category-content a {
@@ -1613,6 +1620,7 @@ button.category-button:active {
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
+   letter-spacing: -0.4px;
 }
 .categories .category-grid {
    display: grid;
@@ -1622,7 +1630,7 @@ button.category-button:active {
    border-bottom: 1px solid #ececec;
 }
 .categories .category-grid .sub-category {
-   /*border-right: 1px solid #ececec;*/
+   border-right: 1px solid #ececec;
    margin-right: 10px;
    margin-bottom: 20px !important;
 }
@@ -1651,7 +1659,7 @@ button.category-button:active {
    font-weight: 600;
    font-family: "Work Sans"; */
 
-   padding: 0 40px 10px 40px;
+   padding: 0 33px 10px 35px;
    align-content: center;
    /* padding-bottom: 24px; */
    /* border-bottom: 1px solid #ececec; */
@@ -1662,18 +1670,19 @@ button.category-button:active {
 }
 .sidebar-inner-page h4 {
    border-bottom: 1px solid #cccccc;
-   padding: 20px 40px;
+   padding: 20px 26px;
    color: #000000;
 }
 .categories .sidebar-inner-category-content .sub-category:last-child {
    border-right: none;
 }
 .categories .sidebar-inner-category-content .sub-category .sub-category-content a {
-   display: block;
-   font-size: 16px;
-   line-height: 20px;
-   color: #333333;
-   font-family: "Work Sans";
+   display: block;	
+   font-size: 14px;	
+   line-height: 18px;	
+   color: #333333;	
+   font-family: "Work Sans";	
+   letter-spacing: -0.4px;	
    text-decoration: none;
 }
 .categories .sidebar-inner-category-content .sub-category .sub-category-content .category-text:hover {
@@ -1685,7 +1694,7 @@ button.category-button:active {
    color: #333333;
    font-weight: 600;
    font-family: "Work Sans";
-   margin-top: 25px;
+   margin-top: 8px;
    margin-bottom: 2px;
 }
 
@@ -2031,7 +2040,7 @@ button.category-button:active {
 }
 
 .remove-cart {
-   top: 30%;
+   top: 25%;
    left: 5%;
    text-align: center;
    z-index: 20;
@@ -2130,8 +2139,8 @@ button.category-button:active {
    font-weight: 600;
 }
 .quantity-area {
-   padding-top: 7px;
-   padding-bottom: 7px;
+   padding-top: 0px;	
+   padding-bottom: 8px;
    /*height: 100%;*/
 }
 .quantity-area .quantity-button {
@@ -2246,9 +2255,14 @@ button.category-button:active {
 
 /* ========== LoadMore Button ============ */
 .loadmore{
-   background-color: #17A18D;
-   color: white;
-   border-radius: 5px;
+   width: 30%;	
+   height: 37px;	
+   background-color: black;	
+   text-align: center;	
+   text-decoration: none;	
+   color: #ffffff;	
+   padding: 8px;	
+   border: 1px solid black;
 }
 .loadmore .btntext{
    vertical-align: super;
@@ -2312,27 +2326,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #checkout-panel .address-panel {
    color: #333333 !important;
-   position: relative;
-}
-.address-panel .selectRadio {
-   position: absolute;
-   top: 12px;
-   left: 12px;
-   font-size: 18px;
-   width: 18px;
-   height: 18px;
-}
-.address-panel .removeAddress {
-   background-color: red;
-   position: absolute;
-   width: 24px;
-   height: 24px;
-   color: #fff !important;
-   border-radius: 50%;
-   top: 12px;
-   right: 12px;
-   font-size: 15px;
-   font-weight: 500;
 }
 #checkout-panel .address-panel .card {
    height: 100%;
@@ -2449,8 +2442,6 @@ a#newAddressCancelBtn {
 }
 
 /*============== Checkout panels Ends =================*/
-
-
 
 
 /*Grocery Panel*/
@@ -2727,15 +2718,11 @@ a#newAddressCancelBtn {
     max-width: 76% !important;
 }
 
-
 /*Grocery Panel*/
 
 
 /* ========== Timeline Ends ============ */
 /* ===================================== */
-
-
-
 
 /* ----------------------------------------------------- */
 /* Media Queries */
@@ -2777,13 +2764,8 @@ a#newAddressCancelBtn {
    }
 }
 
-@media (max-width: 425px) {
-   .ordertrackingprogress ul li {
-      width: 18%;
-   }
-}
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
    .hidden-sm-down{
       display: none;
    }
@@ -2884,58 +2866,6 @@ a#newAddressCancelBtn {
       top: 50px;
    }
 
-   .ordertrackingprogress ul {
-      padding-left: 0px;
-   }
-
-   .ordertrackingprogress ul li {
-      width: 23% !important;
-   }
-
-   .ordertrackingprogress ul li .check-container {
-      width: 40px;
-      height: 40px;
-   }
-
-   .ordertrackingprogress ul li i {
-      padding: 5px;
-   }
-
-   .ordertrackingprogress ul img.truck {
-      top: -7px;
-      left: 82px;
-      width: 34px;
-   }
-   .ordertrackingprogress ul li::after {
-      height: 10px;
-      top: 15px;
-   }
-   .ordertrackingprogress ul li::before {
-      width: 8px;
-      height: 8px;   
-   }
-   .ordertrackingprogress ul li:last-child {
-      top: 19px;
-   }
-
-}
-
-@media only screen and (min-width: 768px and max-width: 768px) {
-   .ordertrackingprogress ul li:last-child {
-      top: 0px;
-   }
-}
-
-@media only screen and (max-width: 575px) and (min-width: 521px)  {
-   .ordertrackingprogress ul li:last-child {
-      top: 0px;
-   }
-}
-
-@media (max-width: 340px)  {
-   .ordertrackingprogress ul li {
-      width: 19% !important;
-   }
 }
 
 @media (max-width: 991px) {
@@ -2963,47 +2893,6 @@ a#newAddressCancelBtn {
    }
    .value-cart .card-title {
       margin-bottom: 22px;
-   }
-   .value-cart-feature {
-      margin-top: 19px;
-   }
-   .order-item {
-      width: 100%;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #cccccc;
-      padding-top: 20px;
-      text-align: center;
-      border-left: none;
-   }
-   .order-item:last-child {
-      border-bottom: none;
-   }
-   .quantity-area {
-      padding-left: 38%;
-   }
-   .order-button {
-      padding-left: 30%;
-   }
-   .order-history-button {
-      text-align: center;
-      width: 100%;
-      padding-top: 0px;
-   }
-   .order-history-button .order-id,
-   .order-history-button .order-date,
-   .order-history-button .order-time {
-      width: 100%;
-      border-right: none !important;
-      padding: 20px 0;
-      border-bottom: 1px solid #cccccc;
-   }
-   #orderHistoryaccordion .orderTrackingLink {
-      width: 100%;
-      text-align: center;
-      padding-top: 20px;
-   }
-   .ordertrackingprogress ul li {
-      width: 22%;
    }
 }
 
@@ -3033,25 +2922,22 @@ a#newAddressCancelBtn {
    }
    .value-cart .card-title {
       font-size: 15px;
-      margin-bottom: 28px;
+      margin-bottom: 22px;
    }
    .grocery-features .card .value-cart .card-button {
       width: 132px;
       font-size: 14px;
    }
    .grocery-features .value-cart {
-      height: 202px;
-   }
-   .value-cart {
-      padding-bottom: 24px;
+      height: 196px;
    }
    .value-cart .card-heading {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
    }
    .value-cart .value-cart-feature-image {
-       right: 14px;
-       max-width: 40%;
-       top: 42px;
+      right: 14px;
+      max-width: 40%;
+      top: 35px;
    }
 }
 
