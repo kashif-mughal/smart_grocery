@@ -179,7 +179,7 @@ html,body
 .ordertrackingprogress ul img.truck {
    position: absolute;
    top: -11px;
-   left: 125px;
+   left: 85%;
 }
 
 #order_form .table thead tr td {

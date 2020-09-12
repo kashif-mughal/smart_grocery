@@ -11,12 +11,6 @@ class Lassistant {
         $assistant_list = $this->last_assistant();
         $i = 0;
         $total = 0;
-        if (!empty($assistant_list)) {
-            foreach ($assistant_list as $k => $v) {
-                $i++;
-                $assistant_list[$k]['sl'] = $i;
-            }
-        }
         $data = array(
             'title' => 'Manage Assistant',
             'assistant_list' => $assistant_list,
@@ -30,6 +24,7 @@ class Lassistant {
         $CI->load->model('Assistants');
         $day = 1;
         $assistant_list = null;
+        date_default_timezone_set('Asia/Karachi');
         while (empty($assistant_list)) {
             if(--$day == -30)
                 break;

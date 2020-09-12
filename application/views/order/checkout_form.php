@@ -471,10 +471,16 @@
         $('#time-process').hide();
         $('#collapseThree').collapse('hide');
 
-        if(currentElem.dataset.day == "today"){
+        if(currentElem.dataset.day == "today" && !deliveryAdded){
             $("#dCharges").html(formatCurrency(150));
             subTotal += 150;
             $('.sub-total').html(formatCurrency(subTotal));
+            deliveryAdded = true;
+        }else if(currentElem.dataset.day != "today" && deliveryAdded){
+            $("#dCharges").html(formatCurrency(0));
+            subTotal -= 150;
+            $('.sub-total').html(formatCurrency(subTotal));
+            deliveryAdded = false;
         }
 
         step3Verified = true;
