@@ -32,6 +32,16 @@ class Lassistant {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
+        for ($i=0; $i < count($assistant_list); $i++) { 
+            $productObject = (object) [
+                                 'id' => $assistant_list[$i]['ProductId'],
+                                 'pName' => $assistant_list[$i]['ProductName'],
+                                 'price' => $assistant_list[$i]['SalePrice'],
+                                 'img' => base_url($assistant_list[$i]['ProductImg'])
+                                ];
+
+            $assistant_list[$i]["Jsn"] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
+        }
         $assistantObj = Array();
         $assistantObj["Assistant"] = Array();
         $assistantObj["Cat"] = Array();

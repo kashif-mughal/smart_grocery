@@ -218,19 +218,13 @@
 
                               <div class="filter-brand px-4 py-3 border-b-primary">
                                  <div class="heading-primary mb-3">Filter by Brand:</div>                                    
-                                 <div class="filter-brand-button">
-                                    <?php foreach ($Assistant["Brands"] as $key => $value) {?>
-                                       <button class="btn btn-link mb-2"><?=$value?></button>
-                                    <?php } ?>
+                                 <div class="filter-brand-button" id="brand-filter-area">
                                  </div>
                               </div>
 
                               <div class="filter-weight px-4 py-3 border-b-primary">
                                  <div class="heading-primary mb-3">Filter by Weight:</div>                                    
-                                 <div class="filter-weight-button">
-                                    <?php foreach ($Assistant["SaleUnitQty"] as $key => $value) {?>
-                                       <button class="btn btn-link mb-2"><?=$value?></button>
-                                    <?php } ?>
+                                 <div class="filter-weight-button" id="saleunit-filter">
                                  </div>
                               </div>
 
@@ -257,46 +251,8 @@
                         <div class="col-md-8 pl-0 pt-3">
                            <div class="product-content">
                               <div class="container-fluid">
-                                 <div class="row">
-                                    <?php foreach ($Assistant["Assistant"] as $key => $value) {
-                                       for ($i=0; $i < count($value); $i++) { ?>
-                                          <div class="col-sm-4">
-                                               <div class="mb-3">
-                                                <div class="card product-card each-prod">
-                                                   <img class="card-img-top" src="<?=base_url($value[$i]['ProductImg']);?>" alt="Card image cap">
-                                                   <div class="card-body p-0 text-center">
-                                                      <p class="product-card-title"><?=$value[$i]['ProductName']?></p>
-                                                      <p class="product-card-weight mb-0"><?=$value[$i]['UnitName']?></p>
-                                                      <p class="card-text product-card-inner-price"><script type="text/javascript">document.write(formatCurrency('<?=$value[$i]['SalePrice']?>', 0));</script></p>
-                                                      <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                                                         <?php
-                                                            $productObject = (object) [
-                                                             'id' => $value[$i]['ProductId'],
-                                                             'pName' => $value[$i]['ProductName'],
-                                                             'price' => $value[$i]['SalePrice'],
-                                                             'img' => base_url($value[$i]['ProductImg'])
-                                                            ];
-                                                         ?>
-                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                         <input type="number" min="0" class="d-inline-flex quantity quantity-input">
-                                                         <span class="d-block quantity-button">
-                                                             <a href="javascript:void(0)" class="qty-pls d-block">+</a>
-                                                             <div class="separator"></div>
-                                                             <a href="javascript:void(0)" class="qty-mns d-block">-</a>
-                                                         </span>
-                                                      </div>
-                                                      <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
-                                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                                         >Add to Cart</a>
-                                                      <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
-                                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                                         >Remove From Cart</a>
-                                                   </div>
-                                                </div>
-                                               </div>
-                                          </div>
-                                       <?php } ?>
-                                    <?php } ?>
+                                 <div class="row" id="product-wrt-cat">
+                                    
                                  </div>
                               </div>
                            </div>
@@ -331,6 +287,39 @@
          </div>
       </div>
    </div>
+</div>
+<div style="display: none;">
+    <script type="text" id="clone-cart">
+
+      <div class="col-sm-4">
+           <div class="mb-3">
+            <div class="card product-card each-prod">
+               <img class="card-img-top" src="{Img}" alt="Card image cap">
+               <div class="card-body p-0 text-center">
+                  <p class="product-card-title">{ProductName}</p>
+                  <p class="product-card-weight mb-0">{UnitName}</p>
+                  <p class="card-text product-card-inner-price">{SalePrice}</p>
+                  <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                     <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                     <input type="number" min="0" class="d-inline-flex quantity quantity-input">
+                     <span class="d-block quantity-button">
+                         <a href="javascript:void(0)" class="qty-pls d-block">+</a>
+                         <div class="separator"></div>
+                         <a href="javascript:void(0)" class="qty-mns d-block">-</a>
+                     </span>
+                  </div>
+                  <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
+                     data-json="{Jsn}"
+                     >Add to Cart</a>
+                  <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
+                     data-json="{Jsn}"
+                     >Remove From Cart</a>
+               </div>
+            </div>
+           </div>
+      </div>
+
+    </script>
 </div>
    <!-- Virtual Assistant -->
 <script type="text/javascript">
@@ -367,7 +356,37 @@
          window.scrollTo(0, parseInt(scrollY || '0') * -1);
       });
       
+      setupGroceryAssistant();
    });
+
+   function setupGroceryAssistant(){
+      var container = $('#product-wrt-cat');
+      var assistantJson = JSON.parse('<?=$Assistant?>');
+      var brandArea = $("#brand-filter-area");
+      var weightArea = $("#saleunit-filter");
+      for(var each in assistantJson["Brands"]){
+         brandArea.append(`<button class="btn btn-link mb-2">${assistantJson["Brands"][each]}</button>`);
+      }
+      for(var each in assistantJson["SaleUnitQty"]){
+         weightArea.append(`<button class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
+      }
+
+      var cartTemplate = $('#clone-cart').text();
+      var baseUrl = '<?=base_url()?>';
+      for(each in assistantJson["Assistant"])
+      {
+         for (var i = 0; i < assistantJson["Assistant"][each].length; i++) {
+            var cartTemplateCopy = cartTemplate;
+            cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantJson["Assistant"][each][i].ProductImg);
+            cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantJson["Assistant"][each][i].ProductName);
+            cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantJson["Assistant"][each][i].UnitName);
+            cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantJson["Assistant"][each][i].SalePrice), 0);
+            cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantJson["Assistant"][each][i].Jsn);
+            container.append(cartTemplateCopy);
+         }
+
+      }
+   }
 </script>
 <style type="text/css">
    .slick-next{
