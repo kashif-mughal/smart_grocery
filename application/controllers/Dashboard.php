@@ -18,7 +18,8 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Products');
         $CI->load->model('Units');
         $CI->load->model('Brands');
-        $query = $this->db->query("SELECT gp.* from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
+        $query = $this->db->query("SELECT gp.*, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'Dozen' END AS UnitName 
+        from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId left join grocery_unit gu on gp.Unit = gu.UnitId where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
         $product_list;
         if ($query->num_rows() > 0) {
             $product_list =  $query->result_array();
@@ -33,17 +34,17 @@ class Dashboard extends CI_Controller {
                 $products = $products['products'];
             $value->products = $products;
         }
-        $final_product_list = array();
-        foreach($product_list as $prod => $value) {
-            $unitId = $prod['UnitId'];
-            $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
-            $value['UnitName'] = $currentUnit[0]['UnitName'];
-            array_push($final_product_list,$value);
-        }
+        // $final_product_list = array();
+        // foreach($product_list as $prod => $value) {
+        //     $unitId = $prod['UnitId'];
+        //     $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
+        //     $value['UnitName'] = $currentUnit[0]['UnitName'];
+        //     array_push($final_product_list,$value);
+        // }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,
-            'ProdList' => $final_product_list,
+            'ProdList' => $product_list,
             'Assistant' => $assistant
         );
         $content = $CI->parser->parse('include/home', $data, true);

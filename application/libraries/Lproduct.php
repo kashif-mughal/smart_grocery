@@ -88,7 +88,6 @@ class Lproduct {
             'brands' => $brands,
             'status' => $product_detail[0]['status'],
             'units' => $units,
-            'unit' => $product_detail[0]['UnitId'],
             'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
             'sale_unit' => $product_detail[0]['SaleUnit'],
             'ProductImg' => $product_detail[0]['ProductImg'],

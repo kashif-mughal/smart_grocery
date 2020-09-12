@@ -584,6 +584,8 @@
 
     $(document).on("click", "a.singleAddress", function () {
         $(this).prev('.address-panel .selectRadio').prop('checked', true);
+        $('.address-panel i.fa-check').hide();
+        $(this).prev('i.fa-check').toggle();
         // $('.address-panel i.fa-check').hide();
         // $(this).prev('i.fa-check').toggle();
         $('.selectedAddress').removeClass("selectedAddress");

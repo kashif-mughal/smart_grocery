@@ -2326,6 +2326,27 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #checkout-panel .address-panel {
    color: #333333 !important;
+   position: relative;
+}
+.address-panel .selectRadio {
+   position: absolute;
+   top: 12px;
+   left: 12px;
+   font-size: 18px;
+   width: 18px;
+   height: 18px;
+}
+.address-panel .removeAddress {
+   background-color: red;
+   position: absolute;
+   width: 24px;
+   height: 24px;
+   color: #fff !important;
+   border-radius: 50%;
+   top: 12px;
+   right: 12px;
+   font-size: 15px;
+   font-weight: 500;
 }
 #checkout-panel .address-panel .card {
    height: 100%;

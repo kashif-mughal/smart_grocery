@@ -109,13 +109,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="unit" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
-                            <div class="col-sm-6">
-                                <input class="form-control" name ="unit" id="unit" type="text" placeholder="Unit"  required="" value="{unit}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="OriginalPrice" class="col-sm-3 col-form-label">Original Price </label>
                             <div class="col-sm-6">
                                 <input class="form-control" name ="OriginalPrice" id="OriginalPrice" value="{OriginalPrice}" type="text" placeholder="Original Price" required>
@@ -296,7 +289,7 @@ $(document).ready(function() {
     if(tagsList) {
         var tagsArrayList = tagsList.split(",");
         for(var i = 0; i < tagsArrayList.length; i++) {
-            $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}">${tagsArrayList[i]}</a>`);
+            $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}" title="Remove Tag">${tagsArrayList[i]}</a>`);
         }
     }
 
@@ -305,7 +298,7 @@ $(document).ready(function() {
         if($('#Tags').val()) {
             var singleTag = $('#Tags').val();
             if(!isDuplicate(singleTag)) {
-                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}">${singleTag}</a>`);
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}" title="Remove Tag">${singleTag}</a>`);
                 $('#Tags').val('');
             }
         }

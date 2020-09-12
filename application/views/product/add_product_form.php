@@ -260,7 +260,7 @@
         if(tagsList) {
             var tagsArrayList = tagsList.split(",");
             for(var i = 0; i < tagsArrayList.length; i++) {
-                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}">${tagsArrayList[i]}</a>`);
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}" title="Remove Tag">${tagsArrayList[i]}</a>`);
             }
         }
 
@@ -269,7 +269,7 @@
             if($('#Tags').val() != '' || $('#Tags').val() != 'undefined') {
                 var singleTag = $('#Tags').val();
                 if(!isDuplicate(singleTag)) {
-                    $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}">${singleTag}</a>`);
+                    $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}" title="Remove Tag">${singleTag}</a>`);
                     $('#Tags').val('');
                 }
             }
