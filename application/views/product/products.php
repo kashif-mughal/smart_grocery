@@ -63,7 +63,7 @@
                                         </div>
                                         <img class="card-img-bottom text-center" src="{imgUrl}" alt="Card image cap">
                                         <div class="product-info text-center">
-                                            <p class="card-text product-card-inner-name">{productName}</p>
+                                            <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
                                             <p class="card-text product-card-inner-weight">{unitName}</p>
                                             <p class="card-text product-card-inner-price d-inline">{salePrice}</p>
                                             {priceString}
@@ -106,7 +106,7 @@
                                         </div>
                                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                         <div class="product-info text-center">
-                                            <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
+                                            <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                             <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
                                             <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p>
                                             <?php if($discountPercentage != 0) { ?> 

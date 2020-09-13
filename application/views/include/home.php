@@ -31,7 +31,7 @@
                         </div>
                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                         <div class="product-info text-center">
-                           <p class="card-text product-card-inner-name"><?php echo $value['ProductName']; ?></p>
+                           <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                            <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
                            <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
                            <?php if($discountPercentage > 0) { ?> 
@@ -147,7 +147,7 @@
                                     <?php if(!empty($value->childCats[$i]['CatName'])){?>
                                     <img class="card-img-top" src="<?php echo base_url().$value->childCats[$i]['Img']; ?>" alt="Card image cap">
                                     <div class="card-body p-0">
-                                       <p class="product-card-title"><?php echo $value->childCats[$i]['CatName']; ?></p>
+                                       <p class="product-card-title" title="<?php echo $value->childCats[$i]['CatName']; ?>"><?php echo $value->childCats[$i]['CatName']; ?></p>
                                        <a href="javascript:void(0)" class="product-card-details-btn">View more details</a>
                                     </div>
                                     <div class="card-footer p-0">
@@ -196,8 +196,8 @@
                   </div>
                </div>
                <div class="va-panel-header-sub py-3 text-center">
-                  <span class="heading-primary d-block">Categoy: Edibles</span>
-                  <span class="heading-secondary d-block">Sub Category: Atta</span>
+                  <span class="heading-primary d-block">Categoy: <span id="va-panel-heading-category"></span></span>
+                  <span class="heading-secondary d-block">Sub Category: <span id="va-panel-heading-sub-category"></span></span>
                </div> 
                <div class="va-panel-content">
                   <div class="container-fluid">
@@ -257,15 +257,8 @@
                               </div>
                            </div>
 
-                           <div class="product-content-button my-4 text-center">
-                              <button class="btn btn-link nav-btn-primary">1</button>
-                              <button class="btn btn-link nav-btn-dismiss">2</button>
-                              <button class="btn btn-link nav-btn-dismiss">3</button>
-                              <button class="btn btn-link nav-btn-dismiss">4</button>
-                              <button class="btn btn-link nav-btn-dismiss">5</button>
-                              <button class="btn btn-link nav-btn-dismiss">6</button>
-                              <button class="btn btn-link nav-btn-dismiss">7</button>
-                              <button class="btn btn-link nav-btn-dismiss">8</button>
+                           <div class="product-content-button my-4 text-center" id="pagination-btn">
+                              
                            </div>
 
                         </div>
@@ -276,8 +269,8 @@
                <div class="va-panel-footer">
                   <div class="d-flex justify-content-around align-items-center">
                      <button class="btn btn-link va-panel-footer-btn-red text-center" data-dismiss="modal">Leave Grocery Assistant</button>
-                     <button class="btn btn-link va-panel-footer-btn-black">Previous Category</button>
-                     <button class="btn btn-link va-panel-footer-btn-black">Next Category</button>
+                     <button class="btn btn-link va-panel-footer-btn-black" id="nextCategoryBtn">Previous Category</button>
+                     <button class="btn btn-link va-panel-footer-btn-black" id="prevCategoryBtn">Next Category</button>
                      <button class="btn btn-link va-panel-footer-btn-green" id="popup-checkout">Checkout</button>
                   </div>
                </div>
@@ -296,7 +289,7 @@
             <div class="card product-card each-prod">
                <img class="card-img-top" src="{Img}" alt="Card image cap">
                <div class="card-body p-0 text-center">
-                  <p class="product-card-title">{ProductName}</p>
+                  <p class="product-card-title" title="{ProductName}">{ProductName}</p>
                   <p class="product-card-weight mb-0">{UnitName}</p>
                   <p class="card-text product-card-inner-price">{SalePrice}</p>
                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
@@ -323,11 +316,23 @@
 </div>
    <!-- Virtual Assistant -->
 <script type="text/javascript">
-   
+   var numberOfPageList = [];
+   var groceryAssistantData = [];
+   var currentCategoryName;
    $(document).ready(function(){
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));
       });
+      
+      var groceryAssistantNumber = 0;
+      var categoryByName = [];
+      var assistantJson = JSON.parse('<?=$Assistant?>');
+
+
+      for(each in assistantJson["Assistant"])
+      {
+         categoryByName.push(each);
+      }
 
       function checkout(currentElement){
          var cart = getCookie('baskit');
@@ -356,14 +361,83 @@
          window.scrollTo(0, parseInt(scrollY || '0') * -1);
       });
       
-      setupGroceryAssistant();
+      groceryAssistantData = setupGroceryAssistant(groceryAssistantNumber);
+      
+      $('#prevCategoryBtn').click(function() {debugger
+
+         var foundCurrentCat = false;
+         var nextCat;
+         for(each in assistantJson["Assistant"]) {
+            if(foundCurrentCat) {
+               nextCat = each;
+               break;
+            }
+            if(each == currentCategoryName)
+               foundCurrentCat = true;
+         }
+         if(nextCat) {
+            $('#nextCategoryBtn').attr('disabled', false);
+            $('#prevCategoryBtn').attr('disabled', false);
+            $('#product-wrt-cat').empty();
+            $("#va-panel-heading-category").text(assistantJson["Assistant"][nextCat][0]["parentCategory"]);
+            $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][nextCat][0]["CatName"]);
+            var productContainer = $('#product-wrt-cat');
+            productContainer.append(groceryAssistantData[nextCat][0]);
+            $('#pagination-btn').empty();
+            for(var i = 0; i < numberOfPageList[nextCat]; i++) {
+               $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${nextCat}')">${i+1}</button>`);
+            }
+            currentCategoryName = nextCat;
+         }
+         else {
+            $('#nextCategoryBtn').attr('disabled', false);
+            $('#prevCategoryBtn').attr('disabled', true);
+         }
+      });
+      // nextCategoryBtn
+      $('#nextCategoryBtn').click(function() {debugger
+         var foundCurrentCat = false;
+         var prevCat;
+         var catIndex;
+         var isLastCat;
+         for(each in assistantJson["Assistant"]) {
+            if(each == currentCategoryName) {
+               foundCurrentCat = true;
+               break;
+            }
+            prevCat = each;
+         }
+
+         if(prevCat) {
+            $('#prevCategoryBtn').attr('disabled', false);
+            $('#nextCategoryBtn').attr('disabled', false);
+            $('#product-wrt-cat').empty();
+            $("#va-panel-heading-category").text(assistantJson["Assistant"][prevCat][0]["parentCategory"]);
+            $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][prevCat][0]["CatName"]);
+            var productContainer = $('#product-wrt-cat');debugger
+            productContainer.append(groceryAssistantData[prevCat][0]);
+            $('#pagination-btn').empty();
+            for(var i = 0; i < numberOfPageList[prevCat]; i++) {
+               $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${prevCat}')">${i+1}</button>`);
+            }
+            currentCategoryName = prevCat;
+         }
+         else {
+            $('#nextCategoryBtn').attr('disabled', true);
+            $('#prevCategoryBtn').attr('disabled', false);
+         }
+      });
    });
 
-   function setupGroceryAssistant(){
+   
+
+   function setupGroceryAssistant(groceryAssistantNumber){
       var container = $('#product-wrt-cat');
       var assistantJson = JSON.parse('<?=$Assistant?>');
       var brandArea = $("#brand-filter-area");
       var weightArea = $("#saleunit-filter");
+      
+
       for(var each in assistantJson["Brands"]){
          brandArea.append(`<button class="btn btn-link mb-2">${assistantJson["Brands"][each]}</button>`);
       }
@@ -371,22 +445,55 @@
          weightArea.append(`<button class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
       }
 
+      var eachPage = 6;
+
       var cartTemplate = $('#clone-cart').text();
       var baseUrl = '<?=base_url()?>';
+      var finalData = [];
       for(each in assistantJson["Assistant"])
       {
-         for (var i = 0; i < assistantJson["Assistant"][each].length; i++) {
-            var cartTemplateCopy = cartTemplate;
-            cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantJson["Assistant"][each][i].ProductImg);
-            cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantJson["Assistant"][each][i].ProductName);
-            cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantJson["Assistant"][each][i].UnitName);
-            cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantJson["Assistant"][each][i].SalePrice), 0);
-            cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantJson["Assistant"][each][i].Jsn);
-            container.append(cartTemplateCopy);
+         if(!currentCategoryName) 
+            currentCategoryName = each;
+         var pages = [];
+         var totalProducts = assistantJson["Assistant"][each].length; // total products
+         var numberOfPages = Math.ceil(totalProducts/eachPage); // number of pages
+         numberOfPageList[each] = numberOfPages;
+         
+         
+         for (var i = 0; i < numberOfPageList[each]; i++) {
+            var catProductList = [];
+            for(var k = i * eachPage; k < eachPage + (eachPage * i); k++) {
+               if(!assistantJson["Assistant"][each][k]) break;
+               var cartTemplateCopy = cartTemplate;
+               cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantJson["Assistant"][each][k].ProductImg);
+               cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantJson["Assistant"][each][k].ProductName);
+               cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantJson["Assistant"][each][k].UnitName);
+               cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantJson["Assistant"][each][k].SalePrice,0));
+               cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantJson["Assistant"][each][k].Jsn);
+               catProductList.push(cartTemplateCopy);
+            }
+            
+            pages.push(catProductList);
          }
+         
+         console.log(pages);
 
+         finalData[each] = pages;
       }
+      $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][groceryAssistantNumber]["parentCategory"]);
+      $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][groceryAssistantNumber]["CatName"]);
+      container.append(finalData[currentCategoryName][0]);
+      for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
+         $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
+      }
+      return finalData;
    }
+
+   function renderCatPaginate(pageNumber, category) {
+      $('#product-wrt-cat').empty();
+      $('#product-wrt-cat').append(groceryAssistantData[category][pageNumber]);
+   }
+
 </script>
 <style type="text/css">
    .slick-next{
@@ -415,17 +522,5 @@
    }
    .grocery-features .grocery-assistant-card .image-container {
       top: 48px;
-   }
-   .product-card-inner-name {
-      white-space: nowrap;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-   }
-   .product-card-title {
-      white-space: nowrap;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
    }
 </style>
