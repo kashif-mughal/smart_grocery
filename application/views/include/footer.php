@@ -143,7 +143,7 @@ foreach($CatList as $key => $value) {
 			<div class="feature-details my-4">
 				<h4>Sauda Express - the most customer-centeric online shopping platform</h4>
 				<div class="feature_details_content">
-					<h6>Wide Geographic Voverage</h6>
+					<h6>Wide Geographic Coverage</h6>
 					<p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>
 				</div>
 				<div class="feature_details_content">
