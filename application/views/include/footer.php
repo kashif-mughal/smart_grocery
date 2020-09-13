@@ -154,6 +154,18 @@ foreach($CatList as $key => $value) {
 					<h6>Long term Commitment</h6>
 					<p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>
 				</div>
+				<div class="feature_details_content">
+					<h6>Best Value for your Money</h6>
+					<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Special features for members</h6>
+					<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Payment Options</h6>
+					<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add payment option through debit and credit cards as well – this option too, will be available in a few weeks’ time.</p>
+				</div>
 			</div>
 
 			<div class="useful-links my-4">
