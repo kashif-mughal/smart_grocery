@@ -4,10 +4,10 @@
 			margin-top: 0px !important;
 		}
 	</style>
-	<div class="row mx-auto">
+	<!-- <div class="row mx-auto">
 		<img src="img/logo.png" alt="" class="mx-auto mt-3" style="background-color: #17a18d; border-radius: 47%;">
-	</div>
-	<div class="row">
+	</div> -->
+	<div class="row mt-3">
 		<div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 			<!-- Phone Verification -->
@@ -54,12 +54,12 @@
 					<div class="sign-in-content ml-4">
 						<h4 class="mb-5">Phone Number Verification</h4>
 						<span class="d-block mb-3 currentPhoneMessage">Enter 4 digit code sent to your phone </span>
-						<div class="form-inline" id="inputOtp">
-							<form class="digit-group">
-								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
-								<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
-								<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
-								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off">
+						<div class="form-inline">
+							<form class="digit-group" id="inputOtp">
+								<input type="number" name="digit-1" id="digit-1" autocomplete="off" autofocus>
+								<input type="number" name="digit-2" id="digit-2" autocomplete="off">
+								<input type="number" name="digit-3" id="digit-3" autocomplete="off">
+								<input type="number" name="digit-4" id="digit-4" autocomplete="off" last="true">
 							</form>
 						</div>
 						<a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
@@ -198,7 +198,7 @@
 		<div class="col-xl-4 col-lg-4 col-md-12">
             <div class="row">
                <div class="col-lg-12 col-md-6 grocery-features-columns">
-                  <div class="grocery-features mt-0">
+                  <div class="grocery-features shop-assistant-feature mt-lg-0">
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">
@@ -279,7 +279,7 @@
 			console.log(e.keyCode);
 			if(e.keyCode == 13)
 				$('#phoneSubmit').trigger("click");
-		});
+			});
 
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
@@ -304,7 +304,7 @@
 								$('.errorNotify').hide();
 								$('#phoneForm').hide();
 								$('#otpForm').show();
-								$("digit-1").select().focus();
+								$("#digit-1").focus();
 							}, 2000);
 						}
 						else {
@@ -523,7 +523,8 @@
 						}, 2000);
 					}
 				});
-			}
+			}		
+
 		});
 
 		// Logout
@@ -562,57 +563,28 @@
 			var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 			return (reg.test(email)) ? true : false;
 		}
+		var allowKeys = ["0","1","2","3","4","5","6","7","8","9"];
 
-		// OTP inputs ============== 
-		$(function() {
-			'use strict';
-
-			var OTPinput = $('#inputOtp');
-			function goToNextInput(e) {
-				var key = e.which || e.keyCode,
-				t = $(e.target),
-				sib = t.next('input');
-				if(t.attr('last') == "true"){
+		$('input[name^=digit-]').keydown(function() {
+			// Check Character
+			if(allowKeys.indexOf(event.key) == -1) return false;
+			if(event.key.length <= 1) 
+			{debugger
+				$("#inputOtp #" + event.target.id).val(event.key);
+				var nextElement = $("#inputOtp #" + event.target.id).next();
+				nextElement.focus();
+				if($("#inputOtp #" + event.target.id).attr('last') == "true"){
 					$('#otpSubmit').select().focus();
 					$('#otpSubmit').trigger('click');
-					return true;
 				}
-				if (key != 9 && (key < 48 || key > 57 || key >= 96 && key <= 105)) {
-					e.preventDefault();
-					return false;
-				}
-
-				if (key === 9) {
-					return true;
-				}
-
-				if (!sib || !sib.length) {
-				sib = OTPinput.find('input').eq(0);
-				}
-				sib.select().focus();
-			}
-
-			function onKeyDown(e) {
-				var key = e.which;
-
-				if (key === 9 || (key >= 48 && key <= 57 || key >= 96 && key <= 105)) {
-					return true;
-				}
-
-				e.preventDefault();
 				return false;
 			}
-			
-			function onFocus(e) {
-				$(e.target).select();
+			else {
+				var str = event.key;
+				str = str.substring(0, str.length - 1);
+				$("#inputOtp #" + event.target.id).val(str);
 			}
-
-			OTPinput.on('keyup', 'input', goToNextInput);
-			OTPinput.on('keydown', 'input', onKeyDown);
-			OTPinput.on('click', 'input', onFocus);
-
-		});
-		
+		});		
 	});
 
 </script>

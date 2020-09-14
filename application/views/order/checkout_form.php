@@ -124,7 +124,11 @@
                                                             {userAddress}
                                                             <div class="col-md-6 my-2">
                                                                 <div class="card p-5 text-center">
+<<<<<<< Updated upstream
                                                                     <a href="javascript:void(0)" class="removeAddress">x</a>
+=======
+                                                                    <a href="#" class="removeAddress">x</a>
+>>>>>>> Stashed changes
                                                                     <input type="radio" name="optradio" class="selectRadio">
                                                                     <!-- <i class="fas fa-check" style="display:none;"></i> -->
                                                                     <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
