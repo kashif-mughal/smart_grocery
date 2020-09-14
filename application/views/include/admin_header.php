@@ -244,7 +244,39 @@ $users = $CI->Users->profile_edit_data();
                 </ul>
             </li>
             <!-- Unit menu end -->
+            <!-- Site Setting menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Csettings")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="javascript:void(0)">
+                    <i class="fas fa-file-contract"></i><span>Settings</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Csettings') ?>">Site Settings</a></li>
 
+                </ul>
+            </li>
+            <!-- Site Setting menu end -->
     </ul>
 </div> <!-- /.sidebar -->
 </aside>
+<script type="text/javascript">
+    function getUrlVars(){
+      var vars = [], hash;
+      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+      for(var i = 0; i < hashes.length; i++)
+      {
+          hash = hashes[i].split('=');
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+      }
+      return vars;
+  }
+</script>

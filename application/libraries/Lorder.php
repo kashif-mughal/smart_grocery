@@ -18,11 +18,13 @@ class Lorder {
     public function checkout_detail_form() {
         $CI = & get_instance();
         $CI->load->model('Users');
+        $CI->load->model('SiteSettings');
         $userAddress = $CI->Users->get_user_address();
         // print_r($userAddress);die;
         $data = array(
             'title' => 'Checkout',
-            'userAddress' => $userAddress
+            'userAddress' => $userAddress,
+            'deliveryCharges' => $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"]
         );
         return $CI->parser->parse('order/checkout_form', $data, true);
     }
@@ -49,6 +51,7 @@ class Lorder {
     public function place_order(){
         $CI = & get_instance();
         $CI->load->model('Orders');
+        $CI->load->model('SiteSettings');
         date_default_timezone_set('Asia/Karachi');
         $addressId = $CI->session->userdata("addressId");
         $deliveryTime = $CI->session->userdata("deliveryTime");
@@ -68,7 +71,7 @@ class Lorder {
             $OV += $eachProd->quantity * $eachProd->price;
         }
         $currentDate = date('Y-m-d');
-        $deliveryCharges = $deliveryDate == $currentDate ? 150 : 0;
+        $deliveryCharges = $deliveryDate == $currentDate ? $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"] : 0;
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
             'OrderValue' => $OV,

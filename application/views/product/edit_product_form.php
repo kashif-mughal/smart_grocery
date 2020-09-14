@@ -220,7 +220,7 @@
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">Status <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name="status" id="status">
+                                <select class="form-control" name="status" id="status" required>
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>

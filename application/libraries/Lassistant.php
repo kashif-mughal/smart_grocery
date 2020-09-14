@@ -32,6 +32,7 @@ class Lassistant {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
+        echo '<pre>'; print_r($assistant_list);die;
         for ($i=0; $i < count($assistant_list); $i++) { 
             $productObject = (object) [
                                  'id' => $assistant_list[$i]['ProductId'],
@@ -47,6 +48,7 @@ class Lassistant {
         $assistantObj["Cat"] = Array();
         $assistantObj["SaleUnitQty"] = Array();
         $assistantObj["Brands"] = Array();
+        $assistantObj["Tags"] = Array();
         for ($i=0; $i < count($assistant_list); $i++) { 
             if(!$assistantObj["Assistant"][$assistant_list[$i]["CatName"]])
                 $assistantObj["Assistant"][$assistant_list[$i]["CatName"]] = Array();
@@ -54,11 +56,18 @@ class Lassistant {
             array_push($assistantObj["Cat"], $assistant_list[$i]["CatName"]);
             array_push($assistantObj["SaleUnitQty"], $assistant_list[$i]["SaleUnitQuantity"]);
             array_push($assistantObj["Brands"], $assistant_list[$i]["BrandName"]);
+            if(!empty($assistant_list[$i]["tags"])){
+                $tagsArr = explode(",", $assistant_list[$i]["tags"]);
+                for ($j=0; $j < count($tagsArr); $j++) { 
+                    array_push($assistantObj["Tags"], $tagsArr[$j]);
+                }
+            }
         }
         $assistantObj["Cat"] = array_unique($assistantObj["Cat"]);
         $assistantObj["Brands"] = array_unique($assistantObj["Brands"]);
         $assistantObj["Brands"] = array_filter($assistantObj["Brands"]);
         $assistantObj["SaleUnitQty"] = array_unique($assistantObj["SaleUnitQty"]);
+        $assistantObj["Tags"] = array_unique($assistantObj["Tags"]);
         //echo '<pre>'; print_r($assistantObj);die;
         return $assistantObj;
     }

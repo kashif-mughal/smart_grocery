@@ -34,13 +34,6 @@ class Dashboard extends CI_Controller {
                 $products = $products['products'];
             $value->products = $products;
         }
-        // $final_product_list = array();
-        // foreach($product_list as $prod => $value) {
-        //     $unitId = $prod['UnitId'];
-        //     $currentUnit = $CI->Units->unit_search_item($value['UnitId']);
-        //     $value['UnitName'] = $currentUnit[0]['UnitName'];
-        //     array_push($final_product_list,$value);
-        // }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
             'CatList' => $catArray,

@@ -204,7 +204,7 @@
                      <div class="row">
                         <div class="col-md-4 px-0">
                            <div class="filter-sidebar">
-                              <a href="javascript:void(0)">
+                              <a href="javascript:void(0)" id="showFilterResultBtn" style="display: none;">
                                  <h4 class="ribbon">
                                     <strong class="ribbon-content">SHOW RESULT</strong>
                                  </h4>
@@ -229,20 +229,9 @@
                               </div>
 
                               <div class="filter-type px-4 py-3 border-b-primary">
-                                 <div class="heading-primary mb-3">Filter by Weight:</div>
-                                 <div class="filter-type-checkbox">
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                      <label class="form-check-label" for="exampleRadios1">
-                                        Chakki
-                                      </label>
-                                    </div>
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                      <label class="form-check-label" for="exampleRadios2">
-                                        Fine
-                                      </label>
-                                    </div>
+                                 <div class="heading-primary mb-3">Filter by Tags:</div>
+                                 <div class="filter-type-checkbox" id="tag-filter-area">
+                                    
                                  </div>                                    
                               </div>
 
@@ -414,7 +403,7 @@
             $('#product-wrt-cat').empty();
             $("#va-panel-heading-category").text(assistantJson["Assistant"][prevCat][0]["parentCategory"]);
             $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][prevCat][0]["CatName"]);
-            var productContainer = $('#product-wrt-cat');debugger
+            var productContainer = $('#product-wrt-cat');
             productContainer.append(groceryAssistantData[prevCat][0]);
             $('#pagination-btn').empty();
             for(var i = 0; i < numberOfPageList[prevCat]; i++) {
@@ -428,21 +417,44 @@
          }
       });
    });
+   function toggleAndCheckActiveFilter(currentElement){
+      currentElement = $(currentElement);
+      if(currentElement.hasClass("filterSelected")){
+         currentElement.removeClass("filterSelected");
+      }
+      else
+         currentElement.addClass("filterSelected");
 
-   
+      if(anyFilterSelected())
+         $("#showFilterResultBtn").show();
+      else
+         $("#showFilterResultBtn").hide();
+   }
+   function anyFilterSelected(){
+      return $(".filterSelected").length > 0;
+   }
 
-   function setupGroceryAssistant(groceryAssistantNumber){
+   function setupGroceryAssistant(){
       var container = $('#product-wrt-cat');
       var assistantJson = JSON.parse('<?=$Assistant?>');
       var brandArea = $("#brand-filter-area");
       var weightArea = $("#saleunit-filter");
-      
 
+      var tagArea = $("#tag-filter-area");
       for(var each in assistantJson["Brands"]){
-         brandArea.append(`<button class="btn btn-link mb-2">${assistantJson["Brands"][each]}</button>`);
+         brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJson["Brands"][each]}">${assistantJson["Brands"][each]}</button>`);
       }
       for(var each in assistantJson["SaleUnitQty"]){
-         weightArea.append(`<button class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
+         weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJson["SaleUnitQty"][each]}" class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
+      }
+      var counter = 0;
+      for(var each in assistantJson["Tags"]){
+         tagArea.append(`<div class="form-check">
+                          <input class="form-check-input" data-value="${assistantJson["Tags"][each]}" onclick="toggleAndCheckActiveFilter(this);" type="checkbox" name="tag${++counter}" id="tag${counter}" value="${assistantJson["Tags"][each]}">
+                          <label class="form-check-label" for="tag${counter}">
+                            ${assistantJson["Tags"][each]}
+                          </label>
+                        </div>`);
       }
 
       var eachPage = 6;
@@ -480,8 +492,8 @@
 
          finalData[each] = pages;
       }
-      $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][groceryAssistantNumber]["parentCategory"]);
-      $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][groceryAssistantNumber]["CatName"]);
+      $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][0]["parentCategory"]);
+      $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][0]["CatName"]);
       container.append(finalData[currentCategoryName][0]);
       for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
          $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
@@ -522,5 +534,27 @@
    }
    .grocery-features .grocery-assistant-card .image-container {
       top: 48px;
+   }
+   .product-card-inner-name {
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+   .product-card-title {
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+   .form-check{
+      display: inline-block;
+      margin-right: 10px;
+   }
+   .filterSelected{
+      box-shadow: 1px 1px 10px 1px green;
+   }
+   .filterSelected : focus{
+      box-shadow: 1px 1px 10px 1px green;
    }
 </style>

@@ -393,7 +393,7 @@
         var todayTemplate = `<thead>
                                 <tr>
                                     <th scope="col">Date - Day</th>
-                                    <th scope="col">Same Day Delivey - Additional Rs 150 will be
+                                    <th scope="col">Same Day Delivey - Additional Rs <?=$deliveryCharges?> will be
                                         charged</th>
                                 </tr>
                             </thead>
@@ -463,6 +463,8 @@
         timeSlotAreaElem.append(otherDTemplateHead);
         timeSlotAreaElem.append(otherDTemplateBody);
     }
+    var deliveryCharges = parseInt('<?=$deliveryCharges?>');
+    var deliveryAdded = false;
     function setTimeSlotInternal(currentElem){
         deliveryTime = $(currentElem).find('input').first().val();
         var deliveryTimeArr = deliveryTime.split('__');
@@ -476,13 +478,13 @@
         $('#collapseThree').collapse('hide');
 
         if(currentElem.dataset.day == "today" && !deliveryAdded){
-            $("#dCharges").html(formatCurrency(150));
-            subTotal += 150;
+            $("#dCharges").html(formatCurrency(deliveryCharges));
+            subTotal += deliveryCharges;
             $('.sub-total').html(formatCurrency(subTotal));
             deliveryAdded = true;
         }else if(currentElem.dataset.day != "today" && deliveryAdded){
             $("#dCharges").html(formatCurrency(0));
-            subTotal -= 150;
+            subTotal -= deliveryCharges;
             $('.sub-total').html(formatCurrency(subTotal));
             deliveryAdded = false;
         }
@@ -571,7 +573,7 @@
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
                eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
+               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
                //append newly created row in card body
                cartBody.append(eachProdTemplateCopy);
             }
