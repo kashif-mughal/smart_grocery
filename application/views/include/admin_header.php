@@ -185,7 +185,7 @@ $users = $CI->Users->profile_edit_data();
                 }
                 ?>">
                 <a href="#">
-                    <i class="fa fa-balance-scale "></i><span>Assistant</span>
+                    <i class="fa fa-hands-helping"></i><span>Assistant</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -193,6 +193,28 @@ $users = $CI->Users->profile_edit_data();
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('Cassistant') ?>">Add Asssitant</a></li>
                     <li><a href="<?php echo base_url('Cassistant/manage_assistant') ?>">Manage Assistant</a></li>
+
+                </ul>
+            </li>
+            <!-- Asssitant menu end -->
+
+            <!-- Asssistant menu start -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Cvalue")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="fa fa-cart-plus"></i><span>Value Cart</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Cvalue') ?>">Add Value Cart</a></li>
+                    <li><a href="<?php echo base_url('Cvalue/manage_value') ?>">Manage Value Cart</a></li>
 
                 </ul>
             </li>
@@ -253,7 +275,7 @@ $users = $CI->Users->profile_edit_data();
                 }
                 ?>">
                 <a href="javascript:void(0)">
-                    <i class="fas fa-file-contract"></i><span>Settings</span>
+                    <i class="fas fa-cog"></i><span>Settings</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>

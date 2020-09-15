@@ -72,57 +72,60 @@
                     <h4>Sauda Express Value Cart</h4>
                     <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis amet cumque sunt libero iste repudiandae ullam, ut ipsam fugiat architecto et repellendus minus non impedit dolorum! Nobis pariatur aut necessitatibus?</p> -->
                 </div>
-                <?php if($products && count($products > 0)){?>
-                    <?php foreach($products as $value) {?>
-                    <div class="order-history-header mt-3 p-0">
-                        <div class="card order-history-card each-prod">
-                            
-                            <div class="featured-products mt-0 border-none d-flex justify-content-between align-items-center">
-                                <?php 
-                                 if($value['IsFeatured'] == 1) {
-                                  $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
-                                }?> 
+                <?php if($value_list && count($value_list > 0) && $value_list["Value"] && count($value_list["Value"] > 0)){?>
+                    
+                    <?php foreach($value_list["Value"] as $key => $value) {?>
+                        <?php for ($i=0; $i < count($value); $i++) {?>
+                            <div class="order-history-header mt-3 p-0">
+                                <div class="card order-history-card each-prod">
+                                    
+                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-items-center">
+                                        <?php 
+                                         if($value[$i]['IsFeatured'] == 1) {
+                                          $discountPercentage = (($value[$i]['Price'] - $value[$i]['SalePrice'])/$value[$i]['Price']) * 100;
+                                        }?> 
 
-                                <img src="<?=base_url($value['ProductImg'])?>" style="width: 70px; max-height: 60px;" alt="">
-                                <div class="order-product-name order-item align-self-center">
-                                    <p class="order-name"><?=$value['ProductName']?></p>
-                                    <p class="order-weight"><?=$value['ItemQuantity']?>&nbsp;<?=$value['UnitName']?></p>
-                                </div>
-                                <div class="order-product-price order-item">
-                                    <p class="order-price"><script type="text/javascript">
-                                        document.write(formatCurrency('<?=$value["SalePrice"]?>'));
-                                    </script></p>
-                                    <?php if($discountPercentage != 0) { ?> 
-                                        <p class="order-discount"><del><script type="text/javascript">
-                                        document.write(formatCurrency('<?=$value["Price"]?>'));
-                                    </script></del></p>
-                                    <?php } ?>
-                                </div>
-                                <div class="quantity-area order-item">
-                                    <div class="d-flex">
-                                        <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                        <input type="number" value="<?=$value['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
-                                        <span class="d-block quantity-button">
-                                            <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
-                                            <div class="separator"></div>
-                                            <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
-                                        </span>
+                                        <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 70px; max-height: 60px;" alt="">
+                                        <div class="order-product-name order-item align-self-center">
+                                            <p class="order-name"><?=$value[$i]['ProductName']?></p>
+                                            <p class="order-weight"><?=$value[$i]['ItemQuantity']?>&nbsp;<?=$value[$i]['UnitName']?></p>
+                                        </div>
+                                        <div class="order-product-price order-item">
+                                            <p class="order-price"><script type="text/javascript">
+                                                document.write(formatCurrency('<?=$value[$i]["SalePrice"]?>'));
+                                            </script></p>
+                                            <?php if($discountPercentage != 0) { ?> 
+                                                <p class="order-discount"><del><script type="text/javascript">
+                                                document.write(formatCurrency('<?=$value[$i]["Price"]?>'));
+                                            </script></del></p>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="quantity-area order-item">
+                                            <div class="d-flex">
+                                                <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                                <input type="number" value="<?=$value[$i]['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
+                                                <span class="d-block quantity-button">
+                                                    <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
+                                                    <div class="separator"></div>
+                                                    <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="order-button order-item text-center">
+                                            <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart"
+                                               data-json="<?= $value[$i]["Jsn"]?>"
+                                               >Add to Cart
+                                            </a>
+                                            <!-- <a href="#" class="d-block align-self-center button-primary">Add to Cart</a> -->
+                                            <a href="javascript:void(0);" style="display: none;" class="align-self-center button-secondary remove-cart" data-json="<?= $value[$i]["Jsn"]?>"
+                                               >Remove From Cart
+                                           </a>
+                                            <!-- <a href="#" class="d-block align-self-center button-secondary">Delete</a> -->
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="order-button order-item text-center">
-                                    <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart"
-                                       data-json="<?= $value["Jsn"]?>"
-                                       >Add to Cart
-                                    </a>
-                                    <!-- <a href="#" class="d-block align-self-center button-primary">Add to Cart</a> -->
-                                    <a href="javascript:void(0);" style="display: none;" class="align-self-center button-secondary remove-cart" data-json="<?= $value["Jsn"]?>"
-                                       >Remove From Cart
-                                   </a>
-                                    <!-- <a href="#" class="d-block align-self-center button-secondary">Delete</a> -->
-                                </div>
                             </div>
-                        </div>
-                    </div>
+                        <?php } ?>
                     <?php } ?>
                 <?php }else{
                     echo '<h3 class="nothing-to-show">Nothing to show</h3>';

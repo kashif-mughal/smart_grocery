@@ -3,15 +3,15 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Assistants extends CI_Model {
+class Values extends CI_Model {
 
     public function __construct() {
-        parent::__construct('grocery_assistant');
+        parent::__construct('grocery_value');
     }
-    private $tableName = 'grocery_assistant';
+    private $tableName = 'grocery_value';
     
-    public function search_last_assistant($key, $value) {
-        $this->db->select("ga.AssistantId, gp.ProductId, gp.ProductName, gp.tags, gp.Price, gp.SalePrice, gp.ProductImg, gb.BrandName, concat(gp.SaleUnitQty, gps.UnitName) SaleUnitQuantity, gc.CatName, gc2.CatName parentCategory, CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName ");
+    public function search_last_value($key, $value) {
+        $this->db->select("ga.ValueId, gp.ProductId, gp.ProductName, gp.tags, gp.Price, gp.SalePrice, gp.ProductImg, gb.BrandName, concat(gp.SaleUnitQty, gps.UnitName) SaleUnitQuantity, gc.CatName, gc2.CatName parentCategory, CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName ");
         $this->db->from($this->tableName." ga");
         $this->db->join("grocery_products gp", "gp.ProductId = ga.ProductId");
         $this->db->join("grocery_category gc", "gp.Category = gc.CategoryId", "left");
@@ -30,7 +30,7 @@ class Assistants extends CI_Model {
     }
 
     //Count customer
-    public function assistant_entry($data) {
+    public function value_entry($data) {
         $this->db->insert($this->tableName, $data);
         return TRUE;
     }

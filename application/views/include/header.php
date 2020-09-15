@@ -219,11 +219,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </button>
                                     <div class="dropdown-menu">
                                       <?php foreach($menuCatList as $key => $value) {?>
-                                         <a class="dropdown-item" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
+                                         <a class="dropdown-item" id="cat-<?=$value->catId?>" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
                                       <?php } ?>
                                    </div>
                                  </div>
-                                 <input type="text" name="q" class="form-control font-weight-400 border-none" placeholder="Search here">
+                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">Search</button>
                                  </div>
@@ -346,6 +346,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
+  var urlVars = getUrlVars();
+  var searchText = urlVars["q"];
+  if(searchText){
+    $("#q").val(searchText);
+  }
+  var selectedCat = urlVars["categoryId"];
+  if(selectedCat){
+    $("#cat-" + selectedCat).trigger("click");
+  }
    loadCartData();
    $(document).on('keydown', '.quantity', function () {
       if(event.keyCode == 189)

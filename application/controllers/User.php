@@ -41,7 +41,7 @@ class User extends CI_Controller {
 
     public function value_cart() {
         $CI = & get_instance();
-        $this->auth->check_auth();
+        //$this->auth->check_auth();
         $content = $CI->luser->user_value_cart();
         $this->template->full_html_view($content);
     }
