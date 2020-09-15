@@ -134,7 +134,7 @@
                                                 <td><?=$value['sl']?></td>
                                                 <td><?= $value['OrderId']?></td>
                                                 <td>
-                                                    <?= $value['OrderValue']?> + <?= $value['DeliveryCharges']?>
+                                                    <?= $value['OrderValue']?> + <?= $value['DeliveryCharges'] ? $value['DeliveryCharges'] : 0 ?>
                                                 </td>
                                                 <td><?= $value['email'] ? "("+ $value['email'] +") " + $value['phone'] : $value['phone']?></td>
                                                 <td><?= $value['ModifiedOn']?></td>

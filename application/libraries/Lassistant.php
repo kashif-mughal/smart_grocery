@@ -32,6 +32,7 @@ class Lassistant {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
+        //echo '<pre>'; print_r($assistant_list);die;
         for ($i=0; $i < count($assistant_list); $i++) { 
             $productObject = (object) [
                                  'id' => $assistant_list[$i]['ProductId'],

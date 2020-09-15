@@ -204,11 +204,11 @@
                      <div class="row">
                         <div class="col-md-4 px-0">
                            <div class="filter-sidebar">
-                              <a href="javascript:void(0)" id="showFilterResultBtn" style="display: none;">
+                              <button onclick="filterAssistantProduct()" id="showFilterResultBtn" style="display: none; background-color: transparent; border: none;">
                                  <h4 class="ribbon">
                                     <strong class="ribbon-content">SHOW RESULT</strong>
                                  </h4>
-                              </a>
+                              </button>
                               <div class="filter-header d-flex px-4 py-3 border-b-primary">
                                  <div class="filter-icon mr-2">
                                     <img src="<?=base_url("assets/img/GroceryAssistant/filter.png")?>">   
@@ -308,6 +308,7 @@
    var numberOfPageList = [];
    var groceryAssistantData = [];
    var currentCategoryName;
+   var assistantJsonArray;
    $(document).ready(function(){
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));
@@ -316,8 +317,8 @@
       var groceryAssistantNumber = 0;
       var categoryByName = [];
       var assistantJson = JSON.parse('<?=$Assistant?>');
-
-
+      assistantJsonArray = assistantJson;
+      
       for(each in assistantJson["Assistant"])
       {
          categoryByName.push(each);
@@ -352,11 +353,11 @@
       
       groceryAssistantData = setupGroceryAssistant(groceryAssistantNumber);
       
-      $('#prevCategoryBtn').click(function() {debugger
+      $('#prevCategoryBtn').click(function() {
 
          var foundCurrentCat = false;
          var nextCat;
-         for(each in assistantJson["Assistant"]) {
+         for(each in groceryAssistantData) {
             if(foundCurrentCat) {
                nextCat = each;
                break;
@@ -371,25 +372,28 @@
             $("#va-panel-heading-category").text(assistantJson["Assistant"][nextCat][0]["parentCategory"]);
             $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][nextCat][0]["CatName"]);
             var productContainer = $('#product-wrt-cat');
-            productContainer.append(groceryAssistantData[nextCat][0]);
-            $('#pagination-btn').empty();
-            for(var i = 0; i < numberOfPageList[nextCat]; i++) {
-               $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${nextCat}')">${i+1}</button>`);
+            if(groceryAssistantData[nextCat]) {
+               productContainer.append(groceryAssistantData[nextCat][0]);
+               $('#pagination-btn').empty();
+               for(var i = 0; i < numberOfPageList[nextCat]; i++) {
+                  $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${nextCat}')">${i+1}</button>`);
+               }
+               currentCategoryName = nextCat;
             }
-            currentCategoryName = nextCat;
          }
          else {
             $('#nextCategoryBtn').attr('disabled', false);
             $('#prevCategoryBtn').attr('disabled', true);
          }
       });
+        
       // nextCategoryBtn
-      $('#nextCategoryBtn').click(function() {debugger
+      $('#nextCategoryBtn').click(function() {
          var foundCurrentCat = false;
          var prevCat;
          var catIndex;
          var isLastCat;
-         for(each in assistantJson["Assistant"]) {
+         for(each in groceryAssistantData) {
             if(each == currentCategoryName) {
                foundCurrentCat = true;
                break;
@@ -404,12 +408,14 @@
             $("#va-panel-heading-category").text(assistantJson["Assistant"][prevCat][0]["parentCategory"]);
             $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][prevCat][0]["CatName"]);
             var productContainer = $('#product-wrt-cat');
-            productContainer.append(groceryAssistantData[prevCat][0]);
-            $('#pagination-btn').empty();
-            for(var i = 0; i < numberOfPageList[prevCat]; i++) {
-               $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${prevCat}')">${i+1}</button>`);
+            if(groceryAssistantData[prevCat]) {
+               productContainer.append(groceryAssistantData[prevCat][0]);
+               $('#pagination-btn').empty();
+               for(var i = 0; i < numberOfPageList[prevCat]; i++) {
+                  $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${prevCat}')">${i+1}</button>`);
+               }
+               currentCategoryName = prevCat;
             }
-            currentCategoryName = prevCat;
          }
          else {
             $('#nextCategoryBtn').attr('disabled', true);
@@ -417,6 +423,114 @@
          }
       });
    });
+
+   function filterAssistantProduct() {
+      var assistantJson2 = JSON.parse('<?=$Assistant?>');
+      var assistantData = assistantJson2["Assistant"];
+      var brandSelector = $('.filter-brand .filterSelected');
+      var weightSelector = $('.filter-weight .filterSelected');
+      var tagSelector = $('.filter-type .filterSelected');
+      var selectedBrands = [];
+      var selectedWeights = [];
+      var selectedTags = [];
+      for(var b = 0; b < $('.filter-brand .filterSelected').length; b++) {
+         selectedBrands.push($(brandSelector[b]).data('value'));
+      }
+      for(var b = 0; b < $('.filter-weight .filterSelected').length; b++) {
+         selectedWeights.push($(weightSelector[b]).data('value'));
+      }
+      for(var b = 0; b < $('.filter-type .filterSelected').length; b++) {
+         selectedTags.push($(tagSelector[b]).data('value'));
+      }
+      var finalFilterData = [];
+      var container = $('#product-wrt-cat');
+      $('#product-wrt-cat').empty();
+      var eachPage = 6;
+      var cartTemplate = $('#clone-cart').text();
+      var baseUrl = '<?=base_url()?>';
+
+      for(each in assistantData) {debugger
+         if(!currentCategoryName) 
+            currentCategoryName = each;
+         var pages = [];
+         var brands;
+         var weights;
+         var tags;
+         var numberOfPagesCurrent = 0;
+         // for(item in assistantData[each]) {
+            for(var m = 0; m < assistantData[each].length; m++) {
+               var brands = selectedBrands.length != 0 ? selectedBrands.includes(assistantData[each][m].BrandName) : true;
+               var weights = selectedWeights.length != 0 ? selectedWeights.includes(assistantData[each][m].SaleUnitQuantity) : true;
+               
+               var tags;
+               if(selectedTags.length) {
+                  var currentProductTagsArray = assistantData[each][m].tags.split(',');
+                  for(var t = 0; t < selectedTags.length; t++) {
+                     if( currentProductTagsArray.includes(selectedTags[t]) ) {
+                        tags = true;
+                     }
+                     else {
+                        tags = false;
+                     }
+                  }
+               }
+
+               if(brands && weights && tags) {
+                  numberOfPagesCurrent++;
+               }
+
+            }
+         // }
+
+         var totalProducts = numberOfPagesCurrent; // total products
+         var numberOfPages = Math.ceil(totalProducts/eachPage); // number of pages
+         numberOfPageList[each] = numberOfPages;
+         for (var i = 0; i < numberOfPageList[each]; i++) {
+            var catProductList = [];
+            for(var k = i * eachPage; k < eachPage + (eachPage * i); k++) {
+               if(!assistantData[each][k]) break;
+               var brandAvailable = selectedBrands.length != 0 ? selectedBrands.includes(assistantData[each][k].BrandName) : true;
+               var weightAvailable = selectedWeights.length != 0 ? selectedWeights.includes(assistantData[each][k].SaleUnitQuantity) : true;
+               
+               var tagsAvailable;
+               if(selectedTags.length) {
+                  var currentProductTagsArray = assistantData[each][k].tags.split(',');
+                  for(var t = 0; t < selectedTags.length; t++) {
+                     if( currentProductTagsArray.includes(selectedTags[t]) ) {
+                        tagsAvailable = true;
+                     }
+                     else {
+                        tagsAvailable = false;
+                     }
+                  }
+               }
+
+               if( brandAvailable && weightAvailable && tagsAvailable ) {
+                  var cartTemplateCopy = cartTemplate;
+                  cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantData[each][k].ProductImg);
+                  cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantData[each][k].ProductName);
+                  cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantData[each][k].UnitName);
+                  cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantData[each][k].SalePrice,0));
+                  cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantData[each][k].Jsn);
+                  catProductList.push(cartTemplateCopy);
+               }
+            }
+            if(catProductList.length > 0) { pages.push(catProductList); }
+         }
+         if(pages.length > 0) { finalFilterData[each] = pages; }
+      }
+      if(finalFilterData[currentCategoryName]) { 
+         $("#va-panel-heading-category").text(assistantData[currentCategoryName][0]["parentCategory"]);
+         $("#va-panel-heading-sub-category").text(assistantData[currentCategoryName][0]["CatName"]);
+         container.append(finalFilterData[currentCategoryName][0]); 
+      }
+      $('#pagination-btn').empty();
+      for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
+         $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
+      }
+      groceryAssistantData = finalFilterData;
+   }
+
    function toggleAndCheckActiveFilter(currentElement){
       currentElement = $(currentElement);
       if(currentElement.hasClass("filterSelected")){
@@ -442,14 +556,17 @@
 
       var tagArea = $("#tag-filter-area");
       for(var each in assistantJson["Brands"]){
-         brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJson["Brands"][each]}">${assistantJson["Brands"][each]}</button>`);
+         if(assistantJson["Brands"][each])
+            brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJson["Brands"][each]}">${assistantJson["Brands"][each]}</button>`);
       }
       for(var each in assistantJson["SaleUnitQty"]){
-         weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJson["SaleUnitQty"][each]}" class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
+         if(assistantJson["SaleUnitQty"][each])
+            weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJson["SaleUnitQty"][each]}" class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
       }
       var counter = 0;
       for(var each in assistantJson["Tags"]){
-         tagArea.append(`<div class="form-check">
+         if(assistantJson["Tags"][each])
+            tagArea.append(`<div class="form-check">
                           <input class="form-check-input" data-value="${assistantJson["Tags"][each]}" onclick="toggleAndCheckActiveFilter(this);" type="checkbox" name="tag${++counter}" id="tag${counter}" value="${assistantJson["Tags"][each]}">
                           <label class="form-check-label" for="tag${counter}">
                             ${assistantJson["Tags"][each]}
@@ -487,9 +604,6 @@
             
             pages.push(catProductList);
          }
-         
-         console.log(pages);
-
          finalData[each] = pages;
       }
       $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][0]["parentCategory"]);

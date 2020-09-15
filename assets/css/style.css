@@ -2631,7 +2631,7 @@ a#newAddressCancelBtn {
    border: 1px solid #cccccc;
 }
 .va-panel-content .product-card {
-   height: 305px !important;
+   height: 320px !important;
    width: 200px !important;
 }
 .va-panel-content .product-content-button button.nav-btn-primary {
@@ -2676,9 +2676,6 @@ a#newAddressCancelBtn {
    color: #000000;
    font-weight: 500;
    font-family: "Work Sans";
-}
-.va-panel-content .product-card {
-   height: 305px !important;
 }
 .va-panel-content .product-card-btn {
    background-color: #25bfa9;
@@ -2748,6 +2745,7 @@ a#newAddressCancelBtn {
 .modal-lg {
     max-width: 76% !important;
 }
+
 
 /*Grocery Panel*/
 
