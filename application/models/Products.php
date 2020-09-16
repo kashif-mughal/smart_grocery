@@ -308,9 +308,9 @@ class Products extends CI_Model {
         $productList = json_encode($json_product);
         file_put_contents($cache_file, $productList);
     }
-    public function search($q, $limit = 10){
+    public function search($q, $fromTable, $limit = 10){
         $currentDate = date_format(new DateTime(), 'Y-m-d');
-        $query = "SELECT gp.*, gc.CatName from grocery_products gp join grocery_category gc on gp.category = gc.CategoryId where gp.ProductId NOT IN(SELECT ProductId from grocery_assistant ga WHERE ga.CreatedOn = '$currentDate' AND ga.Status = 1) AND gp.ProductName like('%$q%') limit $limit";
+        $query = "SELECT gp.*, gc.CatName from grocery_products gp join grocery_category gc on gp.category = gc.CategoryId where gp.ProductId NOT IN(SELECT ProductId from $fromTable ga WHERE ga.CreatedOn = '$currentDate' AND ga.Status = 1) AND gp.ProductName like('%$q%') limit $limit";
         $query = $this->db->query($query);
         
         if ($query->num_rows() > 0) {

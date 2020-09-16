@@ -26,8 +26,9 @@ class Cvalue extends CI_Controller {
         $q = $this->input->get('search');
         if(empty($q))
             return null;
-        $products = $CI->Products->search($q);
-        if(count($products) == 0)
+        $products = $CI->Products->search($q, "grocery_value");
+
+        if(!$products || count($products) == 0)
             return null;
         $productsToSend = Array();
 
@@ -41,7 +42,6 @@ class Cvalue extends CI_Controller {
                     ];
             array_push($productsToSend, $productObject);
         }
-        
         echo json_encode($productsToSend);
         return;
     }
