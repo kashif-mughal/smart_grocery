@@ -33,6 +33,8 @@ class Lassistant {
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
         //echo '<pre>'; print_r($assistant_list);die;
+        if(is_null($assistant_list) || !is_array($assistant_list))
+            return null;
         for ($i=0; $i < count($assistant_list); $i++) { 
             $productObject = (object) [
                                  'id' => $assistant_list[$i]['ProductId'],
