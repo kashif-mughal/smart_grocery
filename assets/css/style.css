@@ -2601,6 +2601,7 @@ a#newAddressCancelBtn {
    font-family: "Work Sans" !important;
    border-radius: 0px !important;
    padding: 2px 6px !important;
+   margin-right: 0.3rem;
 }
 .filter-weight-button button {
    font-size: 15px !important;
@@ -2780,7 +2781,6 @@ a#newAddressCancelBtn {
    display: none  ;
 }
 
-#phoneSubmit {}
 
 
 /*Grocery Panel*/
@@ -2850,6 +2850,25 @@ a#newAddressCancelBtn {
    .sign-in-content .phone-Submit-Btn,
    .sign-in-content .phone-Submit-Btn #phoneSubmit {
       width: 100%;
+   }
+
+   .order-button a {
+      margin: 4px -16px !important;
+   }
+
+   .va-panel-header img {
+      width: 140px;
+      height: auto;
+   }
+
+   .va-panel-header div.d-flex {
+      width: 170px;
+   }
+
+   #virtualAssistant div.modal-dialog {
+      margin-top: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
    }
 }
 
@@ -3016,6 +3035,10 @@ a#newAddressCancelBtn {
       height: 58px;
       font-size: 16px !important;
       font-weight: 500;
+   }
+
+   .order-button a {
+      margin: 4px -15px !important;
    }
 
 }
