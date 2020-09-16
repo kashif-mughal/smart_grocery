@@ -45,7 +45,6 @@ class Luser {
             'title' => 'Sauda Express | Value cart',
             'value_list' => $value_list
         );
-        //echo '<pre>'; print_r($data);die;   
         return $CI->parser->parse('user/value_cart', $data, true);
     }
 

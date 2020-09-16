@@ -88,7 +88,9 @@
                                         <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 70px; max-height: 60px;" alt="">
                                         <div class="order-product-name order-item align-self-center">
                                             <p class="order-name"><?=$value[$i]['ProductName']?></p>
-                                            <p class="order-weight"><?=$value[$i]['ItemQuantity']?>&nbsp;<?=$value[$i]['UnitName']?></p>
+                                            <p class="order-weight"><?=empty($value[$i]['SaleUnitName']) ? $value[$i]['UnitName'] : 
+                                            ($value[$i]['SaleUnitQty'] . ' ' . $value[$i]['SaleUnitName'])
+                                            ?></p>
                                         </div>
                                         <div class="order-product-price order-item">
                                             <p class="order-price"><script type="text/javascript">

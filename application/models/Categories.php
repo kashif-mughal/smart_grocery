@@ -96,11 +96,11 @@ class Categories extends CI_Model {
         
         $whereString = is_null($productName) ? " " : " AND gp.ProductName Like('%$productName%') ";
         $query = "SELECT 
-                        gp.*, 
+                        gp.*, gu2.UnitName SaleUnitName, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
-                    LEFT JOIN grocery_unit gu ON
-                    gu.UnitId = gp.Unit
+                    LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
+                    left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND 
                     gp.Category IN(
                         $inCats
@@ -110,8 +110,8 @@ class Categories extends CI_Model {
         $countQuery = "SELECT 
                         count(1) total
                     FROM grocery_products gp
-                    LEFT JOIN grocery_unit gu ON
-                    gu.UnitId = gp.Unit
+                    LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
+                    left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND 
                     gp.Category IN(
                         $inCats

@@ -107,7 +107,8 @@
                                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                         <div class="product-info text-center">
                                             <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                            <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
+                                            <p class="card-text product-card-inner-weight">
+                                                <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
                                             <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p>
                                             <?php if($discountPercentage != 0) { ?> 
                                                 <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
@@ -205,7 +206,7 @@
                                 cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, "");
                             cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
                             cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
-                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, data[i].UnitName);
+                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
                             cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
                             pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
                             cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);

@@ -32,7 +32,7 @@
                         <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                         <div class="product-info text-center">
                            <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                           <p class="card-text product-card-inner-weight"><?php echo $value['UnitName']; ?></p>
+                           <p class="card-text product-card-inner-weight"><?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
                            <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
                            <?php if($discountPercentage > 0) { ?> 
                            <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
@@ -516,7 +516,9 @@
                   var cartTemplateCopy = cartTemplate;
                   cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantData[each][k].ProductImg);
                   cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantData[each][k].ProductName);
-                  cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantData[each][k].UnitName);
+                  cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, !assistantData[each][k].UnitName ? assistantData[each][k].UnitName : 
+                     (assistantData[each][k].SaleUnitQty + " " + assistantData[each][k].SaleUnitName)
+                     );
                   cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantData[each][k].SalePrice,0));
                   cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantData[each][k].Jsn);
                   catProductList.push(cartTemplateCopy);
@@ -631,7 +633,9 @@
                var cartTemplateCopy = cartTemplate;
                cartTemplateCopy = cartTemplateCopy.replace(/{Img}/g, baseUrl + assistantJson["Assistant"][each][k].ProductImg);
                cartTemplateCopy = cartTemplateCopy.replace(/{ProductName}/g, assistantJson["Assistant"][each][k].ProductName);
-               cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, assistantJson["Assistant"][each][k].UnitName);
+               cartTemplateCopy = cartTemplateCopy.replace(/{UnitName}/g, !assistantJson["Assistant"][each][k].SaleUnitName ? assistantJson["Assistant"][each][k].UnitName : 
+                  (assistantJson["Assistant"][each][k].SaleUnitQty + " " + assistantJson["Assistant"][each][k].SaleUnitName)
+                  );
                cartTemplateCopy = cartTemplateCopy.replace(/{SalePrice}/g, formatCurrency(assistantJson["Assistant"][each][k].SalePrice,0));
                cartTemplateCopy = cartTemplateCopy.replace(/{Jsn}/g, assistantJson["Assistant"][each][k].Jsn);
                catProductList.push(cartTemplateCopy);

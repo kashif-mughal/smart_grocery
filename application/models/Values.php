@@ -11,7 +11,7 @@ class Values extends CI_Model {
     private $tableName = 'grocery_value';
     
     public function search_last_value($key, $value) {
-        $this->db->select("ga.ValueId, gp.ProductId, gp.ProductName, gp.tags, gp.Price, gp.SalePrice, gp.ProductImg, gb.BrandName, concat(gp.SaleUnitQty, gps.UnitName) SaleUnitQuantity, gc.CatName, gc2.CatName parentCategory, CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName ");
+        $this->db->select("ga.ValueId, gps.UnitName SaleUnitName, gp.SaleUnitQty, gp.ProductId, gp.ProductName, gp.tags, gp.Price, gp.SalePrice, gp.ProductImg, gb.BrandName, concat(gp.SaleUnitQty, gps.UnitName) SaleUnitQuantity, gc.CatName, gc2.CatName parentCategory, CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName ");
         $this->db->from($this->tableName." ga");
         $this->db->join("grocery_products gp", "gp.ProductId = ga.ProductId");
         $this->db->join("grocery_category gc", "gp.Category = gc.CategoryId", "left");
