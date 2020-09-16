@@ -212,8 +212,15 @@
                               <div class="filter-header d-flex px-4 py-3 border-b-primary">
                                  <div class="filter-icon mr-2">
                                     <img src="<?=base_url("assets/img/GroceryAssistant/filter.png")?>">   
-                                 </div>                                    
+                                 </div>                           
                                  <span class="filter-heading">Use Filters to Find your Product</span>
+                                 <button onclick="clearAllFilters();" id="clearFilter" class="align-items-top justify-content-center ml-auto" style="display: none;">
+                                    <div class="clearFilterContainer mr-2" style="position: relative;margin-top: 3px;background: #fff;">
+                                       <i class="fas fa-filter" style="position: absolute;color: #808080;"></i>
+                                       <i class="fas fa-slash" style="position: absolute;left: -2px;top: 0px;"></i>
+                                    </div>
+                                    <span class="ml-2">Clear Filters</span>
+                                 </button>
                               </div>
 
                               <div class="filter-brand px-4 py-3 border-b-primary">
@@ -309,7 +316,7 @@
    var groceryAssistantData = [];
    var currentCategoryName;
    var assistantJsonArray;
-   $(document).ready(function(){
+   $(document).ready(function() {
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));
       });
@@ -539,11 +546,39 @@
       else
          currentElement.addClass("filterSelected");
 
-      if(anyFilterSelected())
+      if(anyFilterSelected()) {
          $("#showFilterResultBtn").show();
-      else
+         $('#clearFilter').css("display", "flex");
+         $("#clearFilter").show();
+      }
+      else {
          $("#showFilterResultBtn").hide();
+         $("#clearFilter").hide();
+      }
    }
+
+   function clearAllFilters() {debugger;
+      var brandFilter = $('.filter-sidebar .filter-brand .filter-brand-button button');
+      var weightFilter = $('.filter-sidebar .filter-weight .filter-weight-button button');
+      var tagsFilter = $('.filter-sidebar .filter-type .filter-type-button button');
+      if(brandFilter.hasClass("filterSelected")) {
+         brandFilter.removeClass("filterSelected");
+      }
+      if(weightFilter.hasClass("filterSelected")) {
+         weightFilter.removeClass("filterSelected");
+      }
+      if(tagsFilter.hasClass("filterSelected")) {
+         tagsFilter.removeClass("filterSelected");
+      }
+      $("#showFilterResultBtn").hide();
+      $('#product-wrt-cat').empty();
+      $("#brand-filter-area").empty();
+      $("#saleunit-filter").empty();
+      $("#tag-filter-area").empty();
+      groceryAssistantData = setupGroceryAssistant();
+      $("#clearFilter").hide();
+   }
+
    function anyFilterSelected(){
       return $(".filterSelected").length > 0;
    }
@@ -606,11 +641,13 @@
          }
          finalData[each] = pages;
       }
-      $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][0]["parentCategory"]);
-      $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][0]["CatName"]);
-      container.append(finalData[currentCategoryName][0]);
-      for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
-         $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
+      if(finalData[currentCategoryName]) { 
+         $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][0]["parentCategory"]);
+         $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][0]["CatName"]);
+         container.append(finalData[currentCategoryName][0]);
+         for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
+            $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
+         }
       }
       return finalData;
    }

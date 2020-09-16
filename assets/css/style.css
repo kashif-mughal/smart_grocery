@@ -2746,6 +2746,16 @@ a#newAddressCancelBtn {
     max-width: 76% !important;
 }
 
+#clearFilter {
+   text-decoration: none;
+   color: #000000;
+   border: 1px solid #000000;
+   padding: 3px;
+   border-radius: 4px;
+   font-size: 10px;
+   display: none  ;
+}
+
 
 /*Grocery Panel*/
 
