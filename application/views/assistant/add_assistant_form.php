@@ -2,6 +2,23 @@
 <style type="text/css">
     .customCart{
         text-align: center;
+        border-radius: 10px 10px 0px 0px !important;
+        border: 1px solid #cccccc !important;
+        padding: 12px;
+        position: relative;
+    }
+    .customCart i.fa-times {
+        float: right;
+        cursor: pointer;
+        background-color: red;
+        color: #fff;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        position: absolute;
+        right: 7px;
+        top: 7px;
+        padding-top: 4px;
     }
     .customCart img{
         width: 120px;

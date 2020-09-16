@@ -6,10 +6,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Order</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">User</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Value Cart</a></li>
                 </ol>
-                <h3 class="mb-0">Order Traking</h3>
+                <h3 class="mb-0">Value Cart</h3>
             </nav>
             <h3 class="mb-0"><?php echo $SelectOrder['SubOrder']; ?></h3>
         </div>
@@ -79,20 +79,20 @@
                             <div class="order-history-header mt-3 p-0">
                                 <div class="card order-history-card each-prod">
                                     
-                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-items-center">
+                                    <div class="featured-products mt-0 border-none d-flex flex-column flex-md-row text-center text-md-left justify-content-between align-items-center">
                                         <?php 
                                          if($value[$i]['IsFeatured'] == 1) {
                                           $discountPercentage = (($value[$i]['Price'] - $value[$i]['SalePrice'])/$value[$i]['Price']) * 100;
                                         }?> 
 
-                                        <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 70px; max-height: 60px;" alt="">
-                                        <div class="order-product-name order-item align-self-center">
+                                        <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 60px; max-height: 60px;" alt="">
+                                        <div class="order-product-name order-item align-self-center" style="width: 230px;">
                                             <p class="order-name"><?=$value[$i]['ProductName']?></p>
                                             <p class="order-weight"><?=empty($value[$i]['SaleUnitName']) ? $value[$i]['UnitName'] : 
                                             ($value[$i]['SaleUnitQty'] . ' ' . $value[$i]['SaleUnitName'])
                                             ?></p>
                                         </div>
-                                        <div class="order-product-price order-item">
+                                        <div class="order-product-price order-item" style="padding-top: 9px;padding-bottom: 9px;">
                                             <p class="order-price"><script type="text/javascript">
                                                 document.write(formatCurrency('<?=$value[$i]["SalePrice"]?>'));
                                             </script></p>
@@ -102,8 +102,8 @@
                                             </script></del></p>
                                             <?php } ?>
                                         </div>
-                                        <div class="quantity-area order-item">
-                                            <div class="d-flex">
+                                        <div class="quantity-area order-item" style="width: 125px;padding-top: 7px;padding-bottom: 7px;">
+                                            <div class="d-flex text-md-left text-center">
                                                 <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                 <input type="number" value="<?=$value[$i]['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
                                                 <span class="d-block quantity-button">

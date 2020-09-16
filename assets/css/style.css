@@ -1214,7 +1214,11 @@ button.category-button:active {
 .main-content .featured-products-content .card .remove-cart{
    height: 30px;
 }
-
+#virtualAssistant .modal-dialog {
+   max-width: 1260px !important;
+   margin-left: auto;
+   margin-right: auto;
+}
 .va-panel .filter-sidebar {
    position: relative;
 }
@@ -1746,6 +1750,15 @@ button.category-button:active {
 .order-history-card img {
    max-width: 100px;
 }
+.order-history-card .order-name {
+   height: 2.3em !important;
+   line-height: 1.2em !important;
+   width: 100% !important;
+   overflow: hidden !important;
+   text-overflow: ellipsis !important;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+}
 .order-button a {
    font-size: 14px;
    font-weight: 600;
@@ -1754,7 +1767,7 @@ button.category-button:active {
    text-decoration: none;
    color: #ffffff;
    margin: 4px 0px;
-   width: 169px;
+   width: 150px;
 }
 .order-button .button-primary {
    background-color: #25bfa9;
@@ -2803,6 +2816,30 @@ a#newAddressCancelBtn {
    }
 }
 
+@media (max-width: 767px) {
+   .order-item {
+      width: 90% !important;
+      border-left: none;
+      border-bottom: 1px solid #ccc;
+      padding-top: 18px;
+      padding-bottom: 18px;
+   }
+   .order-history-card img {
+      width: 100px !important;
+      max-height: 100px !important;
+   }
+   .order-item:last-child {
+      border-bottom: none;
+   }
+   .quantity-area {
+      padding-left: 38% !important;
+      padding-right: 32% !important;
+   }
+   .order-button {
+      padding-left: 30%;
+      padding-right: 30%;
+   }
+}
 
 @media (max-width: 768px) {
    .hidden-sm-down{
@@ -2905,6 +2942,8 @@ a#newAddressCancelBtn {
       top: 50px;
    }
 
+   
+
 }
 
 @media (max-width: 991px) {
@@ -2933,6 +2972,15 @@ a#newAddressCancelBtn {
    .value-cart .card-title {
       margin-bottom: 22px;
    }
+
+   .quantity-area {
+      width: 120px;
+      padding-left: 9px;
+   }
+   .quantity-area input {
+      max-width: 35px !important;
+   }
+
 }
 
 @media (max-width: 636px) {
@@ -3030,6 +3078,21 @@ a#newAddressCancelBtn {
       grid-template-columns: 2fr 7fr;
    } */
    /* widget */
+
+   .order-history-card img {
+      width: 50px;
+      margin-right: 10px;
+   }
+   .order-product-price .order-price {
+      font-size: 16px;
+   }
+   .order-product-price {
+      padding-top: 6px;
+      padding-bottom: 6px;
+   }
+   .quantity-area {
+      padding-left: 4px;
+   }
 
 }
 
