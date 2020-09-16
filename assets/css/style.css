@@ -1215,9 +1215,13 @@ button.category-button:active {
    height: 30px;
 }
 #virtualAssistant .modal-dialog {
-   max-width: 1260px !important;
+   max-width: 1260px !important; 
    margin-left: auto;
    margin-right: auto;
+}
+.order-history-card .order-header .order-history-card img.product-image {
+   width: 70px; 
+   max-height: 60px;
 }
 .va-panel .filter-sidebar {
    position: relative;
@@ -1748,7 +1752,7 @@ button.category-button:active {
 }
 
 .order-history-card img {
-   max-width: 100px;
+   max-width: 70px;
 }
 .order-history-card .order-name {
    height: 2.3em !important;
@@ -2102,6 +2106,9 @@ button.category-button:active {
 .order-button .button-secondary:hover {
    background-color: #464646 !important;
 }
+.order-history-card {
+
+}
 .order-history-card img {
    max-width: 100px;
 }
@@ -2141,6 +2148,9 @@ button.category-button:active {
    margin-bottom: 0px;
    font-weight: 500;
    font-family: "Work Sans";
+}
+.order-history-header .featured-products .order-product-name {
+   width: 32%;
 }
 .order-history-header h5 {
    font-size: 20px;
@@ -2543,6 +2553,7 @@ a#newAddressCancelBtn {
    padding-top: 3px;
    padding-bottom: 3px;
    height: 22%;
+   margin-left: 14px;
 }
 .va-panel-content .filter-heading {
    font-size: 16px;
@@ -2769,6 +2780,8 @@ a#newAddressCancelBtn {
    display: none  ;
 }
 
+#phoneSubmit {}
+
 
 /*Grocery Panel*/
 
@@ -2814,6 +2827,30 @@ a#newAddressCancelBtn {
       justify-content: center !important;
       margin-bottom: 20px !important;
    }
+
+   #clearFilter .clearFilterText {
+      font-size: 7px;
+   }
+
+   .sign-in-content #phoneSubmit {
+      font-size: 14px;
+      padding-top: 14px !important;
+      padding-bottom: 14px !important;
+   }
+
+   .sign-in-content .phoneInputFooterText {
+      font-size: 14px;
+   }
+
+   .sign-in-content #inputOtp input {
+      font-size: 28px;
+      width: 44px;
+   }
+
+   .sign-in-content .phone-Submit-Btn,
+   .sign-in-content .phone-Submit-Btn #phoneSubmit {
+      width: 100%;
+   }
 }
 
 @media (max-width: 767px) {
@@ -2824,20 +2861,44 @@ a#newAddressCancelBtn {
       padding-top: 18px;
       padding-bottom: 18px;
    }
-   .order-history-card img {
-      width: 100px !important;
-      max-height: 100px !important;
+   .order-history-card .order-history-button img {
+      width: 50px !important;
+      max-height: 50px !important;
    }
    .order-item:last-child {
       border-bottom: none;
    }
    .quantity-area {
-      padding-left: 38% !important;
-      padding-right: 32% !important;
+      padding-left: 10% !important;
+      padding-right: 4% !important;
+   }
+   .order-history-card .quantity-area {
+      padding-left: 34% !important;
+      padding-right: 13% !important;
    }
    .order-button {
       padding-left: 30%;
       padding-right: 30%;
+   }
+
+   .order-id,
+   .order-date,
+   .order-time {
+      border-right: none !important;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 16px;
+      padding-top: 16px;
+      width: 100%;
+   }
+   
+   .order-header button.order-history-button {
+      width: 100%;
+   }
+
+   .order-history-card .featured-products img.product-image {
+      width: 150px;
+      /* height: 100px; */
+      height: auto;
    }
 }
 
@@ -2942,7 +3003,20 @@ a#newAddressCancelBtn {
       top: 50px;
    }
 
-   
+   .va-panel-content .filter-sidebar .ribbon {
+      bottom: 246px;
+      right: 8px;
+   }
+
+   .sign-in-content .input-group-prepend .input-group-text {
+      font-size: 16px !important;
+      font-weight: 500;
+   }
+   .sign-in-content input#inputPhone {
+      height: 58px;
+      font-size: 16px !important;
+      font-weight: 500;
+   }
 
 }
 
@@ -2979,6 +3053,24 @@ a#newAddressCancelBtn {
    }
    .quantity-area input {
       max-width: 35px !important;
+   }
+
+   /* .order-id,
+   .order-date,
+   .order-time {
+      border-right: none !important;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 16px;
+      padding-top: 16px;
+      width: 100%;
+   } */
+
+   .order-history-card .order-history-button img {
+      width: 30px !important;
+      max-height: 30px !important;
+   }
+   .orderTrackingLink .orderTrackingIcon {
+      font-size: 14px;
    }
 
 }
@@ -3079,7 +3171,7 @@ a#newAddressCancelBtn {
    } */
    /* widget */
 
-   .order-history-card img {
+   .order-history-card .order-history-button img {
       width: 50px;
       margin-right: 10px;
    }

@@ -219,7 +219,7 @@
                                        <i class="fas fa-filter" style="position: absolute;color: #808080;"></i>
                                        <i class="fas fa-slash" style="position: absolute;left: -2px;top: 0px;"></i>
                                     </div>
-                                    <span class="ml-2">Clear Filters</span>
+                                    <span class="ml-2 clearFilterText">Clear Filters</span>
                                  </button>
                               </div>
 
@@ -263,11 +263,11 @@
                </div>  
 
                <div class="va-panel-footer">
-                  <div class="d-flex justify-content-around align-items-center">
-                     <button class="btn btn-link va-panel-footer-btn-red text-center" data-dismiss="modal">Leave Grocery Assistant</button>
-                     <button class="btn btn-link va-panel-footer-btn-black" id="nextCategoryBtn">Previous Category</button>
-                     <button class="btn btn-link va-panel-footer-btn-black" id="prevCategoryBtn">Next Category</button>
-                     <button class="btn btn-link va-panel-footer-btn-green" id="popup-checkout">Checkout</button>
+                  <div class="d-flex flex-column flex-md-row justify-content-around align-items-center">
+                     <button class="btn btn-link va-panel-footer-btn-red mb-2 mb-md-0 text-center" data-dismiss="modal">Leave Grocery Assistant</button>
+                     <button class="btn btn-link va-panel-footer-btn-black mb-2 mb-md-0" id="nextCategoryBtn">Previous Category</button>
+                     <button class="btn btn-link va-panel-footer-btn-black mb-2 mb-md-0" id="prevCategoryBtn">Next Category</button>
+                     <button class="btn btn-link va-panel-footer-btn-green mb-2 mb-md-0" id="popup-checkout">Checkout</button>
                   </div>
                </div>
 
@@ -280,8 +280,8 @@
 <div style="display: none;">
     <script type="text" id="clone-cart">
 
-      <div class="col-sm-4">
-           <div class="mb-3">
+      <div class="col-sm-6 col-md-4">
+           <div class="mb-3 mx-auto">
             <div class="card product-card each-prod">
                <img class="card-img-top" src="{Img}" alt="Card image cap">
                <div class="card-body p-0 text-center">

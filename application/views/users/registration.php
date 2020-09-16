@@ -31,14 +31,14 @@
 									<span class="input-group-text font-size-26 bg-white border-l-none" id="startingCode">3</span>
 								</div>
 								<input type="number" class="form-control mr-0 border-l-none" id="inputPhone" autofocus>
-								<div class="input-group-append m-0">
+								<div class="input-group-append m-0 phone-Submit-Btn">
 									<a href="javascript:void(0)" class="btn btn-dark px-4 py-3" type="submit" id="phoneSubmit">
 										Verify Number
 									</a>
 								</div>
 							</div>
-							<span class="d-block">* You will receive a sms shortly</span>
-							<span class="d-block">Existing user will log in right after verifying the confirmation code</span>
+							<span class="d-block phoneInputFooterText">* You will receive a sms shortly</span>
+							<span class="d-block phoneInputFooterText">Existing user will log in right after verifying the confirmation code</span>
 						</div>
 					</div>
 				</div>
@@ -264,14 +264,14 @@
 			var phoneRegEx = /^[0-9]{9}$/;
 			if(phoneNumber.match(phoneRegEx)) {
 				// if phone is validated
-				$('#inputPhone').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
+				$('#inputPhone').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important; border-right: 1.3px solid green !important;");
 				$('#countryCode').attr("style", "border: 1.3px solid green !important; border-right: none !important;");
 				$('#dash').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
 				$('#startingCode').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
 			}
 			else {
 				// if phone is not validated
-				$('#inputPhone').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
+				$('#inputPhone').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important; border-right: 1.3px solid red !important;");
 				$('#countryCode').attr("style", "border: 1.3px solid red !important; border-right: none !important;");
 				$('#dash').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
 				$('#startingCode').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
@@ -300,7 +300,12 @@
 							//responseMessage
 							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
 							$('.errorNotify').show();
+							var currentScreenWidth = $(window).width();
+							if(currentScreenWidth <= 576) {
+								$('.phoneInputFooterText').remove();
+							}
 							setTimeout(function() {
+								
 								$('.errorNotify').hide();
 								$('#phoneForm').hide();
 								$('#otpForm').show();
@@ -569,7 +574,7 @@
 			// Check Character
 			if(allowKeys.indexOf(event.key) == -1) return false;
 			if(event.key.length <= 1) 
-			{debugger
+			{
 				$("#inputOtp #" + event.target.id).val(event.key);
 				var nextElement = $("#inputOtp #" + event.target.id).next();
 				nextElement.focus();
