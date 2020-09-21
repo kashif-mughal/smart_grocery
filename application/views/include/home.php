@@ -320,7 +320,7 @@
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));
       });
-      
+
       var groceryAssistantNumber = 0;
       var categoryByName = [];
       var assistantJson = JSON.parse('<?=$Assistant?>');
@@ -691,13 +691,13 @@
       top: 48px;
    }
    .product-card-inner-name {
-      white-space: nowrap;
+      /* white-space: nowrap; */
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
    }
    .product-card-title {
-      white-space: nowrap;
+      /* white-space: nowrap; */
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;

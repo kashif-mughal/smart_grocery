@@ -944,6 +944,7 @@ button.category-button:active {
    border-radius: 10px 10px 0 0;
    padding: 8px 20px;
    border: 1px solid #cccccc;
+   min-height: 438px;
 }
 .slick-dots {
    bottom: -26px !important;
@@ -1650,7 +1651,10 @@ button.category-button:active {
 .categories .category-grid .sub-category {
    border-right: 1px solid #ececec;
    margin-right: 10px;
-   margin-bottom: 20px !important;
+   /* margin-bottom: 20px !important; */
+}
+.categories .category-grid .sub-category .sub-category-content {
+   padding-bottom: 20px;
 }
 .categories .category-grid .sub-category:last-child {
    border-right: none;
