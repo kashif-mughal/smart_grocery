@@ -508,6 +508,13 @@ function removeItemFromShoppingCart(currentElem){
       if(cartObj && cartObj.length > 0)
          showEmptyResponse(cartObj)
    }
+   else{
+    var totalP = 0;
+    for (var i = 0; i < cartExceptCurrentProduct.length; i++) {
+      totalP += parseInt(cartExceptCurrentProduct[i].price) * parseInt(cartExceptCurrentProduct[i].quantity);
+    }
+    $('#Grand-Total').html(totalP);
+   }
    loadCartData();
 }
 function loadShoppingCart(){
@@ -541,7 +548,7 @@ function loadShoppingCart(){
       </tr>`;
       var cartTotalRow = `<tr>
       <td colspan="7" class="text-right">Total</td>
-      <td class="text-right">{grandTotal}</td>
+      <td class="text-right" id="Grand-Total">{grandTotal}</td>
       <td></td>
       </tr>`;
       var sum = 0;

@@ -9,7 +9,7 @@
             </ol>
          </nav>
          <!-- <h3 class="mb-0"><?php //echo $SelectOrder['SubOrder']; ?></h3> -->
-         <h3 class="mb-0">Order Traking</h3>
+         <h3 class="mb-0">Order Tracking</h3>
       </div>
    </div>
 </div>
@@ -64,9 +64,9 @@
                      </div>
                      <div id="orderNumberSubtitle">
                         <span>Order Placed on </span>
-                        <strong><script>document.write((new Date('<?=$OrderData["OrderDetail"][0]["DeliveryDate"]?>')).toDateString());</script></strong>
+                        <strong><script>document.write((new Date('<?=$OrderData["OrderDetail"][0]["CreatedOn"]?>')).toDateString());</script></strong>
                         <span> at </span>
-                        <strong><?=date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryUpto"]))?></strong>
+                        <strong><?=date('h:i a', strtotime($OrderData["OrderDetail"][0]["CreatedOn"]))?></strong>
                      </div>
                   </div>
                   <!-- Order Details Form -->

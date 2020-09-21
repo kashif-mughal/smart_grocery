@@ -116,6 +116,7 @@
 
                                                     </div>
                                                     <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
+                                                    <input type="button" id="cancel-address" class="btn btn-link px-5 py-2 button-primary text-white" value="Cancel">
                                                 </form>
                                                 <form id="addressForm" style="display: <?=$userAddress ? 'block' : 'none';?>"  action="<?=base_url('user/submit_address')?>">
                                                     <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
@@ -612,11 +613,17 @@
 
     $('#addNewAddress').click(function (e) {
         e.preventDefault();
-        $('#newAddressContent').hide();
-        $('#newAddressEdit').show();
-        $('#newAddressEdit').focus();
-        $('#newAddressAddBtn').show();
-        $('#newAddressCancelBtn').show();
+        //$('#newAddressForm').show();
+        $('#newAddressForm')[0].reset();
+        $('#newAddressForm').show();
+        $('#addressForm').hide();
+
+
+        // $('#newAddressContent').hide();
+        // $('#newAddressEdit').show();
+        // $('#newAddressEdit').focus();
+        // $('#newAddressAddBtn').show();
+        // $('#newAddressCancelBtn').show();
     });
 
     $('#newAddressAddBtn').click(function () {
@@ -658,6 +665,11 @@
         if($('#newAddressForm').validate()){
             submitFirstAddress($(this));
         }
+    });
+
+    $('#cancel-address').click(function(){
+        $('#newAddressForm').hide();
+        $('#addressForm').show();
     });
 
     function submitFirstAddress(form){

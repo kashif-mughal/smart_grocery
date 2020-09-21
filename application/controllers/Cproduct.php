@@ -97,7 +97,8 @@ class Cproduct extends CI_Controller {
             'SaleUnitQty' => $this->input->post('SaleUnitQty'),
             'SaleUnit' => $this->input->post('SaleUnit'),
             'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
-            'tags' => $this->input->post('allTags')
+            'tags' => $this->input->post('allTags'),
+            'Brand' => $this->input->post('BrandId')
         );
         $result = $this->Products->product_entry($data);
         if ($result == TRUE) {

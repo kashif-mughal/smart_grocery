@@ -149,7 +149,14 @@
                                 </select>
                             </div>
                         </div>
-
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                $('#isFeatured').val(<?=$is_featured?>);
+                                $('#isHot').val(<?=$is_hot?>);
+                                $('#isFeatured').trigger('change');
+                                $('#isHot').trigger('change');
+                            });
+                        </script>
 
                         <div class="form-group row">
                             <label for="CategoryId" class="col-sm-3 col-form-label">Category <i class="text-danger">*</i></label>
