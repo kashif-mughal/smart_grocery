@@ -431,7 +431,7 @@
       });
    });
 
-   function filterAssistantProduct() {
+   function filterAssistantProduct() {debugger;
       var assistantJson2 = JSON.parse('<?=$Assistant?>');
       var assistantData = assistantJson2["Assistant"];
       var brandSelector = $('.filter-brand .filterSelected');
@@ -466,23 +466,23 @@
          var numberOfPagesCurrent = 0;
          // for(item in assistantData[each]) {
             for(var m = 0; m < assistantData[each].length; m++) {
-               var brands = selectedBrands.length != 0 ? selectedBrands.includes(assistantData[each][m].BrandName) : true;
-               var weights = selectedWeights.length != 0 ? selectedWeights.includes(assistantData[each][m].SaleUnitQuantity) : true;
+               var brandsInternal = selectedBrands.length != 0 ? selectedBrands.includes(assistantData[each][m].BrandName) : true;
+               var weightsInternal = selectedWeights.length != 0 ? selectedWeights.includes(assistantData[each][m].SaleUnitQuantity) : true;
                
-               var tags;
+               var tagsInternal = true;
                if(selectedTags.length) {
                   var currentProductTagsArray = assistantData[each][m].tags.split(',');
                   for(var t = 0; t < selectedTags.length; t++) {
                      if( currentProductTagsArray.includes(selectedTags[t]) ) {
-                        tags = true;
+                        tagsInternal = true;
                      }
                      else {
-                        tags = false;
+                        tagsInternal = false;
                      }
                   }
                }
 
-               if(brands && weights && tags) {
+               if(brandsInternal && weightsInternal && tagsInternal) {
                   numberOfPagesCurrent++;
                }
 
@@ -499,7 +499,7 @@
                var brandAvailable = selectedBrands.length != 0 ? selectedBrands.includes(assistantData[each][k].BrandName) : true;
                var weightAvailable = selectedWeights.length != 0 ? selectedWeights.includes(assistantData[each][k].SaleUnitQuantity) : true;
                
-               var tagsAvailable;
+               var tagsAvailable = true;
                if(selectedTags.length) {
                   var currentProductTagsArray = assistantData[each][k].tags.split(',');
                   for(var t = 0; t < selectedTags.length; t++) {
@@ -537,6 +537,7 @@
       for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
          $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
       }
+      $('#showFilterResultBtn').hide();
       groceryAssistantData = finalFilterData;
    }
 
@@ -653,10 +654,12 @@
          $("#va-panel-heading-category").text(assistantJson["Assistant"][currentCategoryName][0]["parentCategory"]);
          $("#va-panel-heading-sub-category").text(assistantJson["Assistant"][currentCategoryName][0]["CatName"]);
          container.append(finalData[currentCategoryName][0]);
+         $('#pagination-btn').empty();
          for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
             $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
          }
       }
+      $('#showFilterResultBtn').hide();
       return finalData;
    }
 
