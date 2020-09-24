@@ -557,9 +557,13 @@
          $("#showFilterResultBtn").hide();
          $("#clearFilter").hide();
       }
+      var selectedItemsLength = $('.filterSelected').length;
+      if(selectedItemsLength == 0) {
+         clearAllFilters();
+      }
    }
 
-   function clearAllFilters() {debugger;
+   function clearAllFilters() {
       var brandFilter = $('.filter-sidebar .filter-brand .filter-brand-button button');
       var weightFilter = $('.filter-sidebar .filter-weight .filter-weight-button button');
       var tagsFilter = $('.filter-sidebar .filter-type .filter-type-button button');
