@@ -1,3 +1,51 @@
+<style type="text/css">
+
+    #TagPool a.tag {
+        background: #eee;
+        border-radius: 3px 0 0 3px;
+        color: #999;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 20px 0 23px;
+        position: relative;
+        margin: 0 10px 10px 0;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+    }
+
+    a.tag::before {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        content: '';
+        height: 6px;
+        left: 10px;
+        position: absolute;
+        width: 6px;
+        top: 10px;
+    }
+
+    a.tag::after {
+        background: #fff;
+        border-bottom: 13px solid transparent;
+        border-left: 10px solid #eee;
+        border-top: 13px solid transparent;
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    #TagPool a.tag:hover {
+        background-color: crimson;
+        color: white;
+    }
+
+    #TagPool a.tag:hover::after {
+        border-left-color: crimson; 
+    }
+</style>
 <!--Edit customer start -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -61,16 +109,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="unit" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
-                            <div class="col-sm-6">
-                                <input class="form-control" name ="unit" id="unit" type="text" placeholder="Unit"  required="" value="{unit}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="OriginalPrice" class="col-sm-3 col-form-label">Original Price </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" value="{OriginalPrice}" type="text" placeholder="Original Price">
+                                <input class="form-control" name ="OriginalPrice" id="OriginalPrice" value="{OriginalPrice}" type="text" placeholder="Original Price" required>
                             </div>
                         </div>
                         
@@ -108,12 +149,19 @@
                                 </select>
                             </div>
                         </div>
-
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                $('#isFeatured').val(<?=$is_featured?>);
+                                $('#isHot').val(<?=$is_hot?>);
+                                $('#isFeatured').trigger('change');
+                                $('#isHot').trigger('change');
+                            });
+                        </script>
 
                         <div class="form-group row">
                             <label for="CategoryId" class="col-sm-3 col-form-label">Category <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name ="CategoryId" id="CategoryId">
+                                <select class="form-control" name ="CategoryId" id="CategoryId" required>
                                     <option value="0">None</option>
                                     {categories}
                                         <option value="{CategoryId}">{CatName}</option>
@@ -141,9 +189,9 @@
                         </script>
 
                         <div class="form-group row">
-                            <label for="UnitId" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
+                            <label for="Unit" class="col-sm-3 col-form-label">Unit <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name ="UnitId" id="UnitId">
+                                <select class="form-control" name ="Unit" id="Unit" required>
                                     <option value="0">None</option>
                                     {units}
                                         <option value="{UnitId}">{UnitName}</option>
@@ -151,14 +199,35 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="SaleUnitQty" class="col-sm-3 col-form-label">Sale Unit Quantity </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="SaleUnitQty" id="SaleUnitQty" type="number" value="{sale_unit_qty}" required placeholder="SaleUnitQty">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="SaleUnit" class="col-sm-3 col-form-label">Sale Unit <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name ="SaleUnit" id="SaleUnit" required>
+                                    <option value="0">None</option>
+                                    {units}
+                                        <option value="{UnitId}">{UnitName}</option>
+                                    {/units}
+                                </select>
+                            </div>
+                        </div>
+
                         <script type="text/javascript">
-                            $('#UnitId').val(<?=$unit?>);
+                            $('#Unit').val(<?=$unit?>);
+                            $('#SaleUnit').val(<?=$sale_unit?>);
                         </script>
 
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">Status <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <select class="form-control" name="status" id="status">
+                                <select class="form-control" name="status" id="status" required>
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
@@ -178,6 +247,27 @@
                                 <img style="background: green; max-width: 100px;" src="<?=base_url()?>{ProductImg}">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="Tags" class="col-sm-3 col-form-label">Tags </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input class="form-control" name ="Tags" id="Tags" type="text" placeholder="Tags" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" id="addTag" type="button">Add</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6" id="TagPool">
+                                
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="allTags" id="allTags" value="{tags}" />
 
                         <input type="hidden" value="{product_id}" name="product_id">
 
@@ -201,7 +291,52 @@
 $(document).ready(function() {
     $('#is_featured').val(<?=$is_featured; ?>);
     $('#is_hot').val(<?=$is_hot; ?>);
+
+    var tagsList = $('#allTags').val();
+    if(tagsList) {
+        var tagsArrayList = tagsList.split(",");
+        for(var i = 0; i < tagsArrayList.length; i++) {
+            $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}" title="Remove Tag">${tagsArrayList[i]}</a>`);
+        }
+    }
+
+    var tags = '';
+    $('#addTag').click(function(e) {
+        if($('#Tags').val()) {
+            var singleTag = $('#Tags').val();
+            if(!isDuplicate(singleTag)) {
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}" title="Remove Tag">${singleTag}</a>`);
+                $('#Tags').val('');
+            }
+        }
+    });
+
+    $(document).on("click", "a.tag", function (e) { $(this).remove(); });
+
+    $('#product_update').submit(function() {
+        var tagsData = $('#TagPool a');
+        var tagsDatalength = $('#TagPool a').length;
+        var arrayTags = [];
+        var arrayList = "";
+        for(var i = 0; i < tagsDatalength; i++) {
+            arrayTags.push($('#TagPool a')[i].text);
+        }
+        arrayList = arrayTags.join(',');
+        $('#allTags').val(arrayList);
+    });
+
 });
+
+function isDuplicate(tag) {
+    var tagsData = $('#TagPool a');
+    var tagsDatalength = $('#TagPool a').length;
+    for(var i = 0; i < tagsDatalength; i++) {
+        if($('#TagPool a')[i].text == tag) {
+            return true;
+        }
+    }
+    return false;
+}
 </script>
 
 

@@ -1,8 +1,13 @@
 <div class="container">
-	<div class="row mx-auto">
+	<style type="text/css">
+		.content-box{
+			margin-top: 0px !important;
+		}
+	</style>
+	<!-- <div class="row mx-auto">
 		<img src="img/logo.png" alt="" class="mx-auto mt-3" style="background-color: #17a18d; border-radius: 47%;">
-	</div>
-	<div class="row">
+	</div> -->
+	<div class="row mt-3">
 		<div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 			<!-- Phone Verification -->
@@ -26,14 +31,14 @@
 									<span class="input-group-text font-size-26 bg-white border-l-none" id="startingCode">3</span>
 								</div>
 								<input type="number" class="form-control mr-0 border-l-none" id="inputPhone" autofocus>
-								<div class="input-group-append m-0">
+								<div class="input-group-append m-0 phone-Submit-Btn">
 									<a href="javascript:void(0)" class="btn btn-dark px-4 py-3" type="submit" id="phoneSubmit">
 										Verify Number
 									</a>
 								</div>
 							</div>
-							<span class="d-block">* You will receive a sms shortly</span>
-							<span class="d-block">Existing user will log in right after verifying the confirmation code</span>
+							<span class="d-block phoneInputFooterText">* You will receive a sms shortly</span>
+							<span class="d-block phoneInputFooterText">Existing user will log in right after verifying the confirmation code</span>
 						</div>
 					</div>
 				</div>
@@ -49,12 +54,12 @@
 					<div class="sign-in-content ml-4">
 						<h4 class="mb-5">Phone Number Verification</h4>
 						<span class="d-block mb-3 currentPhoneMessage">Enter 4 digit code sent to your phone </span>
-						<div class="form-inline" id="inputOtp">
-							<form class="digit-group">
-								<input type="number" name="digit-1" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-1" autocomplete="off" autofocus>
-								<input type="number" name="digit-2" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-2" autocomplete="off">
-								<input type="number" name="digit-3" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-3" autocomplete="off">
-								<input type="number" name="digit-4" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="digit-4" autocomplete="off" last="true">
+						<div class="form-inline">
+							<form class="digit-group" id="inputOtp">
+								<input type="number" name="digit-1" id="digit-1" autocomplete="off" autofocus>
+								<input type="number" name="digit-2" id="digit-2" autocomplete="off">
+								<input type="number" name="digit-3" id="digit-3" autocomplete="off">
+								<input type="number" name="digit-4" id="digit-4" autocomplete="off" last="true">
 							</form>
 						</div>
 						<a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
@@ -193,11 +198,11 @@
 		<div class="col-xl-4 col-lg-4 col-md-12">
             <div class="row">
                <div class="col-lg-12 col-md-6 grocery-features-columns">
-                  <div class="grocery-features">
+                  <div class="grocery-features shop-assistant-feature mt-lg-0">
                      <div class="card">
                         <div class="card-body grocery-assistant-card">
                            <div class="container-fluid px-0">
-                              <h6 class="card-title mb-0">Our Shop Assistant will systematically walk you through all sections of the store</h6>
+                              <h6 class="card-title mb-0">Walk through all sections of the store with our assistant</h6>
                               <div class="row">
                                  <div class="col-md-7 pr-0">
                                     <h4 class="card-heading pt-3 mb-2">SHOP ASSISTANT</h4>
@@ -259,14 +264,14 @@
 			var phoneRegEx = /^[0-9]{9}$/;
 			if(phoneNumber.match(phoneRegEx)) {
 				// if phone is validated
-				$('#inputPhone').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
+				$('#inputPhone').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important; border-right: 1.3px solid green !important;");
 				$('#countryCode').attr("style", "border: 1.3px solid green !important; border-right: none !important;");
 				$('#dash').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
 				$('#startingCode').attr("style", "border-top: 1.3px solid green !important; border-bottom: 1.3px solid green !important;");
 			}
 			else {
 				// if phone is not validated
-				$('#inputPhone').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
+				$('#inputPhone').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important; border-right: 1.3px solid red !important;");
 				$('#countryCode').attr("style", "border: 1.3px solid red !important; border-right: none !important;");
 				$('#dash').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
 				$('#startingCode').attr("style", "border-top: 1.3px solid red !important; border-bottom: 1.3px solid red !important;");
@@ -274,7 +279,7 @@
 			console.log(e.keyCode);
 			if(e.keyCode == 13)
 				$('#phoneSubmit').trigger("click");
-		});
+			});
 
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
@@ -295,11 +300,16 @@
 							//responseMessage
 							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
 							$('.errorNotify').show();
+							var currentScreenWidth = $(window).width();
+							if(currentScreenWidth <= 576) {
+								$('.phoneInputFooterText').remove();
+							}
 							setTimeout(function() {
+								
 								$('.errorNotify').hide();
 								$('#phoneForm').hide();
 								$('#otpForm').show();
-								$("digit-1").select().focus();
+								$("#digit-1").focus();
 							}, 2000);
 						}
 						else {
@@ -518,7 +528,8 @@
 						}, 2000);
 					}
 				});
-			}
+			}		
+
 		});
 
 		// Logout
@@ -557,57 +568,28 @@
 			var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 			return (reg.test(email)) ? true : false;
 		}
+		var allowKeys = ["0","1","2","3","4","5","6","7","8","9"];
 
-		// OTP inputs ============== 
-		$(function() {
-			'use strict';
-
-			var OTPinput = $('#inputOtp');
-			function goToNextInput(e) {
-				var key = e.which,
-				t = $(e.target),
-				sib = t.next('input');
-				if(t.attr('last') == "true"){
+		$('input[name^=digit-]').keydown(function() {
+			// Check Character
+			if(allowKeys.indexOf(event.key) == -1) return false;
+			if(event.key.length <= 1) 
+			{
+				$("#inputOtp #" + event.target.id).val(event.key);
+				var nextElement = $("#inputOtp #" + event.target.id).next();
+				nextElement.focus();
+				if($("#inputOtp #" + event.target.id).attr('last') == "true"){
 					$('#otpSubmit').select().focus();
 					$('#otpSubmit').trigger('click');
-					return true;
 				}
-				if (key != 9 && (key < 48 || key > 57)) {
-				e.preventDefault();
-				return false;
-				}
-
-				if (key === 9) {
-				return true;
-				}
-
-				if (!sib || !sib.length) {
-				sib = OTPinput.find('input').eq(0);
-				}
-				sib.select().focus();
-			}
-
-			function onKeyDown(e) {
-				var key = e.which;
-
-				if (key === 9 || (key >= 48 && key <= 57)) {
-				return true;
-				}
-
-				e.preventDefault();
 				return false;
 			}
-			
-			function onFocus(e) {
-				$(e.target).select();
+			else {
+				var str = event.key;
+				str = str.substring(0, str.length - 1);
+				$("#inputOtp #" + event.target.id).val(str);
 			}
-
-			OTPinput.on('keyup', 'input', goToNextInput);
-			OTPinput.on('keydown', 'input', onKeyDown);
-			OTPinput.on('click', 'input', onFocus);
-
-		});
-		
+		});		
 	});
 
 </script>

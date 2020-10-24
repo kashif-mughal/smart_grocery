@@ -9,7 +9,7 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Order</a></li>
                 </ol>
-                <h3 class="mb-0">Order Traking</h3>
+                <h3 class="mb-0">Order Tracking</h3>
             </nav>
             <h3 class="mb-0"><?php echo $SelectOrder['SubOrder']; ?></h3>
         </div>

@@ -121,7 +121,12 @@
             });
 
             // $("#insert_sale_order").validate();
-            
+            $("img").on("error", function() {
+             $(this).attr(
+               "src",
+               "<?=base_url('assets/img/product.png')?>"
+             );
+           });
         </script>
         <style type="text/css">
             #toTop{

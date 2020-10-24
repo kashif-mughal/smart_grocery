@@ -53,7 +53,7 @@ class Orders extends CI_Model {
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
-        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
+        $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
         $CI = & get_instance();
         $userRole = $CI->session->userdata('user_type');
         if($userRole != 1){
@@ -74,19 +74,19 @@ class Orders extends CI_Model {
 
     }
 
-    public function retrieve_orders($perpage, $page, $orderId = null, $userEmail = null){
-        if(isset($_GET['ue']) && !empty($_GET['ue']))
-            $userEmail = $_GET['ue'];
+    public function retrieve_orders($perpage, $page, $orderId = null, $userPhone = null){
+        if(isset($_GET['up']) && !empty($_GET['up']))
+            $userPhone = $_GET['up'];
         if(isset($_GET['on']) && is_numeric($_GET['on']))
             $orderId = $_GET['on'];
 
         $wherePart = '';
-        if(!is_null($orderId) && !is_null($userEmail))
-            $wherePart = "WHERE a.OrderId = $orderId AND u.email = '$userEmail'";
+        if(!is_null($orderId) && !is_null($userPhone))
+            $wherePart = "WHERE a.OrderId = $orderId AND u.phone like('%$userPhone%')";
         else if(!is_null($orderId))
             $wherePart = "WHERE a.OrderId = $orderId";
-        else if(!is_null($userEmail))
-            $wherePart = "WHERE u.email = '$userEmail'";
+        else if(!is_null($userPhone))
+            $wherePart = "WHERE u.phone like('%$userPhone%')";
         $queryText = "SELECT a.*, u.phone, u.email from $this->tableName a join users u on u.user_id = a.CustomerId $wherePart ORDER BY a.ModifiedOn DESC LIMIT $page,$perpage";
 
         //$query = $this->db->get();
@@ -120,7 +120,7 @@ class Orders extends CI_Model {
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
-        $this->db->join('grocery_unit d', 'c.UnitId = d.UnitId');
+        $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
         $CI = & get_instance();
         $userRole = $CI->session->userdata('user_type');
         if($userRole != 1){

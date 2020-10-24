@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Cproduct extends CI_Controller {
 
     public $product_id;
-
+    public $globaPerPageProducts = 100;
     function __construct() {
         parent::__construct();
         $this->load->database();
@@ -30,7 +30,7 @@ class Cproduct extends CI_Controller {
         if(empty($page) || !is_numeric($page) || $page < 0)
             $page = 0;
         if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
-            $perpage = 8;
+            $perpage = $this->globaPerPageProducts;
         $content = $this->lproduct->products_by_category($catId, $name, $page, $perpage);
 
         $this->template->full_html_view($content);
@@ -44,7 +44,7 @@ class Cproduct extends CI_Controller {
         if(empty($page) || !is_numeric($page) || $page < 0)
             $page = 0;
         if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
-            $perpage = 8;
+            $perpage = $this->globaPerPageProducts;
         $products = $this->lproduct->internal_products_by_category($catId, $name, $page, $perpage);
         for ($i=0; $i < count($products['products']); $i++) { 
             $productObject = (object) [
@@ -94,7 +94,11 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
             'status' => 1,
-            'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png')
+            'SaleUnitQty' => $this->input->post('SaleUnitQty'),
+            'SaleUnit' => $this->input->post('SaleUnit'),
+            'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
+            'tags' => $this->input->post('allTags'),
+            'Brand' => $this->input->post('BrandId')
         );
         $result = $this->Products->product_entry($data);
         if ($result == TRUE) {
@@ -143,7 +147,7 @@ class Cproduct extends CI_Controller {
         $status = ($this->input->post('status') == 1) ? 1 : 0;
         $data = array(
             'ProductName' => $this->input->post('product_name'),
-            'Unit' => $this->input->post('unit'),
+            'Unit' => $this->input->post('Unit'),
             'OriginalPrice' => $this->input->post('OriginalPrice'),
             'Price' => $this->input->post('price'),
             'SalePrice' => $this->input->post('salePrice'),
@@ -152,7 +156,10 @@ class Cproduct extends CI_Controller {
             'Category' => $this->input->post('CategoryId'),
             'Status' => $status,
             'Brand' => $this->input->post('BrandId'),
-            'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s')
+            'SaleUnitQty' => $this->input->post('SaleUnitQty'),
+            'SaleUnit' => $this->input->post('SaleUnit'),
+            'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+            'tags' => $this->input->post('allTags')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])

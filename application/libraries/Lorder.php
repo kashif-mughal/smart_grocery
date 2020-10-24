@@ -18,11 +18,13 @@ class Lorder {
     public function checkout_detail_form() {
         $CI = & get_instance();
         $CI->load->model('Users');
+        $CI->load->model('SiteSettings');
         $userAddress = $CI->Users->get_user_address();
         // print_r($userAddress);die;
         $data = array(
             'title' => 'Checkout',
-            'userAddress' => $userAddress
+            'userAddress' => $userAddress,
+            'deliveryCharges' => $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"]
         );
         return $CI->parser->parse('order/checkout_form', $data, true);
     }
@@ -49,7 +51,8 @@ class Lorder {
     public function place_order(){
         $CI = & get_instance();
         $CI->load->model('Orders');
-
+        $CI->load->model('SiteSettings');
+        date_default_timezone_set('Asia/Karachi');
         $addressId = $CI->session->userdata("addressId");
         $deliveryTime = $CI->session->userdata("deliveryTime");
         $addressText = $CI->session->userdata("addressText");
@@ -67,6 +70,8 @@ class Lorder {
         foreach ($orderDetail as $key => $eachProd) {
             $OV += $eachProd->quantity * $eachProd->price;
         }
+        $currentDate = date('Y-m-d');
+        $deliveryCharges = $deliveryDate == $currentDate ? $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"] : 0;
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
             'OrderValue' => $OV,
@@ -76,11 +81,14 @@ class Lorder {
             'DeliveryFrom' => $dtFrom,
             'DeliveryUpto' => $dtUpto,
             'DeliveryAddress' => $addressId,
+            'deliveryCharges' => $deliveryCharges,
             'Status' => 1,
         );
         $orderId = $CI->Orders->place_order($data);
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
+                $CI->session->set_userdata("OV", $OV + $deliveryCharges);
+                $CI->session->set_userdata("deliveryCharges", $deliveryCharges);
                 return $orderId;
             }else{
                 return 'Something went wrong!!';

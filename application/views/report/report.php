@@ -283,7 +283,7 @@
     function filltable(reportType) {
         $.ajax({
             type: "POST",
-            url: '<?php echo base_url('CReport/generate_report') ?>',
+            url: '<?php echo base_url('creport/generate_report') ?>',
             data: {Report_Type: reportType, start_date: startDate, end_date: endDate},
             dataType: "json",
             cache: false,

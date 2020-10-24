@@ -9,7 +9,7 @@
             </ol>
          </nav>
          <!-- <h3 class="mb-0"><?php //echo $SelectOrder['SubOrder']; ?></h3> -->
-         <h3 class="mb-0">Order Traking</h3>
+         <h3 class="mb-0">Order Tracking</h3>
       </div>
    </div>
 </div>
@@ -53,10 +53,10 @@
             </div>
          </div> -->
          
-         <div class="col-xl-12 col-lg-12 col-md-12 my-3 pr-0">
-            <div class="container bg-transparent pr-0">
+         <div class="col-xl-12 col-lg-12 col-md-12 my-3 px-0">
+            <div class="container bg-transparent px-0">
 
-               <div class="card p-5 content-box" style="z-index: -20; border: 3px 3px 0 0;">
+               <div class="card p-sm-5 content-box" style="z-index: -20; border: 3px 3px 0 0;">
                   <div class="d-flex flex-column pb-5 mb-4 border-b-primary">
                      <div id="orderNumberTitle">
                         <span>Order No.</span>
@@ -64,14 +64,14 @@
                      </div>
                      <div id="orderNumberSubtitle">
                         <span>Order Placed on </span>
-                        <strong><script>document.write((new Date('<?=$OrderData["OrderDetail"][0]["DeliveryDate"]?>')).toDateString());</script></strong>
+                        <strong><script>document.write((new Date('<?=$OrderData["OrderDetail"][0]["CreatedOn"]?>')).toDateString());</script></strong>
                         <span> at </span>
-                        <strong><?=date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($OrderData["OrderDetail"][0]["DeliveryUpto"]))?></strong>
+                        <strong><?=date('h:i a', strtotime($OrderData["OrderDetail"][0]["CreatedOn"]))?></strong>
                      </div>
                   </div>
                   <!-- Order Details Form -->
                   <div class="ordertrackingprogress my-4">
-                     <ul >
+                     <ul class="px-0">
 
                         <?php $skip = false; $elem = null; $canceledStepId = 7; $placed = false; for ($i=0; $i < count($OrderData['TrakingSteps']); $i++) {?>
                                  <li>
@@ -89,11 +89,11 @@
                                     <?php if(!$placed && $OrderData["OrderDetail"][0]["PreviousOrderStep"] == 0){
                                        $placed = true;
                                        ?>
-                                       <img style="left: 70px;" src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
+                                       <img src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
                                     <?php } ?>
 
 
-                                    <?php if(!$placed && ($OrderData['TrakingSteps'][$i]['StepId'] == $OrderData["OrderDetail"][0]["PreviousOrderStep"] && $OrderData["OrderDetail"][0]["OrderStep"] != 4 && $OrderData["OrderDetail"][0]["OrderStep"] != 7)){
+                                    <?php if(!$placed && ($OrderData['TrakingSteps'][$i]['StepId'] == $OrderData["OrderDetail"][0]["OrderStep"] && $OrderData["OrderDetail"][0]["OrderStep"] != 4 && $OrderData["OrderDetail"][0]["OrderStep"] != 7)){
                                        $placed = true;
                                        ?>
                                        <img src="<?php echo base_url() ?>assets/img/orderTrackingTruck.png" class="truck" />
@@ -167,7 +167,7 @@
                            <h6 class="shippingHeading">Shipping</h6>
                            <div class="shippingContent pb-3 d-flex justify-content-between align-items-center">
                               <span>Delivery Charges</span>
-                              <span>Rs. 0.00</span>
+                              <span><script type="text/javascript">document.write(formatCurrency('<?=$OrderData["OrderDetail"][0]["DeliveryCharges"]?>'));</script></span>
                            </div>
                            <div class="shippingContentSub pb-3 border-b-primary">
                               <p>Shipping options will be updated during checkout.</p>

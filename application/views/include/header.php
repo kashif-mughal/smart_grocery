@@ -219,11 +219,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </button>
                                     <div class="dropdown-menu">
                                       <?php foreach($menuCatList as $key => $value) {?>
-                                         <a class="dropdown-item" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
+                                         <a class="dropdown-item" id="cat-<?=$value->catId?>" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
                                       <?php } ?>
                                    </div>
                                  </div>
-                                 <input type="text" name="q" class="form-control font-weight-400 border-none" placeholder="I'm shopping for...">
+                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">Search</button>
                                  </div>
@@ -308,7 +308,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </tbody>
                   </table>
                   <div class="text-right">
-                     <a href="<?php echo base_url() ?>corder/checkout_form" target="_blank" class="checkout-btn btn btn-sm btn-primary">
+                     <a href="<?php echo base_url() ?>corder/checkout_form" class="checkout-btn btn btn-sm btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout
                      </a>
                      <a href="javascript:void(0);" onclick="emptyCart();" class="btn btn-sm btn-secondary">
@@ -346,6 +346,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
+  var urlVars = getUrlVars();
+  var searchText = urlVars["q"];
+  if(searchText){
+    $("#q").val(searchText);
+  }
+  var selectedCat = urlVars["categoryId"];
+  if(selectedCat){
+    $("#cat-" + selectedCat).trigger("click");
+  }
    loadCartData();
    $(document).on('keydown', '.quantity', function () {
       if(event.keyCode == 189)
@@ -499,6 +508,13 @@ function removeItemFromShoppingCart(currentElem){
       if(cartObj && cartObj.length > 0)
          showEmptyResponse(cartObj)
    }
+   else{
+    var totalP = 0;
+    for (var i = 0; i < cartExceptCurrentProduct.length; i++) {
+      totalP += parseInt(cartExceptCurrentProduct[i].price) * parseInt(cartExceptCurrentProduct[i].quantity);
+    }
+    $('#Grand-Total').html(totalP);
+   }
    loadCartData();
 }
 function loadShoppingCart(){
@@ -532,7 +548,7 @@ function loadShoppingCart(){
       </tr>`;
       var cartTotalRow = `<tr>
       <td colspan="7" class="text-right">Total</td>
-      <td class="text-right">{grandTotal}</td>
+      <td class="text-right" id="Grand-Total">{grandTotal}</td>
       <td></td>
       </tr>`;
       var sum = 0;

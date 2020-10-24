@@ -199,4 +199,23 @@ class Users extends CI_Model {
         }
         return $insertedAddresses;
     }
+
+    public function soft_delete_user_address($addressId){
+        $userId = $this->session->userdata('user_id');
+        $this->db->select("1");
+        $this->db->from("grocery_user_address");
+        $this->db->where("UserId", $userId);
+        $this->db->where("AddressId", $addressId);
+        $this->db->where("Status", 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $data = array(
+                'Status' => 0,
+            );
+            $this->db->where("AddressId", $addressId);
+            $this->db->update("grocery_user_address", $data);
+            return true;
+        }
+        return false;
+    }
 }

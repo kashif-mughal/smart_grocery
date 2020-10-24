@@ -80,11 +80,18 @@
                     <div class="panel-body">
                         <form action="<?php echo base_url('Corder/index')?>" class="form-inline" method="get" ccept-charset="utf-8">
                             <label for="order_no">Order No</label>
-                            <input type="text" class="form-control" name="on" placeholder="Order No">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="ue" placeholder="Email">
+                            <input type="text" class="form-control" name="on" id="on" placeholder="Order No">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" name="up" id="up" placeholder="Phone">
                             <button type="submit" class="btn btn-primary btn-sm">Search</button>
                         </form>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var urlVals = getUrlVars();
+                                document.getElementById("on").value = urlVals["on"] ? urlVals["on"] : "";
+                                document.getElementById("up").value = urlVals["up"] ? urlVals["up"] : "";
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -113,8 +120,8 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Order No</th>
-                                        <th>Total Amount</th>
-                                        <th>Customer</th>
+                                        <th>(OV + DC) Total Amount</th>
+                                        <th>Customer Phone</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -126,7 +133,9 @@
                                             <tr class="<?= $value['OrderStep'] == 7 ? 'canceled' : ($value['OrderStep'] == 1 ? 'in-circle' : 'pending-action')?>">
                                                 <td><?=$value['sl']?></td>
                                                 <td><?= $value['OrderId']?></td>
-                                                <td><?= $value['OrderValue']?></td>
+                                                <td>
+                                                    <?= $value['OrderValue']?> + <?= $value['DeliveryCharges'] ? $value['DeliveryCharges'] : 0 ?>
+                                                </td>
                                                 <td><?= $value['email'] ? "("+ $value['email'] +") " + $value['phone'] : $value['phone']?></td>
                                                 <td><?= $value['ModifiedOn']?></td>
                                                 <td>

@@ -38,29 +38,12 @@ class Luser {
 
     public function user_value_cart(){
         $CI = & get_instance();
-        $CI->load->model('Products');
-        $products = $CI->Products->get_value_cart_products();
-        $finalProducts = Array();
-        if($products)
-        for ($i=0; $i < count($products); $i++) {
-            $pid = $products[$i]['ProductId'];
-            $filteredArray = array_filter($finalProducts, function($toCheck) use ($pid) { 
-                return $toCheck['ProductId'] == $pid; 
-            });
-            if(count($filteredArray) > 0)
-                continue;
-            $productObject = (object) [
-                           'id' => $products[$i]['ProductId'],
-                           'pName' => $products[$i]['ProductName'],
-                           'price' => $products[$i]['SalePrice'],
-                           'img' => base_url().$products[$i]['ProductImg']
-                       ];
-                       $products[$i]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
-            array_push($finalProducts, $products[$i]);
-        }
+        $CI->load->library('lvalue');
+        $value_list = $CI->lvalue->last_value();
+
         $data = array(
             'title' => 'Sauda Express | Value cart',
-            'products' => $finalProducts
+            'value_list' => $value_list
         );
         return $CI->parser->parse('user/value_cart', $data, true);
     }

@@ -116,6 +116,7 @@
 
                                                     </div>
                                                     <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
+                                                    <input type="button" id="cancel-address" class="btn btn-link px-5 py-2 button-primary text-white" value="Cancel">
                                                 </form>
                                                 <form id="addressForm" style="display: <?=$userAddress ? 'block' : 'none';?>"  action="<?=base_url('user/submit_address')?>">
                                                     <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
@@ -124,7 +125,7 @@
                                                             {userAddress}
                                                             <div class="col-md-6 my-2">
                                                                 <div class="card p-5 text-center">
-                                                                    <a href="#" class="removeAddress">x</a>
+                                                                    <a href="javascript:void(0)" class="removeAddress">x</a>
                                                                     <input type="radio" name="optradio" class="selectRadio">
                                                                     <!-- <i class="fas fa-check" style="display:none;"></i> -->
                                                                     <a href="javascript:void(0)" data-addressId="{AddressId}" class="singleAddress" id="address">
@@ -250,12 +251,9 @@
                                             <h6 class="subtotal-price font-size-15 sub-total"></h6>
                                         </div>
                                         <div class="orderbox-content">
-                                            <div class="orderbox-content-title mb-3">
-                                                <h6>Shipping</h6>
-                                            </div>
                                             <div class="orderbox-content-charges d-flex justify-content-between mb-3">
                                                 <h6>Delivery Charges</h6>
-                                                <h6></h6>
+                                                <h6 id="dCharges">RS. 0.00</h6>
                                             </div>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
@@ -325,17 +323,36 @@
         $("#proceed").on("click", function(){
             proceedToCheckout();
         });
-    });
-    function proceedToCheckout(){
-        if(!step1Verified || !step2Verified || !step3Verified || !step4Verified){
-            $.notify("Please verify all the steps", "error");
+
+        function proceedToCheckout(){
+            if(!step1Verified || !step2Verified || !step3Verified || !step4Verified){
+                $.notify("Please verify all the steps", "error");
+                    return false;
+            }
+            var baskit = getCookie('baskit');
+            if(!baskit || JSON.parse(baskit).length == 0){
+                $.notify("The Cart is empty, please add some item in cart", "error");
                 return false;
-        }else{
+            }
+
+            openWindowWithPost(
+                "<?=base_url('Corder/checkout')?>", JSON.parse(baskit)
+            );
+        }
+        
+    });
+
+    function openWindowWithPost(url, dataArr) {
             var form = document.createElement("form");
             //form.target = "_blank";
             form.method = "POST";
-            form.action = "<?=base_url('Corder/checkout')?>";
+            form.action = url;
             form.style.display = "none";
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = 'order';
+            input.value = JSON.stringify(dataArr);
+            form.appendChild(input);
 
             var input = document.createElement("input");
             input.type = "hidden";
@@ -355,11 +372,12 @@
             input.value = selectedAddress.text().trim();
             form.appendChild(input);
 
+
             document.body.appendChild(form);
             form.submit();
             document.body.removeChild(form);
         }
-    }
+
     function setTimeSlots(){
         var timeSlotAreaElem = $('#timeSlotArea');
         timeSlotAreaElem.empty();
@@ -372,7 +390,7 @@
         var todayTemplate = `<thead>
                                 <tr>
                                     <th scope="col">Date - Day</th>
-                                    <th scope="col">Same Day Delivey - Additional Rs 150 will be
+                                    <th scope="col">Same Day Delivey - Additional Rs <?=$deliveryCharges?> will be
                                         charged</th>
                                 </tr>
                             </thead>
@@ -381,7 +399,7 @@
                                     <td>${currentDt.toDateString()}</td>
                                     <td>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="today1" onclick="setTimeSlotInternal(this);">
+                                            <label class="form-check-label" for="today1" data-day="today" onclick="setTimeSlotInternal(this);">
                                                 <input class="form-check-input" type="radio"
                                                 name="deliveryDate" value="${currentDt.toLocaleDateString() + ' 10:00 AM__' + currentDt.toLocaleDateString() + ' 7:00 PM'}">
                                                 today
@@ -442,6 +460,8 @@
         timeSlotAreaElem.append(otherDTemplateHead);
         timeSlotAreaElem.append(otherDTemplateBody);
     }
+    var deliveryCharges = parseInt('<?=$deliveryCharges?>');
+    var deliveryAdded = false;
     function setTimeSlotInternal(currentElem){
         deliveryTime = $(currentElem).find('input').first().val();
         var deliveryTimeArr = deliveryTime.split('__');
@@ -453,6 +473,19 @@
         $('#time-success').show();
         $('#time-process').hide();
         $('#collapseThree').collapse('hide');
+
+        if(currentElem.dataset.day == "today" && !deliveryAdded){
+            $("#dCharges").html(formatCurrency(deliveryCharges));
+            subTotal += deliveryCharges;
+            $('.sub-total').html(formatCurrency(subTotal));
+            deliveryAdded = true;
+        }else if(currentElem.dataset.day != "today" && deliveryAdded){
+            $("#dCharges").html(formatCurrency(0));
+            subTotal -= deliveryCharges;
+            $('.sub-total').html(formatCurrency(subTotal));
+            deliveryAdded = false;
+        }
+
         step3Verified = true;
     }
     function submitForm(form){
@@ -487,6 +520,35 @@
            }
         });
     }
+    function deleteAddress(currentElem){
+        var addressId = currentElem.parent().find(".singleAddress").data("addressid");
+        if(!addressId)
+        {
+            console.log("address removed inmem successfully");
+            currentElem.parent().parent().remove();
+        }
+        if(!confirm("Confirm to delete address?"))
+            return;
+        $.ajax({
+           type: "POST",
+           url: "<?=base_url("user/delete_address");?>",
+           data: {addressId : addressId},
+           dataType: "JSON",
+           success: function(data)
+           {
+            if(data.status == 0){
+                $.notify("Something went wrong", "error");
+                console.log(data);
+                return false;
+            }
+            console.log("address removed successfully");
+            currentElem.parent().parent().remove();
+           },
+           error: function(a,b){
+                $.notify("Something went wrong!!!", "error");
+           }
+        });
+    }
     function loadCheckoutCartArea(){
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
@@ -508,11 +570,12 @@
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
                eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
+               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
                //append newly created row in card body
                cartBody.append(eachProdTemplateCopy);
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
+            subTotal = sum;
             $('.sub-total').html(formatCurrency(sum));
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
@@ -525,26 +588,42 @@
             return false;
          }
     }
-
+    var subTotal = 0;
     var addressCounter = 1;
 
     $(document).on("click", "a.singleAddress", function () {
         $(this).prev('.address-panel .selectRadio').prop('checked', true);
+        $('.address-panel i.fa-check').hide();
+        $(this).prev('i.fa-check').toggle();
         // $('.address-panel i.fa-check').hide();
         // $(this).prev('i.fa-check').toggle();
         $('.selectedAddress').removeClass("selectedAddress");
         $(this).addClass("selectedAddress");
         $('#selectedFinalAddress').val($(this).find('.internalAddressContent')[0].innerText);
         selectedAddress = $(this);
+        $('#submitAddress').trigger("click");
+    });
+    $(document).on("click", "input[name='optradio']", function () {
+        $(this).parent().find(".singleAddress").trigger("click");
+    });
+
+    $(document).on("click", ".removeAddress", function () {
+        deleteAddress($(this));
     });
 
     $('#addNewAddress').click(function (e) {
         e.preventDefault();
-        $('#newAddressContent').hide();
-        $('#newAddressEdit').show();
-        $('#newAddressEdit').focus();
-        $('#newAddressAddBtn').show();
-        $('#newAddressCancelBtn').show();
+        //$('#newAddressForm').show();
+        $('#newAddressForm')[0].reset();
+        $('#newAddressForm').show();
+        $('#addressForm').hide();
+
+
+        // $('#newAddressContent').hide();
+        // $('#newAddressEdit').show();
+        // $('#newAddressEdit').focus();
+        // $('#newAddressAddBtn').show();
+        // $('#newAddressCancelBtn').show();
     });
 
     $('#newAddressAddBtn').click(function () {
@@ -586,6 +665,11 @@
         if($('#newAddressForm').validate()){
             submitFirstAddress($(this));
         }
+    });
+
+    $('#cancel-address').click(function(){
+        $('#newAddressForm').hide();
+        $('#addressForm').show();
     });
 
     function submitFirstAddress(form){

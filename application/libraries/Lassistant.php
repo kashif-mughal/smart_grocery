@@ -11,12 +11,6 @@ class Lassistant {
         $assistant_list = $this->last_assistant();
         $i = 0;
         $total = 0;
-        if (!empty($assistant_list)) {
-            foreach ($assistant_list as $k => $v) {
-                $i++;
-                $assistant_list[$k]['sl'] = $i;
-            }
-        }
         $data = array(
             'title' => 'Manage Assistant',
             'assistant_list' => $assistant_list,
@@ -30,6 +24,7 @@ class Lassistant {
         $CI->load->model('Assistants');
         $day = 1;
         $assistant_list = null;
+        date_default_timezone_set('Asia/Karachi');
         while (empty($assistant_list)) {
             if(--$day == -30)
                 break;
@@ -37,7 +32,46 @@ class Lassistant {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $assistant_list = $CI->Assistants->search_last_assistant("CreatedOn", $dt);
         }
-        return $assistant_list;
+        //echo '<pre>'; print_r($assistant_list);die;
+        if(is_null($assistant_list) || !is_array($assistant_list))
+            return null;
+        for ($i=0; $i < count($assistant_list); $i++) { 
+            $productObject = (object) [
+                                 'id' => $assistant_list[$i]['ProductId'],
+                                 'pName' => $assistant_list[$i]['ProductName'],
+                                 'price' => $assistant_list[$i]['SalePrice'],
+                                 'img' => base_url($assistant_list[$i]['ProductImg'])
+                                ];
+
+            $assistant_list[$i]["Jsn"] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
+        }
+        $assistantObj = Array();
+        $assistantObj["Assistant"] = Array();
+        $assistantObj["Cat"] = Array();
+        $assistantObj["SaleUnitQty"] = Array();
+        $assistantObj["Brands"] = Array();
+        $assistantObj["Tags"] = Array();
+        for ($i=0; $i < count($assistant_list); $i++) { 
+            if(!$assistantObj["Assistant"][$assistant_list[$i]["CatName"]])
+                $assistantObj["Assistant"][$assistant_list[$i]["CatName"]] = Array();
+            array_push($assistantObj["Assistant"][$assistant_list[$i]["CatName"]], $assistant_list[$i]);
+            array_push($assistantObj["Cat"], $assistant_list[$i]["CatName"]);
+            array_push($assistantObj["SaleUnitQty"], $assistant_list[$i]["SaleUnitQuantity"]);
+            array_push($assistantObj["Brands"], $assistant_list[$i]["BrandName"]);
+            if(!empty($assistant_list[$i]["tags"])){
+                $tagsArr = explode(",", $assistant_list[$i]["tags"]);
+                for ($j=0; $j < count($tagsArr); $j++) { 
+                    array_push($assistantObj["Tags"], $tagsArr[$j]);
+                }
+            }
+        }
+        $assistantObj["Cat"] = array_unique($assistantObj["Cat"]);
+        $assistantObj["Brands"] = array_unique($assistantObj["Brands"]);
+        $assistantObj["Brands"] = array_filter($assistantObj["Brands"]);
+        $assistantObj["SaleUnitQty"] = array_unique($assistantObj["SaleUnitQty"]);
+        $assistantObj["Tags"] = array_unique($assistantObj["Tags"]);
+        //echo '<pre>'; print_r($assistantObj);die;
+        return $assistantObj;
     }
 
     //Sub assistant Add

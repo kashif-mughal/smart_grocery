@@ -1,3 +1,17 @@
+<?php
+$CI = & get_instance();
+$CI->load->model('Brands');
+$CI->load->library('lcategory');
+$TopBrandList = $CI->Brands->top_brands();
+
+$CatList = $CI->lcategory->get_category_hierarchy();
+foreach($CatList as $key => $value) {
+    $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
+    if($products)
+        $products = $products['products'];
+    $value->products = $products;
+}
+?>
 <div id="main-page">
 	<div class="container">
 
@@ -113,7 +127,7 @@
 								<h6><?=$key?></h6>
 								
 								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
-									<a href="#">
+									<a href="<?=base_url('Cproduct/products?categoryId=').$value->childCats[$i]['CategoryId']?>">
 										<span class="hyphen">-</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
 									</a>
 								<?php } ?>
@@ -129,7 +143,7 @@
 			<div class="feature-details my-4">
 				<h4>Sauda Express - the most customer-centeric online shopping platform</h4>
 				<div class="feature_details_content">
-					<h6>Wide Geographic Voverage</h6>
+					<h6>Wide Geographic Coverage</h6>
 					<p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>
 				</div>
 				<div class="feature_details_content">
@@ -140,6 +154,18 @@
 					<h6>Long term Commitment</h6>
 					<p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>
 				</div>
+				<div class="feature_details_content">
+					<h6>Best Value for your Money</h6>
+					<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Special features for members</h6>
+					<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Payment Options</h6>
+					<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add payment option through debit and credit cards as well – this option too, will be available in a few weeks’ time.</p>
+				</div>
 			</div>
 
 			<div class="useful-links my-4">
@@ -147,28 +173,28 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-2 pl-0">
-							<a href="#">Mission & Vision</a>
+							<a href="<?=base_url("cpage/vision");?>">Mission & Vision</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Brand Stores</a>
+							<a href="<?=base_url("cpage/brandstore");?>">Brand Stores</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Privacy Policy</a>
+							<a href="<?=base_url("cpage/privacy");?>">Privacy Policy</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Terms & Conditions</a>
+							<a href="<?=base_url("cpage");?>">Terms & Conditions</a>
 						</div>
 						
 						<div class="w-100"></div>
 
 						<div class="col-md-2 pl-0">
-							<a href="#">FAQs</a>
+							<a href="<?=base_url("cpage/faq");?>">FAQs</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Return & Refund</a>
+							<a href="<?=base_url("cpage/returnandrefund");?>">Return & Refund</a>
 						</div>
 						<div class="col-md-2 pl-0">
-							<a href="#">Categories</a>
+							<a href="<?=base_url("cpage/categories");?>">Categories</a>
 						</div>
 					</div>
 				</div>

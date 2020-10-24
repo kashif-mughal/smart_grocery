@@ -88,8 +88,10 @@ class Lproduct {
             'brands' => $brands,
             'status' => $product_detail[0]['status'],
             'units' => $units,
-            'unit' => $product_detail[0]['UnitId'],
-            'ProductImg' => $product_detail[0]['ProductImg']
+            'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
+            'sale_unit' => $product_detail[0]['SaleUnit'],
+            'ProductImg' => $product_detail[0]['ProductImg'],
+            'tags' => $product_detail[0]['tags']
         );
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);

@@ -52,11 +52,36 @@ class Corder extends CI_Controller {
                 'addressText' => $addressText,
                 'deliveryTime' => $deliveryTime,
                 'userDeliveryTime' =>  $t1 . " - " . $t2,
-                'userDeliveryDate' => $dt
+                'userDeliveryDate' => $dt,
+                'paymentMode' => 'Cash On Delivery'
             ));
 
-        $content = $this->lorder->checkout_form();
-        $this->template->full_html_view($content);
+
+
+        if(empty($this->input->post('order'))){
+            $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
+            redirect(base_url('Corder/checkout_form'));
+        }
+        $result = $this->lorder->place_order();
+        
+        if (is_numeric($result)) {
+            $this->session->set_userdata(array('message' => 'Successfully Added'));
+            $this->session->set_userdata("orderId", $result);
+            $content = $this->lorder->checkout_form($result);
+            $this->template->full_html_view($content);
+        } else {
+            $this->session->set_userdata(array('error_message' => $result));
+            redirect(base_url('Corder/checkout_form'));
+        }
+
+
+
+
+
+
+
+        // $content = $this->lorder->checkout_form();
+        // $this->template->full_html_view($content);
     }
 
     //Proceed to checkout

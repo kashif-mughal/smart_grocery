@@ -73,27 +73,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    if ($assistant_list) {
-                                        ?>
-                                        {assistant_list}
-                                        <tr id="{AssistantId}">
-                                            <td class="text-center">{sl}</td>
-                                            <td class="text-center"><img width="50px;" src="<?=base_url()?>{ProductImg}"></td>
-                                            <td class="text-center">{ProductName}</td>
-                                            <td class="text-center">{SalePrice}</td>
-                                            <td>
-                                                <center>
-                                                    <?php echo form_open() ?>
-                                                    <a href="javascript:void(0);" class="Deleteassistant btn btn-danger btn-sm" name="{AssistantId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                        <?php echo form_close() ?>
-                                                </center>
-                                            </td>
-                                    </tr>
-                                    {/assistant_list}
-                                    <?php
-                                }
-                                ?>
+                                    <?php $counter = 0;
+                                    foreach ($assistant_list["Assistant"] as $key => $value) {?>
+                                        <?php for ($i=0; $i < count($value); $i++) {?>
+                                            <tr id="<?=$value[$i]["AssistantId"]?>">
+                                                <td class="text-center"><?=++$counter;?></td>
+                                                <td class="text-center"><img width="50px;" src="<?=base_url($value[$i]["ProductImg"])?>"></td>
+                                                <td class="text-center"><?=$value[$i]["ProductName"]?></td>
+                                                <td class="text-center"><?=$value[$i]["SalePrice"]?></td>
+                                                <td>
+                                                    <center>
+                                                        <?php echo form_open() ?>
+                                                        <a href="javascript:void(0);" class="Deleteassistant btn btn-danger btn-sm" name="<?=$value[$i]["AssistantId"]?>" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                            <?php echo form_close() ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
