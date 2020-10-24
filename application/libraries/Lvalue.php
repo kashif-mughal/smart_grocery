@@ -32,7 +32,7 @@ class Lvalue {
             $dt = date ( 'Y-m-d' , strtotime ( $Date . " $day days" ));
             $value_list = $CI->Values->search_last_value("CreatedOn", $dt);
         }
-        if(is_null($assistant_list) || !is_array($assistant_list))
+        if(is_null($value_list) || !is_array($value_list))
             return null;
         for ($i=0; $i < count($value_list); $i++) { 
             $productObject = (object) [
