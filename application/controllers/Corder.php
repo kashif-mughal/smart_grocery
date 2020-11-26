@@ -163,6 +163,11 @@ class Corder extends CI_Controller {
         $content = $this->lorder->checkout_detail_form();
         $this->template->full_html_view($content);
     }
+     public function cart_page(){
+        // $this->auth->check_auth();
+        $content = $this->lorder->cart_page();
+        $this->template->full_html_view($content);
+    }
     public function update_traking(){
         if(!$this->session->userdata('sid_web') || !$this->session->userdata('user_type') == 1 || empty($this->input->post('orderId')) || empty($this->input->post('OrderStep'))){
             $data['status'] = 0;

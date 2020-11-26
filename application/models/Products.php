@@ -344,4 +344,24 @@ class Products extends CI_Model {
         }
         return false;
     }
+    
+    // model for auto complete search
+    public function getUsers($postData){
+      $response = array();
+
+      $this->db->select('*');
+
+      if($postData['search'] )
+      {
+          $this->db->where("ProductName like '%".$postData['search']."%' ");
+          $result = $this->db->get('grocery_products')->result();
+
+          foreach($result as $row )
+          {
+              $response[] = array("label"=>$row->ProductName);
+          }
+      }
+
+      return $response;
+    }
 }

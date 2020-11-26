@@ -47,7 +47,7 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4>Update Setting </h4>
+                            <h4>Update Settings Here</h4>
                         </div>
                     </div>
                     <?php echo form_open('Csettings/update_site_settings', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'insert_setting')) ?>
@@ -67,6 +67,54 @@
                                 <textarea rows="10" class="form-control" name ="footer_text" id="footer_text" placeholder="Footer Text">
                                     <?=$SettingData['footer_text']?>
                                 </textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="homecat" class="col-sm-3 col-form-label">Home Categories</label>
+                            <div class="col-sm-9">
+                                    <ul id="sortable-sss">
+                                        <?php 
+                                        if($SettingData['home_page_cat'] === 'null'){
+                                            foreach($categories as $category){
+                                                ?>
+                                                    <li class="ui-state-default uisort" id="item-<?php echo ($category['CategoryId']); ?>" data-name="<?php echo ($category['CatName']); ?>" data-id="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></li>
+                                                    <?php 
+                                                
+                                            }
+                                        }else{
+                                            foreach(json_decode($SettingData['home_page_cat'], true) as $setcat){ 
+                                                foreach($categories as $category){
+                                                    if($setcat===$category['CategoryId']){ ?>
+                                                        <li class="ui-state-default uisort" id="item-<?php echo ($category['CategoryId']); ?>" data-name="<?php echo ($category['CatName']); ?>" data-id="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></li>
+                                                        <?php 
+                                                    }
+                                                }
+                                            }
+                                        }?>
+                                    </ul>
+                                    
+                                    <!--<select multiple name="home_page_cat[]" class="llhome_page_cat_sss" id="" style="width: 100%;"></select>-->
+                                        
+                             
+                            <?php /*<select multiple name="home_page_cat[]" class="" id="home_page_cat" style="
+    width: 100%;
+">
+                                    <?php foreach($categories as $category){ ?>
+                                    <?php foreach(json_decode($SettingData['home_page_cat'], true) as $setcat){ 
+                                    if($setcat==$category['CategoryId']){?>
+                                    <option selected="selected" value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
+                                    <?php
+                                    }else{?>
+                                    <option value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
+                                    <?php
+                                    }
+                                    }?>
+                                    <option value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
+                                    <?php
+                                    } ?>
+                                    
+                                </select> */?>
                             </div>
                         </div>
                         <div class="form-group row">

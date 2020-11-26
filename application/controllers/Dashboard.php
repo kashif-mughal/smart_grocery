@@ -18,6 +18,8 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Products');
         $CI->load->model('Units');
         $CI->load->model('Brands');
+        
+        
         $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
         from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
         left join grocery_unit gu on gp.Unit = gu.UnitId 
@@ -29,7 +31,10 @@ class Dashboard extends CI_Controller {
         }
         $assistant = $CI->lassistant->last_assistant();
         // echo '<pre>'; print_r($assistant);die;
-        $catArray = $CI->lcategory->get_category_hierarchy();
+        
+        //$catArray = $CI->lcategory->get_category_hierarchy();
+        $catArray = $CI->lcategory->get_category_hierarchy_in();
+        //echo '<pre>'; print_r($catArray);die;
         foreach($catArray as $key => $value) {
             $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
             if($products)
@@ -37,7 +42,7 @@ class Dashboard extends CI_Controller {
             $value->products = $products;
         }
         $data = array(
-            'title' => 'Sauda Express | Buy each and everything home grocery',
+            'title' => 'Sauda Express | Buy all your grocery here',
             'CatList' => $catArray,
             'ProdList' => $product_list,
             'Assistant' => json_encode($assistant)

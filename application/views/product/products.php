@@ -5,12 +5,12 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#"><?php echo $SelectCategory['MainCategory']; ?></a></li>
+                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <!--<li class="breadcrumb-item"><a href="#"><?php echo $SelectCategory['MainCategory']; ?></a></li>-->
                     <li class="breadcrumb-item"><?php echo $SelectCategory['SubCategory']; ?></li>
                 </ol>
             </nav>
-            <h3 class="mb-0"><?php echo $SelectCategory['SubCategory']; ?></h3>
+            <h3 class="mb-0"><?php echo $SelectCategory['MainCategory']; ?></h3>
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
                     <div class="row" id="products-area">
                         <div style="display: none;">
                             <script type="text" id="clone-cart">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 px-0">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
                                 <div class="featured-products-content mb-2 d-flex justify-content-between">
                                     <div class="card mr-2 each-prod product-card-inner">
                                         <div class="card-body p-0">
@@ -88,13 +88,37 @@
                             </div>
                             </script>
                         </div>
+                        <style>
+                            .main-content .featured-products-content .card .card-body h5{
+                                width: 80%;
+                                background: #ff2524d1;
+                                color: #fff;
+                                z-index: 1;
+                                text-align: center;
+                                font-size: 14px;
+                                position: absolute;
+                                top: 60px;
+                                text-transform: uppercase;
+                                margin: 0px 20px;
+                                padding: 10px 0px;
+                                border-radius: 0px 20px;
+                                font-weight: 700;
+                            }
+                        </style>
                         <?php foreach($ProdList as $value) { 
                             $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                             ?>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 px-0">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
+                                <?php if($_SESSION['user_type'] == 1){ echo $value['sort']; } ?>
                                 <div class="featured-products-content mb-2 d-flex align-items-center justify-content-start">
                                     <div class="card mr-2 each-prod product-card-inner">
                                         <div class="card-body p-0">
+                                            
+                                            <?php if($value['stock'] == '0') { 
+echo '<h5>Out Of Stock</h5>'; 
+}elseif($value['stock'] == '2'){
+     echo '<h5>Out Of Season</h5>'; 
+}?>
                                             <div class="header">
                                                 <?php if($discountPercentage != 0) { ?> 
                                                     <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
@@ -120,6 +144,7 @@
                                                'img' => base_url().$value['ProductImg']
                                            ];
                                            ?>
+                                           <?php if($value['stock'] == '1') { ?>
                                             <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                                                 <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                 <input type="text" class="d-inline-flex quantity-input quantity">
@@ -129,13 +154,16 @@
                                                     <a href="javascript:void(0);" class="qty-mns d-block">-</a>
                                                 </span>
                                             </div>
+                                            <?php } ?>
                                         </div>
+                                        <?php if($value['stock'] == '1') { ?>
                                         <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                         >Add to Cart</a>
                                         <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
                                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                         >Remove From Cart</a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

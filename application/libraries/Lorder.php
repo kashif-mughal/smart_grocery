@@ -28,7 +28,19 @@ class Lorder {
         );
         return $CI->parser->parse('order/checkout_form', $data, true);
     }
-
+     public function cart_page() {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        $CI->load->model('SiteSettings');
+        $userAddress = $CI->Users->get_user_address();
+            // print_r($userAddress);die;
+        $data = array(
+            'title' => 'Cart Page',
+            'userAddress' => $userAddress,
+            // 'deliveryCharges' => $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"]
+        );
+        return $CI->parser->parse('order/cart_page', $data, true);
+    }
     public function proceed_to_checkout($orderId) {
         $CI = & get_instance();
         $orderData = json_decode($_POST['order']);

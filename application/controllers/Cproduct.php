@@ -159,7 +159,10 @@ class Cproduct extends CI_Controller {
             'SaleUnitQty' => $this->input->post('SaleUnitQty'),
             'SaleUnit' => $this->input->post('SaleUnit'),
             'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
-            'tags' => $this->input->post('allTags')
+            'tags' => $this->input->post('allTags'),
+            'stock' => $this->input->post('stock'),
+            'season' => $this->input->post('season'),
+            'sort' => $this->input->post('sort')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])

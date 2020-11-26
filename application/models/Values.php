@@ -24,6 +24,7 @@ class Values extends CI_Model {
         $this->db->where('gp.Status', 1);
         $this->db->where('gc.Status', 1);
         $query = $this->db->get();
+        
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }

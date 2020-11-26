@@ -50,6 +50,7 @@
         <!-- Theme style -->
         <link href="<?php echo base_url() ?>assets/dist/css/styleBD.min.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>assets/css/select2.min.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="<?php echo base_url() ?>assets/css/select2.sortable.css" rel="stylesheet" type="text/css"/>-->
         <?php
         if ($Web_settings[0]['rtr'] == 1) {
             ?>
@@ -120,10 +121,100 @@
         <!-- Dashboard js -->
         <script src="<?php echo base_url() ?>assets/dist/js/dashboard.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>assets/js/select2.min.js" type="text/javascript"></script>
+        <!--<script src="<?php echo base_url() ?>assets/js/html.sortable.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>assets/js/select2.sortable.js" type="text/javascript"></script>-->
+        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>-->
+        
 
         <script type="text/javascript">
             $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-
+            $( function() {
+                $( "#sortable-sss" ).sortable({
+                    axis: 'y',
+                    update: function (event, ui) {
+            	        var data = $(this).sortable('serialize');
+                        //$('span').text(data);
+                        var value= $(this).attr('data-id');
+                        var text = $(this).attr('data-name');
+                        
+                        //var data = {text:text,value:value};
+                        console.log(data);
+                        $.ajax({
+                            data: data,
+                            type: 'POST',
+                            url: 'https://saudaexpress.com/Csettings/update_site_settings_categories'
+                        });
+            	    }
+                    /*update: function(event, ui) {
+                        var data = $(this).sortable('serialize');
+                        $.ajax({
+                                data: oData,
+                            type: 'POST',
+                            url: 'https://saudaexpress.com/Csettings/update_site_settings_categories'
+                        });
+                        $('.uisort').each(function(i) { 
+                           $(this).data('id', i+1); 
+                        }).filter(':first').trigger('listData');
+                        
+                    }*/
+                });
+                $('.uisort').on('listData', function() {
+                    $('.llhome_page_cat_sss').find('option').remove();
+                    $('.uisort').each(function() {
+                        
+                        $('.llhome_page_cat_sss').append($('<option>', { 
+                            value: $(this).attr('data-id'),
+                            text : $(this).attr('data-name')
+                        }));
+                        //$('.llhome_page_cat_sss').val($(this).attr('data-id'));
+                        console.log($(this).attr('data-id')); 
+                    });
+                });
+                
+                //$( "#sortable-sss" ).disableSelection();
+              });
+            
+            $("#home_page_cat").select2({
+                placeholder: 'Select a Category'
+            }).on("select2:select", function (evt) {
+                    var id = evt.params.data.id;
+            
+                    var element = $(this).children("option[value="+id+"]");
+            
+                    moveElementToEndOfParent(element);
+            
+                    $(this).trigger("change");
+                });
+            var ele=$("#home_page_cat").parent().find("ul.select2-selection__rendered");
+            ele.sortable({
+                containment: 'parent',
+                update: function() {
+                    orderSortedValues();
+                    console.log(""+$("#home_page_cat").val())
+                }
+            });
+            
+            orderSortedValues = function() {
+            var value = ''
+                $("#home_page_cat").parent().find("ul.select2-selection__rendered").children("li[title]").each(function(i, obj){
+            
+                    var element = $("#home_page_cat").children('option').filter(function () { return $(this).html() == obj.title });
+                    moveElementToEndOfParent(element)
+                });
+            };
+            
+            moveElementToEndOfParent = function(element) {
+                var parent = element.parent();
+            
+                element.detach();
+            
+                parent.append(element);
+            };
+            /*$(function() {
+            $('select#home_page_cat').select2Sortable();
+            });*/
+            
+            
             // select 2 dropdown 
             $("select.form-control:not(.dont-select-me)").select2({
                 placeholder: "Select option",

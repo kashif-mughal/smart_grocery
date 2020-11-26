@@ -104,6 +104,14 @@
                                 <img style="background: green; max-width: 100px;" src="<?=base_url()?>{Img}">
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="sort" class="col-sm-3 col-form-label">sort</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="sort" id="sort" value="{sort}" type="number">
+                            </div>
+                        </div>
+                        
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
                             <div class="col-sm-6">

@@ -25,8 +25,8 @@ foreach($CatList as $key => $value) {
 						</div>
 						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
 							<h5 class="call_to_action_title">Same/Next Day Delivery</h5>
-							<h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100
-								for orders below Rs. 4,000</h6>
+							<h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100 for orders below Rs. 4,000
+</h6>
 						</div>
 					</div>
 					
@@ -52,8 +52,7 @@ foreach($CatList as $key => $value) {
 						</div>
 						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
 							<h5 class="call_to_action_title">Online Support</h5>
-							<h6 class="call_to_action_content">Customer support from 9AM - Midnight (021) 111
-								111 123
+							<h6 class="call_to_action_content">Customer support from 9AM - 9PM +92 318 2294472
 							</h6>
 						</div>
 					</div>
@@ -91,7 +90,7 @@ foreach($CatList as $key => $value) {
 					<div class="feature-img">
 						<img src="<?php echo base_url() ?>assets/img/footer/arrow-left.png?>" alt="">
 					</div>
-					<h4 class="feature-text my-2 py-1">Maintain very high level of satisfaction of all our customers - we offer cashback and return options without any questions asked</h4>                  
+					<h4 class="feature-text my-2 py-1">Maintain very high level of satisfaction for all our customers - we offer cashback and return options without any questions asked</h4>                  
 				</div>
 			</div>
 			<div class="best_features">
@@ -102,7 +101,7 @@ foreach($CatList as $key => $value) {
 					<h4 class="feature-text my-2 py-1">Continuously innovate and improve out offerings to enhance the experience of our customers</h4>                  
 				</div>
 			</div>
-
+<!-- 
 			<div class="mission_vision my-4">
 				<h4>Mission & Vision</h4>
 				<div class="mission_vision_content">
@@ -113,6 +112,34 @@ foreach($CatList as $key => $value) {
 					<h6>Vision:</h6>
 					<p>Build strong understanding of customer needs fby carefully analyzing their shopping patterns and paying close attension to their stated expectations through intelligently carried out research and surverys. Use most suitable technology to create out of box solutions with the aim to acheiving optimum level of satisfaction for our customers and at the same time fullfilling our economic objectives. Attract best talent by offering competative remunerations and a healthy work environment that enables every team member to perform at his or her optimum level and at the same time achieve a perfect work-life balance.
 					</p>
+				</div>
+			</div> -->
+
+	        <div class="feature-details my-4">
+				<h4>Sauda Express - the most customer-centeric online shopping platform</h4>
+				<div class="feature_details_content">
+					<h6>Wide Geographic Coverage</h6>
+					<p>Order from anywhere in Karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Innovative Approach</h6>
+					<p>We at Sauda Express take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Long term Commitment</h6>
+					<p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Best Value for your Money</h6>
+					<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express and hence we make every effort to offer wide range of quality products at lowest possible prices.</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Special features for members</h6>
+					<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
+				</div>
+				<div class="feature_details_content">
+					<h6>Payment Options</h6>
+					<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add digital payment options.</p>
 				</div>
 			</div>
 
@@ -136,35 +163,6 @@ foreach($CatList as $key => $value) {
 						</div>
 					<?php } ?>
 
-
-				</div>
-			</div>
-
-			<div class="feature-details my-4">
-				<h4>Sauda Express - the most customer-centeric online shopping platform</h4>
-				<div class="feature_details_content">
-					<h6>Wide Geographic Coverage</h6>
-					<p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>
-				</div>
-				<div class="feature_details_content">
-					<h6>Innovative Approach</h6>
-					<p>We at Sauda Express take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>
-				</div>
-				<div class="feature_details_content">
-					<h6>Long term Commitment</h6>
-					<p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>
-				</div>
-				<div class="feature_details_content">
-					<h6>Best Value for your Money</h6>
-					<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>
-				</div>
-				<div class="feature_details_content">
-					<h6>Special features for members</h6>
-					<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
-				</div>
-				<div class="feature_details_content">
-					<h6>Payment Options</h6>
-					<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add payment option through debit and credit cards as well – this option too, will be available in a few weeks’ time.</p>
 				</div>
 			</div>
 
@@ -174,9 +172,6 @@ foreach($CatList as $key => $value) {
 					<div class="row">
 						<div class="col-md-2 pl-0">
 							<a href="<?=base_url("cpage/vision");?>">Mission & Vision</a>
-						</div>
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/brandstore");?>">Brand Stores</a>
 						</div>
 						<div class="col-md-2 pl-0">
 							<a href="<?=base_url("cpage/privacy");?>">Privacy Policy</a>
@@ -192,9 +187,6 @@ foreach($CatList as $key => $value) {
 						</div>
 						<div class="col-md-2 pl-0">
 							<a href="<?=base_url("cpage/returnandrefund");?>">Return & Refund</a>
-						</div>
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/categories");?>">Categories</a>
 						</div>
 					</div>
 				</div>
@@ -214,7 +206,22 @@ foreach($CatList as $key => $value) {
 					</div>
 				</div>
 			</div>
-
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+			<div class="company-address">
+				<div class="container">
+					<div class="row" >
+						<div class="col-6" style="letter-spacing: 10px;">
+							<a href="https://www.facebook.com/saudaexpresspk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
+							<a href="https://twitter.com/saudaexpresspk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
+							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a>
+						</div>
+						<div class="col-6 text-right">
+							<p>Powered By: <span><a href="http://www.malejol.com" style="text-decoration:none; color:#3d3d3b"">Malejol</a></span></p>
+						</div>
+					
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

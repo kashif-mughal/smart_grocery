@@ -26,6 +26,11 @@
         background: black !important;
         border-radius: 0px;
     }
+    .sidebar-inner-page h4 {
+        border-bottom: 1px solid #cccccc;
+        padding: 20px 26px;
+        color: #000000;
+    }
 </style>
 <!-- Bread Crumb -->
 

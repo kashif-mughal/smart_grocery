@@ -91,8 +91,13 @@ class Lproduct {
             'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
             'sale_unit' => $product_detail[0]['SaleUnit'],
             'ProductImg' => $product_detail[0]['ProductImg'],
-            'tags' => $product_detail[0]['tags']
+            'tags' => $product_detail[0]['tags'],
+            'stock' => $product_detail[0]['stock'],
+            'season' => $product_detail[0]['season'],
+            'sort' => $product_detail[0]['sort']
         );
+        
+        //var_dump($data);exit();
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 
@@ -249,6 +254,96 @@ class Lproduct {
                 'MainCategory' => 'Products',
                 'SubCategory' => 'All'
             );
+        }
+        if($catId == 12) {
+            $selectedCategory = array(
+                'MainCategory' => 'Essential Foods',
+                'SubCategory' => 'All',
+            );   
+        }
+        if($catId == 177) {
+            $selectedCategory = array(
+                'MainCategory' => 'Snacks & Breakfast',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 178) {
+            $selectedCategory = array(
+                'MainCategory' => 'Bakery and Frozen',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 179) {
+            $selectedCategory = array(
+                'MainCategory' => 'Beverages',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 180) {
+            $selectedCategory = array(
+                'MainCategory' => 'Fresh Fruits & Vegetables',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 181) {
+            $selectedCategory = array(
+                'MainCategory' => 'Meat & Poultry',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 182) {
+            $selectedCategory = array(
+                'MainCategory' => 'Seafood',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 183) {
+            $selectedCategory = array(
+                'MainCategory' => 'Personal Hygiene',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 184) {
+            $selectedCategory = array(
+                'MainCategory' => 'Haircare',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 185) {
+            $selectedCategory = array(
+                'MainCategory' => 'Toiletries',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 186) {
+            $selectedCategory = array(
+                'MainCategory' => 'Kitchen Essentials',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 187) {
+            $selectedCategory = array(
+                'MainCategory' => 'Household Essentials',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 188) {
+            $selectedCategory = array(
+                'MainCategory' => 'Baby Care',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 189) {
+            $selectedCategory = array(
+                'MainCategory' => 'OTC Healthcare & Wellbeing',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 190) {
+            $selectedCategory = array(
+                'MainCategory' => 'Pet Care',
+                'SubCategory' => 'All'
+            );   
         }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',

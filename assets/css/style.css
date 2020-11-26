@@ -1,4 +1,6 @@
-.form-control {
+.categories .category-grid .sub-category .sub-category-content .category-text:hover {
+   text-decoration: underline;
+}.form-control {
    border-color: #cccccc !important;
 }
 
@@ -944,7 +946,13 @@ button.category-button:active {
    border-radius: 10px 10px 0 0;
    padding: 8px 20px;
    border: 1px solid #cccccc;
-   min-height: 455px;
+   min-height: 45px;
+}
+.panel-min-height {
+   min-height: 455px !important;
+}
+.slider .featured-products-content {
+   display: none;   
 }
 .slick-dots {
    bottom: -26px !important;
@@ -1039,7 +1047,7 @@ button.category-button:active {
 
 
 .main-content .featured-products-content .card .card-body {
-   max-height: 39px;
+   max-height: 14px;
 }
 .main-content .featured-products-content .card img {
    max-width: 190px;	
@@ -1105,13 +1113,14 @@ button.category-button:active {
 }
 
 #products-area .featured-products-content .product-card-inner {
-   width: 100% !important;
-   max-width: 400px !important;
-   height: 348px;
-   border-radius: 10px 10px 0px 0px;
-   background-color: #ffffff;
-   border: 1px solid #cccccc;
-   margin-bottom: 10px; 
+    width: 100% !important;
+    max-width: 400px !important;
+    /* height: 377px; */
+    border-radius: 10px 10px 0px 0px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    margin-bottom: 4px;
+    padding-bottom: 10px;
 }
 
 .edibles-main .product-card-inner {
@@ -1133,7 +1142,7 @@ button.category-button:active {
 }	
 .product-card-title,
 .product-card-inner-name {
-   height: 2.5em !important;
+   height: 4.5em !important;
    line-height: 1.3em !important;
    width: 100% !important;
    overflow: hidden !important;
@@ -1277,7 +1286,7 @@ button.category-button:active {
    position: absolute;
    right: 21px;
    max-width: 35%;
-   top: 48px;
+   top: 23%;
 }
 .grocery-features .card {	
    border-radius: 6px 6px 0 0;	
@@ -1642,14 +1651,18 @@ button.category-button:active {
    letter-spacing: -0.4px;
 }
 .categories .category-grid {
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+   /* display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+   columns: 4;
+   -webkit-columns: 4;
+   -moz-columns: 4;
+   column-rule: solid 1px #ececec;
    align-content: center;
    padding-bottom: 24px;
-   border-bottom: 1px solid #ececec;
+   /* border-bottom: 1px solid #ececec; */
 }
 .categories .category-grid .sub-category {
-   border-right: 1px solid #ececec;
+   /* border-right: 1px solid #ececec; */
    margin-right: 10px;
    /* margin-bottom: 20px !important; */
 }
@@ -1665,6 +1678,12 @@ button.category-button:active {
 }
 .categories .category-grid .sub-category .sub-category-content .category-text:hover {
    text-decoration: underline;
+}
+.categories .category-grid .sub-category .sub-category-content .category-text {
+   position: absolute;
+}
+.hyphen{
+   padding-right: 4px;
 }
 
 
@@ -1728,6 +1747,7 @@ button.category-button:active {
    background-color: #ffffff;
    padding: 15px 0;
    border: 1px solid #cccccc;
+   padding-top: 158px;
 }
 .bread_crumb h3 {
    font-size: 24px;
@@ -1769,9 +1789,9 @@ button.category-button:active {
 }
 .order-button a {
    font-size: 14px;
-   font-weight: 600;
+   font-weight: 500;
    font-family: "Work Sans";
-   padding: 6px 20px;
+   padding: 6px 11px;
    text-decoration: none;
    color: #ffffff;
    margin: 4px 0px;
@@ -1930,7 +1950,7 @@ button.category-button:active {
 }
 
 .sidenav .sidenav-content {
-   padding: 60px 12px;
+   padding: 38px 24px;
    background-color: #ffffff;
 }
 .sidenav .sidebar-menu .sidebar-menu-title {
@@ -1949,6 +1969,62 @@ button.category-button:active {
    font-family: "Work Sans";
    margin-bottom: 0px;
 }
+.sidenav h4.sidebar-heading {
+   font-family: "Work Sans";
+   font-size: 23px;
+   letter-spacing: -1px;
+   font-weight: 600;
+   margin-bottom: 20px;   
+   border-bottom: 1px solid #cccccc;
+   color: #000000;
+   padding: 20px 22px;
+}
+.sidenav #accordionExample h6 {
+   font-size: 16px;
+   line-height: 20px;
+   color: #333333;
+   font-weight: 600;
+   font-family: "Work Sans";
+   margin-top: 8px;
+   margin-bottom: 2px;
+}
+.sidenav .left-menu-top-heading 
+.sidenav #accordionExample a {
+   display: block;
+   font-size: 14px;
+   line-height: 18px;
+   color: #333333;
+   font-family: "Work Sans";
+   letter-spacing: -0.4px;
+   text-decoration: none;
+}
+.sidenav .sidebar-menu-items > li {
+   padding: 0 33px 10px 35px;
+}
+.sidenav .sidebar-menu-items > li > ul {
+   padding: 2px 30px;
+}
+.sidenav .inner-category a {
+   display: block;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    color: #333333;
+    font-family: "Work Sans";
+    letter-spacing: -0.4px;
+    text-decoration: none;
+}
+.sidenav .sidebar-menu .sidebar-menu-items .inner-category-heading {
+   font-size: 16px !important;
+    line-height: 20px;
+    color: #333333;
+    font-weight: 600;
+    font-family: "Work Sans";
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+.sidenav .sidebar-menu-items .inner-category .cat-text:hover {
+   text-decoration: underline;
+}
 .sidenav .sidebar-menu .sidebar-menu-items li a {
    font-size: 14px;
    line-height: 23px;
@@ -1957,6 +2033,7 @@ button.category-button:active {
    font-family: "Work Sans";
    padding-top: 0px;
    padding-bottom: 0px;
+   padding-left: 0px;
 }
 
 .sidenav .sidebar-menu .sidebar-menu-items li a:hover {
@@ -1972,18 +2049,14 @@ button.category-button:active {
    padding: 0 12px 12px 10px;
 }
 .sidenav a {
-   padding: 8px 8px 8px 32px;
    text-decoration: none;
-   font-size: 25px;
-   color: #818181;
    display: block;
-   transition: 0.3s;
+   color: #1b1b1b;
+   font-size: 29px;
 }
-
-.sidenav a:hover {
-   color: #000000;
+.socialmedia-footer{
+   padding: 9px 5px;
 }
-
 .sidenav #btn-close-sidebar {
    position: absolute;
    top: 0;
@@ -1995,12 +2068,6 @@ button.category-button:active {
 #body-content {
    transition: margin-left .5s;
    /* padding: 16px; */
-}
-
-/* Order : My Order */
-.sidenav a {
-    padding: 8px 8px 8px 16px;
-    font-size: 22px;
 }
 
 /* Sidebar */
@@ -2091,9 +2158,9 @@ button.category-button:active {
 /* Order History */
 .order-button a {
    font-size: 14px;
-   font-weight: 600;
+   font-weight: 500;
    font-family: "Work Sans";
-   padding: 6px 20px;
+   padding: 6px 11px;
    text-decoration: none;
    color: #ffffff;
    margin: 4px 0px;
@@ -2109,9 +2176,6 @@ button.category-button:active {
 }
 .order-button .button-secondary:hover {
    background-color: #464646 !important;
-}
-.order-history-card {
-
 }
 .order-history-card img {
    max-width: 100px;
@@ -2615,6 +2679,7 @@ a#newAddressCancelBtn {
    border: 1px solid #cccccc !important;
    border-radius: 0px;
    padding: 2px 8px;
+   margin: 2px;
 }
 .filter-type-checkbox input {
    width: 17px !important;
@@ -2660,13 +2725,19 @@ a#newAddressCancelBtn {
    border: 1px solid #cccccc;
 }
 .va-panel-content .product-card {
-   height: 320px !important;
-   width: 200px !important;
+   height: 351px !important;
+   width: 190px !important;
 }
 .va-panel-content .product-content-button button.nav-btn-primary {
    padding: 2px 8px !important;
    background-color: #333333;
    border: 1px solid #909090;
+   border-radius: 0px;
+   color: #ffffff;
+}
+.va-panel-content .product-content-button button.nav-btn-secondary {
+   padding: 4px 16px !important;
+   background-color: #25bfa9;
    border-radius: 0px;
    color: #ffffff;
 }
@@ -2874,6 +2945,9 @@ a#newAddressCancelBtn {
       margin-left: 10px;
       margin-right: 10px;
    }
+   .grocery-features .grocery-assistant-card .image-container {
+      width: 127px !important;
+   }
 }
 
 @media (max-width: 767px) {
@@ -3007,8 +3081,7 @@ a#newAddressCancelBtn {
    } 
 
    .grocery-features .grocery-assistant-card .image-container {
-      width: 28%;
-      top: 45px;
+      width: 127px !important;
    }
 
    .grocery-assistant-card .card-heading {
@@ -3059,7 +3132,7 @@ a#newAddressCancelBtn {
    }
    .grocery-features .grocery-assistant-card .image-container {
       height: 201px !important;
-      width: 32%;
+      width: 35%;
    }
    .value-cart .value-cart-feature-image {
        position: absolute;
@@ -3106,6 +3179,9 @@ a#newAddressCancelBtn {
    .tag-line {
       font-size: calc(0.6rem + 0.3vw) !important;
    }
+   .grocery-features .grocery-assistant-card .image-container {
+      width: 127px;
+   }
 }
 
 @media (max-width: 1139px) {
@@ -3124,7 +3200,9 @@ a#newAddressCancelBtn {
       font-size: 14px;
    }
    .grocery-features .grocery-assistant-card .image-container {
-      right: 14px;
+      right: 18px;
+      width: 35%;
+      top: 35px;
    }
    .value-cart .card-title {
       font-size: 15px;

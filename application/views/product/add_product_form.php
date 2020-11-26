@@ -211,6 +211,27 @@
                         </div>
                         
                         <div class="form-group row">
+                            <label for="stock" class="col-sm-3 col-form-label">Stock <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="stock" id="stock" required>
+                                    <option value="1" selected="selected">In Stock</option>
+                                    <option value="0">Out Of Stock</option>
+                                    <option value="2">Out Of Season</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!--<div class="form-group row">
+                            <label for="season" class="col-sm-3 col-form-label">Season <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="season" id="season" required>
+                                    <option value="1" selected="selected">In Season</option>
+                                    <option value="0">Out Of Season</option>
+                                </select>
+                            </div>
+                        </div>-->
+                        
+                        <div class="form-group row">
                             <label for="Img" class="col-sm-3 col-form-label">Product Image </label>
                             <div class="col-sm-6">
                                 <input type="file" name="image" class="form-control" id="image">

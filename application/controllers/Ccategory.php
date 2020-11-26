@@ -112,7 +112,8 @@ class Ccategory extends CI_Controller {
         $data = array(
             'CatName' => $this->input->post('CatName'),
             'Alias' => $this->input->post('Alias'),
-            'ParentId' => $this->input->post('ParentId')
+            'ParentId' => $this->input->post('ParentId'),
+            'sort' => $this->input->post('sort')
         );
         if($_FILES['image']['name'])
             $data['Img'] = (!empty($image_url) ? $image_url : 'assets/img/category.jpg');

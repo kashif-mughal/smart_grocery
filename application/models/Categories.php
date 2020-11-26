@@ -21,6 +21,24 @@ class Categories extends CI_Model {
         }
         return false;
     }
+    
+    public function category_listin() {
+        
+        $CI = & get_instance();
+        $CI->load->model('SiteSettings');
+        $setting_detail = $CI->SiteSettings->retrieve_editdata('setting_id', '1');
+        $SettingData = $setting_detail[0];
+        //echo ($SettingData['home_page_cat']);
+        $idarr = trim($SettingData['home_page_cat'], '[]');
+        $myq = 'SELECT a.*, b.CatName ParentName FROM `grocery_category`a LEFT JOIN `grocery_category` b ON a.ParentId = b.CategoryId WHERE a.Status="1" AND a.ParentId IN ('.$idarr.')';
+        //echo $myq;
+        $query = $this->db->query($myq);
+        if ($query->num_rows() > 0) {
+            //return $query->result_array();
+            return json_decode($SettingData['home_page_cat']);
+        }
+        return false;
+    }
 
     public function category_list_product() {
         $this->db->select('*');
@@ -50,6 +68,30 @@ class Categories extends CI_Model {
         $this->db->from($this->tableName);
         $this->db->where('CategoryId', $CategoryId);
         $this->db->limit('500');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+    
+    //Count customer
+    public function parent_category() {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('ParentId', 0);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+    //Count customer
+    public function parent_category_seeting() {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('ParentId', 0);
+        $this->db->where('Status', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -105,7 +147,7 @@ class Categories extends CI_Model {
                     gp.Category IN(
                         $inCats
                     )
-                    ORDER BY gp.ModifiedOn DESC
+                    ORDER BY gp.sort DESC
                     LIMIT $startFrom, $limit";
         $countQuery = "SELECT 
                         count(1) total
