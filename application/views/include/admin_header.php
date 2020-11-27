@@ -157,6 +157,28 @@ $users = $CI->Users->profile_edit_data();
 
             <!-- Brand menu start -->
             <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Ccopun")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="ti-bag"></i><span>Copun</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Ccopun') ?>">Add Copun</a></li>
+                    <li><a href="<?php echo base_url('Ccopun/manage_copun') ?>">Manage Copun</a></li>
+
+                </ul>
+            </li>
+            <!-- Brand menu end -->
+
+            <!-- Order menu start -->
+            <li class="treeview <?php
             if ($this->uri->segment('1') == ("Corder")) {
                 echo "active";
                 } else {
@@ -174,7 +196,7 @@ $users = $CI->Users->profile_edit_data();
 
                 </ul>
             </li>
-            <!-- Brand menu end -->
+            <!-- ORder menu end -->
 
             <!-- Asssistant menu start -->
             <li class="treeview <?php

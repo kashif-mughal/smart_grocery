@@ -498,12 +498,20 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
       if(cart)
          cart = JSON.parse(cart);
 
+      var dataJson = null;
+      dataJson = addCartObj.data('json');
+      if(!dataJson){
+        var currentProdId = addCartObj.attr("pId");
+        dataJson = cart.filter(function(each){return each.id == currentProdId});
+        if(dataJson.length > 0)
+          dataJson = dataJson[0];
+      }
       if(qty == 0){
-         removeAndUpdateFromCart(addCartObj.data('json'), $(prodContainer.find('.remove-cart')[0]));
+         removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
          return true;
       }else{
          addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
-            addCartObj.data('json'), 
+            dataJson, 
             qty,
             addCartObj
             );
@@ -540,62 +548,7 @@ function removeItemFromShoppingCart(currentElem){
    }
    loadCartData();
 }
-// function loadShoppingCart(){
-//   var cartBody = $('#shoppingCartBody');
-//   var cart = getCookie('baskit');
-//   $(cartBody.find('tbody')).empty();
-//   if(cart){
-//       cart = JSON.parse(cart);
-//       if(cart.length == 0)
-//       {
-//          //show empty response here
-//          showEmptyResponse(cartBody);
-//          return;
-//       }
-//       $(cartBody).show();
-//       $($('.emptyCart')[0]).hide();
-//       $(document).off('click', '.checkout-btn', handleCheckout(event));
-//       var eachProdTemplate = `<tr>
-//       <td class="text-center">
-//       <img src="{imgValue}" alt="" class="img-fluid">
-//       </td>
-//       <td colspan="3">{prodName}</td>
-//       <td>{qty}</td>
-//       <td class="text-right" colspan="2">{price}</td>
-//       <td class="text-right">{totalPrice}</td>
-//       <td class="text-right">
-//       <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="btn btn-sm btn-block btn-danger remove-item-from-cart">
-//       <i class="fa fa-times"></i> Remove
-//       </a>
-//       </td>
-//       </tr>`;
-//       var cartTotalRow = `<tr>
-//       <td colspan="7" class="text-right">Total</td>
-//       <td class="text-right" id="Grand-Total">{grandTotal}</td>
-//       <td></td>
-//       </tr>`;
-//       var sum = 0;
-//       for (var i = 0; i < cart.length; i++) {
-//          var eachProdTemplateCopy = eachProdTemplate;
-//          sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace('{price}', cart[i].price);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-//          eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
-//          //append newly created row in card body
-//          $(cartBody.find('tbody')).append(eachProdTemplateCopy);
-//          }
-//          cartTotalRow = cartTotalRow.replace('{grandTotal}', sum);
-//          $(cartBody.find('tbody')).append(cartTotalRow);
-//       }
-//       else{
-//          //show empty response here
-//          showEmptyResponse(cartBody);
-//          return false;
-//       }   
-//   }
+
    function showEmptyResponse(cartBody){
       if(cartBody)
         $(cartBody).hide();
