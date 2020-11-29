@@ -35,7 +35,7 @@ html,body
 }
 
 .main-content {
-   margin-top: 145px;
+   /* margin-top: 145px; */
 }
 
 /* ===== OTP Input Ends ===== */
@@ -1759,9 +1759,9 @@ button.category-button:active {
 .categories .category-grid {
    /* display: grid;
    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
-   columns: 4;
-   -webkit-columns: 4;
-   -moz-columns: 4;
+   columns: 3;
+   -webkit-columns: 3;
+   -moz-columns: 3;
    column-rule: solid 1px #ececec;
    align-content: center;
    padding-bottom: 24px;
@@ -1785,9 +1785,9 @@ button.category-button:active {
 .categories .category-grid .sub-category .sub-category-content .category-text:hover {
    text-decoration: underline;
 }
-.categories .category-grid .sub-category .sub-category-content .category-text {
+/* .categories .category-grid .sub-category .sub-category-content .category-text {
    position: absolute;
-}
+} */
 .hyphen{
    padding-right: 4px;
 }
@@ -1798,6 +1798,13 @@ button.category-button:active {
    border-bottom: 1px solid #cccccc;
    border-left: 1px solid #cccccc;
    border-right: 1px solid #cccccc;
+}
+.sidebar-inner-page i,
+.filter-brand i,
+.filter-weight i,
+.filter-type i,
+.products-widget-heading i {
+   font-size: 24px;
 }
 .sidebar-inner-category-content {
    /* font-size: 16px;
@@ -2995,11 +3002,7 @@ a#newAddressCancelBtn {
       background: transparent;
       border: none;
    }
-   .categories .category-grid {
-      columns: 3;
-      -webkit-columns: 3;
-      -moz-columns: 3;
-   }
+   
 
    #va-panel .va-panel-content .quantity-area {
       margin-left: 0;
@@ -3136,6 +3139,12 @@ a#newAddressCancelBtn {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       max-width: 50%;
+   }
+
+   .categories .category-grid {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
    }
    
 }

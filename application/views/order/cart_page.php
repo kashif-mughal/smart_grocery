@@ -418,9 +418,9 @@ function loadShoppingCart1(){
           <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
               <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
               <span class="d-block quantity-button">
-                 <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                 <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
                  <div class="separator"></div>
-                 <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                 <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
               </span>
            </div>
         </td>
