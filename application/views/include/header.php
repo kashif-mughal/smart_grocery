@@ -203,16 +203,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div class="main-nav bg-light">
          <div class="container">
-            <div class="row align-items-center py-4">
+            <div class="row align-items-center py-3 py-md-4">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-4 mb-md-2 mb-lg-0 col-12 order-1 text-center">
+               <div class="col-lg-3 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-end justify-content-md-end justify-content-sm-center">
                      <div class="sidebar-button">
                         <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                               aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" style="width: 44px;">
+                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
                               <!-- <i class="fa fa-bars" style="font-size: 40px;"></i> -->
                         </button>
                      </div>
@@ -225,7 +225,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </div>
                </div>
                <!-- Search Bar -->
-               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right">
+               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
@@ -249,7 +249,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  </div>
                               </div>
                               </div>
-                              <div class="input-group mb-3" style="position: absolute; color: white;">
+                              <div class="input-group mb-3 search-helper-text" style="position: absolute; color: white;">
                                 <span>"Searching in" &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
                               </div>
                            </form>
@@ -257,7 +257,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                   <!-- Phone Number & Add to Cart Button -->
-                  <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1">
+                  <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
+                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1 col-4">
                      <div class="phone_cart d-flex flex-row align-item-center 
                         justify-content-start justify-content-md-start justify-content-sm-center">
                         <!-- Phone -->

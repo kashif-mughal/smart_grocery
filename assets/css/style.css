@@ -34,6 +34,19 @@ html,body
    box-shadow: 0 0 5px #17a18d inset;
 }
 
+.section-head {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   z-index: 1071;
+}
+
+
+.main-content {
+   margin-top: 145px;
+}
+
 /* ===== OTP Input Ends ===== */
 
 /*css animation*/
@@ -145,7 +158,7 @@ html,body
 }
 .ordertrackingprogress ul li:last-child:after {
     border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
+    border-bottom-right-radius: 10px;
     left: -15%
 }
 .ordertrackingprogress ul li .check-container {
@@ -948,6 +961,97 @@ button.category-button:active {
    border: 1px solid #cccccc;
    min-height: 45px;
 }
+<<<<<<< HEAD
+/* Loading */
+/* .lds-roller {
+   display: inline-block;
+   position: relative;
+   width: 50px;
+   height: 50px;
+ }
+ .lds-roller div {
+   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+   transform-origin: 40px 40px;
+ }
+ .lds-roller div:after {
+   content: " ";
+   display: block;
+   position: absolute;
+   width: 7px;
+   height: 7px;
+   border-radius: 50%;
+   background: #333333;
+   margin: -4px 0 0 -4px;
+ }
+ .lds-roller div:nth-child(1) {
+   animation-delay: -0.036s;
+ }
+ .lds-roller div:nth-child(1):after {
+   top: 63px;
+   left: 63px;
+ }
+ .lds-roller div:nth-child(2) {
+   animation-delay: -0.072s;
+ }
+ .lds-roller div:nth-child(2):after {
+   top: 68px;
+   left: 56px;
+ }
+ .lds-roller div:nth-child(3) {
+   animation-delay: -0.108s;
+ }
+ .lds-roller div:nth-child(3):after {
+   top: 71px;
+   left: 48px;
+ }
+ .lds-roller div:nth-child(4) {
+   animation-delay: -0.144s;
+ }
+ .lds-roller div:nth-child(4):after {
+   top: 72px;
+   left: 40px;
+ }
+ .lds-roller div:nth-child(5) {
+   animation-delay: -0.18s;
+ }
+ .lds-roller div:nth-child(5):after {
+   top: 71px;
+   left: 32px;
+ }
+ .lds-roller div:nth-child(6) {
+   animation-delay: -0.216s;
+ }
+ .lds-roller div:nth-child(6):after {
+   top: 68px;
+   left: 24px;
+ }
+ .lds-roller div:nth-child(7) {
+   animation-delay: -0.252s;
+ }
+ .lds-roller div:nth-child(7):after {
+   top: 63px;
+   left: 17px;
+ }
+ .lds-roller div:nth-child(8) {
+   animation-delay: -0.288s;
+ }
+ .lds-roller div:nth-child(8):after {
+   top: 56px;
+   left: 12px;
+ }
+ @keyframes lds-roller {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+ } */
+
+/* Loading Ends */
+
+=======
+>>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
 .panel-min-height {
    min-height: 455px !important;
 }
@@ -1192,6 +1296,11 @@ button.category-button:active {
 .quantity-area .quantity-button a:hover {
    background-color: #999999;
 }
+
+#btn-sidebar img {
+   width: 44px;
+}
+
 /* Inner Page Product Card */
 
 
@@ -2725,7 +2834,11 @@ a#newAddressCancelBtn {
    border: 1px solid #cccccc;
 }
 .va-panel-content .product-card {
+<<<<<<< HEAD
+   height: 320px !important;
+=======
    height: 351px !important;
+>>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
    width: 190px !important;
 }
 .va-panel-content .product-content-button button.nav-btn-primary {
@@ -2867,10 +2980,65 @@ a#newAddressCancelBtn {
 /* ----------------------------------------------------- */
 /* Media Queries */
 
+@media (max-width: 425px) {
+   .product-card-viewmore-btn {
+      padding: 7px 28px !important;
+      font-size: 12px !important;
+   }
+
+   .main-page-product-card {
+      width: 160px;
+   }
+   
+   .product-card img {
+      width: 145px;
+   } 
+
+   .main-page-product-card .card-footer {
+      background: transparent;
+      border: none;
+   }
+   .categories .category-grid {
+      columns: 3;
+      -webkit-columns: 3;
+      -moz-columns: 3;
+   }
+}
+
 @media (max-width: 576px) {
    .phone_cart {
       margin-bottom: 12px !important;
    }
+
+   .phone_cart .phone {
+      display: none !important;
+   }
+
+   .logo .logo_content img {
+      max-width: 150px !important;
+   }
+
+   #btn-sidebar img {
+      width: 35px;
+   }
+
+   .cart_icon {
+      margin-bottom: 20px;
+   }
+
+   .search-helper-text {
+      display: none;
+   }
+
+   .header_search_form_container input {
+      min-height: 20px !important;
+      font-size: 14px;
+      padding: 18px 12px;
+   }
+   .main-content {
+      margin-top: 182px !important;
+   }
+
 
    .top-bar .cart-basket-main {
       width: 100% !important;
@@ -2948,6 +3116,17 @@ a#newAddressCancelBtn {
    .grocery-features .grocery-assistant-card .image-container {
       width: 127px !important;
    }
+<<<<<<< HEAD
+   .sign-in-content .input-group-prepend,
+   .sign-in-content #inputPhone {
+      height: 45px !important;
+      margin-bottom: 10px;
+   }
+   .sign-in-content .phone-Submit-Btn {
+      height: 45px;
+   }
+=======
+>>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
 }
 
 @media (max-width: 767px) {
@@ -3005,7 +3184,7 @@ a#newAddressCancelBtn {
    }
    
    .logo .logo_content img {
-      max-width: 190px !important;
+      max-width: 190px;
    }
 
 /* top bar */
@@ -3155,6 +3334,10 @@ a#newAddressCancelBtn {
       max-width: 35px !important;
    }
 
+   .logo .logo_content img {
+      max-width: 190px;
+   }
+
    /* .order-id,
    .order-date,
    .order-time {
@@ -3171,6 +3354,11 @@ a#newAddressCancelBtn {
    }
    .orderTrackingLink .orderTrackingIcon {
       font-size: 14px;
+   }
+
+   
+   .main-content {
+      margin-top: 205px;
    }
 
 }
