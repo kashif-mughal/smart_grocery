@@ -114,10 +114,7 @@
                             $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                             ?>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
-<<<<<<< HEAD
-=======
                                 <?php if($_SESSION['user_type'] == 1){ echo $value['sort']; } ?>
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
                                 <div class="featured-products-content mb-2 d-flex align-items-center justify-content-start">
                                     <div class="card mr-2 each-prod product-card-inner">
                                         <div class="card-body p-0">

@@ -5,7 +5,7 @@
     }
 </style>
 
-<section class="main-content" style="padding-top: 150px;">
+<section class="main-content">
    <div class="container">
       <div class="row">
          <div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
@@ -332,11 +332,7 @@
    <!-- Virtual Assistant -->
 
    <!-- Website Note -->
-<<<<<<< HEAD
-   <div id="websiteNote" style="z-index: 2000; display: block; position: absolute; top: 0vh; margin-left: 23%;">
-=======
    <div id="websiteNote" style="z-index: 2000; display: block; position: fixed; top: 0vh; margin-left: 23%;">
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
        <div style="width: 70%; margin-top:35vh; animation-name: moveInUp;animation-duration: 0.5s; box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;">
           <div class="p-0" style=" border-radius: 5px; border:1px solid #ffc107; background-color: #fff;">
              <div class="modal-body p-5">
@@ -354,11 +350,6 @@
           </div>
        </div>
     </div>
-<<<<<<< HEAD
-   <div class="bg-overlay" style="position: absolute; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.5;"></div>
-    <!-- Website Note -->
-
-=======
    <div class="bg-overlay" style="position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.5;"></div>
     <!-- Website Note -->
 <style>
@@ -366,7 +357,6 @@ html{
    overflow: hidden;
 }
 </style>
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
 <script type="text/javascript">
    var numberOfPageList = [];
    var groceryAssistantData = [];
@@ -380,10 +370,7 @@ html{
       $('#websiteNoteDismiss').click(function() {
          $('#websiteNote').hide();
          $("body").css({"height": "100%", "overflow-y": "none"});
-<<<<<<< HEAD
-=======
           $("html").css({"overflow": "auto"});
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
          $('.bg-overlay').hide();
       });
      // Website Note Ends
@@ -505,11 +492,7 @@ html{
             $('#nextCategoryBtn').attr('disabled', false);
             $('#prevCategoryBtn').attr('disabled', true);
          }
-<<<<<<< HEAD
-
-=======
          
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
          isCatButtonSearch = false;
       });
         
@@ -544,11 +527,7 @@ html{
             var tagAreaArray = [];
             for(each in assistantJson["Assistant"][prevCat]) {
                var tagsArray = [];
-<<<<<<< HEAD
-
-=======
                
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
                if(assistantJson["Assistant"][prevCat][each]["BrandName"] && (brandAreaArray.indexOf(assistantJson["Assistant"][prevCat][each]["BrandName"]) == -1)) {
                   brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJson["Assistant"][prevCat][each]["BrandName"]}">${assistantJson["Assistant"][prevCat][each]["BrandName"]}</button>`);
                      brandAreaArray.push(assistantJson["Assistant"][prevCat][each]["BrandName"]);
@@ -593,11 +572,7 @@ html{
             $('#nextCategoryBtn').attr('disabled', true);
             $('#prevCategoryBtn').attr('disabled', false);
          }
-<<<<<<< HEAD
-
-=======
          
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
          isCatButtonSearch = false;
       });
 
@@ -633,19 +608,11 @@ html{
       var baseUrl = '<?=base_url()?>';
       var catIndex = 0;
       $('#pagination-category-btn').empty();
-<<<<<<< HEAD
-
-      if(isCatButtonSearch) {
-         currentCategoryName = $("#va-panel-heading-sub-category").text();
-      }
-
-=======
       
       if(isCatButtonSearch) {
          currentCategoryName = $("#va-panel-heading-sub-category").text();
       }
 
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       for(each in assistantData) {
          if(!isCatButtonSearch) {
             if(!currentCategoryName) 
@@ -729,11 +696,7 @@ html{
          $("#va-panel-heading-sub-category").text(assistantData[currentCategoryName][0]["CatName"]);
          for(var j = 0; j < finalFilterData[currentCategoryName][0].length; j++) {
             container.append(finalFilterData[currentCategoryName][0][j]);
-<<<<<<< HEAD
-         }         
-=======
          } 
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       }
       $('#pagination-btn').empty();
       for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
@@ -769,19 +732,7 @@ html{
    }
 
    function clearAllFilters() {
-<<<<<<< HEAD
-
-      var currentCategoryNameAfterClear = currentCategoryName;
-
-=======
-      var currentCategoryNameAfterClear = currentCategoryName;
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
-      var brandFilter = $('.filter-sidebar .filter-brand .filter-brand-button button');
-      var weightFilter = $('.filter-sidebar .filter-weight .filter-weight-button button');
-      var tagsFilter = $('.filter-sidebar .filter-type .filter-type-button button');
-      if(brandFilter.hasClass("filterSelected")) {
          brandFilter.removeClass("filterSelected");
-      }
       if(weightFilter.hasClass("filterSelected")) {
          weightFilter.removeClass("filterSelected");
       }
@@ -796,14 +747,7 @@ html{
       groceryAssistantData = setupGroceryAssistant();
       
       $("#clearFilter").hide();
-<<<<<<< HEAD
-
-
-      // ==========================================================================================
-
-=======
       
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       var lastCategory;
        for(each in groceryAssistantData) {
          if(each == currentCategoryName) {
@@ -814,22 +758,6 @@ html{
        }
        
        lastCategory = currentCategoryNameAfterClear;
-<<<<<<< HEAD
-
-       if(lastCategory) {
-       
-
-         $("#brand-filter-area").empty();
-         $("#saleunit-filter").empty();
-         $("#tag-filter-area").empty();
-
-         var brandArea = $("#brand-filter-area");
-         var weightArea = $("#saleunit-filter");
-         var tagArea = $("#tag-filter-area");
-
-         var counter = 0;
-
-=======
        if(lastCategory) {
        
          $("#brand-filter-area").empty();
@@ -839,37 +767,21 @@ html{
          var weightArea = $("#saleunit-filter");
          var tagArea = $("#tag-filter-area");
          var counter = 0;
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
          var brandAreaArray = [];
          var weightAreaArray = [];
          var tagAreaArray = [];
          for(each in assistantJsonArray["Assistant"][lastCategory]) {
             var tagsArray = [];
-<<<<<<< HEAD
-
-=======
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
             if(assistantJsonArray["Assistant"][lastCategory][each]["BrandName"] && (brandAreaArray.indexOf(assistantJsonArray["Assistant"][lastCategory][each]["BrandName"]) == -1)) {
               brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJsonArray["Assistant"][lastCategory][each]["BrandName"]}">${assistantJsonArray["Assistant"][lastCategory][each]["BrandName"]}</button>`);
                 brandAreaArray.push(assistantJsonArray["Assistant"][lastCategory][each]["BrandName"]);
             }       
-<<<<<<< HEAD
-
-=======
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
             if(assistantJsonArray["Assistant"][lastCategory][each]["SaleUnitQuantity"] && (weightAreaArray.indexOf(assistantJsonArray["Assistant"][lastCategory][each]["SaleUnitQuantity"]) == -1)) {
               weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJsonArray["Assistant"][lastCategory][each]["SaleUnitQuantity"]}" class="btn btn-link mb-2">${assistantJsonArray["Assistant"][lastCategory][each]["SaleUnitQuantity"]}</button>`);  
               weightAreaArray.push(assistantJsonArray["Assistant"][lastCategory][each]["SaleUnitQuantity"]);
             }
-<<<<<<< HEAD
-
             var tagString = assistantJsonArray["Assistant"][lastCategory][each].tags;
             tagsArray = tagString.split(",");
-
-=======
-            var tagString = assistantJsonArray["Assistant"][lastCategory][each].tags;
-            tagsArray = tagString.split(",");
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
             for(tag in tagsArray) {
               if(tagsArray[tag] && (tagAreaArray.indexOf(tagsArray[tag]) == -1)) {
                 tagArea.append(`<div class="form-check">
@@ -881,20 +793,12 @@ html{
             }
        }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       $('#prevCategoryBtn').attr('disabled', false);
       $('#nextCategoryBtn').attr('disabled', false);
       $('#product-wrt-cat').empty();
       $("#va-panel-heading-category").text(assistantJsonArray["Assistant"][lastCategory][0]["parentCategory"]);
       $("#va-panel-heading-sub-category").text(assistantJsonArray["Assistant"][lastCategory][0]["CatName"]);
-<<<<<<< HEAD
-
-=======
       
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       if(groceryAssistantData[currentCategoryNameAfterClear]) {
          $('#product-wrt-cat').append(groceryAssistantData[currentCategoryNameAfterClear][0]);
          $('#pagination-btn').empty();
@@ -903,12 +807,6 @@ html{
          }
          currentCategoryName = currentCategoryNameAfterClear;
       }
-<<<<<<< HEAD
-
-      // currentCategoryName = 
-      // isCatButtonSearch = false;
-=======
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
    }
 
    function anyFilterSelected(){
@@ -927,32 +825,6 @@ html{
       var brandArea = $("#brand-filter-area");
       var weightArea = $("#saleunit-filter");
       var tagArea = $("#tag-filter-area");
-<<<<<<< HEAD
-
-      var brandAreaArray = [];
-      var weightAreaArray = [];
-      var tagAreaArray = [];
-      // for(var each in assistantJson["Brands"]){
-      //    if(assistantJson["Brands"][each])
-      //       brandArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" class="btn btn-link mb-2" data-value="${assistantJson["Brands"][each]}">${assistantJson["Brands"][each]}</button>`);
-      // }
-      // for(var each in assistantJson["SaleUnitQty"]){
-      //    if(assistantJson["SaleUnitQty"][each])
-      //       weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJson["SaleUnitQty"][each]}" class="btn btn-link mb-2">${assistantJson["SaleUnitQty"][each]}</button>`);
-      // }
-      // var counter = 0;
-      // for(var each in assistantJson["Tags"]){
-      //    if(assistantJson["Tags"][each])
-      //       tagArea.append(`<div class="form-check">
-      //                     <input class="form-check-input" data-value="${assistantJson["Tags"][each]}" onclick="toggleAndCheckActiveFilter(this);" type="checkbox" name="tag${++counter}" id="tag${counter}" value="${assistantJson["Tags"][each]}">
-      //                     <label class="form-check-label" for="tag${counter}">
-      //                       ${assistantJson["Tags"][each]}
-      //                     </label>
-      //                   </div>`);
-      // }
-
-
-=======
       
       var brandAreaArray = [];
       var weightAreaArray = [];
@@ -978,7 +850,6 @@ html{
       // }
 
 
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       var eachPage = 8;
 
       var cartTemplate = $('#clone-cart').text();
@@ -1003,19 +874,6 @@ html{
             weightArea.append(`<button onclick="toggleAndCheckActiveFilter(this);" data-value="${assistantJson["Assistant"][firstElement][each]["SaleUnitQuantity"]}" class="btn btn-link mb-2">${assistantJson["Assistant"][firstElement][each]["SaleUnitQuantity"]}</button>`);  
             weightAreaArray.push(assistantJson["Assistant"][firstElement][each]["SaleUnitQuantity"]);
          }
-<<<<<<< HEAD
-         // if(assistantJson["Assistant"][firstElement][each]["Tags"] && (tagAreaArray.indexOf(assistantJson["Assistant"][firstElement][each]["Tags"]) == -1)) {
-         //    tagArea.append(`<div class="form-check">
-         //                  <input class="form-check-input" data-value="${assistantJson["Assistant"][firstElement][each]["Tags"]}" onclick="toggleAndCheckActiveFilter(this);" type="checkbox" name="tag${++counter}" id="tag${counter}" value="${assistantJson["Assistant"][firstElement][each]["Tags"]}">
-         //                  <label class="form-check-label" for="tag${counter}">
-         //                    ${assistantJson["Assistant"][firstElement][each]["Tags"]}
-         //                  </label>
-         //                </div>`);
-         //    tagAreaArray.push(assistantJson["Assistant"][firstElement][each]["Tags"]);
-         // }
-
-         var tagString = assistantJson["Assistant"][firstElement][each].tags;
-=======
         //  if(assistantJson["Assistant"][firstElement][each]["Tags"] && (tagAreaArray.indexOf(assistantJson["Assistant"][firstElement][each]["Tags"]) == -1)) {
         //     tagArea.append(`<div class="form-check">
         //                   <input class="form-check-input" data-value="${assistantJson["Assistant"][firstElement][each]["Tags"]}" onclick="toggleAndCheckActiveFilter(this);" type="checkbox" name="tag${++counter}" id="tag${counter}" value="${assistantJson["Assistant"][firstElement][each]["Tags"]}">
@@ -1027,7 +885,6 @@ html{
         //  }
         
         var tagString = assistantJson["Assistant"][firstElement][each].tags;
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
          tagsArray = tagString.split(",");
 
          for(tag in tagsArray) {
@@ -1039,14 +896,9 @@ html{
                tagAreaArray.push(tagsArray[tag]);
             }
          }
-<<<<<<< HEAD
-      }
-
-=======
 
       }
       
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       currentCategoryName = firstElement;
 
       for(each in assistantJson["Assistant"])
@@ -1141,11 +993,7 @@ html{
          }
 
       }
-<<<<<<< HEAD
-
-=======
       
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
       $("#va-panel-heading-category").text(assistantJsonArray["Assistant"][category][0]["parentCategory"]);
       $("#va-panel-heading-sub-category").text(assistantJsonArray["Assistant"][category][0]["CatName"]);
       $('#pagination-btn').empty();
@@ -1153,10 +1001,7 @@ html{
          $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${category}')">${i+1}</button>`);
       }
       isCatButtonSearch = true;
-<<<<<<< HEAD
-=======
       
->>>>>>> 55fa7e856b21499e18f7137c4a30d25d05a3da4b
    }
 
    function renderCatPaginate(pageNumber, category) {
