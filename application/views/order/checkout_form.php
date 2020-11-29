@@ -255,6 +255,10 @@
                                                 <h6>Delivery Charges</h6>
                                                 <h6 id="dCharges">RS. 0.00</h6>
                                             </div>
+                                            <div id="cDiscount" style="display: none;" class="orderbox-content-charges justify-content-between mb-3">
+                                                <h6>Coupon Discount</h6>
+                                                <h6 id="cDiscountValue"></h6>
+                                            </div>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
                                             </div>
@@ -263,7 +267,7 @@
                                     </div>
                                     <div class="orderbox-footer d-flex justify-content-between mx-3">
                                         <h6>TOTAL</h6>
-                                        <h6 class="total-price font-size-15 sub-total"></h6>
+                                        <h6 class="total-price font-size-15" id="grand-amount"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -476,14 +480,16 @@
 
         if(currentElem.dataset.day == "today" && !deliveryAdded){
             $("#dCharges").html(formatCurrency(deliveryCharges));
-            subTotal += deliveryCharges;
-            $('.sub-total').html(formatCurrency(subTotal));
+            //subTotal += deliveryCharges;
+            //$('.sub-total').html(formatCurrency(subTotal));
             deliveryAdded = true;
+            calculatePrice();
         }else if(currentElem.dataset.day != "today" && deliveryAdded){
             $("#dCharges").html(formatCurrency(0));
-            subTotal -= deliveryCharges;
-            $('.sub-total').html(formatCurrency(subTotal));
+            //subTotal -= deliveryCharges;
+            //$('.sub-total').html(formatCurrency(subTotal));
             deliveryAdded = false;
+            calculatePrice();
         }
 
         step3Verified = true;
@@ -575,8 +581,15 @@
                cartBody.append(eachProdTemplateCopy);
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
-            subTotal = sum;
-            $('.sub-total').html(formatCurrency(sum));
+            subTotal = sum;debugger;
+            <?php if($_SESSION["copunId"] && $_SESSION["copunId"] != 0){ ?>
+                copun = {};
+                copun.copunId = <?=$_SESSION["copunId"]?>;
+                copun.copunDiscountType = '<?=$_SESSION["copunDiscountType"]?>';
+                copun.copunDiscountValue = <?=$_SESSION["copunDiscountValue"]?>;
+                copun.copunMinPurchase = <?=$_SESSION["copunMinPurchase"]?>;
+            <?php } ?>
+            calculatePrice();
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
             }else{
@@ -590,7 +603,44 @@
     }
     var subTotal = 0;
     var addressCounter = 1;
+    var copun = null;
+    function calculatePrice(){
+        var cart = getCookie('baskit');
+         if(cart){
+            cart = JSON.parse(cart);
+            var sum = 0;
+            for (var i = 0; i < cart.length; i++) {
+               sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+            }
+            subTotal = sum;
+            $('.subtotal-price').html(formatCurrency(sum));
+            if(deliveryAdded != undefined && deliveryAdded == true){
+                $('#grand-amount').html(formatCurrency(parseFloat(deliveryCharges) + parseFloat(subTotal)));
+            }
+            else
+                $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+        }
 
+        if(copun){
+          var discountedValue = 0.00;
+          var currentDeliveryCharges = 0.00;
+          if(deliveryAdded != undefined && deliveryAdded == true){
+                currentDeliveryCharges = parseFloat(deliveryCharges);
+            }
+          if(copun.copunDiscountType == "Amount"){
+            $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
+            $('#grand-amount').html(formatCurrency(currentDeliveryCharges + parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+          }else{
+            $('#cDiscountValue').html(copun.copunDiscountValue + "%");
+            $('#grand-amount').html(formatCurrency(currentDeliveryCharges + (subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue)))));
+          }
+          $('#cDiscount').addClass('d-flex');
+        }else{
+          $('#cDiscountValue').html("");
+          $('#cDiscount').removeClass('d-flex');
+          $('#cDiscount').hide();
+        }
+      }
     $(document).on("click", "a.singleAddress", function () {
         $(this).prev('.address-panel .selectRadio').prop('checked', true);
         $('.address-panel i.fa-check').hide();

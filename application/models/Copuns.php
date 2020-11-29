@@ -16,4 +16,16 @@ class Copuns extends CI_Model {
         return TRUE;
     }
 
+    //Get Specific copun
+    public function get_copun($copun){
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $this->db->where('CopunName', $copun);
+        $this->db->where('Status', 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 }

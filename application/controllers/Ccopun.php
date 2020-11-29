@@ -9,8 +9,6 @@ class Ccopun extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->auth->check_admin_auth();
-        $this->load->library('auth');
         $this->load->library('lcopun');
         $this->load->model('Copuns');
     }
@@ -28,6 +26,71 @@ class Ccopun extends CI_Controller {
         
     }
 
+    //Apply copun
+    public function apply_copun(){
+        $copun = $this->input->post('copun');
+        if(empty($copun))
+        {
+            print_r('{"Success": false, "Message": "Empty copun"}');
+            return;
+        }else{
+            $copun_detail = $this->Copuns->get_copun($copun);
+            if(!$copun_detail){
+                print_r('{"Success": false, "Message": "Copun not found"}');
+                $this->set_and_reset_copun_in_session($copun, 0, 0);
+                return;
+            }else{
+                $copun = $copun_detail[0];
+                if($copun['Infinite'] == 0){
+                    // $copun['StartFrom'] = '2020-11-26 02:22:34';
+                    // $copun['EndOn'] = '2020-11-29 02:22:34';;
+                    if($copun['StartFrom'] == '0000-00-00 00:00:00 ' || $copun['EndOn'] == '0000-00-00 00:00:00 '){
+                        print_r('{"Success": false, "Message": "Copun expired."}');
+                        $this->set_and_reset_copun_in_session($copun, 0, 0);
+                        return;
+                    }
+                    date_default_timezone_set("Asia/Karachi");
+                    $start = new DateTime($copun['StartFrom']);
+                    $end = new DateTime($copun['EndOn']);
+                    $currentDt = new DateTime();
+                    if(!($start < $currentDt && $end > $currentDt)){
+                        print_r('{"Success": false, "Message": "Copun expired"}');
+                        $this->set_and_reset_copun_in_session($copun, 0, 0);
+                        return;
+                    }
+                }
+                $minpurchase = empty($copun["MinPurchase"]) ? -1 : $copun["MinPurchase"];
+
+                $this->set_and_reset_copun_in_session($copun, $minpurchase, 1);
+                
+                print_r('{"Success": true, 
+                    "Message": "Success", 
+                    "Data": {
+                        "copunId": '. $copun["CopunId"] .',
+                        "copunDiscountType": "'. $copun["DiscountType"] .'",
+                        "copunDiscountValue": '. $copun["DiscountValue"] .',
+                        "copunMinPurchase": '. $minpurchase .'
+                    }
+                }');
+                return;
+            }
+        }
+    }
+    private function set_and_reset_copun_in_session($copun, $minpurchase, $set){
+        if($set == 1){
+            $this->session->set_userdata(array('copunId' => $copun['CopunId']));
+            $this->session->set_userdata(array('copunName' => $copun['CopunName']));
+            $this->session->set_userdata(array('copunDiscountType' => $copun['DiscountType']));
+            $this->session->set_userdata(array('copunDiscountValue' => $copun['DiscountValue']));
+            $this->session->set_userdata(array('copunMinPurchase' => $minpurchase));
+        }else{
+            $this->session->unset_userdata('copunId');
+            $this->session->unset_userdata('copunName');
+            $this->session->unset_userdata('copunDiscountType');
+            $this->session->unset_userdata('copunDiscountValue');
+            $this->session->unset_userdata('copunMinPurchase');
+        }
+    }
     //Insert copun and upload
     public function insert_copun() {
         if(is_null($this->input->post('Infinite'))){

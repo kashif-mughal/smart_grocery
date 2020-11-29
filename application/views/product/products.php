@@ -10,7 +10,7 @@
                     <li class="breadcrumb-item"><?php echo $SelectCategory['SubCategory']; ?></li>
                 </ol>
             </nav>
-            <h3 class="mb-0"><?php echo $SelectCategory['MainCategory']; ?></h3>
+            <h3 class="mb-0 d-inline"><?php echo $SelectCategory['MainCategory']; ?><?php if($CurrentBrandName){echo " (".$CurrentBrandName.")";}?></h3>
         </div>
     </div>
 </div>

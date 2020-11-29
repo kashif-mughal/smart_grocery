@@ -80,7 +80,6 @@ class Lcopun {
 
         $CI = & get_instance();
 
-        $CI->load->model('Copuns');
         $data = array(
 
             'title' => 'Add copun'

@@ -195,7 +195,7 @@ foreach($CatList as $key => $value) {
 			<div class="top-brands my-4">
 				<h4>Top Brands</h4>
 				<?php foreach($TopBrandList as $key => $value)  { ?>
-				<a href="#" id="<?=$value['BrandId']?>"><?=$value['BrandName']?> (<?=$value['Total_Products']?>)</a>
+				<a href="<?=base_url("cproduct/products?brand=".$value['BrandId'])?>" id="<?=$value['BrandId']?>"><?=$value['BrandName']?> (<?=$value['Total_Products']?>)</a>
 				<?php } ?>
 			</div>
 

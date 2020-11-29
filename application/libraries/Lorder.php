@@ -84,6 +84,11 @@ class Lorder {
         }
         $currentDate = date('Y-m-d');
         $deliveryCharges = $deliveryDate == $currentDate ? $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"] : 0;
+
+        $copunDiscount = 0;
+
+        $copunId = $CI->session->userdata("copunId");
+        $copunDiscount = $this->apply_copun($OV);
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
             'OrderValue' => $OV,
@@ -96,11 +101,17 @@ class Lorder {
             'deliveryCharges' => $deliveryCharges,
             'Status' => 1,
         );
+        if(!empty($copunId) && $copunDiscount != 0){
+            $data['CopunId'] = $copunId;
+            $data['CopunDiscount'] = $copunDiscount;
+        }
+
         $orderId = $CI->Orders->place_order($data);
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
-                $CI->session->set_userdata("OV", $OV + $deliveryCharges);
+                $CI->session->set_userdata("OV", $OV);
                 $CI->session->set_userdata("deliveryCharges", $deliveryCharges);
+                $CI->session->set_userdata("discountedPrice", $copunDiscount);
                 return $orderId;
             }else{
                 return 'Something went wrong!!';
@@ -108,6 +119,60 @@ class Lorder {
         }
         else{
             return 'Already Inserted';
+        }
+    }
+
+    private function apply_copun($OV){
+        $CI = & get_instance();
+        $CI->load->model('Copuns');
+        $copun = $CI->session->userdata("copunName");
+        if(empty($copun))
+        {
+            return 0;
+        }else{
+            $copun_detail = $CI->Copuns->get_copun($copun);
+            if(!$copun_detail){
+                return 0;
+            }else{
+                $copun = $copun_detail[0];
+                if($copun['Infinite'] == 0){
+                    if($copun['StartFrom'] == '0000-00-00 00:00:00 ' || $copun['EndOn'] == '0000-00-00 00:00:00 '){
+                        return 0;
+                    }
+                    date_default_timezone_set("Asia/Karachi");
+                    $start = new DateTime($copun['StartFrom']);
+                    $end = new DateTime($copun['EndOn']);
+                    $currentDt = new DateTime();
+                    if(!($start < $currentDt && $end > $currentDt)){
+                        return 0;
+                    }
+                }
+                $minpurchase = empty($copun["MinPurchase"]) ? -1 : $copun["MinPurchase"];
+                $this->set_and_reset_copun_in_session($copun, $minpurchase, 0);
+                
+                if($copun["DiscountType"] == "Amount"){
+                    return floatval($copun["DiscountValue"]);
+                }else{
+                     return (floatval($OV) / 100) * floatval($copun["DiscountValue"]);
+                }
+            }
+        }
+    }
+
+    private function set_and_reset_copun_in_session($copun, $minpurchase, $set){
+        $CI = & get_instance();
+        if($set == 1){
+            $CI->session->set_userdata(array('copunId' => $copun['CopunId']));
+            $CI->session->set_userdata(array('copunName' => $copun['CopunName']));
+            $CI->session->set_userdata(array('copunDiscountType' => $copun['DiscountType']));
+            $CI->session->set_userdata(array('copunDiscountValue' => $copun['DiscountValue']));
+            $CI->session->set_userdata(array('copunMinPurchase' => $minpurchase));
+        }else{
+            $CI->session->unset_userdata('copunId');
+            $CI->session->unset_userdata('copunName');
+            $CI->session->unset_userdata('copunDiscountType');
+            $CI->session->unset_userdata('copunDiscountValue');
+            $CI->session->unset_userdata('copunMinPurchase');
         }
     }
 

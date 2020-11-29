@@ -217,14 +217,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                         <div class="orderbox-content">
                                             <div class="orderbox-content-charges d-flex justify-content-between mb-3">
                                                 <h6>Delivery Charges</h6>
-                                                <h6 id="dCharges">RS 0.00</h6>
+                                                <h6 id="dCharges"><script type="text/javascript">document.write(formatCurrency(0));</script></h6>
                                             </div>
-                                            <?php if($_POST['coupon'] === '1234'){?>
-                                                <div class="orderbox-content-charges d-flex justify-content-between mb-3">
-                                                    <h6>Coupon Discount</h6>
-                                                    <h6 id="cDiscount">RS 20.00</h6>
-                                                </div>
-                                            <?php } ?>
+                                            <div id="cDiscount" style="display: none;" class="orderbox-content-charges justify-content-between mb-3">
+                                                <h6>Coupon Discount</h6>
+                                                <h6 id="cDiscountValue"></h6>
+                                            </div>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
                                             </div>
@@ -233,7 +231,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </div>
                                     <div class="orderbox-footer d-flex justify-content-between mx-3">
                                         <h6>TOTAL</h6>
-                                        <h6 class="total-price font-size-15 sub-total"></h6>
+                                        <h6 class="total-price font-size-15 sub-total" id="grand-amount"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -244,8 +242,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                 <div class="content-box order-box" style="border-radius: 0px 0px 10px 10px;">
                                     <h3 class="text-center">Apply Coupon Here</h3>
                                     <div class="input-group">
-                                        <form method="POST" action="" style="width: 100%;">
-                                            <input name="coupon" type="text" class="form-control coupon" placeholder="Enter coupon code here...">
+                                        <form method="POST" id="copun-form" action="<?=base_url("Ccopun/apply_copun")?>" style="width: 100%;">
+                                            <input name="copun" type="text" class="form-control coupon" placeholder="Enter coupon code here...">
                                             <div class="input-group-append">
                                                 <button class="btn" style="width:100%; margin-top:5px; margin-bottom: 2px; background-color:#333333; color:white;" type="submit">Apply</button>
                                             </div>
@@ -326,14 +324,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
             subTotal = sum;
-            <?php if($_POST['coupon'] === '1234'){?>
-             subTotal = sum + parseFloat('20');
-             $('.total-price').text(subTotal);
-             //alert(sum);
-             <?php }else{ ?>
-
-             <?php } ?>
              $('.subtotal-price').html(formatCurrency(sum));
+             $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
             }else{
@@ -488,8 +480,43 @@ function loadShoppingCart1(){
 </script>
 
 <script type='text/javascript'>
+  var copun = null;
+  $(document).on('click', '.remove-item-from-cart, .qty-pls, .qty-mns', function () {
+      setTimeout(function(){
+        calculatePrice();
+      }, 500);
+   });
+  function calculatePrice(){
+    var cart = getCookie('baskit');
+     if(cart){
+        cart = JSON.parse(cart);
+        var sum = 0;
+        for (var i = 0; i < cart.length; i++) {
+           sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+        }
+        subTotal = sum;
+        $('.subtotal-price').html(formatCurrency(sum));
+        $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+    }
+
+    if(copun){
+      var discountedValue = 0.00;
+      if(copun.copunDiscountType == "Amount"){
+        $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
+        $('#grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+      }else{
+        $('#cDiscountValue').html(copun.copunDiscountValue + "%");
+        $('#grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
+      }
+      $('#cDiscount').addClass('d-flex');
+    }else{
+      $('#cDiscountValue').html("");
+      $('#cDiscount').removeClass('d-flex');
+      $('#cDiscount').hide();
+    }
+  }
+
   $(document).ready(function(){
-  
      $( "#q" ).autocomplete({
         source: function( request, response )
         {
@@ -510,6 +537,33 @@ function loadShoppingCart1(){
              $('#q').val(ui.item.label);
              return false;
         }
+     });
+
+     $("#copun-form").on("submit", function(){
+        event.preventDefault();
+        var currentElem = $(this);
+        $.ajax({
+                url: currentElem.attr("action"),
+                type: currentElem.attr("method"),
+                data: currentElem.serialize(),
+                dataType: 'json',
+                success: function(a) 
+                {
+                  if(!a.Success){
+                    $.notify(a.Message, "error");
+                    copun = null;
+                    calculatePrice();
+                  }else{
+                    copun = a.Data;
+                    //applyDiscount(copun);
+                    calculatePrice();
+                  }
+                },
+                error: function(a){
+                  copun = null;
+                  calculatePrice();
+                }
+             });
      });
 
   });

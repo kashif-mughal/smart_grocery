@@ -2990,6 +2990,30 @@ a#newAddressCancelBtn {
       font-size: 12px !important;
    }
 
+   #checkout-panel .verification-steps-heading {
+      font-size: 13px;
+      font-weight: 400;
+   }
+   #checkout-panel .change-button {
+       padding: 2px 10px;
+       font-size: 12px;
+   }
+   #checkout-panel .process-number {
+       font-size: 12px;
+       padding: 8px;
+   }
+   #checkout-panel i.fa-check {
+       font-size: 12px;
+       padding: 8px;
+   }
+   #checkout-panel .completed-content {
+       font-size: 12px;
+       font-weight: 600;
+   }
+   .table thead th{
+      font-size: 12px;
+      vertical-align: top;
+   }
    .main-page-product-card {
       width: 160px;
    }

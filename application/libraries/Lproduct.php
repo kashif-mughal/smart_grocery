@@ -233,10 +233,10 @@ class Lproduct {
         return $productList;
     }
 
-    public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
+    public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8, $brand = null){
         $CI = & get_instance();
         $CI->load->library('lcategory');
-        $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage);
+        $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage, $brand);
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             for ($i=0; $i < count($value->childCats); $i++) { 
@@ -248,7 +248,6 @@ class Lproduct {
                 }
             }
         }
-
         if($catId == null) {
             $selectedCategory = array(
                 'MainCategory' => 'Products',
@@ -353,12 +352,19 @@ class Lproduct {
             'SelectCategory' => $selectedCategory,
             'PerPage' => $perpage
         );
+        if(!is_null($brand)){
+            $CI->load->model('Brands');
+            $currentBrand = $CI->Brands->brand_search_item($brand);
+            if($currentBrand && count($currentBrand) > 0){
+                $data["CurrentBrandName"] = $currentBrand[0]['BrandName'];
+            }
+        }
         return $CI->parser->parse('product/products', $data, true);
     }
-    public function internal_products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
+    public function internal_products_by_category($catId, $productName = null, $page = 0, $perpage = 8, $brand = null){
         $CI = & get_instance();
         $CI->load->model('Categories');
-        $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage);
+        $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage, $brand);
         return $result;
     }
 }

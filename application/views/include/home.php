@@ -223,7 +223,7 @@
                </div> 
                <div class="va-panel-content">
                   <div class="container-fluid">
-                     <div class="row">
+                     <div class="row" style="width: 105%;">
                         <div class="col-md-4 px-0 pt-0">
                            <div class="filter-sidebar">
                               <button onclick="filterAssistantProduct()" id="showFilterResultBtn" style="display: none; background-color: transparent; border: none;">
