@@ -94,6 +94,9 @@
                             </script>
                         </div>
                         <style>
+                        .main-content {
+                            margin-top: 0 !important;
+                        }
                             .main-content .featured-products-content .card .card-body h5{
                                 width: 80%;
                                 background: #ff2524d1;

@@ -63,8 +63,15 @@ $(document).ready(function(){
     // document.body.style.backgroundColor = "white";
   });
 
-  $('#myCollapsible').collapse({
-     toggle: false
-  })
+  function WindowsResizeFunc() {
+    if ($(window).width() >  768) {
+      $(".edibles-main .product-category").removeClass('collapse');
+    }
+    else {
+      $(".edibles-main .product-category").addClass('collapse');
+    }
+  }
+  
+  $(window).resize(WindowsResizeFunc);
  
 });

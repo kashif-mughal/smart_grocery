@@ -3105,10 +3105,7 @@ a#newAddressCancelBtn {
       width: 127px !important;
    }
 
-   .products-widget-heading a {
-      color: #25bfa9;
-      display: block;
-   }
+   
 }
 
 @media (max-width: 767px) {
@@ -3281,6 +3278,11 @@ a#newAddressCancelBtn {
       margin: 4px -15px !important;
    }
 
+   .products-widget-heading a {
+      color: #25bfa9;
+      display: block;
+   }
+
    .main-content {
       margin-top: 200px !important;
    }
@@ -3338,6 +3340,9 @@ a#newAddressCancelBtn {
    }
    .orderTrackingLink .orderTrackingIcon {
       font-size: 14px;
+   }
+   .bread_crumb {
+      margin-top: 11vh; 
    }
 
 }

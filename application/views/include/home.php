@@ -134,12 +134,12 @@
                         <h2 class="products-widget-heading accordion" id="accordionCategory">
                            <div class="d-flex align-items-center justify-content-between">
                               <?=$key?>
-                              <a href="javascript:void(0)" type="button" data-toggle="collapse" data-target="<?='#collapse'.$value->childCats[0]['CategoryId']?>" aria-expanded="true" aria-controls="<?='collapse'.$value->childCats[0]['CategoryId']?>">
+                              <a href="javascript:void(0)" type="button" data-toggle="collapse" data-target="<?='#collapse'.$value->childCats[0]['CategoryId']?>" aria-expanded="false" aria-controls="<?='collapse'.$value->childCats[0]['CategoryId']?>" class="collapsed">
                                  <i class="fas fa-chevron-circle-down"></i>
                               </a>
                            </div>
                         </h2>
-                        <div class="card product-category" id="<?='collapse'.$value->childCats[0]['CategoryId']?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionCategory">
+                        <div class="card product-category collapse" id="<?='collapse'.$value->childCats[0]['CategoryId']?>" aria-labelledby="headingOne" data-parent="#accordionCategory">
                            <div class="card-body product-card-category-list">
                               <?php for ($i=0; $i < count($value->childCats); $i++) {?>
                               <div>
