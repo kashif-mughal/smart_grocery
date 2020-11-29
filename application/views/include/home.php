@@ -134,12 +134,18 @@
                         <h2 class="products-widget-heading accordion" id="accordionCategory">
                            <div class="d-flex align-items-center justify-content-between">
                               <?=$key?>
-                              <a href="javascript:void(0)" type="button" data-toggle="collapse" data-target="<?='#collapse'.$value->childCats[0]['CategoryId']?>" aria-expanded="false" aria-controls="<?='collapse'.$value->childCats[0]['CategoryId']?>" class="collapsed">
+                              <a href="javascript:void(0)" 
+                                 type="button" 
+                                 data-toggle="collapse" 
+                                 data-target="<?='#collapse'.$value->childCats[0]['CategoryId']?>" 
+                                 aria-expanded="false" 
+                                 aria-controls="<?='collapse'.$value->childCats[0]['CategoryId']?>" 
+                                 class="collapsed">
                                  <i class="fas fa-chevron-circle-down"></i>
                               </a>
                            </div>
                         </h2>
-                        <div class="card product-category collapse" id="<?='collapse'.$value->childCats[0]['CategoryId']?>" aria-labelledby="headingOne" data-parent="#accordionCategory">
+                        <div class="card product-category collapse show" id="<?='collapse'.$value->childCats[0]['CategoryId']?>" aria-labelledby="headingOne" data-parent="#accordionCategory">
                            <div class="card-body product-card-category-list">
                               <?php for ($i=0; $i < count($value->childCats); $i++) {?>
                               <div>
@@ -238,29 +244,60 @@
                                     <span class="ml-2 clearFilterText">Clear Filters</span>
                                  </button>
                               </div>
-
-                              <div class="filter-brand px-4 py-3 border-b-primary">
-                                 <div class="heading-primary mb-3">Filter by Brand:</div>                                    
-                                 <div class="filter-brand-button" id="brand-filter-area">
+                              
+                              <div class="accordion" id="va-filter">
+                                 <div class="filter-brand px-4 py-3 border-b-primary">
+                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                       <div>Filter by Brand:</div>
+                                       <a href="javascript:void(0)" 
+                                          data-toggle="collapse" 
+                                          type="button" 
+                                          aria-expanded="false" 
+                                          data-target="#brand-filter-area"
+                                          aria-controls="brand-filter-area">
+                                          <i class="fas fa-chevron-circle-down"></i>
+                                       </a>                                    
+                                    </div>
+                                    <div class="filter-brand-button collapse show" id="brand-filter-area" data-parent="#va-filter">
+                                    </div>
                                  </div>
-                              </div>
 
-                              <div class="filter-weight px-4 py-3 border-b-primary">
-                                 <div class="heading-primary mb-3">Filter by Weight:</div>                                    
-                                 <div class="filter-weight-button" id="saleunit-filter">
+                                 <div class="filter-weight px-4 py-3 border-b-primary">
+                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                       <div>Filter by Weight:</div>
+                                       <a href="javascript:void(0)" 
+                                          data-toggle="collapse" 
+                                          type="button" 
+                                          aria-expanded="false" 
+                                          data-target="#saleunit-filter"
+                                          aria-controls="saleunit-filter">
+                                          <i class="fas fa-chevron-circle-down"></i>
+                                       </a> 
+                                    </div>
+                                    <div class="filter-weight-button collapse show" id="saleunit-filter" data-parent="#va-filter">
+                                    </div>
                                  </div>
-                              </div>
 
-                              <div class="filter-type px-4 py-3 border-b-primary">
-                                 <div class="heading-primary mb-3">Filter by Tags:</div>
-                                 <div class="filter-type-checkbox" id="tag-filter-area">
-                                    
-                                 </div>                                    
+                                 <div class="filter-type px-4 py-3 border-b-primary">
+                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                       <div>Filter by Tags:</div>
+                                       <a href="javascript:void(0)" 
+                                          data-toggle="collapse" 
+                                          type="button" 
+                                          aria-expanded="false" 
+                                          data-target="#tag-filter-area"
+                                          aria-controls="tag-filter-area">
+                                          <i class="fas fa-chevron-circle-down"></i>
+                                       </a>
+                                    </div>
+                                    <div class="filter-type-checkbox collapse show" id="tag-filter-area" data-parent="#va-filter">
+                                    </div>                                    
+                                 </div>
                               </div>
 
                            </div>
                         </div>
-                        <div class="col-md-8 pl-0 pt-3">
+                        <div class="col-sm-12 col-md-8 pl-0 pt-3">
                            <div class="product-content">
                               <div class="container-fluid">
                                  <div class="row" id="product-wrt-cat">
@@ -299,7 +336,7 @@
 <div style="display: none;">
     <script type="text" id="clone-cart">
 
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-6 col-md-3 pr-sm-0">
            <div class="mb-3 mx-auto">
             <div class="card product-card each-prod">
                <img class="card-img-top" src="{Img}" alt="Card image cap">

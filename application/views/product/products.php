@@ -21,43 +21,45 @@
 <section class="main-content">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-12 pr-0">
-                <div class="categories sidebar-inner-page accordion" id="accordionCat">
-                    <div class="d-flex align-items-center justify-content-between">
+            <div class="col-xl-3 col-lg-3 col-md-12 px-0">
+                <div class="categories sidebar-inner-page accordion" id="accordionCatInnerPage">
+                    <div class="d-flex align-items-center justify-content-between innerPageMenu">
                         <h4>Shop By Department</h4>
-                        <a href="javascript:void(0)" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 <i class="fas fa-chevron-circle-down"></i>
+                        <a href="javascript:void(0)" type="button" data-toggle="collapse" data-target="#InnerPageMenuContent" aria-expanded="true" aria-controls="accordionCatInnerPage">
+                            <i class="fas fa-chevron-circle-down"></i>
                         </a>
                     </div>
-                    <?php foreach($CatList as $key => $value) {?>
-                        <div class="sidebar-inner-category-content" id="<?='collapse'.$value->childCats[0]['CategoryId']?>" class="collapse hide" aria-labelledby="headingOne" data-parent="<?='#accordionCat'.$value->childCats[0]['CategoryId']?>">
-                            <div class="sub-category">
-                                <div class="sub-category-content">
+                    <div class="collapse show" id="InnerPageMenuContent" aria-labelledby="accordionCatInnerPage" data-parent="#accordionCatInnerPage">
+                        <?php foreach($CatList as $key => $value) {?>
+                            <div class="sidebar-inner-category-content">
+                                <div class="sub-category">
+                                    <div class="sub-category-content">
 
-                                    <h6><?=$key?></h6>
+                                        <h6><?=$key?></h6>
 
-                                    <?php for ($i=0; $i < count($value->childCats); $i++) {?>
-                                        <a href="<?php echo base_url(); ?>Cproduct/products?categoryId=<?=$value->childCats[$i]['CategoryId']?>">
-                                            <span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
-                                        </a>
-                                    <?php } ?>
-                                    
+                                        <?php for ($i=0; $i < count($value->childCats); $i++) {?>
+                                            <a href="<?php echo base_url(); ?>Cproduct/products?categoryId=<?=$value->childCats[$i]['CategoryId']?>">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
+                                            </a>
+                                        <?php } ?>
+                                        
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                    <?php } ?>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
 
-                <div class="container bg-transparent pr-0">
+                <div class="container bg-transparent">
                     <div class="row" id="products-area">
                         <div style="display: none;">
                             <script type="text" id="clone-cart">
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
                                 <div class="featured-products-content mb-2 d-flex justify-content-between">
-                                    <div class="card mr-2 each-prod product-card-inner">
+                                    <div class="card each-prod product-card-inner">
                                         <div class="card-body p-0">
                                             <div class="header">
                                                 {discountString}
@@ -72,7 +74,7 @@
                                             <p class="card-text product-card-inner-weight">{unitName}</p>
                                             <p class="card-text product-card-inner-price d-inline">{salePrice}</p>
                                             {priceString}
-                                            <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                            <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
                                                 <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                 <input type="text" class="d-inline-flex quantity-input quantity">
                                                 <span class="d-block quantity-button">

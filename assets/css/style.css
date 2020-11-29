@@ -953,12 +953,16 @@ button.category-button:active {
    min-height: 45px;
 }
 
-.products-widget-heading a {
+.products-widget-heading a,
+#va-filter .heading-primary a,
+.innerPageMenu a {
    color: #25bfa9;
    display: none;
 }
 
-.products-widget-heading a:hover {
+.products-widget-heading a:hover,
+#va-filter .heading-primary a,
+.innerPageMenu a {
    color: #17a18d;
 }
 
@@ -1812,8 +1816,11 @@ button.category-button:active {
    margin-right: 0px;
 }
 .sidebar-inner-page h4 {
+   margin-bottom: 0px;
+}
+.sidebar-inner-page .innerPageMenu {
    border-bottom: 1px solid #cccccc;
-   padding: 20px 26px;
+   padding: 16px 18px;
    color: #000000;
 }
 .categories .sidebar-inner-category-content .sub-category:last-child {
@@ -2818,7 +2825,7 @@ a#newAddressCancelBtn {
    color: #FAB301;
 }
 .va-panel-content .product-card .card-img-top{
-   width: 170px !important;
+   width: 170px;
 }
 .va-products-content .product-card-inner {
    height: 355px;
@@ -2827,8 +2834,8 @@ a#newAddressCancelBtn {
    border: 1px solid #cccccc;
 }
 .va-panel-content .product-card {
-   height: 320px !important;
-   width: 190px !important;
+   height: 355px;
+   width: 190px;
 }
 .va-panel-content .product-content-button button.nav-btn-primary {
    padding: 2px 8px !important;
@@ -2969,6 +2976,7 @@ a#newAddressCancelBtn {
 /* ----------------------------------------------------- */
 /* Media Queries */
 
+
 @media (max-width: 425px) {
    .product-card-viewmore-btn {
       padding: 7px 28px !important;
@@ -2991,6 +2999,16 @@ a#newAddressCancelBtn {
       columns: 3;
       -webkit-columns: 3;
       -moz-columns: 3;
+   }
+
+   #va-panel .va-panel-content .quantity-area {
+      margin-left: 0;
+   }
+
+   .col-sm-6 {
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
    }
 }
 
@@ -3104,7 +3122,21 @@ a#newAddressCancelBtn {
    .grocery-features .grocery-assistant-card .image-container {
       width: 127px !important;
    }
+   .va-panel-content .product-card .card-img-top{
+      width: 138px !important;
+   }
 
+   .va-panel-content .product-card {
+      height: 350px;
+      width: 160px !important;
+      margin-right: 15px !important;
+   }
+
+   .col-sm-6 {
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+   }
    
 }
 
@@ -3156,7 +3188,19 @@ a#newAddressCancelBtn {
       height: auto;
    }
 
-   
+   .products-widget-heading a,
+   #va-filter .heading-primary a,
+   .innerPageMenu a {
+      color: #25bfa9;
+      display: block;
+   }
+
+   .featured-products-content .quantity-area {
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-left: auto;
+      margin-right: auto;
+   }
 }
 
 @media (max-width: 768px) {
@@ -3276,11 +3320,6 @@ a#newAddressCancelBtn {
 
    .order-button a {
       margin: 4px -15px !important;
-   }
-
-   .products-widget-heading a {
-      color: #25bfa9;
-      display: block;
    }
 
    .main-content {
