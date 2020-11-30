@@ -15,9 +15,9 @@ foreach($CatList as $key => $value) {
 <div id="main-page">
 	<div class="container">
 
-		<section class="main-content">
+		<section >
 			<div class="row my-4">
-				<div class="col-md-4">
+				<div class="col-md-4 footer-padding">
 
 					<div class="call_to_action_grid border-right-full">
 						<div class="call_to_action_image">
@@ -26,12 +26,12 @@ foreach($CatList as $key => $value) {
 						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
 							<h5 class="call_to_action_title">Same/Next Day Delivery</h5>
 							<h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100 for orders below Rs. 4,000
-</h6>
+							</h6>
 						</div>
 					</div>
 					
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 footer-padding">
 					
 					<div class="call_to_action_grid border-right-full">
 						<div class="call_to_action_image">
@@ -44,7 +44,7 @@ foreach($CatList as $key => $value) {
 					</div>
 					
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 footer-padding">
 					
 					<div class="call_to_action_grid">
 						<div class="call_to_action_image">
@@ -64,7 +64,7 @@ foreach($CatList as $key => $value) {
 </div>
 <section class="main-footer">
 	<div class="container">
-		<div class="main-content">
+		<div class="main-footer-content">
 			<p class="footer-text text-center text-md-left">
 				Sauda Express is not just another online grocery store. We at Sauda Express aim at revolutionizing the whole thinking of online shopping by introducing latest technology into the arena and at the same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily abandoned by online shopping platforms focusing only on the technological aspect. We consistently work hard to:
 			</p>

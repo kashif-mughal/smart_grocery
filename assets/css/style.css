@@ -1523,25 +1523,26 @@ button.category-button:active {
 /* Call to Action */
 /* ==================================== */
 
+.main-footer-content,
 .main-footer {
    background-color: #ffffff;
 }
-.main-footer .main-content {
+.main-footer .main-footer-content {
    padding-top: 40px;
    padding-bottom: 40px;
 }
-.main-footer .main-content .best_features {
+.main-footer .main-footer-content .best_features {
    border-bottom: 1px solid #ececec;
    padding: 16px 0;
 }
-.main-footer .main-content .feature-text {
+.main-footer .main-footer-content .feature-text {
    font-size: 16px;
    letter-spacing: 0px;
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
 }
-.main-footer .main-content .feature-img {
+.main-footer .main-footer-content .feature-img {
    width: 42px;
    height: 42px;
    border-radius: 21px;
@@ -1552,7 +1553,7 @@ button.category-button:active {
    align-self: center;
    margin-right: 12px;
 }
-.main-footer .main-content .feature-img .feature-img-text {
+.main-footer .main-footer-content .feature-img .feature-img-text {
    font-size: 20px;
    letter-spacing: -1px;
    color: #ffffff;
@@ -1626,7 +1627,7 @@ button.category-button:active {
 /* Checkout */
 
 /* Mission & Vision */
-.main-footer .main-content .mission_vision {
+.main-footer .main-footer-content .mission_vision {
    font-size: 20px;
    letter-spacing: -1px;
    color: #666666;
@@ -1635,14 +1636,14 @@ button.category-button:active {
    padding-bottom: 10px;
    border-bottom: 1px solid #ececec;
 }
-.main-footer .main-content .mission_vision p {
+.main-footer .main-footer-content .mission_vision p {
    font-size: 14px;
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
    letter-spacing: -0.5px
 }
-.main-footer .main-content .mission_vision .mission_vision_content h6 {
+.main-footer .main-footer-content .mission_vision .mission_vision_content h6 {
    margin-bottom: 0px;
    font-weight: 700;
    letter-spacing: 0px;
@@ -1650,7 +1651,7 @@ button.category-button:active {
 /* Mission & Vision */
 
 /* Feature Details */
-.main-footer .main-content .feature-details {
+.main-footer .main-footer-content .feature-details {
    font-size: 20px;
    letter-spacing: -0.5px;
    color: #666666;
@@ -1659,14 +1660,14 @@ button.category-button:active {
    padding-bottom: 10px;
    border-bottom: 1px solid #ececec;
 }
-.main-footer .main-content .feature-details p {
+.main-footer .main-footer-content .feature-details p {
    font-size: 14px;
    color: #666666;
    font-weight: 400;
    font-family: "Work Sans";
 
 }
-.main-footer .main-content .feature-details .feature_details_content h6 {
+.main-footer .main-footer-content .feature-details .feature_details_content h6 {
    margin-bottom: 0px;
    font-weight: 600;
    letter-spacing: 0px;
@@ -1684,7 +1685,7 @@ button.category-button:active {
 /* Hotline & Basket */
 
 /* Useful Links */
-.main-footer .main-content .useful-links {
+.main-footer .main-footer-content .useful-links {
    font-size: 20px;
    letter-spacing: -1px;
    color: #666666;
@@ -1693,7 +1694,7 @@ button.category-button:active {
    padding-bottom: 24px;
    border-bottom: 1px solid #ececec;
 }
-.main-footer .main-content .useful-links a {
+.main-footer .main-footer-content .useful-links a {
    font-size: 14px;
    line-height: 22px;
    color: #666666;
@@ -1703,7 +1704,7 @@ button.category-button:active {
 /* Useful Links */
 
 /* Top Brands */
-.main-footer .main-content .top-brands {
+.main-footer .main-footer-content .top-brands {
    font-size: 20px;
    letter-spacing: -1px;
    color: #666666;
@@ -1712,7 +1713,7 @@ button.category-button:active {
    padding-bottom: 24px;
    border-bottom: 1px solid #ececec;
 }
-.main-footer .main-content .top-brands a {
+.main-footer .main-footer-content .top-brands a {
    font-size: 14px;
    line-height: 22px;
    color: #666666;
@@ -2188,6 +2189,9 @@ button.category-button:active {
 
 /* Sidebar */
 
+.footer-padding {
+   padding: 7px 20px 0px 0px;
+}
 
 /* Privacy Policy */
 .privacyPolicy-heading {
@@ -3026,16 +3030,21 @@ a#newAddressCancelBtn {
       background: transparent;
       border: none;
    }
-   
-
    #va-panel .va-panel-content .quantity-area {
       margin-left: 0;
    }
-
    .col-sm-6 {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       max-width: 50%;
+   }
+   .order-button a {
+      margin: 4px -32px !important;
+   }
+
+   .order-history-card .quantity-area {
+      padding-left: 20%;
+      padding-right: 5%;
    }
 }
 
@@ -3110,12 +3119,20 @@ a#newAddressCancelBtn {
 
    .sign-in-content #phoneSubmit {
       font-size: 14px;
-      padding-top: 14px !important;
-      padding-bottom: 14px !important;
+      padding-top: 14px;
+      padding-bottom: 14px;
    }
 
    .sign-in-content .phoneInputFooterText {
       font-size: 14px;
+   }
+
+   .sign-in-content .input-group {
+      margin-bottom: 10px !important;
+   }
+
+   .sign-in-content input {
+      height: 45px !important;
    }
 
    .sign-in-content #inputOtp input {
@@ -3129,7 +3146,7 @@ a#newAddressCancelBtn {
    }
 
    .order-button a {
-      margin: 4px -16px !important;
+      margin: 4px -16px;
    }
 
    .va-panel-header img {
@@ -3170,6 +3187,19 @@ a#newAddressCancelBtn {
       -webkit-columns: 2;
       -moz-columns: 2;
    }
+
+   .sign-in-content input#inputPhone,
+   .sign-in-content .input-group-prepend {
+      height: 38px !important;
+      margin-bottom: 10px;
+   }
+
+   .sign-in-content #phoneSubmit {
+      font-size: 12px;
+      padding-top: 8px !important;
+      padding-bottom: 8px !important;
+      margin: 0px;
+  }
    
 }
 
@@ -3189,18 +3219,18 @@ a#newAddressCancelBtn {
       border-bottom: none;
    }
    .quantity-area {
-      padding-left: 10% !important;
-      padding-right: 4% !important;
+      padding-left: 10%;
+      padding-right: 4%;
    }
    .order-history-card .quantity-area {
-      padding-left: 34% !important;
-      padding-right: 13% !important;
+      padding-left: 22%;
+      padding-right: 13%;
    }
    .order-button {
-      padding-left: 30%;
+      padding-left: 15%;
       padding-right: 30%;
    }
-
+   
    .order-id,
    .order-date,
    .order-time {
@@ -3352,7 +3382,7 @@ a#newAddressCancelBtn {
    }
 
    .order-button a {
-      margin: 4px -15px !important;
+      margin: 4px -15px;
    }
 
    .main-content {
@@ -3598,7 +3628,7 @@ a#newAddressCancelBtn {
     margin-left: auto !important;
   }
 
-  .main-footer .main-content {
+  .main-footer .main-footer-content {
       max-width: 1140px !important;
       margin-left: auto !important;
       margin-right: auto !important;
