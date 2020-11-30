@@ -82,6 +82,7 @@ class Lcategory
                   
                 $catArray[$category_list[$i]['ParentName']] = new stdClass();
                 $catArray[$category_list[$i]['ParentName']]->childCats = Array();
+                $catArray[$category_list[$i]['ParentName']]->sortOrder = $category_list[$i]["ParentSort"];
               }
             if (is_array($catArray[$category_list[$i]['ParentName']]->childCats))
               {
@@ -99,10 +100,6 @@ class Lcategory
         $CI =& get_instance();
         $CI->load->model('Categories');
         $category_list = $CI->Categories->category_list();
-        $category_listin = $CI->Categories->category_listin();
-        //echo '<pre>';print_r($category_listin);echo '</pre>';
-        //echo '<pre>';print_r($category_list);echo '</pre>';die();
-        //$category_list = $CI->Categories->category_list();
         for ($i = 0; $i < count($category_list); $i++)
           {
               //echo '<pre>';print_r($category_list[$i]['ParentId']);
@@ -113,6 +110,7 @@ class Lcategory
                   
                 $catArray[$category_list[$i]['ParentName']] = new stdClass();
                 $catArray[$category_list[$i]['ParentName']]->childCats = Array();
+                $catArray[$category_list[$i]['ParentName']]->sortOrder = $category_list[$i]["ParentSort"];
               }
             if (is_array($catArray[$category_list[$i]['ParentName']]->childCats))
               {
@@ -121,7 +119,6 @@ class Lcategory
                 $catArray[$category_list[$i]['ParentName']]->catId = $category_list[$i]['ParentId'];
               }
           }
-          //echo '<pre>';print_r($catArray);die;
         return $catArray;
       }
   }

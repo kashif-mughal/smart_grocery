@@ -597,32 +597,38 @@ function removeItemFromShoppingCart(currentElem){
       overflow: auto;
    }
 </style>
-   <!-- Auto Complete search script START-->
-    <script type='text/javascript'>
-      $(document).ready(function(){
-         $("#q").autocomplete({
-            source: function( request, response )
-            {
-                 $.ajax({
-                    url: "<?php echo base_url();?>Autocomplete/userdata",
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                      search: request.term
-                    },
-                    success: function( data ) 
-                    {
-                      response( data );
-                    }
-                 });
-            },
-            select: function (values, ui) {
-                 $('#q').val(ui.item.label);
-                 return false;
-            }
-         });
-      });
-      
-    </script>
-  <!-- Auto Complete search script END-->
+ <!-- Auto Complete search script START-->
+<script type='text/javascript'>
+  $(document).ready(function(){
+     $("#q").autocomplete({
+        source: function( request, response )
+        {
+             $.ajax({
+                url: "<?php echo base_url();?>Autocomplete/userdata",
+                type: 'post',
+                dataType: "json",
+                data: {
+                  search: request.term
+                },
+                success: function( data ) 
+                {
+                  response( data );
+                }
+             });
+        },
+        select: function (values, ui) {
+             $('#q').val(ui.item.label);
+             return false;
+        }
+     });
+  });
+  $(document).ready(function(){
+    var allTxt = $(".card-text, .product-card-title");
+    for (var i = 0; i < allTxt.length; i++) {
+      $(allTxt[i]).attr("data-toggle", "tooltip");
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+<!-- Auto Complete search script END-->
  

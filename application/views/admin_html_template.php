@@ -130,33 +130,7 @@
             $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
             $( function() {
                 $( "#sortable-sss" ).sortable({
-                    axis: 'y',
-                    update: function (event, ui) {
-            	        var data = $(this).sortable('serialize');
-                        //$('span').text(data);
-                        var value= $(this).attr('data-id');
-                        var text = $(this).attr('data-name');
-                        
-                        //var data = {text:text,value:value};
-                        console.log(data);
-                        $.ajax({
-                            data: data,
-                            type: 'POST',
-                            url: 'https://saudaexpress.com/Csettings/update_site_settings_categories'
-                        });
-            	    }
-                    /*update: function(event, ui) {
-                        var data = $(this).sortable('serialize');
-                        $.ajax({
-                                data: oData,
-                            type: 'POST',
-                            url: 'https://saudaexpress.com/Csettings/update_site_settings_categories'
-                        });
-                        $('.uisort').each(function(i) { 
-                           $(this).data('id', i+1); 
-                        }).filter(':first').trigger('listData');
-                        
-                    }*/
+                    axis: 'y'
                 });
                 $('.uisort').on('listData', function() {
                     $('.llhome_page_cat_sss').find('option').remove();

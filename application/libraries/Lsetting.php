@@ -14,7 +14,7 @@ class Lsetting {
         $CI = & get_instance();
         $CI->load->model('SiteSettings');
         $CI->load->model('Categories');
-        $categories = $CI->Categories->parent_category_seeting('CategoryId, CatName');
+        $categories = $CI->Categories->parent_category_seeting();
         $setting_detail = $CI->SiteSettings->retrieve_editdata('setting_id', $SettingId);
 
         $data = array(

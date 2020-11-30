@@ -1,4 +1,26 @@
 <!-- Add new customer start -->
+
+<style type="text/css">
+    .sort-category{
+        padding-left: 0px;
+    }
+    .sort-category li{
+        padding: 5px;
+        margin-bottom: 3px;
+    }
+    .sort-category li:hover{
+        background-color: #95d295;
+    }
+    .overlay-loading{
+        width: 97%;
+        height:100%;
+        position: absolute;
+        background-color: #00000033; 
+        background-image: url(https://cdn.lowgif.com/small/b7daf07f7e8293bd-buy-manfrotto-pro-light-camera-backpack-3n1-36-af-marcotec.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
 <div class="content-wrapper">
     <section class="content-header">
         <div class="header-icon">
@@ -44,6 +66,8 @@
 
         <div class="row">
             <div class="col-sm-12">
+                <div class="alert alert-danger" style="display: none;">asdf</div>
+                <div class="alert alert-success" style="display: none;">asdf</div>
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -69,54 +93,6 @@
                                 </textarea>
                             </div>
                         </div>
-                        
-                        <div class="form-group row">
-                            <label for="homecat" class="col-sm-3 col-form-label">Home Categories</label>
-                            <div class="col-sm-9">
-                                    <ul id="sortable-sss">
-                                        <?php 
-                                        if($SettingData['home_page_cat'] === 'null'){
-                                            foreach($categories as $category){
-                                                ?>
-                                                    <li class="ui-state-default uisort" id="item-<?php echo ($category['CategoryId']); ?>" data-name="<?php echo ($category['CatName']); ?>" data-id="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></li>
-                                                    <?php 
-                                                
-                                            }
-                                        }else{
-                                            foreach(json_decode($SettingData['home_page_cat'], true) as $setcat){ 
-                                                foreach($categories as $category){
-                                                    if($setcat===$category['CategoryId']){ ?>
-                                                        <li class="ui-state-default uisort" id="item-<?php echo ($category['CategoryId']); ?>" data-name="<?php echo ($category['CatName']); ?>" data-id="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></li>
-                                                        <?php 
-                                                    }
-                                                }
-                                            }
-                                        }?>
-                                    </ul>
-                                    
-                                    <!--<select multiple name="home_page_cat[]" class="llhome_page_cat_sss" id="" style="width: 100%;"></select>-->
-                                        
-                             
-                            <?php /*<select multiple name="home_page_cat[]" class="" id="home_page_cat" style="
-    width: 100%;
-">
-                                    <?php foreach($categories as $category){ ?>
-                                    <?php foreach(json_decode($SettingData['home_page_cat'], true) as $setcat){ 
-                                    if($setcat==$category['CategoryId']){?>
-                                    <option selected="selected" value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
-                                    <?php
-                                    }else{?>
-                                    <option value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
-                                    <?php
-                                    }
-                                    }?>
-                                    <option value="<?php echo ($category['CategoryId']); ?>"><?php echo ($category['CatName']); ?></option>
-                                    <?php
-                                    } ?>
-                                    
-                                </select> */?>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
                             <div class="col-sm-12">
@@ -125,12 +101,103 @@
                         </div>
                     </div>
                     <?php echo form_close() ?>
+                    <?php echo form_open('Ccategory/update_category_order', array('class' => 'form-vertical', 'method' => 'post', 'id' => 'update_category_order')) ?>
+                    <input type="hidden" name="setting_id" value="<?=$SettingData['setting_id']?>">
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="homecat" class="col-sm-3 col-form-label">Home Categories</label>
+                            <div class="col-sm-9">
+                                <div class="overlay-loading" style="display: none;"></div>
+                                <ul id="sortable-sss" class="sort-category">
+                                    <?php $counter = 0; foreach($categories as $category){?>
+                                        <li class="list-unstyled ui-state-default uisort" 
+                                        data-uisort="<?=++$counter?>" 
+                                        data-originalsort="<?=$category['sort']?>" 
+                                        data-id="<?=$category['CategoryId']?>" 
+                                        data-name="<?=$category['CatName']?>"><?=$category['CatName']?></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label"></label>
+                            <div class="col-sm-12">
+                                <input type="submit" style="float: right;width: 10%;" class="btn btn-success btn-large" value="Save Order" />
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo form_close() ?>
+
+
                 </div>
             </div>
         </div>
     </section>
 </div>
-<!-- Add new customer end -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#update_category_order').on('submit', function(){
+            event.preventDefault();
+            var currentElem = $(this);
+            var all_lis = $("#" + currentElem.attr("id") + " .sort-category li");
+            var payload = [];
+            var currentLiObj = null;
+            for (var i = 0; i < all_lis.length; i++) {
+                var tempCatSortObj = {};
+                currentLiObj = $(all_lis[i]);
+                tempCatSortObj.id = currentLiObj.data("id");
+                tempCatSortObj.pso = currentLiObj.data("originalsort");
+                var uisortorder = currentLiObj.data("uisort");
+                var findElem = all_lis.filter(function(index, obj){
+                    return $(obj).data("uisort") == i+1;
+                });
+                if(findElem.length > 0){
+                    tempCatSortObj.nso = findElem.data("originalsort");
+                }
+                payload.push(tempCatSortObj);
+            }
+            postData(payload, currentElem.attr("action"), currentElem.attr("method"))
+        });
+        function postData(data, url, method){
+            $('.overlay-loading').show();
+            $.ajax({
+               type: method,
+               url: url,
+               data: {"catData": JSON.stringify(data)},
+               // dataType: "JSON",
+               success: function(success)
+               {
+                if(success){
+                    $('.alert-success').html("Category order saved successfully");
+                    $('.alert-success').css('display', 'block');
+                    setTimeout(function() {
+                        $('.alert-success').hide();
+                    }, 5000);
+                }
+                else{
+                    $('.alert-danger').html("Something went wrong!!!");
+                    $('.alert-danger').css('display', 'block');
+                    setTimeout(function() {
+                        $('.alert-danger').hide();
+                    }, 5000);
+                }
+               },
+               error: function(a,b){console.log(a);
+                    $('.alert-danger').html("Something went wrong!!!");
+                    $('.alert-danger').css('display', 'block');
+                    setTimeout(function() {
+                        $('.alert-danger').hide();
+                    }, 5000);alert("b");
+               },
+               complete: function(){
+                $('.overlay-loading').hide();
+                window.location.href = "#";
+               }
+            });
+        }
+    });
+</script>
+<!-- Site Setting end -->
 
 
 

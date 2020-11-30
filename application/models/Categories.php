@@ -11,10 +11,11 @@ class Categories extends CI_Model {
     private $tableName = 'grocery_category';
 
     public function category_list() {
-        $this->db->select('a.*, b.CatName ParentName');
+        $this->db->select('a.*, b.CatName ParentName, b.sort ParentSort');
         $this->db->from($this->tableName.' a');
         $this->db->join($this->tableName.' b', 'a.ParentId = b.CategoryId', 'left');
         $this->db->where('a.Status', 1);
+        $this->db->order_by('b.sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -30,8 +31,8 @@ class Categories extends CI_Model {
         $SettingData = $setting_detail[0];
         //echo ($SettingData['home_page_cat']);
         $idarr = trim($SettingData['home_page_cat'], '[]');
-        $myq = 'SELECT a.*, b.CatName ParentName FROM `grocery_category`a LEFT JOIN `grocery_category` b ON a.ParentId = b.CategoryId WHERE a.Status="1" AND a.ParentId IN ('.$idarr.')';
-        //echo $myq;
+        $myq = 'SELECT a.*, b.CatName ParentName , b.sort ParentSort FROM `grocery_category`a LEFT JOIN `grocery_category` b ON a.ParentId = b.CategoryId WHERE a.Status="1" AND a.ParentId IN ('.$idarr.') Order by a.sort ASC';
+        //echo $myq;die;
         $query = $this->db->query($myq);
         if ($query->num_rows() > 0) {
             //return $query->result_array();
@@ -44,6 +45,7 @@ class Categories extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('Status', 1);
+        $this->db->order_by('sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -55,6 +57,7 @@ class Categories extends CI_Model {
         $this->db->select('CategoryId');
         $this->db->from($this->tableName);
         $this->db->where('Status', 1);
+        $this->db->order_by('sort', 'ASC');
         $query = $this->db->get();
         if($query->num_rows() > 0) {
             return $query->result_array();
@@ -92,6 +95,7 @@ class Categories extends CI_Model {
         $this->db->from($this->tableName);
         $this->db->where('ParentId', 0);
         $this->db->where('Status', 1);
+        $this->db->order_by('sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -175,6 +179,21 @@ class Categories extends CI_Model {
             return $returnData;
         }
         else{
+            return false;
+        }
+    }
+    function update_category_sort_order($catData){
+        try {
+            for ($i=0; $i < count($catData); $i++) { 
+                if($catData[$i]->nso == $catData[$i]->pso)
+                    continue;
+                $data = array(
+                    'sort' => $catData[$i]->nso
+                );
+                $this->update($data, 'CategoryId', $catData[$i]->id);
+            }
+            return true;   
+        } catch (Exception $e) {
             return false;
         }
     }

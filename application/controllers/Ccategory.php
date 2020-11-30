@@ -27,7 +27,6 @@ class Ccategory extends CI_Controller {
         $this->template->full_admin_html_view($content);
         
     }
-
     //Insert category and upload
     public function insert_category() {
 
@@ -130,4 +129,19 @@ class Ccategory extends CI_Controller {
         return true;
     }
 
+    public function update_category_order(){
+        $catData = json_decode($this->input->post("catData"));
+        if(empty($catData)){
+            echo false;
+            return;
+        }
+        if($this->Categories->update_category_sort_order($catData) == true){
+            echo true;
+            return;
+        }
+        else{
+            echo false;
+            return;
+        }
+    }
 }
