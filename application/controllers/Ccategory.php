@@ -144,4 +144,9 @@ class Ccategory extends CI_Controller {
             return;
         }
     }
+    public function child_cats(){
+        $catId = $this->input->get("catId");
+        print_r(json_encode($this->Categories->get_child_categories($catId)));
+        return;
+    }
 }

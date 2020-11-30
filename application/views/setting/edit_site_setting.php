@@ -66,8 +66,8 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="alert alert-danger" style="display: none;">asdf</div>
-                <div class="alert alert-success" style="display: none;">asdf</div>
+                <div class="alert alert-danger" style="display: none;"></div>
+                <div class="alert alert-success" style="display: none;"></div>
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -128,7 +128,39 @@
                     </div>
                     <?php echo form_close() ?>
 
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="delivery_charges" class="col-sm-3 col-form-label">Choose category for sub category sorting</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="cat-for-sub-cat">
+                                    <?php $counter = 0; foreach($categories as $category){?>
+                                        <option value="<?=$category['CategoryId']?>"><?=$category['CatName']?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <?php echo form_open('Ccategory/update_category_order', array('class' => 'form-vertical', 'method' => 'post', 'id' => 'update_sub_category_order')) ?>
+                    <input type="hidden" name="setting_id" value="<?=$SettingData['setting_id']?>">
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label for="homecat" class="col-sm-3 col-form-label">Sub Categories</label>
+                            <div class="col-sm-9">
+                                <div class="overlay-loading" style="display: none;"></div>
+                                <ul id="sortable-sss2" class="sort-category">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-sm-4 col-form-label"></label>
+                            <div class="col-sm-12">
+                                <input type="submit" style="float: right;width: 10%;" class="btn btn-success btn-large" value="Save Order" />
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo form_close() ?>
                 </div>
             </div>
         </div>
@@ -136,7 +168,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#update_category_order').on('submit', function(){
+        $('#update_category_order, #update_sub_category_order').on('submit', function(){
             event.preventDefault();
             var currentElem = $(this);
             var all_lis = $("#" + currentElem.attr("id") + " .sort-category li");
@@ -158,6 +190,7 @@
             }
             postData(payload, currentElem.attr("action"), currentElem.attr("method"))
         });
+
         function postData(data, url, method){
             $('.overlay-loading').show();
             $.ajax({
@@ -187,7 +220,7 @@
                     $('.alert-danger').css('display', 'block');
                     setTimeout(function() {
                         $('.alert-danger').hide();
-                    }, 5000);alert("b");
+                    }, 5000);
                },
                complete: function(){
                 $('.overlay-loading').hide();
@@ -195,6 +228,37 @@
                }
             });
         }
+
+        $("#cat-for-sub-cat").change(function(){
+            var targetElem = $('#update_sub_category_order #sortable-sss2');
+            targetElem.empty();
+            var selectElem = $(this);
+            $.ajax({
+               type: 'GET',
+               url: '<?=base_url("Ccategory/child_cats")?>',
+               data: {"catId": selectElem.val()},
+               dataType: "JSON",
+               success: function(resultCats)
+               {debugger;
+                if(resultCats){
+                    var counter = 0
+                    for (var i = 0; i < resultCats.length; i++) {
+                        targetElem.append(`<li class="list-unstyled ui-state-default uisort ui-sortable-handle" 
+                        data-uisort="${++counter}" 
+                        data-originalsort="${resultCats[i].sort}" 
+                        data-id="${resultCats[i].CategoryId}" 
+                        data-name="${resultCats[i].CatName}">${resultCats[i].CatName}</li>`);
+                    }
+                }
+               },
+               error: function(a,b){console.log(a);}
+            });
+            
+            
+        });
+        $( "#sortable-sss2" ).sortable({
+            axis: 'y'
+        });
     });
 </script>
 <!-- Site Setting end -->

@@ -16,6 +16,7 @@ class Categories extends CI_Model {
         $this->db->join($this->tableName.' b', 'a.ParentId = b.CategoryId', 'left');
         $this->db->where('a.Status', 1);
         $this->db->order_by('b.sort', 'ASC');
+        $this->db->order_by('a.sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -83,6 +84,8 @@ class Categories extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('ParentId', 0);
+        $this->db->where('Status', 1);
+        $this->db->order_by('sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -154,7 +157,7 @@ class Categories extends CI_Model {
                     gp.Category IN(
                         $inCats
                     )
-                    ORDER BY gp.sort DESC
+                    ORDER BY gp.sort ASC
                     LIMIT $startFrom, $limit";
         $countQuery = "SELECT 
                         count(1) total
@@ -196,5 +199,41 @@ class Categories extends CI_Model {
         } catch (Exception $e) {
             return false;
         }
+    }
+    public function get_child_categories($catId) {
+        $inCats = Array();
+        $func = function($value) {
+            return $value["CategoryId"];
+        };
+        if(empty($catId))
+            $catId = 0;
+        $queryFirst = "SELECT  CategoryId
+                            from    (select * from grocery_category
+                                     order by ParentId, CategoryId) products_sorted,
+                                    (select @pv := $catId) initialisation
+                            where   find_in_set(ParentId, @pv) and Status = 1
+                            and     length(@pv := concat(@pv, ',', CategoryId))";
+        $firstQueryResult = $this->db->query($queryFirst);
+        if ($firstQueryResult->num_rows() > 0) {
+            $inCats = array_map($func, $firstQueryResult->result_array());
+        }
+        array_push($inCats, $catId);
+        $inCats = join(",", $inCats);
+
+        $query = "SELECT 
+                    sort, CategoryId, CatName 
+                    FROM $this->tableName
+                    WHERE Status = 1 AND 
+                    ParentId IN(
+                        $inCats
+                    )
+                    ORDER BY sort ASC";
+
+        $query = $this->db->query($query);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        else
+            return false;
     }
 }
