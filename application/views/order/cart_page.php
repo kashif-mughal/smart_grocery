@@ -126,6 +126,17 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             display:block;
         }
     }
+    .emptycart {
+      line-height: 100px;
+      height: 400px;
+      text-align: center;
+    }
+
+    .emptycart p {
+      line-height: 1.5;
+      display: inline-block;
+      vertical-align: middle;
+    }
 </style>
 
 <div id="main-page">
@@ -147,7 +158,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <!-- Bread Crumb -->
 
 
-        <section class="main-content mx-4">
+        <section class="cart-page main-content mx-4">
             <div class="container">
                 <!-- Alert Message -->
                 <?php
@@ -260,6 +271,26 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
             </div>
         </section>
+        <section style="display: none;" class="empty-cart-page main-content mx-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content-box1">
+                    <div class="container">
+                      <div class="emptycart">
+                        <p>
+                          <h3>SHOPPING CART</h3>
+                          <span>You have no items in your shopping cart.</span><br>
+                          <b>
+                            <span>Click <a href="<?=base_url()?>">here</a> to continue shopping.</span>
+                          </b>
+                        </p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </section>
     </div>
 <script type="text/javascript">
     var baskit = getCookie('baskit');
@@ -269,32 +300,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     var step2Verified = false;
     var step3Verified = false;
     var step4Verified = true;
-    if(!baskit || JSON.parse(baskit).length == 0)
-        window.location.href = '<?=base_url();?>';
+    if(!baskit || JSON.parse(baskit).length == 0){
+        //window.location.href = '<?=base_url();?>';
+        $(".cart-page").hide();
+        $('.empty-cart-page').show();
+    }
     $(document).ready(() => {
-        $('#newAddressLocation').select2('destroy');
-        $('#newAddressForm').validate();
         loadCheckoutCartArea();
-        $("#addressForm").submit(function(e) {
-            e.preventDefault();
-            if(!selectedAddress){
-                $.notify("Kindly select at least one address", "error");
-                return false;
-            }
-            if(($('input[name="selectedAddress[]"]')).length == 0){
-                $('#deliveryAddressTitle').html("Your Delivery Address Is");
-                $('#deliveryAddressText').html($('#selectedFinalAddress').val());
-                $('#address-success').show();
-                $('#address-process').hide();
-                $('#collapseTwo').collapse('hide');
-                step2Verified = true;
-                return true;
-                //close tab
-            }
-            submitForm($(this));
-        });
-
-        
     });
 
     function loadCheckoutCartArea(){
@@ -340,8 +352,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     
     var subTotal = 0;
     var addressCounter = 1;
-
-    
 </script>
 
 
@@ -365,20 +375,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
    }
  $(document).ready(() => {
-  var urlVars = getUrlVars();
-  var searchText = urlVars["q"];
-  if(searchText){
-    $("#q").val(searchText);
-  }
-  var selectedCat = urlVars["categoryId"];
-  if(selectedCat){
-    $("#cat-" + selectedCat).trigger("click");
-  }
-   loadCartData();
-   $(document).on('keydown', '.quantity', function () {
-      if(event.keyCode == 189)
-        return false;
-   });
    loadShoppingCart1();
 
 });
@@ -392,7 +388,7 @@ function loadShoppingCart1(){
       if(cart.length == 0)
       {
          //show empty response here
-         showEmptyResponse(cartBody);
+         showEmptyResponse($('.cart-page'));
          return;
       }
       //<td style="text-align:center;"><b>{qty}</b></td>
@@ -441,42 +437,18 @@ function loadShoppingCart1(){
       }
       else{
          //show empty response here
-         showEmptyResponse(cartBody);
+         showEmptyResponse($('.cart-page'));
          return false;
       }   
-   }
-
-   function showEmptyResponse(cartBody){
-      if(cartBody)
-        $(cartBody).hide();
-      $($('.emptyCart')[0]).show();
-      $(document).on('click', '.checkout-btn', handleCheckout(event));
-   }
-
-   function handleCheckout(e){
-    if(event)
-      event.preventDefault();
-      return false;
    }
 
    function emptyCart(){
       var oldDt = new Date(1);
       document.cookie = `baskit=[];path=/;expires=${oldDt}`;
-      showEmptyResponse($('#shoppingCartBody1'));
+      showEmptyResponse($('.cart-page'));
       loadCartData();
    }
 
-   function getUrlVars(){
-      var vars = [], hash;
-      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-      for(var i = 0; i < hashes.length; i++)
-      {
-          hash = hashes[i].split('=');
-          vars.push(hash[0]);
-          vars[hash[0]] = hash[1];
-      }
-      return vars;
-  }
 </script>
 
 <script type='text/javascript'>

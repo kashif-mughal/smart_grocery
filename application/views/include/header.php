@@ -538,7 +538,7 @@ function removeItemFromShoppingCart(currentElem){
    if(cartExceptCurrentProduct.length == 0){
       var cartObj = $('#shoppingCartBody');
       if(cartObj && cartObj.length > 0)
-         showEmptyResponse(cartObj)
+         showEmptyResponse($(".cart-page"))
    }
    else{
     var totalP = 0;
@@ -553,7 +553,9 @@ function removeItemFromShoppingCart(currentElem){
    function showEmptyResponse(cartBody){
       if(cartBody)
         $(cartBody).hide();
-      $($('.emptyCart')[0]).show();
+      if(cartBody && cartBody[0])
+        $(cartBody[0]).hide();
+      $($('.empty-cart-page')[0]).show();
       $(document).on('click', '.checkout-btn', handleCheckout(event));
    }
    function handleCheckout(e){
@@ -564,7 +566,7 @@ function removeItemFromShoppingCart(currentElem){
    function emptyCart(){
       var oldDt = new Date(1);
       document.cookie = `baskit=[];path=/;expires=${oldDt}`;
-      showEmptyResponse($('#shoppingCartBody'));
+      showEmptyResponse($('.cart-page'));
       loadCartData();
    }
    function changeSelectedCat(currentElem){

@@ -254,14 +254,19 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Orders');
         $order_detail = $CI->Orders->retrieve_order_editdata($OrderId, true);
+        $totalValue = 0;
         foreach ($order_detail['OrderDetail'] as $k => $v) {
                 $i++;
                 $order_detail['OrderDetail'][$k]['sl'] = $i;
             }
+            $totalValue += floatval($order_detail['OrderDetail'][0]['OrderValue']) + floatval($order_detail['OrderDetail'][0]['deliveryCharges']);
+                if(!empty($order_detail['OrderDetail'][0]['CopunDiscount']))
+                    $totalValue -= floatval($order_detail['OrderDetail'][0]['CopunDiscount']);
         $data = array(
             'title' => 'Order Edit',
             'OrderData' => $order_detail,
-            'OrderId' => $OrderId
+            'OrderId' => $OrderId,
+            'TotalValue' => $totalValue
         );
         //echo "<pre>";print_r($data);die;
         return $CI->parser->parse('order/admin_order_detail', $data, true);
