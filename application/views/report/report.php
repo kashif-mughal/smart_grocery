@@ -283,7 +283,7 @@
     function filltable(reportType) {
         $.ajax({
             type: "POST",
-            url: '<?php echo base_url('creport/generate_report') ?>',
+            url: '<?php echo base_url('Creport/generate_report') ?>',
             data: {Report_Type: reportType, start_date: startDate, end_date: endDate},
             dataType: "json",
             cache: false,
@@ -331,7 +331,7 @@
                         content += `<tr>
                                         <td>${i+1}</td>
                                         <td class="text-center">${data[i].OrderId}</td>
-                                        <td class="text-center">${data[i].email ? "("+ data[i].email +") " + data[i].phone : data[i].phone}</td>
+									    <td class="text-center">${data[i].email +" Phone :"+ data[i].phone + " Add :" + data[i].address} </td>
                                         <td class="text-right">${data[i].OrderValue}</td>
                                     </tr>`;
                     }

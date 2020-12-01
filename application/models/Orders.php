@@ -116,10 +116,11 @@ class Orders extends CI_Model {
     public function retrieve_order_editdata($orderId, $requireAllSteps = false){
         if(is_null($orderId))
             return false;
-        $this->db->select('a.*, b.*, c.ProductName, c.ProductImg, d.UnitName');
+        $this->db->select('a.*, b.*, u.*, c.ProductName, c.ProductImg, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
+        $this->db->join('users u', 'u.user_id = a.CustomerId');
         $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
         $CI = & get_instance();
         $userRole = $CI->session->userdata('user_type');

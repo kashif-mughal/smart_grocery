@@ -61,6 +61,53 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Customer Name</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["first_name"] . ' ' . $OrderData["OrderDetail"][0]["last_name"]?></span>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Address</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["address"]?></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Email</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["email"]?></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Phone</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["phone"]?></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Total Price</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$TotalValue?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Manage Category -->
         <div class="row">
             <div class="col-sm-12">

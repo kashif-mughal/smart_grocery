@@ -30,6 +30,8 @@ class Luser {
             'title' => display('update_profile'),
             'first_name' => $edit_data[0]['first_name'],
             'last_name' => $edit_data[0]['last_name'],
+            'email' => $edit_data[0]['email'],
+            'phone' => $edit_data[0]['phone'],
             'user_name' => $edit_data[0]['username'],
             'logo' => $edit_data[0]['logo']
         );

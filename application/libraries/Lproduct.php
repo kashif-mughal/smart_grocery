@@ -91,8 +91,13 @@ class Lproduct {
             'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
             'sale_unit' => $product_detail[0]['SaleUnit'],
             'ProductImg' => $product_detail[0]['ProductImg'],
-            'tags' => $product_detail[0]['tags']
+            'tags' => $product_detail[0]['tags'],
+            'stock' => $product_detail[0]['stock'],
+            'season' => $product_detail[0]['season'],
+            'sort' => $product_detail[0]['sort']
         );
+        
+        //var_dump($data);exit();
 
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 
@@ -228,10 +233,10 @@ class Lproduct {
         return $productList;
     }
 
-    public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
+    public function products_by_category($catId, $productName = null, $page = 0, $perpage = 8, $brand = null){
         $CI = & get_instance();
         $CI->load->library('lcategory');
-        $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage);
+        $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage, $brand);
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             for ($i=0; $i < count($value->childCats); $i++) { 
@@ -243,12 +248,101 @@ class Lproduct {
                 }
             }
         }
-
         if($catId == null) {
             $selectedCategory = array(
                 'MainCategory' => 'Products',
                 'SubCategory' => 'All'
             );
+        }
+        if($catId == 12) {
+            $selectedCategory = array(
+                'MainCategory' => 'Essential Foods',
+                'SubCategory' => 'All',
+            );   
+        }
+        if($catId == 177) {
+            $selectedCategory = array(
+                'MainCategory' => 'Snacks & Breakfast',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 178) {
+            $selectedCategory = array(
+                'MainCategory' => 'Bakery and Frozen',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 179) {
+            $selectedCategory = array(
+                'MainCategory' => 'Beverages',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 180) {
+            $selectedCategory = array(
+                'MainCategory' => 'Fresh Fruits & Vegetables',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 181) {
+            $selectedCategory = array(
+                'MainCategory' => 'Meat & Poultry',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 182) {
+            $selectedCategory = array(
+                'MainCategory' => 'Seafood',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 183) {
+            $selectedCategory = array(
+                'MainCategory' => 'Personal Hygiene',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 184) {
+            $selectedCategory = array(
+                'MainCategory' => 'Haircare',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 185) {
+            $selectedCategory = array(
+                'MainCategory' => 'Toiletries',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 186) {
+            $selectedCategory = array(
+                'MainCategory' => 'Kitchen Essentials',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 187) {
+            $selectedCategory = array(
+                'MainCategory' => 'Household Essentials',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 188) {
+            $selectedCategory = array(
+                'MainCategory' => 'Baby Care',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 189) {
+            $selectedCategory = array(
+                'MainCategory' => 'OTC Healthcare & Wellbeing',
+                'SubCategory' => 'All'
+            );   
+        }
+        if($catId == 190) {
+            $selectedCategory = array(
+                'MainCategory' => 'Pet Care',
+                'SubCategory' => 'All'
+            );   
         }
         $data = array(
             'title' => 'Sauda Express | Buy each and everything home grocery',
@@ -258,12 +352,19 @@ class Lproduct {
             'SelectCategory' => $selectedCategory,
             'PerPage' => $perpage
         );
+        if(!is_null($brand)){
+            $CI->load->model('Brands');
+            $currentBrand = $CI->Brands->brand_search_item($brand);
+            if($currentBrand && count($currentBrand) > 0){
+                $data["CurrentBrandName"] = $currentBrand[0]['BrandName'];
+            }
+        }
         return $CI->parser->parse('product/products', $data, true);
     }
-    public function internal_products_by_category($catId, $productName = null, $page = 0, $perpage = 8){
+    public function internal_products_by_category($catId, $productName = null, $page = 0, $perpage = 8, $brand = null){
         $CI = & get_instance();
         $CI->load->model('Categories');
-        $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage);
+        $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage, $brand);
         return $result;
     }
 }

@@ -27,7 +27,6 @@ class Ccategory extends CI_Controller {
         $this->template->full_admin_html_view($content);
         
     }
-
     //Insert category and upload
     public function insert_category() {
 
@@ -112,7 +111,8 @@ class Ccategory extends CI_Controller {
         $data = array(
             'CatName' => $this->input->post('CatName'),
             'Alias' => $this->input->post('Alias'),
-            'ParentId' => $this->input->post('ParentId')
+            'ParentId' => $this->input->post('ParentId'),
+            'sort' => $this->input->post('sort')
         );
         if($_FILES['image']['name'])
             $data['Img'] = (!empty($image_url) ? $image_url : 'assets/img/category.jpg');
@@ -129,4 +129,24 @@ class Ccategory extends CI_Controller {
         return true;
     }
 
+    public function update_category_order(){
+        $catData = json_decode($this->input->post("catData"));
+        if(empty($catData)){
+            echo false;
+            return;
+        }
+        if($this->Categories->update_category_sort_order($catData) == true){
+            echo true;
+            return;
+        }
+        else{
+            echo false;
+            return;
+        }
+    }
+    public function child_cats(){
+        $catId = $this->input->get("catId");
+        print_r(json_encode($this->Categories->get_child_categories($catId)));
+        return;
+    }
 }

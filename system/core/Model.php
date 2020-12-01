@@ -125,10 +125,12 @@ class CI_Model extends Lic {
 		return $this->db->count_all_results();
     }
 
-    public function _list() {
+    public function _list($key = null) {
         $this->db->select('*');
         $this->db->from($this->tableName);
         $this->db->where('Status', 1);
+        if(!is_null($key))
+            $this->db->order_by($key, 'DESC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();

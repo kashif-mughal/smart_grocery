@@ -169,12 +169,20 @@
                               <span>Delivery Charges</span>
                               <span><script type="text/javascript">document.write(formatCurrency('<?=$OrderData["OrderDetail"][0]["DeliveryCharges"]?>'));</script></span>
                            </div>
-                           <div class="shippingContentSub pb-3 border-b-primary">
+                           <?php $copunDiscount = 0; if($OrderData["OrderDetail"][0]["CopunDiscount"] && !is_null($OrderData["OrderDetail"][0]["CopunDiscount"]) && $OrderData["OrderDetail"][0]["CopunDiscount"] != 0){
+                              $copunDiscount = floatval($OrderData["OrderDetail"][0]["CopunDiscount"]);
+                              ?>
+                              <div class="shippingContent pb-3 d-flex justify-content-between align-items-center">
+                                 <span>Copun Discount</span>
+                                 <span><script type="text/javascript">document.write(formatCurrency('-<?=$copunDiscount?>'));</script></span>
+                              </div>
+                           <?php }?>
+                           <!-- <div class="shippingContentSub pb-3 border-b-primary">
                               <p>Shipping options will be updated during checkout.</p>
-                           </div>
+                           </div> -->
                            <div class="total pt-3 d-flex justify-content-between align-items-center">
                               <span class="title">Total</span>
-                              <span class="price"><script>document.write(formatCurrency('<?=$total + $OrderData["OrderDetail"][0]["DeliveryCharges"]?>'))</script></span>
+                              <span class="price"><script>document.write(formatCurrency('<?=$total + $OrderData["OrderDetail"][0]["DeliveryCharges"] - $copunDiscount?>'))</script></span>
                            </div>
                         </div>
                      </div>

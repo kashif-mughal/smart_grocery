@@ -38,6 +38,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    }
 </style>
 
+<!-- Script for the use of auto complete search START-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- Script for the use of auto complete search  END-->
 <!-- Sidebar -->
     
     <div id="mySidenav" class="sidenav">
@@ -131,6 +135,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                             </div>
                         </div>
                     </div>
+                      <div class="card-header sidebar-menu-title p-0 text-left" id="headingOne">
+                     <h4>Follow Us</h4>
+                  </div>
+                  <div class="row" style=" margin-left: 0px;">
+                     <a href="https://www.facebook.com/saudaexpresspk"><i class="fab fa-facebook-square fa-1x"></i></a>
+                     <div class="socialmedia-footer">|</div>
+                     <a href="https://twitter.com/saudaexpresspk"><i class="fab fa-twitter-square fa-1x"></i></a>
+                      <div class="socialmedia-footer">|</div>
+                     <a href="#"><i class="fab fa-whatsapp-square fa-1x"></i></a>
+                  </div>
 
             </div>
         </div>
@@ -141,7 +155,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 <!-- Sidebar Ends -->
 
 
-<div class="section-head">
+<div class="section-head" style="position: fixed; top: 0; width: 100%; z-index: 21;">
       <div class="top-bar">
          <div class="container">
             <div class="row">
@@ -157,6 +171,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <li class="nav-item">
                         <a class="nav-link" href="<?=base_url("Corder/track_order_form")?>">Track your order</a>
                      </li>
+                     <li>
+                        <p class="seperator">|</p>
+                     </li>
+                       <li class="nav-item">
+                          <a class="nav-link" href="<?=base_url("Corder/my_order")?>">Order History</a>
+                       </li>
                      <?php if($_SESSION['user_type'] == 1){?>
                       <li>
                         <p class="seperator">|</p>
@@ -183,29 +203,29 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div class="main-nav bg-light">
          <div class="container">
-            <div class="row align-items-center py-4">
+            <div class="row align-items-center py-3 py-md-4">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-4 mb-md-2 mb-lg-0 col-12 order-1 text-center">
+               <div class="col-lg-3 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-end justify-content-md-end justify-content-sm-center">
                      <div class="sidebar-button">
                         <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
                               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                               aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png" style="width: 44px;">
+                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
                               <!-- <i class="fa fa-bars" style="font-size: 40px;"></i> -->
                         </button>
                      </div>
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
-                           <img src="<?php echo base_url() ?>assets/img/logo.png" alt="Sauda Express" class="img-fluid d-block">
-                           <p class="text-white tag-line mb-0">Inventing Tomorrow</p> 
+                           <img src="<?php echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block">
+                           <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
                      </div>
                   </div>
                </div>
                <!-- Search Bar -->
-               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right">
+               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
@@ -223,13 +243,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                       <?php } ?>
                                    </div>
                                  </div>
-                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here">
+                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here" onfocus="this.value=''">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">Search</button>
                                  </div>
                               </div>
                               </div>
-                              <div class="input-group mb-3" style="position: absolute; color: white;">
+                              <div class="input-group mb-3 search-helper-text" style="position: absolute; color: white;">
                                 <span>"Searching in" &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
                               </div>
                            </form>
@@ -237,7 +257,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                   <!-- Phone Number & Add to Cart Button -->
-                  <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1">
+                  <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
+                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1 col-4">
                      <div class="phone_cart d-flex flex-row align-item-center 
                         justify-content-start justify-content-md-start justify-content-sm-center">
                         <!-- Phone -->
@@ -261,7 +282,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                            <div class="cart_container d-flex flex-row align-item-center justify-content-start">
                               <!-- Cart Icon -->
                               <div class="cart_icon">
-                                 <a href="javascript:void(0)" id="cartBtn" data-toggle="modal" data-target="#shoppingCartModal">
+                                 <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
                                     <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
                                     <div class="cart_icon_text">
                                        <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
@@ -311,6 +332,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <a href="<?php echo base_url() ?>corder/checkout_form" class="checkout-btn btn btn-sm btn-primary">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout
                      </a>
+                       <a href="<?php echo base_url() ?>corder/cart_page" class="checkout-btn btn btn-sm btn-primary">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Proceed to Cart Page
+                     </a>
                      <a href="javascript:void(0);" onclick="emptyCart();" class="btn btn-sm btn-secondary">
                         <i class="fa fa-trash" aria-hidden="true"></i> Clear
                      </a>
@@ -349,7 +373,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
   var urlVars = getUrlVars();
   var searchText = urlVars["q"];
   if(searchText){
-    $("#q").val(searchText);
+    $("#q").val(searchText.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' '));
   }
   var selectedCat = urlVars["categoryId"];
   if(selectedCat){
@@ -363,9 +387,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    $(document).on('click', '.remove-item-from-cart', function () {
       removeItemFromShoppingCart($(this));
    });
-   $(document).on('click', '#cartBtn', function () {
-      loadShoppingCart();
-   });
+//   $(document).on('click', '#cartBtn', function () {
+//       loadShoppingCart();
+//   });
    $(document).on('click', '.remove-cart', function () {
       var productJson = $(this).data('json');
       removeAndUpdateFromCart(productJson, $(this));
@@ -475,12 +499,20 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
       if(cart)
          cart = JSON.parse(cart);
 
+      var dataJson = null;
+      dataJson = addCartObj.data('json');
+      if(!dataJson){
+        var currentProdId = addCartObj.attr("pId");
+        dataJson = cart.filter(function(each){return each.id == currentProdId});
+        if(dataJson.length > 0)
+          dataJson = dataJson[0];
+      }
       if(qty == 0){
-         removeAndUpdateFromCart(addCartObj.data('json'), $(prodContainer.find('.remove-cart')[0]));
+         removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
          return true;
       }else{
          addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
-            addCartObj.data('json'), 
+            dataJson, 
             qty,
             addCartObj
             );
@@ -506,7 +538,7 @@ function removeItemFromShoppingCart(currentElem){
    if(cartExceptCurrentProduct.length == 0){
       var cartObj = $('#shoppingCartBody');
       if(cartObj && cartObj.length > 0)
-         showEmptyResponse(cartObj)
+         showEmptyResponse($(".cart-page"))
    }
    else{
     var totalP = 0;
@@ -517,66 +549,13 @@ function removeItemFromShoppingCart(currentElem){
    }
    loadCartData();
 }
-function loadShoppingCart(){
-   var cartBody = $('#shoppingCartBody');
-   var cart = getCookie('baskit');
-   $(cartBody.find('tbody')).empty();
-   if(cart){
-      cart = JSON.parse(cart);
-      if(cart.length == 0)
-      {
-         //show empty response here
-         showEmptyResponse(cartBody);
-         return;
-      }
-      $(cartBody).show();
-      $($('.emptyCart')[0]).hide();
-      $(document).off('click', '.checkout-btn', handleCheckout(event));
-      var eachProdTemplate = `<tr>
-      <td class="text-center">
-      <img src="{imgValue}" alt="" class="img-fluid">
-      </td>
-      <td colspan="3">{prodName}</td>
-      <td>{qty}</td>
-      <td class="text-right" colspan="2">{price}</td>
-      <td class="text-right">{totalPrice}</td>
-      <td class="text-right">
-      <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="btn btn-sm btn-block btn-danger remove-item-from-cart">
-      <i class="fa fa-times"></i> Remove
-      </a>
-      </td>
-      </tr>`;
-      var cartTotalRow = `<tr>
-      <td colspan="7" class="text-right">Total</td>
-      <td class="text-right" id="Grand-Total">{grandTotal}</td>
-      <td></td>
-      </tr>`;
-      var sum = 0;
-      for (var i = 0; i < cart.length; i++) {
-         var eachProdTemplateCopy = eachProdTemplate;
-         sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace('{price}', cart[i].price);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-         eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
-         //append newly created row in card body
-         $(cartBody.find('tbody')).append(eachProdTemplateCopy);
-         }
-         cartTotalRow = cartTotalRow.replace('{grandTotal}', sum);
-         $(cartBody.find('tbody')).append(cartTotalRow);
-      }
-      else{
-         //show empty response here
-         showEmptyResponse(cartBody);
-         return false;
-      }   
-   }
+
    function showEmptyResponse(cartBody){
       if(cartBody)
         $(cartBody).hide();
-      $($('.emptyCart')[0]).show();
+      if(cartBody && cartBody[0])
+        $(cartBody[0]).hide();
+      $($('.empty-cart-page')[0]).show();
       $(document).on('click', '.checkout-btn', handleCheckout(event));
    }
    function handleCheckout(e){
@@ -587,13 +566,15 @@ function loadShoppingCart(){
    function emptyCart(){
       var oldDt = new Date(1);
       document.cookie = `baskit=[];path=/;expires=${oldDt}`;
-      showEmptyResponse($('#shoppingCartBody'));
+      showEmptyResponse($('.cart-page'));
       loadCartData();
    }
    function changeSelectedCat(currentElem){
       $('#categoryId').val($(currentElem).data('value'));
       $('#searching-cat-name').html($(currentElem).text());
+      $('#q').attr("placeholder" , $(currentElem).text());
    }
+   
    function getUrlVars(){
       var vars = [], hash;
       var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -606,5 +587,50 @@ function loadShoppingCart(){
       return vars;
   }
 </script>
-
    <!-- Cart Scripts End -->
+<style>
+     .ui-autocomplete {
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 1px;
+      font-size: 13px;
+      position: fixed;
+      overflow: auto;
+   }
+</style>
+ <!-- Auto Complete search script START-->
+<script type='text/javascript'>
+  $(document).ready(function(){
+     $("#q").autocomplete({
+        source: function( request, response )
+        {
+             $.ajax({
+                url: "<?php echo base_url();?>Autocomplete/userdata",
+                type: 'post',
+                dataType: "json",
+                data: {
+                  search: request.term
+                },
+                success: function( data ) 
+                {
+                  response( data );
+                }
+             });
+        },
+        select: function (values, ui) {
+             $('#q').val(ui.item.label);
+             return false;
+        }
+     });
+  });
+  $(document).ready(function(){
+    var allTxt = $(".card-text, .product-card-title");
+    for (var i = 0; i < allTxt.length; i++) {
+      $(allTxt[i]).attr("data-toggle", "tooltip");
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+<!-- Auto Complete search script END-->
+ 

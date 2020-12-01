@@ -26,12 +26,15 @@ class Cproduct extends CI_Controller {
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
         $page = $this->input->get('page');
+        $brand = $this->input->get('brand');
+        if(empty($brand) || !is_numeric($brand))
+            $brand = null;
         $perpage = $this->input->get('perpage');
         if(empty($page) || !is_numeric($page) || $page < 0)
             $page = 0;
         if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
             $perpage = $this->globaPerPageProducts;
-        $content = $this->lproduct->products_by_category($catId, $name, $page, $perpage);
+        $content = $this->lproduct->products_by_category($catId, $name, $page, $perpage, $brand);
 
         $this->template->full_html_view($content);
 
@@ -40,12 +43,15 @@ class Cproduct extends CI_Controller {
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
         $page = $this->input->get('page');
+        $brand = $this->input->get('brand');
+        if(empty($brand))
+            $brand = null;
         $perpage = $this->input->get('perpage');
         if(empty($page) || !is_numeric($page) || $page < 0)
             $page = 0;
         if(empty($perpage) || !is_numeric($perpage) || $perpage < 0)
             $perpage = $this->globaPerPageProducts;
-        $products = $this->lproduct->internal_products_by_category($catId, $name, $page, $perpage);
+        $products = $this->lproduct->internal_products_by_category($catId, $name, $page, $perpage, $brand);
         for ($i=0; $i < count($products['products']); $i++) { 
             $productObject = (object) [
                            'id' => $products['products'][$i]['ProductId'],
@@ -159,7 +165,10 @@ class Cproduct extends CI_Controller {
             'SaleUnitQty' => $this->input->post('SaleUnitQty'),
             'SaleUnit' => $this->input->post('SaleUnit'),
             'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
-            'tags' => $this->input->post('allTags')
+            'tags' => $this->input->post('allTags'),
+            'stock' => $this->input->post('stock'),
+            'season' => $this->input->post('season'),
+            'sort' => $this->input->post('sort')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])

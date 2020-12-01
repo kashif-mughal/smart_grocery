@@ -8,6 +8,7 @@ class Lcategory
       {
         $CI =& get_instance();
         $CI->load->model('Categories');
+        
         $category_list = $CI->Categories->category_list(); //It will get only Credit categorys
         $i             = 0;
         $total         = 0;
@@ -58,6 +59,7 @@ class Lcategory
             'Status' => $category_detail[0]['Status'],
             'Img' => $category_detail[0]['Img'],
             'ParentId' => $category_detail[0]['ParentId'],
+            'sort' => $category_detail[0]['sort'],
             'parent_categories' => $categories
         );
         $chapterList     = $CI->parser->parse('category/edit_category_form', $data, true);
@@ -68,21 +70,55 @@ class Lcategory
       {
         $CI =& get_instance();
         $CI->load->model('Categories');
+        $CI->load->model('SiteSettings');
+        $setting_detail = $CI->SiteSettings->retrieve_editdata('setting_id', '1');
+        //$category_list = $CI->Categories->category_listin();
+        //echo '<pre>';print_r($category_list);echo '</pre>';
         $category_list = $CI->Categories->category_list();
-        for ($i = 0; $i < count($category_list); $i++)
-          {
+        for ($i = 0; $i < count($category_list); $i++){
+            
             if ($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']]->childCats))
               {
+                  
                 $catArray[$category_list[$i]['ParentName']] = new stdClass();
                 $catArray[$category_list[$i]['ParentName']]->childCats = Array();
+                $catArray[$category_list[$i]['ParentName']]->sortOrder = $category_list[$i]["ParentSort"];
               }
             if (is_array($catArray[$category_list[$i]['ParentName']]->childCats))
               {
+                  
                 array_push($catArray[$category_list[$i]['ParentName']]->childCats, $category_list[$i]);
                 $catArray[$category_list[$i]['ParentName']]->catId = $category_list[$i]['ParentId'];
               }
           }
           //echo '<pre>';print_r($catArray);die;
+        return $catArray;
+      }
+      
+    //Getting categories with their child categories
+    public function get_category_hierarchy_in(){
+        $CI =& get_instance();
+        $CI->load->model('Categories');
+        $category_list = $CI->Categories->category_list();
+        for ($i = 0; $i < count($category_list); $i++)
+          {
+              //echo '<pre>';print_r($category_list[$i]['ParentId']);
+              
+              
+            if ($category_list[$i]['ParentId'] != '0' && empty($catArray[$category_list[$i]['ParentName']]->childCats))
+              {
+                  
+                $catArray[$category_list[$i]['ParentName']] = new stdClass();
+                $catArray[$category_list[$i]['ParentName']]->childCats = Array();
+                $catArray[$category_list[$i]['ParentName']]->sortOrder = $category_list[$i]["ParentSort"];
+              }
+            if (is_array($catArray[$category_list[$i]['ParentName']]->childCats))
+              {
+                  
+                array_push($catArray[$category_list[$i]['ParentName']]->childCats, $category_list[$i]);
+                $catArray[$category_list[$i]['ParentName']]->catId = $category_list[$i]['ParentId'];
+              }
+          }
         return $catArray;
       }
   }

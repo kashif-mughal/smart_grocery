@@ -45,7 +45,7 @@
                 ?>
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="content-box pd-50">
+                        <div class="content-box pd-30">
                             <div class="checkout-header">
                                 <h3>Thank you for your order</h3>
                                 <h6>Read your details below</h6>
@@ -71,7 +71,9 @@
                                         </div>
                                         <div class="feature-content d-flex flex-column justify-content-center">
                                             <h4 class="feature-text mb-0">Total Order</h4>
-                                            <h4 class="feature-text-price mb-0 sub-total"></h4>
+                                            <h4 class="feature-text-price mb-0"><script type="text/javascript">
+                                            document.write(formatCurrency('<?=$_SESSION["OV"] + $_SESSION["deliveryCharges"] - $_SESSION["discountedPrice"]?>'));
+                                        </script></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -124,8 +126,8 @@
                                     </div>
                                 </div>
 
-                                <a href="<?=base_url();?>" id="checkout" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">Done</a>
-                                <a href="<?=base_url('Corder/my_order');?>" class="button-secondary button-full-width mt-5 mb-3 p-3 text-dec-none text-white font-size-18">View Order history</a>
+                                <a href="<?=base_url();?>" id="checkout" class="button-secondary button-full-width mt-5 mb-1 p-2 text-dec-none text-white font-size-18">Done</a>
+                                <a href="<?=base_url('Corder/my_order');?>" class="button-secondary button-full-width mt-5 mb-1 p-2 text-dec-none text-white font-size-18">View Order history</a>
                                 
                             </div>
                         </div>
@@ -143,17 +145,25 @@
                                         <div class="orderbox-content">
                                             <div class="orderbox-content-charges d-flex justify-content-between mb-3">
                                                 <h6>Delivery Charges</h6>
-                                                <h6><?=$_SESSION["deliveryCharges"];?></h6>
+                                                <h6><script type="text/javascript">document.write(formatCurrency('<?=$_SESSION["deliveryCharges"];?>'))</script></h6>
                                             </div>
+                                            <?php if($_SESSION["discountedPrice"] != 0){?>
+                                                <div class="orderbox-content-charges d-flex justify-content-between mb-3">
+                                                    <h6>Copun Discount</h6>
+                                                    <h6><script type="text/javascript">document.write(formatCurrency('-<?=$_SESSION["discountedPrice"];?>'))</script></h6>
+                                                </div>
+                                            <?php } ?>
                                             <div class="orderbox-content-footer d-inline-flexbox align-self-start">
                                                 <h6>Shipping options will be updated during checkout.</h6>
                                             </div>
-        
+
                                         </div>
                                     </div>
                                     <div class="orderbox-footer d-flex justify-content-between mx-3">
                                         <h6>TOTAL</h6>
-                                        <h6 class="total-price font-size-15 sub-total"></h6>
+                                        <h6 class="total-price font-size-15" id="grand-amount"><script type="text/javascript">
+                                            document.write(formatCurrency('<?=$_SESSION["OV"] + $_SESSION["deliveryCharges"] - $_SESSION["discountedPrice"]?>'));
+                                        </script></h6>
                                     </div>
                                 </div>
                             </div>

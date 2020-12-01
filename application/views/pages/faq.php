@@ -4,12 +4,12 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <!--<li class="breadcrumb-item"><a href="#">Pages</a></li>-->
                     <li class="breadcrumb-item">FAQs</li>
                 </ol>
             </nav>
-            <h3 class="mb-0">FAQs</h3>
+            <!--<h3 class="mb-0">FAQs</h3>-->
         </div>
     </div>
 </div>
@@ -23,16 +23,69 @@
             <div class="col-sm-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body" style="padding:50px;">
-                        <h3 class="mb-4">FAQs</h3>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique ultrices felis, nec maximus quam tempus eu. Sed volutpat ante finibus nulla interdum, quis auctor sem vehicula. Sed scelerisque ligula sit amet metus aliquet tincidunt. Phasellus elit lorem, lobortis eget nunc vel, sollicitudin vulputate libero. Etiam congue, eros ac facilisis porta, velit augue consectetur nunc, sed tincidunt neque purus eu nibh. Nunc sed ullamcorper eros. Curabitur egestas fringilla ligula, ac ornare ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam elit leo, interdum in venenatis quis, dictum sit amet purus. Maecenas rutrum euismod rutrum. Pellentesque vehicula, urna viverra sodales maximus, purus odio fermentum dui, ac vulputate eros tortor ornare orci. Integer dignissim nibh tortor, sit amet tempor arcu sollicitudin nec. Quisque quis accumsan leo, non sollicitudin augue. Etiam porta eleifend elit.
+                        <!--<h3 class="mb-4">FAQs</h3>-->
+                         <h2 class="mb-4">FAQs:</h2>
+                        <b>1. Who owns SAUDA EXPRESS?</b> <br/>
+                        <li>SAUDA EXPRESS is owned by two Pakistani nationals, Mohammad Younus Sandeela and Faisal Feroz.</li><br/><br/>
 
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium vitae nisl quis vestibulum. Quisque bibendum ex id euismod scelerisque. Donec vel sem ornare, bibendum mauris et, vestibulum augue. Donec sed nisl nulla. Sed egestas dapibus enim, in ultricies erat mattis in. Phasellus finibus faucibus eros. Donec venenatis mattis est. Integer ornare purus risus, et congue erat molestie nec. Aliquam venenatis dui ut venenatis volutpat. Nam at tempus mi. Vivamus sed mattis ante. Quisque vel felis nec augue dictum auctor nec nec ante. Cras venenatis scelerisque eleifend. Vestibulum eu ligula a elit finibus aliquam. Curabitur quis purus nec mauris hendrerit pharetra.
+                        <b>2. What is the legal structure of SAUDA EXPRESS?</b><br/>
+                        <li>SAUDA EXPRESS is a Limited Liability Partnership duly registered with Securities and Exchange
+                        Commission of Pakistan.</li><br/><br/>
 
-                        Aliquam gravida pellentesque metus, quis ullamcorper ligula convallis ac. Cras nec elit et mauris commodo porta quis id felis. Integer accumsan pulvinar congue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus tincidunt malesuada augue, sit amet commodo odio vehicula ac. Aliquam aliquet malesuada ipsum, in eleifend lacus commodo non. Fusce id massa pulvinar, laoreet leo vel, semper arcu. Quisque fermentum commodo felis. Mauris ut auctor nisi, porta vulputate nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas quis nisl mi. Donec a elementum enim. Donec luctus, odio sed pretium consectetur, neque velit efficitur urna, a pharetra libero eros non tellus.
+                        <b>3. What are the Terms &amp; Conditions applicable when using SAUDA EXPRESS website / Apps for
+                        online purchasing?</b><br/>
+                        <li><a href="https://saudaexpress.com/cpage">Terms & Conditions</a></li><br/><br/>
 
-                        Proin sit amet metus eu nisi lobortis placerat eu et dolor. Donec tincidunt dictum commodo. Mauris varius felis massa, lacinia lobortis elit varius sed. Maecenas enim nisl, bibendum nec nulla quis, dignissim tincidunt metus. Nullam orci justo, porta quis est a, placerat malesuada ipsum. Sed id viverra orci. Maecenas suscipit lectus vel augue fermentum auctor. Ut congue semper finibus. Nulla facilisi. Suspendisse gravida ultrices purus quis semper. Integer scelerisque augue in iaculis eleifend. Morbi id fermentum quam.
+                        <b>4. What is the Privacy Policy followed by SAUDA EXPRESS?</b><br/>
+                        <li><a href="https://saudaexpress.com/cpage/privacy">Privacy Policy</a></li><br/><br/>
 
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla in lacus hendrerit, fermentum erat id, auctor quam. Phasellus faucibus porta finibus. Aliquam risus dolor, lacinia in elit vel, tempus euismod augue. Proin ac dolor magna. Aliquam erat volutpat. Vestibulum tempus, sapien id vestibulum cursus, erat erat dignissim purus, id tempor ex enim sit amet neque. Pellentesque sit amet venenatis metus, mollis rhoncus quam. Nunc arcu ex, pulvinar ut interdum sed, iaculis sit amet nunc. Mauris eros erat, volutpat quis libero non, egestas aliquet eros. Nunc feugiat purus id lectus sodales sagittis. Nullam mauris justo, fermentum eu mattis vel, fermentum in leo. Nunc et magna libero.
+                        <b>5. What is the Return &amp; Refund policy of SAUDA EXPRESS?</b><br/>
+                        <li><a href="https://saudaexpress.com/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
+
+                        <b>6. Do I need to pay extra delivery charges if I return a product?</b><br/>
+                        <li>If the product was damaged, used, worn out, incorrect or incomplete at the time of delivery
+                        then there are no extra charges applicable.</li><br/><br/>
+
+                        <b>7. What can I do if I have a complaint?</b><br/>
+                        <li>In case of a complaint the customers can call us on our “Customer Care” number displayed on
+                        top of the website / App. Customer can also register their complaint by sending email on
+                        info@saudaexpress.com.</li><br/><br/>
+
+                        <b>8. When can I expect the delivery once I order goods on SAUDA EXPRESS?</b><br/>
+                        <li>Soon after you submit the order you will receive an SMS alert confirming your Order Number as
+                        well as expected time for delivery. The delivery time can however, vary due to external factors
+                        such as traffic jams, unfriendly weather conditions etc.</li><br/><br/>
+
+                        <b>9. What if goods I received are damaged or are not according to my order specifications?</b><br/>
+                        <li><a href="https://saudaexpress.com/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
+
+                        <b>10. What are the payment options if I purchase goods on SAUDA EXPRESS?</b><br/>
+                        <li>At present only Cash on Delivery and bank transfer options are available. However, company is
+                        working hard to introduce digital payment options such as Credit and Debit cards. Such
+                        developments will be displayed on the website / App as and when they take place.</li><br/><br/>
+
+                        <b>11. What can I do if goods are not delivered on the indicated time slot?</b><br/>
+                        <li>Though, company makes every effort to deliver goods during the time slots communicated.
+                        However, external factors sometimes restrict this ability and delays (or even early deliveries)
+                        sometimes do happen. If we are aware of such expected delays we ensure they are
+                        communicated to concerned customers in time. Customers experiencing uninformed delays are
+                        requested to inform us on the Customer Care number displayed on the website.</li><br/><br/>
+
+                        <b>12. What happens if I am not available to receive goods?</b><br/>
+                        <li>The company will make two attempts free of cost. If for some reason customer is not available to
+                        receives goods on both attempts, the goods will be returned to warehouse and customer will be
+                        informed of the situation. Should the customer still wish to have the goods delivered, then
+                        additional delivery charges of PKR 500 will be applicable.</li><br/><br/>
+
+                        <b>13. Can I cancel my order once it has been placed on SAUDA EXPRESS website / App?</b><br/>
+                        <li>Orders can be cancelled as long as the goods have not been shipped.<br/><br/>
+
+                        <b>14. Are there any delivery charges applicable?</b><br/>
+                        <li>SAUDA EXPRESS offers free of cost delivery for all orders above PKR 3,000. A nominal charge of
+                        PKR 250 is applicable for orders below PKR 3,000.</li><br/><br/>
+
+                        <b>15. What is the minimum order size when I shop at SAUDA EXPRESS?</b><br/>
+                        <li>There is no minimum limit. However, a nominal charge of PKR 250 is applicable for orders below PKR 3,000.</li><br/>
                     </div>
                 </div>
             </div>

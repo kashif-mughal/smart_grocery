@@ -5,9 +5,9 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Order</a></li>
+                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <!--<li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>-->
+                    <li class="breadcrumb-item">User Edit Profile</li>
                 </ol>
                 <h3 class="mb-0">User Profile</h3>
             </nav>
@@ -44,22 +44,23 @@
         }
         ?>
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
+            <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down mt-4">
                 <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
                     <div>
                         <?php 
                             if(empty($CatList))
                                 $CatList = Array();
                             $data['CatList'] = $CatList;
-                            $this->load->view('include/user_left_menu', $data);
-                        ?>
+                            $this->load->view('include/user_left_menu_2', $data);
+                        ?> 
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
                 <div class="card content-box my-5">
                     <div class="card-body">
-                        <h5 class="card-title text-center text-uppercase">{first_name} {last_name}</h5>
+                        <h5 class="card-title text-center text-uppercase">Email: "<span>{email}</span>"</h5>
+                        <h5 class="card-title text-center text-uppercase">Phone: "<span>{phone}</span>"</h5>
                         <?php echo form_open_multipart('User/update_profile', array('id' => 'update_profile_form'))?>
                         <div class="card">
                             <div class="card-header" style="text-align: center;">

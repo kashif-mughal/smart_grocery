@@ -4,8 +4,7 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
                     <li class="breadcrumb-item">Mission & Vision</li>
                 </ol>
             </nav>
@@ -23,16 +22,41 @@
             <div class="col-sm-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body" style="padding:50px;">
-                        <h3 class="mb-4">Mission & Vision</h3>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique ultrices felis, nec maximus quam tempus eu. Sed volutpat ante finibus nulla interdum, quis auctor sem vehicula. Sed scelerisque ligula sit amet metus aliquet tincidunt. Phasellus elit lorem, lobortis eget nunc vel, sollicitudin vulputate libero. Etiam congue, eros ac facilisis porta, velit augue consectetur nunc, sed tincidunt neque purus eu nibh. Nunc sed ullamcorper eros. Curabitur egestas fringilla ligula, ac ornare ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam elit leo, interdum in venenatis quis, dictum sit amet purus. Maecenas rutrum euismod rutrum. Pellentesque vehicula, urna viverra sodales maximus, purus odio fermentum dui, ac vulputate eros tortor ornare orci. Integer dignissim nibh tortor, sit amet tempor arcu sollicitudin nec. Quisque quis accumsan leo, non sollicitudin augue. Etiam porta eleifend elit.
+                        <h2 class="mb-4">Mission & Vision:</h2>
+                        <h5><u>Mission:</u></h5>
+                            To become the most customer-centric, technologically sound and practical online shopping platform which is highly respected for ethics and professionalism by customers and competition alike.
+                            <br>
+                            <br>
+                            <h5><u>Vision:</u></h5>
+                            Build strong understanding of customer needs by carefully analyzing their shopping patterns and paying close attention to their stated expectations shared by them in intelligently designed surverys. Use most suitable technology to create out of box solutions with the aim to achieving optimum level of customer satisfaction and at the same time fulfilling our economic objectives. Attract best talent by offering competitive remunerations and a healthy work environment that enables every team member to perform at his or her optimum level and at the same time achieve a perfect work-life balance.<br>
 
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium vitae nisl quis vestibulum. Quisque bibendum ex id euismod scelerisque. Donec vel sem ornare, bibendum mauris et, vestibulum augue. Donec sed nisl nulla. Sed egestas dapibus enim, in ultricies erat mattis in. Phasellus finibus faucibus eros. Donec venenatis mattis est. Integer ornare purus risus, et congue erat molestie nec. Aliquam venenatis dui ut venenatis volutpat. Nam at tempus mi. Vivamus sed mattis ante. Quisque vel felis nec augue dictum auctor nec nec ante. Cras venenatis scelerisque eleifend. Vestibulum eu ligula a elit finibus aliquam. Curabitur quis purus nec mauris hendrerit pharetra.
-
-                        Aliquam gravida pellentesque metus, quis ullamcorper ligula convallis ac. Cras nec elit et mauris commodo porta quis id felis. Integer accumsan pulvinar congue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus tincidunt malesuada augue, sit amet commodo odio vehicula ac. Aliquam aliquet malesuada ipsum, in eleifend lacus commodo non. Fusce id massa pulvinar, laoreet leo vel, semper arcu. Quisque fermentum commodo felis. Mauris ut auctor nisi, porta vulputate nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas quis nisl mi. Donec a elementum enim. Donec luctus, odio sed pretium consectetur, neque velit efficitur urna, a pharetra libero eros non tellus.
-
-                        Proin sit amet metus eu nisi lobortis placerat eu et dolor. Donec tincidunt dictum commodo. Mauris varius felis massa, lacinia lobortis elit varius sed. Maecenas enim nisl, bibendum nec nulla quis, dignissim tincidunt metus. Nullam orci justo, porta quis est a, placerat malesuada ipsum. Sed id viverra orci. Maecenas suscipit lectus vel augue fermentum auctor. Ut congue semper finibus. Nulla facilisi. Suspendisse gravida ultrices purus quis semper. Integer scelerisque augue in iaculis eleifend. Morbi id fermentum quam.
-
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla in lacus hendrerit, fermentum erat id, auctor quam. Phasellus faucibus porta finibus. Aliquam risus dolor, lacinia in elit vel, tempus euismod augue. Proin ac dolor magna. Aliquam erat volutpat. Vestibulum tempus, sapien id vestibulum cursus, erat erat dignissim purus, id tempor ex enim sit amet neque. Pellentesque sit amet venenatis metus, mollis rhoncus quam. Nunc arcu ex, pulvinar ut interdum sed, iaculis sit amet nunc. Mauris eros erat, volutpat quis libero non, egestas aliquet eros. Nunc feugiat purus id lectus sodales sagittis. Nullam mauris justo, fermentum eu mattis vel, fermentum in leo. Nunc et magna libero.
+               <!--         <div class="feature-details my-4">-->
+            			<!--	<h4>Sauda Express - the most customer-centeric online shopping platform</h4>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Wide Geographic Coverage</h6>-->
+            			<!--		<p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>-->
+            			<!--	</div>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Innovative Approach</h6>-->
+            			<!--		<p>We at Sauda Express take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>-->
+            			<!--	</div>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Long term Commitment</h6>-->
+            			<!--		<p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>-->
+            			<!--	</div>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Best Value for your Money</h6>-->
+            			<!--		<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>-->
+            			<!--	</div>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Special features for members</h6>-->
+            			<!--		<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>-->
+            			<!--	</div>-->
+            			<!--	<div class="feature_details_content">-->
+            			<!--		<h6>Payment Options</h6>-->
+            			<!--		<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add payment option through debit and credit cards as well – this option too, will be available in a few weeks’ time.</p>-->
+            			<!--	</div>-->
+            			<!--</div>-->
                     </div>
                 </div>
             </div>

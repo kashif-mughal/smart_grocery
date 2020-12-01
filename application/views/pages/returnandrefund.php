@@ -4,8 +4,7 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
                     <li class="breadcrumb-item">Return & Refund</li>
                 </ol>
             </nav>
@@ -23,16 +22,47 @@
             <div class="col-sm-12">
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-body" style="padding:50px;">
-                        <h3 class="mb-4">Return & Refund</h3>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique ultrices felis, nec maximus quam tempus eu. Sed volutpat ante finibus nulla interdum, quis auctor sem vehicula. Sed scelerisque ligula sit amet metus aliquet tincidunt. Phasellus elit lorem, lobortis eget nunc vel, sollicitudin vulputate libero. Etiam congue, eros ac facilisis porta, velit augue consectetur nunc, sed tincidunt neque purus eu nibh. Nunc sed ullamcorper eros. Curabitur egestas fringilla ligula, ac ornare ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam elit leo, interdum in venenatis quis, dictum sit amet purus. Maecenas rutrum euismod rutrum. Pellentesque vehicula, urna viverra sodales maximus, purus odio fermentum dui, ac vulputate eros tortor ornare orci. Integer dignissim nibh tortor, sit amet tempor arcu sollicitudin nec. Quisque quis accumsan leo, non sollicitudin augue. Etiam porta eleifend elit.
+                        <h2 class="mb-5"> Return & Refund Policy:</h2>
+                        <h6>
+                            <span>
+                               If products purchased from SAUDA EXPRESS are found to be damaged, used, worn out, incorrect or incomplete at the time of delivery, the customers can claim refund or replacement. Return / replacement request will not be entertained if the customer does not need the product(s) in question anymore. No extra charges apply when product is replaced or cost is refunded due to product being unfit, as defined earlier, at the time of delivery. 
+                            </span>
+                            <br/>
+                            <br/>
+                            <span>
+                                In case purchase was made on “Cash on Delivery” basis then refund will take place within a maximum of 48 hours. In cases payment was made through Credit or Debit Card the refund would be made within five working days and in case of bank transfer the refund duration would be seven working days.    
+                            </span>
+                            <br/>
+                            <br/>
+                            <span>
+                                Different time limits apply to different categories for reporting the problems and requesting refund /
+                                replacement. Time limit applicable to different categories are listed below:    
+                            </span>
+                        </h6>
+                        <ul>
+                            <li>Essential Foods: within 48 hours from the time of delivery.</li>
+                            <li>Snacks & Breakfast: within 48 hours from the time of delivery.</li>
+                            <li>Bakery & Frozen: within 24 hours from the time of delivery.</li>
+                            <li>
+                                Beverages: carbonated drinks within 24 hours and all other types of beverages within 72 hours from the time of delivery.
+                            </li>
+                            <li>Fresh Fruits & Vegetables: at the time of receiving delivery.</li>
+                            <li>Meat & Poultry: at the time of receiving delivery.</li>
+                            <li>Seafood: at the time of receiving delivery.</li>
+                            <li>
+                                Personal Hygiene: within 72 hours from the time of delivery except for “Deodorants”, “Skin & Body Lotions”, “Sanitizers”, “Face Washes”, “Shaving Gels”, and “After Shave Lotions” which must be reported at the time of receiving delivery.
 
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium vitae nisl quis vestibulum. Quisque bibendum ex id euismod scelerisque. Donec vel sem ornare, bibendum mauris et, vestibulum augue. Donec sed nisl nulla. Sed egestas dapibus enim, in ultricies erat mattis in. Phasellus finibus faucibus eros. Donec venenatis mattis est. Integer ornare purus risus, et congue erat molestie nec. Aliquam venenatis dui ut venenatis volutpat. Nam at tempus mi. Vivamus sed mattis ante. Quisque vel felis nec augue dictum auctor nec nec ante. Cras venenatis scelerisque eleifend. Vestibulum eu ligula a elit finibus aliquam. Curabitur quis purus nec mauris hendrerit pharetra.
-
-                        Aliquam gravida pellentesque metus, quis ullamcorper ligula convallis ac. Cras nec elit et mauris commodo porta quis id felis. Integer accumsan pulvinar congue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus tincidunt malesuada augue, sit amet commodo odio vehicula ac. Aliquam aliquet malesuada ipsum, in eleifend lacus commodo non. Fusce id massa pulvinar, laoreet leo vel, semper arcu. Quisque fermentum commodo felis. Mauris ut auctor nisi, porta vulputate nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas quis nisl mi. Donec a elementum enim. Donec luctus, odio sed pretium consectetur, neque velit efficitur urna, a pharetra libero eros non tellus.
-
-                        Proin sit amet metus eu nisi lobortis placerat eu et dolor. Donec tincidunt dictum commodo. Mauris varius felis massa, lacinia lobortis elit varius sed. Maecenas enim nisl, bibendum nec nulla quis, dignissim tincidunt metus. Nullam orci justo, porta quis est a, placerat malesuada ipsum. Sed id viverra orci. Maecenas suscipit lectus vel augue fermentum auctor. Ut congue semper finibus. Nulla facilisi. Suspendisse gravida ultrices purus quis semper. Integer scelerisque augue in iaculis eleifend. Morbi id fermentum quam.
-
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla in lacus hendrerit, fermentum erat id, auctor quam. Phasellus faucibus porta finibus. Aliquam risus dolor, lacinia in elit vel, tempus euismod augue. Proin ac dolor magna. Aliquam erat volutpat. Vestibulum tempus, sapien id vestibulum cursus, erat erat dignissim purus, id tempor ex enim sit amet neque. Pellentesque sit amet venenatis metus, mollis rhoncus quam. Nunc arcu ex, pulvinar ut interdum sed, iaculis sit amet nunc. Mauris eros erat, volutpat quis libero non, egestas aliquet eros. Nunc feugiat purus id lectus sodales sagittis. Nullam mauris justo, fermentum eu mattis vel, fermentum in leo. Nunc et magna libero.
+                            </li>
+                            <li>Haircare: within 72 hours from the time of delivery.</li>
+                            <li>Toiletries: within 72 hours from the time of delivery.</li>
+                            <li>Kitchen Essentials: within 72 hours from the time of delivery.</li>
+                            <li>Household Essentials: within 72 hours from the time of delivery.</li>
+                            <li>
+                                Baby Care: within 72 hours from the time of delivery except for “Baby Lotions” which must be reported at the time of receiving delivery.
+                            </li>
+                            <li>OTC Healthcare & General Wellbeing: within 72 hours from the time of delivery.</li>
+                            <li>Pet Care: within 72 hours from the time of delivery.</li>
+                        </ul>
                     </div>
                 </div>
             </div>

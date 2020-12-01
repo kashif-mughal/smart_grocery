@@ -223,6 +223,39 @@
                             $('#Unit').val(<?=$unit?>);
                             $('#SaleUnit').val(<?=$sale_unit?>);
                         </script>
+                        
+                        <div class="form-group row">
+                            <label for="stock" class="col-sm-3 col-form-label">Stock <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                
+                                <select class="form-control" name="stock" id="stock" required>
+                                    <option value="1" <?php if($stock=='1') { echo 'selected="selected"'; } ?>>In Stock</option>
+                                    <option value="0" <?php if($stock=='0') { echo 'selected="selected"'; } ?> >Out Of Stock</option>
+                                    <option value="2" <?php if($stock=='2') { echo 'selected="selected"'; } ?> >Out Of Season</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                        <!--<div class="form-group row">
+                            <label for="season" class="col-sm-3 col-form-label">Season <i class="text-danger">*</i></label>
+                            <div class="col-sm-6">
+                                
+                                <select class="form-control" name="season" id="season" required>
+                                    <option value="1" <?php if($season=='1') { echo 'selected="selected"'; } ?>>In Season</option>
+                                    <option value="0" <?php if($season=='0') { echo 'selected="selected"'; } ?> >Out Of Season</option>
+                                </select>
+                            </div>
+                        </div>-->
+                        
+                        
+                        <div class="form-group row">
+                            <label for="sort" class="col-sm-3 col-form-label">Sort</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="sort" id="sort" type="number" value="{sort}">
+                            </div>
+                        </div>
+                        
 
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">Status <i class="text-danger">*</i></label>
