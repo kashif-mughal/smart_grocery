@@ -225,14 +225,18 @@
                   <div class="container-fluid">
                      <div class="row" style="width: 105%;">
                         <div class="col-md-4 px-0 pt-0">
-                           <div class="filter-sidebar">
+                           <div class="filter-sidebar" style="margin-left: 8px;">
                               <button onclick="filterAssistantProduct()" id="showFilterResultBtn" style="display: none; background-color: transparent; border: none;">
                                  <h4 class="ribbon">
                                     <strong class="ribbon-content">SHOW RESULT</strong>
                                  </h4>
                               </button>
-                              <div class="filter-header d-flex px-4 py-3 border-b-primary">
-                                 <div class="filter-icon mr-2">
+                              <div id="main-drawyer" class="accordion filter-header d-flex px-4 py-3 border-b-primary">
+                                 <div id="dryr" data-toggle="collapse" 
+                                       type="button" 
+                                       aria-expanded="false" 
+                                       data-target="#main-drawyer-content"
+                                       aria-controls="main-drawyer-content" class="filter-icon mr-2">
                                     <img src="<?=base_url("assets/img/GroceryAssistant/filter.png")?>">   
                                  </div>                           
                                  <span class="filter-heading">Use Filters to Find your Product</span>
@@ -244,57 +248,57 @@
                                     <span class="ml-2 clearFilterText">Clear Filters</span>
                                  </button>
                               </div>
-                              
-                              <div class="accordion" id="va-filter">
-                                 <div class="filter-brand px-4 py-3 border-b-primary">
-                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
-                                       <div>Filter by Brand:</div>
-                                       <a href="javascript:void(0)" 
-                                          data-toggle="collapse" 
-                                          type="button" 
-                                          aria-expanded="false" 
-                                          data-target="#brand-filter-area"
-                                          aria-controls="brand-filter-area">
-                                          <i class="fas fa-chevron-circle-down"></i>
-                                       </a>                                    
+                              <div class="collapse show" id="main-drawyer-content" data-parent="#main-drawyer">
+                                 <div class="accordion" id="va-filter">
+                                    <div class="filter-brand px-4 py-3 border-b-primary">
+                                       <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                          <div>Filter by Brand:</div>
+                                          <a href="javascript:void(0)" 
+                                             data-toggle="collapse" 
+                                             type="button" 
+                                             aria-expanded="false" 
+                                             data-target="#brand-filter-area"
+                                             aria-controls="brand-filter-area">
+                                             <i class="fas fa-chevron-circle-down"></i>
+                                          </a>                                    
+                                       </div>
+                                       <div class="filter-brand-button collapse show" id="brand-filter-area" data-parent="#va-filter">
+                                       </div>
                                     </div>
-                                    <div class="filter-brand-button collapse show" id="brand-filter-area" data-parent="#va-filter">
-                                    </div>
-                                 </div>
 
-                                 <div class="filter-weight px-4 py-3 border-b-primary">
-                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
-                                       <div>Filter by Weight:</div>
-                                       <a href="javascript:void(0)" 
-                                          data-toggle="collapse" 
-                                          type="button" 
-                                          aria-expanded="false" 
-                                          data-target="#saleunit-filter"
-                                          aria-controls="saleunit-filter">
-                                          <i class="fas fa-chevron-circle-down"></i>
-                                       </a> 
+                                    <div class="filter-weight px-4 py-3 border-b-primary">
+                                       <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                          <div>Filter by Weight:</div>
+                                          <a href="javascript:void(0)" 
+                                             data-toggle="collapse" 
+                                             type="button" 
+                                             aria-expanded="false" 
+                                             data-target="#saleunit-filter"
+                                             aria-controls="saleunit-filter">
+                                             <i class="fas fa-chevron-circle-down"></i>
+                                          </a> 
+                                       </div>
+                                       <div class="filter-weight-button collapse show" id="saleunit-filter" data-parent="#va-filter">
+                                       </div>
                                     </div>
-                                    <div class="filter-weight-button collapse show" id="saleunit-filter" data-parent="#va-filter">
-                                    </div>
-                                 </div>
 
-                                 <div class="filter-type px-4 py-3 border-b-primary">
-                                    <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
-                                       <div>Filter by Tags:</div>
-                                       <a href="javascript:void(0)" 
-                                          data-toggle="collapse" 
-                                          type="button" 
-                                          aria-expanded="false" 
-                                          data-target="#tag-filter-area"
-                                          aria-controls="tag-filter-area">
-                                          <i class="fas fa-chevron-circle-down"></i>
-                                       </a>
+                                    <div class="filter-type px-4 py-3 border-b-primary">
+                                       <div class="heading-primary d-flex justify-content-between align-items-center mb-3">
+                                          <div>Filter by Tags:</div>
+                                          <a href="javascript:void(0)" 
+                                             data-toggle="collapse" 
+                                             type="button" 
+                                             aria-expanded="false" 
+                                             data-target="#tag-filter-area"
+                                             aria-controls="tag-filter-area">
+                                             <i class="fas fa-chevron-circle-down"></i>
+                                          </a>
+                                       </div>
+                                       <div class="filter-type-checkbox collapse show" id="tag-filter-area" data-parent="#va-filter">
+                                       </div>                                    
                                     </div>
-                                    <div class="filter-type-checkbox collapse show" id="tag-filter-area" data-parent="#va-filter">
-                                    </div>                                    
                                  </div>
                               </div>
-
                            </div>
                         </div>
                         <div class="col-sm-12 col-md-8 pl-0 pt-3">
@@ -402,6 +406,9 @@ html{
    var isCatButtonSearch = false;
    $(document).ready(function() {
       // Website Note
+      debugger;
+      if($(window).width() < 770)
+         $("#dryr").trigger("click");
       $("body").css({"height": "100vh", "overflow-y": "hidden"});
       
       $('#websiteNoteDismiss').click(function() {
@@ -769,7 +776,13 @@ html{
    }
 
    function clearAllFilters() {
+      var currentCategoryNameAfterClear = currentCategoryName;
+      var brandFilter = $('.filter-sidebar .filter-brand .filter-brand-button button');
+      var weightFilter = $('.filter-sidebar .filter-weight .filter-weight-button button');
+      var tagsFilter = $('.filter-sidebar .filter-type .filter-type-button button');
+      if(brandFilter.hasClass("filterSelected")) {
          brandFilter.removeClass("filterSelected");
+      }
       if(weightFilter.hasClass("filterSelected")) {
          weightFilter.removeClass("filterSelected");
       }
