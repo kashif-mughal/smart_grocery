@@ -284,7 +284,7 @@
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
 			var phoneNumber = $('#inputPhone').val();
-			var phoneRegEx = /^[0-9]{9}$/;
+			var phoneRegEx = /^[0-9]{9}$/;debugger;
 			if(!phoneNumber.match(phoneRegEx)) {
 				$.notify("Phone number is wronng", "error");
 			}
@@ -344,17 +344,16 @@
 							$.notify(data.responseMessage, "error");
 						}
 						else {
-							$.notify(data.responseMessage, "success");
 							if(data.loggedInStatus && data.redirectURL == false) {
 								// Welcome Screen
-								$.notify("Verification completed, User Logged In", "success");
+								$.notify("Verification completed", "success");
 								setTimeout(function() {
 									window.location.href = "<?php echo base_url('dashboard/welcome'); ?>";
 								}, 2000);
 							}
 							else {
 								// Redirect URL
-								$.notify("Verification completed, Redirecting to your previous location", "success");
+								$.notify("Verification completed", "success");
 								setTimeout(function() {
 									window.location.href = decodeURIComponent(data.redirectURL);
 								}, 2000);

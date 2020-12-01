@@ -559,7 +559,7 @@
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
          var eachProdTemplate = `<div data-id="{pId}" data-name="{prodName}" class="my-box-order d-flex">
-                                    <img src="{imgValue}" alt="" class="img-fluid">
+                                    <img src="{imgValue}" style="height:50px;" alt="" class="img-fluid">
                                     <div class="my-box-order-content ml-3 d-flex flex-column justify-content-center">
                                         <h6>{prodName}  X {qty}</h6>
                                         <h6 class="mt-2 my-order-price">{totalPrice}</h6>
@@ -581,7 +581,7 @@
                cartBody.append(eachProdTemplateCopy);
             }
             $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
-            subTotal = sum;debugger;
+            subTotal = sum;
             <?php if($_SESSION["copunId"] && $_SESSION["copunId"] != 0){ ?>
                 copun = {};
                 copun.copunId = <?=$_SESSION["copunId"]?>;

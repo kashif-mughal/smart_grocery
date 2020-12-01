@@ -54,14 +54,14 @@ class Ccategory extends CI_Controller {
             }
 
         }
-
         $data = array(
             'CatName' => $this->input->post('CatName'),
             'Alias' => $this->input->post('Alias'),
             'ParentId' => $this->input->post('ParentId'),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
             'Status' => 1,
-            'Img' =>(!empty($image_url) ? $image_url : 'assets/img/product.png')
+            'Img' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
+            'sort' => ($this->Categories->get_last_sort_number()) + 1
         );
 
         $result = $this->Categories->category_entry($data);

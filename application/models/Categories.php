@@ -105,7 +105,17 @@ class Categories extends CI_Model {
         }
         return false;
     }
-
+    
+    public function get_last_sort_number(){
+        $this->db->select('max(sort) larger_sort');
+        $this->db->from($this->tableName);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array()[0]['larger_sort'];
+        }
+        return false;
+    }
+    
     //Count customer
     public function category_entry($data) {
         $this->db->select('*');

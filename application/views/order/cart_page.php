@@ -37,19 +37,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         -webkit-transition: opacity 0.4s ease-in-out;
         transition: opacity 0.4s ease-in-out;   
     }
-    .content-box2{
-        position: relative;
-        background-color: #ffffff;
-        margin-top: 20px;
-        border-radius: 0px 0px 10px 10px;
-        padding: 20px;
-        border: 1px solid #cccccc;
-        width:100%;
-        -moz-transition: opacity 0.4s ease-in-out;
-        -o-transition: opacity 0.4s ease-in-out;
-        -webkit-transition: opacity 0.4s ease-in-out;
-        transition: opacity 0.4s ease-in-out;   
-    }
     .content-box3{
         position: relative;
         background-color: #ffffff;
@@ -70,12 +57,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         /* border-radius: 0px 0px 10px 10px; */
         width: 89%;  
         margin-left: 16px; 
-    }
-    .row2{
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     }
     .coupon::placeholder {
     font-size: 13px;
@@ -208,11 +189,19 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                 </table>
                             </div>
                         </div>
-                        <div class="row2">
-                            <div class="content-box2">
-                                <a href="<?=base_url()?>" style="color:white; background-color:#25bfa9;" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
-                                <a href="#" class="btn" style="float: right; color:white; background-color:#333333;" onClick="window.location.reload();">Update Cart<i class="fas fa-sync" style="padding-left:7px;"></i></a>
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="content-box order-box" style="border-radius: 0px 0px 5px 5px;">
+                              <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                  <a href="<?=base_url()?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6" style="text-align: right;">
+                                  <a href="#" class="btn" style="width: 100%;color:white; background-color:#333333;" onClick="window.location.reload();">Update Cart<i class="fas fa-sync" style="padding-left:7px;"></i></a>
+                                </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -300,13 +289,66 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     var step2Verified = false;
     var step3Verified = false;
     var step4Verified = true;
+    var subTotal = 0;
+    var addressCounter = 1;
+    var copun = null;
+
     if(!baskit || JSON.parse(baskit).length == 0){
-        //window.location.href = '<?=base_url();?>';
         $(".cart-page").hide();
         $('.empty-cart-page').show();
     }
     $(document).ready(() => {
         loadCheckoutCartArea();
+        loadShoppingCart1();
+
+        $( "#q" ).autocomplete({
+          source: function( request, response )
+          {
+               $.ajax({
+                  url: "<?php echo base_url(); ?>Autocomplete/userdata",
+                  type: 'post',
+                  dataType: "json",
+                  data: {
+                    search: request.term
+                  },
+                  success: function( data ) 
+                  {
+                    response( data );
+                  }
+               });
+          },
+          select: function (values, ui) {
+               $('#q').val(ui.item.label);
+               return false;
+          }
+       });
+
+     $("#copun-form").on("submit", function(){
+        event.preventDefault();
+        var currentElem = $(this);
+        $.ajax({
+                url: currentElem.attr("action"),
+                type: currentElem.attr("method"),
+                data: currentElem.serialize(),
+                dataType: 'json',
+                success: function(a) 
+                {
+                  if(!a.Success){
+                    $.notify(a.Message, "error");
+                    copun = null;
+                    calculatePrice();
+                  }else{
+                    copun = a.Data;
+                    //applyDiscount(copun);
+                    calculatePrice();
+                  }
+                },
+                error: function(a){
+                  copun = null;
+                  calculatePrice();
+                }
+             });
+     });
     });
 
     function loadCheckoutCartArea(){
@@ -349,195 +391,104 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             return false;
          }
     }   
-    
-    var subTotal = 0;
-    var addressCounter = 1;
-</script>
 
+    function loadShoppingCart1(){
+       var cartBody = $('#shoppingCartBody1');
+       var cart = getCookie('baskit');
+       $(cartBody.find('tbody')).empty();
+       if(cart){
+          cart = JSON.parse(cart);
+          if(cart.length == 0)
+          {
+             //show empty response here
+             showEmptyResponse($('.cart-page'));
+             return;
+          }
+          //<td style="text-align:center;"><b>{qty}</b></td>
+          $(cartBody).show();
+          $($('.emptyCart')[0]).hide();
+          $(document).off('click', '.checkout-btn', handleCheckout(event));
+          var eachProdTemplate1 = `<tr class="each-prod">
+          <td class="text-center ">
+          <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
+          </td>
+          <td colspan="3">{prodName}</td>
+          <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
+          <td>
+            <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+              <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                  <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
+                  <span class="d-block quantity-button">
+                     <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
+                     <div class="separator"></div>
+                     <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
+                  </span>
+               </div>
+            </td>
+        <td class="" style="text-align: center;"><b>{totalPrice}</b></td>
+          <td class="" style="text-align: center;">
+          <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
+          <i class="fas fa-times" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+          </a>
+          </td>
+          </tr>`;
 
-<script type="text/javascript">
-//    const currency = 'Rs';
-   function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if(parts.length > 1){
-         while(parts.length == 1)
-            parts.shift();
-         return parts.pop()
-      }
-   }
-   function formatCurrency(total, toFixed = 2) {
-      var neg = false;
-      if(total < 0) {
-         neg = true;
-         total = Math.abs(total);
-      }
-      return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
-   }
- $(document).ready(() => {
-   loadShoppingCart1();
+          var sum = 0;
+          for (var i = 0; i < cart.length; i++) {
+             var eachProdTemplateCopy1 = eachProdTemplate1;
+             sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, cart[i].pName);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
+             //append newly created row in card body
+             $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
+             }
 
-});
-
-function loadShoppingCart1(){
-   var cartBody = $('#shoppingCartBody1');
-   var cart = getCookie('baskit');
-   $(cartBody.find('tbody')).empty();
-   if(cart){
-      cart = JSON.parse(cart);
-      if(cart.length == 0)
-      {
-         //show empty response here
-         showEmptyResponse($('.cart-page'));
-         return;
-      }
-      //<td style="text-align:center;"><b>{qty}</b></td>
-      $(cartBody).show();
-      $($('.emptyCart')[0]).hide();
-      $(document).off('click', '.checkout-btn', handleCheckout(event));
-      var eachProdTemplate1 = `<tr class="each-prod">
-      <td class="text-center">
-      <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
-      </td>
-      <td colspan="3">{prodName}</td>
-      <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
-      <td>
-        <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-          <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
-              <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
-              <span class="d-block quantity-button">
-                 <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
-                 <div class="separator"></div>
-                 <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
-              </span>
-           </div>
-        </td>
-    <td class="" style="text-align: center;"><b>{totalPrice}</b></td>
-      <td class="" style="text-align: center;">
-      <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
-      <i class="fas fa-times" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
-      </a>
-      </td>
-      </tr>`;
-
-      var sum = 0;
-      for (var i = 0; i < cart.length; i++) {
-         var eachProdTemplateCopy1 = eachProdTemplate1;
-         sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, cart[i].pName);
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
-         eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
-         //append newly created row in card body
-         $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
-         }
-
-      }
-      else{
-         //show empty response here
-         showEmptyResponse($('.cart-page'));
-         return false;
-      }   
-   }
-
-   function emptyCart(){
-      var oldDt = new Date(1);
-      document.cookie = `baskit=[];path=/;expires=${oldDt}`;
-      showEmptyResponse($('.cart-page'));
-      loadCartData();
-   }
-
-</script>
-
-<script type='text/javascript'>
-  var copun = null;
-  $(document).on('click', '.remove-item-from-cart, .qty-pls, .qty-mns', function () {
-      setTimeout(function(){
-        calculatePrice();
-      }, 500);
-   });
-  function calculatePrice(){
-    var cart = getCookie('baskit');
-     if(cart){
-        cart = JSON.parse(cart);
-        var sum = 0;
-        for (var i = 0; i < cart.length; i++) {
-           sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-        }
-        subTotal = sum;
-        $('.subtotal-price').html(formatCurrency(sum));
-        $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
-    }
-
-    if(copun){
-      var discountedValue = 0.00;
-      if(copun.copunDiscountType == "Amount"){
-        $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
-        $('#grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
-      }else{
-        $('#cDiscountValue').html(copun.copunDiscountValue + "%");
-        $('#grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
-      }
-      $('#cDiscount').addClass('d-flex');
-    }else{
-      $('#cDiscountValue').html("");
-      $('#cDiscount').removeClass('d-flex');
-      $('#cDiscount').hide();
-    }
-  }
-
-  $(document).ready(function(){
-     $( "#q" ).autocomplete({
-        source: function( request, response )
-        {
-             $.ajax({
-                url: "<?php echo base_url(); ?>Autocomplete/userdata",
-                type: 'post',
-                dataType: "json",
-                data: {
-                  search: request.term
-                },
-                success: function( data ) 
-                {
-                  response( data );
-                }
-             });
-        },
-        select: function (values, ui) {
-             $('#q').val(ui.item.label);
+          }
+          else{
+             //show empty response here
+             showEmptyResponse($('.cart-page'));
              return false;
+          }   
+      }
+
+    $(document).on('click', '.remove-item-from-cart, .qty-pls, .qty-mns', function () {
+        setTimeout(function(){
+          calculatePrice();
+        }, 500);
+     });
+    function calculatePrice(){
+      var cart = getCookie('baskit');
+       if(cart){
+          cart = JSON.parse(cart);
+          var sum = 0;
+          for (var i = 0; i < cart.length; i++) {
+             sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+          }
+          subTotal = sum;
+          $('.subtotal-price').html(formatCurrency(sum));
+          $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+      }
+
+      if(copun){
+        var discountedValue = 0.00;
+        if(copun.copunDiscountType == "Amount"){
+          $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
+          $('#grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+        }else{
+          $('#cDiscountValue').html(copun.copunDiscountValue + "%");
+          $('#grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
         }
-     });
+        $('#cDiscount').addClass('d-flex');
+      }else{
+        $('#cDiscountValue').html("");
+        $('#cDiscount').removeClass('d-flex');
+        $('#cDiscount').hide();
+      }
+    }
 
-     $("#copun-form").on("submit", function(){
-        event.preventDefault();
-        var currentElem = $(this);
-        $.ajax({
-                url: currentElem.attr("action"),
-                type: currentElem.attr("method"),
-                data: currentElem.serialize(),
-                dataType: 'json',
-                success: function(a) 
-                {
-                  if(!a.Success){
-                    $.notify(a.Message, "error");
-                    copun = null;
-                    calculatePrice();
-                  }else{
-                    copun = a.Data;
-                    //applyDiscount(copun);
-                    calculatePrice();
-                  }
-                },
-                error: function(a){
-                  copun = null;
-                  calculatePrice();
-                }
-             });
-     });
-
-  });
   </script>
    <!-- Cart Scripts End -->

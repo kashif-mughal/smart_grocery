@@ -17,7 +17,7 @@ foreach($CatList as $key => $value) {
 
 		<section >
 			<div class="row my-4">
-				<div class="col-md-4 footer-padding">
+				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
 
 					<div class="call_to_action_grid border-right-full">
 						<div class="call_to_action_image">
@@ -31,7 +31,7 @@ foreach($CatList as $key => $value) {
 					</div>
 					
 				</div>
-				<div class="col-md-4 footer-padding">
+				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
 					
 					<div class="call_to_action_grid border-right-full">
 						<div class="call_to_action_image">
@@ -44,7 +44,7 @@ foreach($CatList as $key => $value) {
 					</div>
 					
 				</div>
-				<div class="col-md-4 footer-padding">
+				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
 					
 					<div class="call_to_action_grid">
 						<div class="call_to_action_image">

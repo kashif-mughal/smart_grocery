@@ -96,7 +96,7 @@
         <!-- SlimScroll -->
         <script src="<?php echo base_url() ?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- dataTables js -->
-        <script src="<?php echo base_url() ?>assets/plugins/dataTables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>assets/plugins/datatables/dataTables4.min.js" type="text/javascript"></script>
 
         <!-- Modal js -->

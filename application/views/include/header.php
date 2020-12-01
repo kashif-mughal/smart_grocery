@@ -203,7 +203,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div class="main-nav bg-light">
          <div class="container">
-            <div class="row align-items-center py-3 py-md-4">
+            <div class="row align-items-center py-2 py-md-3 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
                <div class="col-lg-3 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
@@ -249,16 +249,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  </div>
                               </div>
                               </div>
-                              <div class="input-group mb-3 search-helper-text" style="position: absolute; color: white;">
-                                <span>"Searching in" &nbsp;</span><span id="searching-cat-name">ALL</span> <input type="hidden" name="categoryId" id="categoryId">
-                              </div>
+                              <input type="hidden" name="categoryId" id="categoryId">
                            </form>
                         </div>
                      </div>
                   </div>
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1 col-4">
+                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-right col-4">
                      <div class="phone_cart d-flex flex-row align-item-center 
                         justify-content-start justify-content-md-start justify-content-sm-center">
                         <!-- Phone -->
@@ -358,7 +356,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       if(parts.length > 1){
          while(parts.length == 1)
             parts.shift();
-         return parts.pop()
+         return (parts.pop()).split(";")[0];
       }
    }
    function formatCurrency(total, toFixed = 2) {
@@ -571,7 +569,6 @@ function removeItemFromShoppingCart(currentElem){
    }
    function changeSelectedCat(currentElem){
       $('#categoryId').val($(currentElem).data('value'));
-      $('#searching-cat-name').html($(currentElem).text());
       $('#q').attr("placeholder" , $(currentElem).text());
    }
    
