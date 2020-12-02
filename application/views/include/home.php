@@ -12,11 +12,11 @@
             <div class="featured-products panel-min-height">
                <div class="header">
                   <h2 class="d-inline">FEATURED PRODUCTS</h2>
-                  <a href="javascript:void(0)">
-                  <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="float-right" alt="">
+                  <a class="d-none d-md-inline" href="javascript:void(0)">
+                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="float-right" alt="">
                   </a>
-                  <a href="javascript:void(0)">
-                  <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 65px;position:absolute;top: 30px;" alt="">
+                  <a class="d-none d-md-inline" href="javascript:void(0)">
+                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 65px;position:absolute;top: 30px;" alt="">
                   </a>
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>

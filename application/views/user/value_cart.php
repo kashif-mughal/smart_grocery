@@ -112,7 +112,7 @@
                         <div class="row">
                             <?php foreach($value_list["Value"] as $key => $value) {?>
                                 <?php for ($i=0; $i < count($value); $i++) {?>
-                                    <div class="col-md-12 col-sm-6">
+                                    <div class="col-md-12 col-sm-6 pl-0" style="padding-right: 5px;">
                                         <div class="order-history-header mt-3 p-0">
                                             <div class="card order-history-card each-prod">
                                                 

@@ -209,7 +209,7 @@ foreach($CatList as $key => $value) {
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 			<div class="company-address">
 				<div class="container">
-					<div class="row" >
+					<div class="row" style="font-size: 10px;">
 						<div class="col-6" style="letter-spacing: 10px;">
 							<a href="https://www.facebook.com/saudaexpresspk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
 							<a href="https://twitter.com/saudaexpresspk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
