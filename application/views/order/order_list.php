@@ -25,6 +25,7 @@
         background: black !important;
         border-radius: 0px;
     }
+    
 </style>
 <!-- Bread Crumb -->
 
@@ -132,15 +133,19 @@
                                                                 <img src="<?=base_url("assets/img/orderhistory/track_id.png")?>" alt="Track_Id" style="width: 40px; height: 34px;">
                                                                 <span class="order-header-text"><?='#'.$value[0]['OrderId']?></span>
                                                             </div>
-                                                            <div class="order-date border-r-secondary pr-md-4 mr-md-4 flex-sm-grow-1" style="border-right: 1px solid #ccc;">
+                                                            <div class="order-date border-r-secondary pr-md-4 mr-md-4 flex-sm-grow-1 d-flex justify-content-center align-items-center" style="border-right: 1px solid #ccc;">
                                                                 <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
                                                                 <span class="order-header-text">
-                                                                    <span class="col-sm-6" id="main-date">
-                                                                        <script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script>
+                                                                    <span class="text-left" id="main-date">
+                                                                        <span>
+                                                                            <script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());
+                                                                            </script>
+                                                                        </span><br/>
+                                                                        <span class="d-lg-none d-block">
+                                                                            <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
+                                                                        </span>
                                                                     </span>
-                                                                    <span class="col-sm-6 d-lg-none d-md-block" id="hidden-time">
-                                                                        <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
-                                                                    </span>
+                                                                    
                                                                 <span>     
                                                             </div>
                                                             <div class="order-time pr-4 d-none d-lg-block">

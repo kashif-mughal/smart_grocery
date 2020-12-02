@@ -2981,6 +2981,10 @@ a#newAddressCancelBtn {
    margin-top: 156px;
 }
 
+.order-header-text {
+   padding-left: 10px;
+}
+
 
 /*Grocery Panel*/
 
@@ -3491,6 +3495,10 @@ a#newAddressCancelBtn {
    .grocery-features-columns {
       padding-right: 0px;
    } 
+   .order-header-text {
+      text-align: left;
+      padding-left: 0px;
+   }
    .tag-line {
       font-size: calc(0.7rem + 0.3vw) !important;
    }

@@ -211,7 +211,6 @@ class Auths extends CI_Model {
         $message = "Your OTP Code is ". $fourRandomDigit;
         // print_r($phone_number);die;
         $messageStatus = $this->sendmessage($phone_number, $message);
-        print_r($messageStatus);die;
         return TRUE;
     }
 
