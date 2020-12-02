@@ -16,16 +16,41 @@
     </div>
 </div>
 <style type="text/css">
-    .remove-cart{
-        top: auto;
-        left: auto;
-        text-align: -webkit-auto;
-        z-index: auto;
-        position: relative;
-        vertical-align: unset;
-        background: black !important;
-        border-radius: 0px;
-    }
+    @media (max-width: 425px) {
+        .remove-cart{
+            /* top: auto;
+            left: auto;
+            text-align: -webkit-auto;
+            z-index: auto;
+            position: relative;
+            vertical-align: unset;
+            background: black !important;
+            border-radius: 0px; */
+            top: 11% !important;
+            left: 5% !important;
+            text-align: center !important;
+            z-index: 20 !important;
+            position: absolute !important;
+            vertical-align: middle !important;
+            background: rgba(43, 233, 204, 0.7) !important;
+            border-radius: 10px 0px 10px 0px !important;
+            color: white;
+            font-weight: bolder !important;
+            width: 90% !important;
+        }
+    }  
+        .remove-cart {
+            top: auto;
+            left: auto;
+            text-align: -webkit-auto;
+            z-index: auto;
+            position: relative;
+            vertical-align: unset;
+            background: black;
+            border-radius: 0px;
+            color: black;
+        }
+    
     .sidebar-inner-page h4 {
         border-bottom: 1px solid #cccccc;
         padding: 20px 26px;
@@ -91,7 +116,7 @@
                                         <div class="order-history-header mt-3 p-0">
                                             <div class="card order-history-card each-prod">
                                                 
-                                                <div class="featured-products mt-0 border-none d-flex flex-column flex-md-row text-center text-md-left justify-content-between align-items-center">
+                                                <div class="main-featured-products mt-0 border-none d-flex flex-column flex-md-row text-center text-md-left justify-content-between align-items-center">
                                                     <?php 
                                                     if($value[$i]['IsFeatured'] == 1) {
                                                     $discountPercentage = (($value[$i]['Price'] - $value[$i]['SalePrice'])/$value[$i]['Price']) * 100;
@@ -125,15 +150,20 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="order-button order-item text-center">
+                                                    <div class="order-button order-item d-flex flex-column justify-content-center align-items-center text-center">
                                                         <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart"
                                                         data-json="<?= $value[$i]["Jsn"]?>"
                                                         >Add to Cart
                                                         </a>
                                                         <!-- <a href="#" class="d-block align-self-center button-primary">Add to Cart</a> -->
-                                                        <a href="javascript:void(0);" style="display: none;" class="align-self-center button-secondary remove-cart" data-json="<?= $value[$i]["Jsn"]?>"
-                                                        >Remove From Cart
-                                                    </a>
+                                                        
+
+                                                        <a href="javascript:void(0);" 
+                                                           style="display: none;" 
+                                                           class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart" 
+                                                           data-json="<?= $value[$i]["Jsn"]?>">
+                                                           Remove From Cart
+                                                        </a>
                                                         <!-- <a href="#" class="d-block align-self-center button-secondary">Delete</a> -->
                                                     </div>
                                                 </div>
