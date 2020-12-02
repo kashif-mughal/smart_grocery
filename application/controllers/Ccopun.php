@@ -29,6 +29,7 @@ class Ccopun extends CI_Controller {
     //Apply copun
     public function apply_copun(){
         $copun = $this->input->post('copun');
+        $ov = $this->input->post('ov');
         if(empty($copun))
         {
             print_r('{"Success": false, "Message": "Empty copun"}');
@@ -60,7 +61,11 @@ class Ccopun extends CI_Controller {
                     }
                 }
                 $minpurchase = empty($copun["MinPurchase"]) ? -1 : $copun["MinPurchase"];
-
+                if($ov < $minpurchase){
+                    print_r('{"Success": false, "Message": "Minimum purchase for this copun is '. $minpurchase .'"}');
+                    $this->set_and_reset_copun_in_session($copun, 0, 0);
+                    return;
+                }
                 $this->set_and_reset_copun_in_session($copun, $minpurchase, 1);
                 
                 print_r('{"Success": true, 
@@ -75,6 +80,11 @@ class Ccopun extends CI_Controller {
                 return;
             }
         }
+    }
+    public function empty_copun(){
+        $this->set_and_reset_copun_in_session($copun, 0, 0);
+        echo 1;
+        return;
     }
     private function set_and_reset_copun_in_session($copun, $minpurchase, $set){
         if($set == 1){

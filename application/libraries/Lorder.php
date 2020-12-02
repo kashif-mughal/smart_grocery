@@ -174,6 +174,8 @@ class Lorder {
                 $minpurchase = empty($copun["MinPurchase"]) ? -1 : $copun["MinPurchase"];
                 $this->set_and_reset_copun_in_session($copun, $minpurchase, 0);
                 
+                if(!($minpurchase != -1 && $V > $minpurchase))
+                    return 0;
                 if($copun["DiscountType"] == "Amount"){
                     return floatval($copun["DiscountValue"]);
                 }else{
