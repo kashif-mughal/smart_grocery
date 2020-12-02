@@ -3139,6 +3139,9 @@ a#newAddressCancelBtn {
    .main-featured-products {
       padding: 8px 0px;
    }
+   #orderHistoryaccordion .product-header-card {
+      width: 50% !important;
+   }
 }
 
 @media (max-width: 576px) {

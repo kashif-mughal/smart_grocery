@@ -171,11 +171,11 @@
                                 </div>
 
                               <div id="orderHistoryCollapse<?=$value[0]['OrderId']?>" class="collapse <?= $orderCounter == 0? "show" : ""; ?>" aria-labelledby="headingOne" data-parent="#orderHistoryaccordion">
-                                 <div class="card-body">
+                                 <div class="card-body row">
                                     <?php
                                        for ($i=0; $i < count($value); $i++) {?>
                                        
-                                            <div class="order-history-header mt-3 p-0">
+                                            <div class="order-history-header col-6 col-md-12 mt-3 p-2 product-header-card">
                                                 <div class="card order-history-card each-prod">
                                                     
                                                     <div class="featured-products mt-0 border-none d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -199,7 +199,7 @@
                                                             <?php } ?>
                                                         </div>
                                                         <div class="quantity-area order-item">
-                                                            <div class="d-flex">
+                                                            <div class="d-flex justify-content-center align-items-center">
                                                                 <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                                 <input type="number" value="<?=$value[$i]['ItemQuantity']?>" min="0" class="d-inline-flex quantity  quantity-input">
                                                                 <span class="d-block quantity-button">
