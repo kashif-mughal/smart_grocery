@@ -1,4 +1,4 @@
-<div class="container" style="padding-top: 160px">
+<div class="container">
 	<style type="text/css">
 		.content-box{
 			margin-top: 0px !important;
@@ -7,7 +7,7 @@
 	<!-- <div class="row mx-auto">
 		<img src="img/logo.png" alt="" class="mx-auto mt-3" style="background-color: #17a18d; border-radius: 47%;">
 	</div> -->
-	<div class="row mt-3">
+	<div class="row" id="registration_form">
 		<div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
 			<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 			<!-- Phone Verification -->

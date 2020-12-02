@@ -150,7 +150,7 @@ html,body
 .ordertrackingprogress ul li:last-child:after {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    left: -15%
+    left: -50%
 }
 .ordertrackingprogress ul li .check-container {
    display: block;
@@ -1248,10 +1248,11 @@ button.category-button:active {
 }  
 .product-card-title,
 .product-card-inner-name {
-   height: 4.5em !important;
+   height: 2.5em !important;
    line-height: 1.3em !important;
    width: 100% !important;
    overflow: hidden !important;
+   display: -webkit-box;
    text-overflow: ellipsis !important;
    -webkit-line-clamp: 2;  
    -webkit-box-orient: vertical; 
@@ -2190,7 +2191,7 @@ button.category-button:active {
 /* Sidebar */
 
 .footer-padding {
-   padding: 7px 0px 0px 25px;
+   padding: 7px 18px 7px 18px;
 }
 
 /* Privacy Policy */
@@ -2976,6 +2977,9 @@ a#newAddressCancelBtn {
    display: none  ;
 }
 
+#registration_form {
+   margin-top: 156px;
+}
 
 
 /*Grocery Panel*/
@@ -2986,13 +2990,46 @@ a#newAddressCancelBtn {
 
 /* ----------------------------------------------------- */
 /* Media Queries */
+@media (max-width: 360px) {
+   .main-page-product-card {
+      width: 140px !important;
+   }
+   .main-page-product-card img {
+      width: 124px !important;
+   }
+   .product-card-viewmore-btn {
+      padding: 10px 22px !important;
+      font-size: 10px !important;
+  }
+}
 
+@media (max-width: 375px) {
+   .main-page-product-card {
+      width: 150px;
+   }
+   .main-page-product-card img {
+      width: 134px;
+   }
+   .product-card-viewmore-btn {
+      padding: 10px 28px;
+      font-size: 10px;
+  }
+  #product-wrt-cat .col-md-3 {
+      padding-left: 4px;
+  }
+  .content-box2 a {
+     font-size: 12px;
+  }
+}
 
 @media (max-width: 425px) {
    .product-card-viewmore-btn {
-      padding: 7px 28px !important;
-      font-size: 12px !important;
+      padding: 7px 28px;
+      font-size: 12px;
    }
+   .edibles-main .align-items-center {
+      text-align: center;
+   } 
 
    #checkout-panel .verification-steps-heading {
       font-size: 13px;
@@ -3038,41 +3075,56 @@ a#newAddressCancelBtn {
       flex: 0 0 50%;
       max-width: 50%;
    }
-   .order-button a {
+   /* .order-button a {
       margin: 4px -32px !important;
-   }
+   } */
 
    .order-history-card .quantity-area {
-      padding-left: 20%;
-      padding-right: 5%;
+      padding-left: 10% !important;
+      padding-right: 6% !important;
+   }
+   .order-history-card .order-button {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+   }
+   .order-history-card .order-button a.add-cart {
+      margin-left: 5%;
+   }
+   .order-history-card .order-button a {
+      width: 100px;
+   }
+   .order-history-card .order-button a.remove-cart {
+      font-size: 8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      margin-left: 0px; 
+   }
+   .order-history-card .order-button a {
+      padding: 3px 6px;
    }
 }
 
 @media (max-width: 576px) {
+   
    .phone_cart {
       margin-bottom: 12px !important;
    }
-
+   
    .phone_cart .phone {
       display: none !important;
    }
-
    .logo .logo_content img {
       max-width: 150px !important;
    }
-
    #btn-sidebar img {
       width: 35px;
    }
-
    .cart_icon {
       margin-bottom: 20px;
    }
-
    .search-helper-text {
       display: none;
    }
-
    .header_search_form_container input {
       min-height: 20px !important;
       font-size: 14px;
@@ -3145,9 +3197,17 @@ a#newAddressCancelBtn {
       width: 100%;
    }
 
-   .order-button a {
-      margin: 4px -16px;
+   .order-history-card .order-button {
+      padding-left: 4%;
+      padding-right: 8%;
    }
+   .order-history-card .order-button a {
+      margin-left: 0px;
+      margin-right: 0px;
+      font-size: 12px;
+      /* width: 95%; */
+   }
+   
 
    .va-panel-header img {
       width: 140px;
@@ -3200,6 +3260,17 @@ a#newAddressCancelBtn {
       padding-bottom: 8px !important;
       margin: 0px;
   }
+
+  .ordertrackingprogress ul img.truck {
+      top: 0;
+      left: 85%;
+      width: 36px;
+   }
+
+   .order-history-card .quantity-area {
+      padding-left: 20%;
+      padding-right: 15%;
+   }
    
 }
 
@@ -3210,6 +3281,21 @@ a#newAddressCancelBtn {
       border-bottom: 1px solid #ccc;
       padding-top: 18px;
       padding-bottom: 18px;
+   }
+   .border-b-sm {
+      border-bottom: 1px solid #ccc;
+   }
+   .order-id {
+      width: 50% !important;
+   }
+   .border-r-secondary {
+      border-bottom: none !important;
+   }
+   #main-date {
+      padding-left: 0px;
+   }
+   #hidden-time {
+      margin-left: 58px;
    }
    .order-history-card .order-history-button img {
       width: 50px !important;
@@ -3223,12 +3309,12 @@ a#newAddressCancelBtn {
       padding-right: 4%;
    }
    .order-history-card .quantity-area {
-      padding-left: 22%;
-      padding-right: 13%;
+      padding-left: 23%;
+      padding-right: 15%;
    }
-   .order-button {
-      padding-left: 15%;
-      padding-right: 30%;
+   .order-history-card .order-button {
+      padding-left: 4%;
+      padding-right: 8%;
    }
    
    .order-id,
@@ -3250,6 +3336,12 @@ a#newAddressCancelBtn {
       /* height: 100px; */
       height: auto;
    }
+   .order-history-card .order-product-name {
+      padding-left: 0px;
+   }
+   .order-history-card .order-product-price {
+      padding-left: 0px;
+   }
 
    .products-widget-heading a,
    #va-filter .heading-primary a,
@@ -3263,6 +3355,11 @@ a#newAddressCancelBtn {
       padding-right: 0px;
       margin-left: auto;
       margin-right: auto;
+   }
+
+   .ordertrackingprogress ul img.truck {
+      top: -3px;
+      width: 36px;
    }
 }
 
@@ -3318,11 +3415,10 @@ a#newAddressCancelBtn {
       border-right: none;
       border-bottom: 1px solid #acacac;
    }
-
    .product-card-category-list > div {
       display: inline-block;
-      padding-right: 10px;
-      border-right: 1px solid #b9b6b6;
+      padding-right: 4px;
+      border-right: 1px solid #b5b3b3;
    }
 
    .categories .category-grid {
@@ -3381,9 +3477,9 @@ a#newAddressCancelBtn {
       font-weight: 500;
    }
 
-   .order-button a {
-      margin: 4px -15px;
-   }
+   /* .order-button a {
+      margin: 4px -6px;
+   } */
 
    /*.main-content {*/
    /*   margin-top: 200px !important;*/
@@ -3446,6 +3542,9 @@ a#newAddressCancelBtn {
    .bread_crumb {
       margin-top: 11vh; 
    }
+   #registration_form {
+      margin-top: 238px !important;
+   }
 
 }
 
@@ -3496,6 +3595,9 @@ a#newAddressCancelBtn {
       right: 14px;
       max-width: 40%;
       top: 35px;
+   }
+   #registration_form {
+      margin-top: 156px;
    }
 }
 

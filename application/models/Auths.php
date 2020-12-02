@@ -208,10 +208,12 @@ class Auths extends CI_Model {
             'verified' => 0
         );
         $this->db->insert('grocery_otp', $otp_data);
+        $message = "Your OTP Code is ". $fourRandomDigit;
+        // print_r($phone_number);die;
+        $messageStatus = $this->sendmessage($phone_number, $message);
+        print_r($messageStatus);die;
         return TRUE;
     }
-
-
 
     // ================================================================================
     // ======================= INSERT DATA ============================================
@@ -239,7 +241,7 @@ class Auths extends CI_Model {
         return False;
     }
     // ****** SEND SMS *******
-    private function sendmessage($to_phone_number, $otp_code) {
+    private function sendmessage($to_phone_number, $message) {
         // JSON response Example ======================================
         // $data['phone'] = $to_phone_number;
         // $data['message'] = $to_message; //need to assign event here
@@ -248,15 +250,15 @@ class Auths extends CI_Model {
         // echo json_encode($response);
         // JSON response Example Ends ======================================
 
-        if($to_phone_number && $otp_code) {
-            $From = "923132791656"; ///Your Username
+        if($to_phone_number && $message) {
+            $From = "923018582392"; ///Your Username
             $password = "Master@1"; ///Your Password
             $To = $to_phone_number; ///Recepient Mobile Number
             $sender = "Sauda Express";
-            $code = $otp_code;
+            // $code = $otp_code;
         
             // sending sms
-            $message = "Your OTP Code is ". $code;
+            // $message = "Your OTP Code is ". $code;
             $post = "sender=".urlencode($sender)."&mobile=".urlencode($To)."&message=".urlencode($message)."";
             $url = "https://sendpk.com/api/sms.php?username=$From&password=$password";
             $ch = curl_init();

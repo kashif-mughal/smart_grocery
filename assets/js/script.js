@@ -44,6 +44,33 @@ $(document).ready(function(){
           slidesToScroll: 2,
           centerMode: true
        }
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          mobileFirst: true
+       }
+      },
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          mobileFirst: true
+       }
+      },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          mobileFirst: true
+       }
       }
     ]
   });

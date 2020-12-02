@@ -17,7 +17,7 @@
         <!-- Bread Crumb -->
 
 
-        <section class="main-content mx-4">
+        <section class="main-checkoutform-content mx-4">
             <div class="container">
                 <!-- Alert Message -->
                 <?php

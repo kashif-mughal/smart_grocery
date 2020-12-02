@@ -14,7 +14,7 @@
    </div>
 </div>
 <!-- Bread Crumb -->
-<section class="main-content">
+<section>
    <div class="container">
       <?php
          $message = $this->session->userdata('message');

@@ -29,7 +29,7 @@
 <!-- Bread Crumb -->
 
 
-<section class="main-content">
+<section>
     <div class="container">
         <?php
         $message = $this->session->userdata('message');
@@ -126,17 +126,24 @@
                                             <div class="col-md-8 col-12">
                                                 <!-- <div class=> -->
                                                 
-                                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse<?=$value[0]['OrderId']?>" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button">
-                                                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">    
-                                                            <div class="order-id border-r-secondary pr-md-4 mr-md-4" style="border-right: 1px solid #ccc;">
+                                                    <button data-toggle="collapse" data-target="#orderHistoryCollapse<?=$value[0]['OrderId']?>" aria-expanded="true" aria-controls="orderHistoryCollapse" class="order-history-button px-sm-0">
+                                                        <div class="d-flex align-items-center justify-content-between border-b-sm">    
+                                                            <div class="order-id border-r-secondary pr-md-4 mr-md-4 flex-sm-shrink-1" style="border-right: 1px solid #ccc;">
                                                                 <img src="<?=base_url("assets/img/orderhistory/track_id.png")?>" alt="Track_Id" style="width: 40px; height: 34px;">
                                                                 <span class="order-header-text"><?='#'.$value[0]['OrderId']?></span>
                                                             </div>
-                                                            <div class="order-date border-r-secondary pr-md-4 mr-md-4" style="border-right: 1px solid #ccc;">
+                                                            <div class="order-date border-r-secondary pr-md-4 mr-md-4 flex-sm-grow-1" style="border-right: 1px solid #ccc;">
                                                                 <img src="<?=base_url("assets/img/orderhistory/calendar_icon.png")?>" alt="Calendar">
-                                                                <span class="order-header-text"><script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script><span>     
+                                                                <span class="order-header-text">
+                                                                    <span class="col-sm-6" id="main-date">
+                                                                        <script>document.write((new Date('<?=$value[0]["DeliveryDate"]?>')).toDateString());</script>
+                                                                    </span>
+                                                                    <span class="col-sm-6 d-lg-none d-md-block" id="hidden-time">
+                                                                        <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
+                                                                    </span>
+                                                                <span>     
                                                             </div>
-                                                            <div class="order-time pr-4">
+                                                            <div class="order-time pr-4 d-none d-lg-block">
                                                                 <img src="<?=base_url("assets/img/orderhistory/clock_icon.png")?>" alt="Clock">
                                                                 <span class="order-header-text">
                                                                     <?=date('h:i a', strtotime($value[0]["DeliveryFrom"])). ' - ' .date('h:i a', strtotime($value[0]["DeliveryUpto"]))?>
@@ -197,8 +204,8 @@
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div class="order-button order-item text-center">
-                                                            <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart"
+                                                        <div class="order-button order-item d-flex flex-column justify-content-center align-items-center text-center">
+                                                            <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart mr-lg-2"
                                                                data-json="<?= $value[$i]["Jsn"]?>"
                                                                >Add to Cart
                                                             </a>

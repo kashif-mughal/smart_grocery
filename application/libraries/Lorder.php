@@ -112,6 +112,7 @@ class Lorder {
                 $CI->session->set_userdata("OV", $OV);
                 $CI->session->set_userdata("deliveryCharges", $deliveryCharges);
                 $CI->session->set_userdata("discountedPrice", $copunDiscount);
+                $this->sendsms((($OV + $deliveryCharges) - $copunDiscount),$orderId);
                 return $orderId;
             }else{
                 return 'Something went wrong!!';
@@ -120,6 +121,29 @@ class Lorder {
         else{
             return 'Already Inserted';
         }
+    }
+
+    private function sendsms($grantAmount, $orderId) {
+        // Get Details against 
+        $userPhone = $this->session->userdata('phone');
+        $CI = & get_instance();
+        $CI->load->model('Web_settings');
+        $AdminData = $CI->Web_settings->retrieve_setting_editdata();
+        $adminPhone = $AdminData[0]->AdminPhone;
+
+        // Your have successfully placed an order on Sauda Express.\n
+        // Tracking ID: ____\n
+        // Amount: ___
+
+        $userMessage = "Your have successfully placed an order on Sauda Express.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
+        $adminMessage = "New order has been placed on Sauda Express.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
+
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+        // Send SMS to User
+        $CI->Auths->sendmessage($userPhone,$userMessage);
+        // Send SMS to Admin
+        $CI->Auths->sendmessage($adminPhone,$adminMessage);
     }
 
     private function apply_copun($OV){
