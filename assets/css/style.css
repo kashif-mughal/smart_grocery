@@ -3004,7 +3004,6 @@ a#newAddressCancelBtn {
 /* Media Queries */
 
 
-
 @media (max-width: 360px) {
    .main-page-product-card {
       width: 127px !important;
@@ -3024,6 +3023,15 @@ a#newAddressCancelBtn {
    .order-history-card .order-header {
       padding: 0px !important;
    }
+   .slick-next{
+      display:none !important;
+   }
+   .slick-prev{
+         display:none !important;
+   }
+   .main-content .featured-products-content .product-card-inner {
+      width: 110px !important;
+  }
 }
 
 @media (max-width: 375px) {
@@ -3042,6 +3050,9 @@ a#newAddressCancelBtn {
   }
   .content-box2 a {
      font-size: 12px;
+  }
+  .main-content .featured-products-content .product-card-inner {
+      width: 148px;
   }
 }
 
@@ -3390,14 +3401,13 @@ a#newAddressCancelBtn {
 }
 
 @media (max-width: 768px) {
+   
    .hidden-sm-down{
       display: none;
-   }
-   
+   }   
    .logo .logo_content img {
       max-width: 155px !important;
    }
-
 /* top bar */
    .top-bar .navbar {
       margin-left: auto !important;
@@ -3514,6 +3524,9 @@ a#newAddressCancelBtn {
 }
 
 @media (max-width: 991px) {
+   #add_to_cart_items {
+      left: 54px !important;
+   }
    .grocery-features-columns {
       padding-right: 0px;
    } 

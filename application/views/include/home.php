@@ -406,7 +406,6 @@ html{
    var isCatButtonSearch = false;
    $(document).ready(function() {
       // Website Note
-      debugger;
       if($(window).width() < 770)
          $("#dryr").trigger("click");
       $("body").css({"height": "100vh", "overflow-y": "hidden"});
@@ -1104,6 +1103,11 @@ html{
    }
    .filterSelected : focus{
       box-shadow: 1px 1px 10px 1px green;
+   }
+   @media (max-width: 320px) {
+      .featured-products-content .product-card-inner {
+         width: 120px !important;
+      }
    }
    
 </style>

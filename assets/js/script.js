@@ -48,28 +48,26 @@ $(document).ready(function(){
       {
         breakpoint: 400,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          centerMode: false,
           mobileFirst: true
        }
       },
       {
         breakpoint: 375,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          mobileFirst: true
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          centerMode: false
        }
       },
       {
         breakpoint: 320,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          mobileFirst: true
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          centerMode: false
        }
       }
     ]
