@@ -48,6 +48,9 @@
 
                             </div>
                         <?php } ?>
+                        <script>
+                            WindowsResizeFunc();
+                        </script>
                     </div>
                 </div>
             </div>

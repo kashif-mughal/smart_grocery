@@ -12,6 +12,7 @@ foreach($CatList as $key => $value) {
     $value->products = $products;
 }
 ?>
+</div>
 <div id="main-page">
 	<div class="container">
 

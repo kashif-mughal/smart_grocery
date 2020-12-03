@@ -34,6 +34,9 @@ html,body
    box-shadow: 0 0 5px #17a18d inset;
 }
 
+.wrapper {
+   margin-top: 178px;
+}
 
 /* ===== OTP Input Ends ===== */
 
@@ -2971,7 +2974,7 @@ a#newAddressCancelBtn {
 }
 
 .modal-lg {
-    max-width: 76% !important;
+    max-width: 76%;
 }
 
 #clearFilter {
@@ -3031,7 +3034,11 @@ a#newAddressCancelBtn {
    }
    .main-content .featured-products-content .product-card-inner {
       width: 120px !important;
+   }
+  #product-wrt-cat {
+   padding: 10px !important;
   }
+  
 }
 
 @media (max-width: 375px) {
@@ -3054,6 +3061,13 @@ a#newAddressCancelBtn {
   .main-content .featured-products-content .product-card-inner {
       width: 148px;
   }
+  .va-panel-header img {
+      width: 100px !important;
+   }
+   #va-panel .va-panel-header .va-panel-heading {
+      font-size: 21px !important;
+   }
+   
 }
 
 @media (max-width: 425px) {
@@ -3142,6 +3156,13 @@ a#newAddressCancelBtn {
    #orderHistoryaccordion .product-header-card {
       width: 50% !important;
    }
+
+   .va-panel-content .product-card {
+      width: 115px !important;
+  }
+  .wrapper {
+   margin-top: 160px;
+}
 }
 
 @media (max-width: 576px) {
@@ -3173,6 +3194,8 @@ a#newAddressCancelBtn {
    /*.main-content {*/
    /*   margin-top: 190px !important;*/
    /*}*/
+
+   
 
    .top-bar .cart-basket-main {
       width: 100% !important;
@@ -3267,12 +3290,12 @@ a#newAddressCancelBtn {
       width: 127px !important;
    }
    .va-panel-content .product-card .card-img-top{
-      width: 138px !important;
+      width: 118px !important;
    }
 
    .va-panel-content .product-card {
       height: 350px;
-      width: 160px !important;
+      width: 129px !important;
       margin-right: 15px !important;
    }
 
@@ -3401,6 +3424,10 @@ a#newAddressCancelBtn {
       top: -3px;
       width: 36px;
    }
+
+   .value-cart .card-title {
+      width: 50% !important;
+   }
 }
 
 @media (max-width: 768px) {
@@ -3475,7 +3502,7 @@ a#newAddressCancelBtn {
    }
 
    .value-cart .card-title {
-      width: 50%;
+      width: 83%;
    }
 
    .grocery-features-columns {
@@ -3516,6 +3543,16 @@ a#newAddressCancelBtn {
       font-weight: 500;
    }
 
+   .va-panel-content .product-card {
+      width: 115px;
+   }
+   .va-panel-content .product-card .card-img-top {
+      width: 100px !important;
+   }
+   .modal-lg {
+      max-width: 95% !important;
+   }
+
    /* .order-button a {
       margin: 4px -6px;
    } */
@@ -3523,6 +3560,16 @@ a#newAddressCancelBtn {
    /*.main-content {*/
    /*   margin-top: 200px !important;*/
    /*}*/
+
+   #va-panel .va-panel-content .quantity-area {
+      height: 21%;
+      margin-left: -25px;
+   }
+   .va-panel-content .product-card-btn {
+      font-size: 12px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+   }
 
 }
 
@@ -3675,6 +3722,10 @@ a#newAddressCancelBtn {
    }
    /* Phone Cart */
 
+   .main-content .featured-products-content .product-card-inner {
+      width: 120px !important;
+   }
+
 
    /* widget */
    .grocery-features .card .grocery-assistant-card {
@@ -3713,6 +3764,23 @@ a#newAddressCancelBtn {
       padding-left: 4px;
    }
 
+   .va-panel-content .product-card {
+      width: 160px;
+   }
+   .va-panel-content .product-card .card-img-top {
+      width: 150px;
+   }
+   .modal-lg {
+      max-width: 95% !important;
+  }
+  
+
+}
+
+@media(min-width: 1024px) {
+   .wrapper {
+      margin-top: 124px;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -3763,6 +3831,16 @@ a#newAddressCancelBtn {
    } */
 
       /* Widget */
+
+   .va-panel-content .product-card {
+      width: 180px;
+   }
+   .va-panel-content .product-card .card-img-top {
+      width: 160px;
+   }
+   .modal-lg {
+      max-width: 95% !important;
+   }
 
 }
 

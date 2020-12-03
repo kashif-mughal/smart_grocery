@@ -344,6 +344,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    </div>
 </div>
 
+<div class="wrapper">
+
 <!-- Shopping Cart Modal End -->
 
 <!-- Cart Scripts Start -->
@@ -628,6 +630,23 @@ function removeItemFromShoppingCart(currentElem){
     }
     $('[data-toggle="tooltip"]').tooltip();
   });
+
+  function WindowsResizeFunc() {
+    if ($(window).width() >  768) {
+      $(".edibles-main .product-category").addClass('show');
+      $(".filter-brand-button").addClass('show');
+      $(".filter-weight-button").addClass('show');
+      $(".filter-type-checkbox").addClass('show');
+      $("#InnerPageMenuContent").addClass('show');
+    }
+    else {
+      $(".edibles-main .product-category").removeClass('show');
+      $(".filter-brand-button").removeClass('show');
+      $(".filter-weight-button").removeClass('show');
+      $(".filter-type-checkbox").removeClass('show');
+      $("#InnerPageMenuContent").removeClass('show');
+    }
+  }
 </script>
 <!-- Auto Complete search script END-->
  

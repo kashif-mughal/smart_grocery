@@ -5,7 +5,7 @@
     }
 </style>
 
-<section class="main-content" style="margin-top: 145px;">
+<section class="main-content" >
    <div class="container">
       <div class="row">
          <div class="col-xl-8 col-lg-8 col-md-12 pr-md-0">
@@ -744,6 +744,9 @@ html{
       $('#pagination-btn').empty();
       for(var i = 0; i < numberOfPageList[currentCategoryName]; i++) {
          $('#pagination-btn').append(`<button class="btn btn-link nav-btn-primary" onclick="renderCatPaginate(${i},'${currentCategoryName}')">${i+1}</button>`);
+      }
+      if ($(window).width() < 576) {
+         $('#dryr').click();
       }
       $('#showFilterResultBtn').hide();
       groceryAssistantData = finalFilterData;
