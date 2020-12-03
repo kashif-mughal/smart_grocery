@@ -25,7 +25,30 @@
         background: black !important;
         border-radius: 0px;
     }
-    
+    @media (max-width: 768px) {
+        .remove-cart{
+            /* top: auto;
+            left: auto;
+            text-align: -webkit-auto;
+            z-index: auto;
+            position: relative;
+            vertical-align: unset;
+            background: black !important;
+            border-radius: 0px; */
+            top: 11% !important;
+            left: 5% !important;
+            text-align: center !important;
+            z-index: 20 !important;
+            position: absolute !important;
+            vertical-align: middle !important;
+            background: rgba(43, 233, 204, 0.7) !important;
+            border-radius: 10px 0px 10px 0px !important;
+            color: white;
+            font-weight: bolder !important;
+            width: 90% !important;
+        }
+    }  
+        
 </style>
 <!-- Bread Crumb -->
 
@@ -54,7 +77,7 @@
             $this->session->unset_userdata('error_message');
         }
         ?>
-        <div class="row content-box pd-4">
+        <div class="row content-box pd-4" style="padding-left:0px; padding-right:10px;">
             <h5 class="ml-4 mt-4 mb-2">My Orders History</h5>
             <!-- <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
                 <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
@@ -121,7 +144,7 @@
                     <?php foreach ($orderData as $key => $value) { $orderCounter++;?>
                         <div class="accordion" id="orderHistoryaccordion" style="margin-bottom: 10px;">
                            <div class="card order-history-card">
-                              <div class="card-header order-header">
+                              <div class="card-header order-header" style="padding:0px 5px;">
                                     <div class="container-fluid">
                                         <div class="row py-3 text-center text-md-left">
                                             <div class="col-md-8 col-12">

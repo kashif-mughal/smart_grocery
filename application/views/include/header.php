@@ -182,7 +182,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <p class="seperator">|</p>
                      </li>
                        <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url("Admin_dashboard")?>">Admin Panal</a>
+                          <a class="nav-link" href="<?=base_url("Admin_dashboard")?>">Admin Panel</a>
                        </li>
                      <?php } ?>
                      <li>

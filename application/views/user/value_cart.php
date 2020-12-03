@@ -46,7 +46,7 @@
             z-index: auto;
             position: relative;
             vertical-align: unset;
-            background: black;
+            background: black !important;
             border-radius: 0px;
             color: black;
         }

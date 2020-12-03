@@ -71,7 +71,7 @@
                                                 </a>-->
                                             </div>
                                         </div>
-                                        <img class="card-img-bottom text-center" src="{imgUrl}" alt="Card image cap">
+                                        <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
                                         <div class="product-info text-center">
                                             <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
                                             <p class="card-text product-card-inner-weight">{unitName}</p>
@@ -123,7 +123,7 @@
                             ?>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
                                 <div class="featured-products-content mb-2 d-flex align-items-center justify-content-start">
-                                    <div class="card mr-2 each-prod product-card-inner">
+                                    <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px;">
                                         <div class="card-body p-0">
                                             
                                             <?php if($value['stock'] == '0') { 
@@ -140,7 +140,7 @@ echo '<h5>Out Of Stock</h5>';
                                                 </a>-->
                                             </div>
                                         </div>
-                                        <img class="card-img-bottom text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                        <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                         <div class="product-info text-center">
                                             <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                             <p class="card-text product-card-inner-weight">

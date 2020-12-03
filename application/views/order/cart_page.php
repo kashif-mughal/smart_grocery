@@ -158,7 +158,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <!-- Bread Crumb -->
 
 
-        <section class="cart-page main-content mx-4">
+        <section class="cart-page main-content">
             <div class="container">
                 <!-- Alert Message -->
                 <?php
@@ -213,10 +213,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                             <div class="content-box order-box" style="border-radius: 0px 0px 5px 5px;">
                               <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
-                                  <a href="<?=base_url()?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
+                                  <a href="<?=base_url("corder/checkout_form")?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn">Proceed To Checkout</a>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-6" style="text-align: right;">
-                                    <a href="<?=base_url("corder/checkout_form")?>" class="btn" style="width: 100%;color:white; background-color:#333333;">Proceed To Checkout</a>
+                                    <a href="<?=base_url()?>" class="btn" style="width: 100%;color:white; background-color:#333333;"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
                                 </div>
                               </div>
                             </div>
@@ -279,7 +279,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
             </div>
         </section>
-        <section style="display: none;" class="empty-cart-page main-content mx-4">
+        <section style="display: none;" class="empty-cart-page main-content">
           <div class="container">
             <div class="row">
               <div class="col-md-12">
