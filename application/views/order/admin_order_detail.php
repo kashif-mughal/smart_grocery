@@ -86,6 +86,12 @@
                             <div class="col-sm-12 col-md-5 col-lg-4">
                                 <span><?=$OrderData["OrderDetail"][0]["email"]?></span>
                             </div>
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="delivery-slot">Order Placed On</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=date('Y-m-d h:i a', strtotime($OrderData["OrderDetail"][0]["CreatedOn"]))?></span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-3 col-lg-2">
@@ -93,6 +99,12 @@
                             </div>
                             <div class="col-sm-12 col-md-5 col-lg-4">
                                 <span><?=$OrderData["OrderDetail"][0]["phone"]?></span>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="delivery-slot">Delivery Slot</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["DeliverySlot"]?></span>
                             </div>
                         </div>
                         <div class="row">

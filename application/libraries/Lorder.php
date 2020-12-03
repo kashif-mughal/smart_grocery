@@ -285,6 +285,7 @@ class Lorder {
                 $i++;
                 $order_detail['OrderDetail'][$k]['sl'] = $i;
             }
+            $order_detail['DeliverySlot'] = date('Y-m-d h:i a', strtotime($order_detail["OrderDetail"][0]["DeliveryFrom"])) . ' <b>to</b> ' . date('Y-m-d h:i a', strtotime($order_detail["OrderDetail"][0]["DeliveryUpto"]));
             $totalValue += floatval($order_detail['OrderDetail'][0]['OrderValue']) + floatval($order_detail['OrderDetail'][0]['deliveryCharges']);
                 if(!empty($order_detail['OrderDetail'][0]['CopunDiscount']))
                     $totalValue -= floatval($order_detail['OrderDetail'][0]['CopunDiscount']);
