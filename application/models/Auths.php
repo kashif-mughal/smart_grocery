@@ -240,7 +240,7 @@ class Auths extends CI_Model {
         return False;
     }
     // ****** SEND SMS *******
-    private function sendmessage($to_phone_number, $message) {
+    public function sendmessage($to_phone_number, $message) {
         // JSON response Example ======================================
         // $data['phone'] = $to_phone_number;
         // $data['message'] = $to_message; //need to assign event here

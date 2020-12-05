@@ -125,8 +125,9 @@ class Lorder {
 
     private function sendsms($grantAmount, $orderId) {
         // Get Details against 
-        $userPhone = $this->session->userdata('phone');
+        
         $CI = & get_instance();
+        $userPhone = $CI->session->userdata('phone');
         $CI->load->model('Web_settings');
         $AdminData = $CI->Web_settings->retrieve_setting_editdata();
         $adminPhone = $AdminData[0]->AdminPhone;
