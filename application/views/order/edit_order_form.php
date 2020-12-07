@@ -1,3 +1,72 @@
+<style>
+   @media (max-width: 425px) {
+      /* Order Tracking */	
+      .ordertrackingprogress ul li .check-container {	
+         width: 50px;	
+         height: 50px;	
+      }	
+      .ordertrackingprogress ul li i {	
+         padding: 12px;	
+         font-size: 14px;	
+      }	
+      .ordertrackingprogress ul li::after {	
+         top: 19px;	
+      }	
+      .ordertrackingprogress ul img.truck {	
+         top: -3px;	
+         left: 82%;	
+         width: 33px;	
+      }	
+      .ordertrackingprogress ul li p {	
+         font-size: 12px;	
+      }      
+   }
+   	
+   @media (max-width: 375px) {
+      /* Order Tracking */	
+      .ordertrackingprogress ul li .check-container {	
+         width: 44px;	
+         height: 44px;	
+      }	
+      .ordertrackingprogress ul li i {	
+         padding: 10px;	
+         font-size: 12px;	
+      }	
+      .ordertrackingprogress ul li::after {	
+         top: 19px;	
+      }	
+      .ordertrackingprogress ul img.truck {	
+         top: -1px;	
+         left: 82%;	
+         width: 30px;	
+      }	
+      .ordertrackingprogress ul li p {	
+         font-size: 10px;	
+      }      
+   }
+
+   @media (max-width: 360px) {
+      /* Order Tracking */	
+      .ordertrackingprogress ul li .check-container {	
+         width: 40px;	
+         height: 40px;	
+      }	
+      .ordertrackingprogress ul li i {	
+         padding: 9px;	
+         font-size: 10px;	
+      }	
+      .ordertrackingprogress ul li::after {	
+         top: 17px;	
+      }	
+      .ordertrackingprogress ul img.truck {	
+         width: 26px;	
+      }	
+      .ordertrackingprogress ul li p {	
+         font-size: 9px;	
+      }
+   }
+</style>
+
 <!-- Bread Crumb -->
 <div class="bread_crumb">
    <div class="container">
