@@ -1069,6 +1069,13 @@ button.category-button:active {
 .slider .featured-products-content {
    display: none;   
 }
+.slider {
+    display: none; 
+}
+.slider.slick-initialized { 
+   display: block; 
+}
+
 .slick-dots {
    bottom: -26px !important;
 }

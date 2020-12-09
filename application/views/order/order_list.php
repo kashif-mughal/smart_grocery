@@ -232,13 +232,13 @@
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div class="order-button order-item d-flex flex-column justify-content-center align-items-center text-center">
-                                                            <a href="javascript:void(0);" class="d-block align-self-center button-primary add-cart mr-lg-2"
+                                                        <div class="order-button order-item d-flex flex-column justify-content-center align-items-center mr-lg-2">
+                                                            <a href="javascript:void(0);" class="d-block button-primary add-cart"
                                                                data-json="<?= $value[$i]["Jsn"]?>"
                                                                >Add to Cart
                                                             </a>
                                                             <!-- <a href="#" class="d-block align-self-center button-primary">Add to Cart</a> -->
-                                                            <a href="javascript:void(0);" style="display: none;" class="align-self-center button-secondary remove-cart" data-json="<?= $value[$i]["Jsn"]?>"
+                                                            <a href="javascript:void(0);" style="display: none;" class="button-secondary remove-cart" data-json="<?= $value[$i]["Jsn"]?>"
                                                                >Remove From Cart
                                                            </a>
                                                             <!-- <a href="#" class="d-block align-self-center button-secondary">Delete</a> -->
