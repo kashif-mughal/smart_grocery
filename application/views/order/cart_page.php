@@ -186,7 +186,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                 <!-- Alert Message -->
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="content-box1">
+                        <div class="content-box1" style="margin-left: -3px;">
                             <div class="container" id="shoppingCartBody1">
                                 <table class="table table-hover table-responsive table-condensed">
                                     <thead>
@@ -208,7 +208,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                 </table>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row d-none d-md-block">
                           <div class="col-12">
                             <div class="content-box order-box" style="border-radius: 0px 0px 5px 5px;">
                               <div class="row">
@@ -271,6 +271,18 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row d-none d-block d-md-none">
+                          <div class="col-md-12">
+                            <div class="content-box order-box" style="border-radius: 0px 0px 10px 10px;">
+                              <div class="col-md-12">
+                                <a href="<?=base_url("corder/checkout_form")?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn">Proceed To Checkout</a>
+                              </div>
+                              <div class="col-md-12" style="text-align: right;">
+                                  <a href="<?=base_url()?>" class="btn" style="width: 100%;color:white; background-color:#333333;"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>

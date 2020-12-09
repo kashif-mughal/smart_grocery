@@ -76,7 +76,7 @@ html,body
 /*================ New Address Form ==================*/
 
 .newFormItem {
-   padding: 24px 20px;
+   font-size: 0.8rem;
    margin-bottom: 12px;
 }
 .loctionDropdown label {
@@ -1144,14 +1144,14 @@ button.category-button:active {
    width: 100% !important;
    height: 32px;
    background-color: #25bfa9;
-   padding: 6px 34px;
-   margin-top: 12px !important;
-   /* margin: 6px auto !important; */
    font-size: 15px;
    color: #ffffff;
    font-weight: 500;
    font-family: "Work Sans";
    text-decoration: none;
+   line-height: 2;
+   text-align: center;
+   vertical-align: middle;
 }
 .product-card-viewmore-btn:hover {
    text-decoration: none;
@@ -3530,6 +3530,10 @@ a#newAddressCancelBtn {
    .value-cart .card-title {
       width: 50% !important;
    }
+
+   .phone_cart .phone {
+      display: none !important;
+   }
 }
 
 
@@ -3547,10 +3551,6 @@ a#newAddressCancelBtn {
    
    .phone_cart {
       margin-bottom: 12px !important;
-   }
-   
-   .phone_cart .phone {
-      display: none !important;
    }
    .logo .logo_content img {
       max-width: 150px !important;
@@ -3717,10 +3717,6 @@ a#newAddressCancelBtn {
 
 
 @media (max-width: 425px) {
-   .product-card-viewmore-btn {
-      padding: 7px 28px;
-      font-size: 12px;
-   }
    .edibles-main .align-items-center {
       text-align: center;
    } 
@@ -3822,10 +3818,6 @@ a#newAddressCancelBtn {
    .main-page-product-card img {
       width: 134px;
    }
-   .product-card-viewmore-btn {
-      padding: 10px 28px;
-      font-size: 10px;
-  }
   #product-wrt-cat .col-md-3 {
       padding-left: 4px;
   }
@@ -3851,10 +3843,6 @@ a#newAddressCancelBtn {
    .main-page-product-card img {
       width: 114px !important;
    }
-   .product-card-viewmore-btn {
-      padding: 6px 15px !important;
-      font-size: 8px !important;
-  }
    .order-history-card .order-id,
    .order-history-card .order-header-text {
       font-size: 11px !important;

@@ -200,7 +200,7 @@
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
          var eachProdTemplate = `<div data-id="{pId}" data-name="{prodName}" class="my-box-order d-flex">
-                                    <img src="{imgValue}" alt="" class="img-fluid">
+                                    <img src="{imgValue}" alt="" class="img-fluid" style="width:auto; height:80px;">
                                     <div class="my-box-order-content ml-3 d-flex flex-column justify-content-center">
                                         <h6>{prodName}  X {qty}</h6>
                                         <h6 class="mt-2 my-order-price">{totalPrice}</h6>

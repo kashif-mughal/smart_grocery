@@ -189,7 +189,6 @@
                   <!-- Order Details Table -->
 
                   
-
                   <table class="table table-bordered bg-white">
                      <thead>
                         <tr>

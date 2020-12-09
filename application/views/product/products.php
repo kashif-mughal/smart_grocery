@@ -60,7 +60,7 @@
                     <div class="row" id="products-area">
                         <div style="display: none;">
                             <script type="text" id="clone-cart">
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="featured-products-content mb-2 d-flex justify-content-between">
                                     <div class="card each-prod product-card-inner">
                                         <div class="card-body p-0">
@@ -121,16 +121,16 @@
                         <?php foreach($ProdList as $value) { 
                             $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                             ?>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 px-0">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 px-0">
                                 <div class="featured-products-content mb-2 d-flex align-items-center justify-content-start">
                                     <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px;">
                                         <div class="card-body p-0">
                                             
                                             <?php if($value['stock'] == '0') { 
-echo '<h5>Out Of Stock</h5>'; 
-}elseif($value['stock'] == '2'){
-     echo '<h5>Out Of Season</h5>'; 
-}?>
+                                            echo '<h5>Out Of Stock</h5>'; 
+                                            }elseif($value['stock'] == '2'){
+                                                 echo '<h5>Out Of Season</h5>'; 
+                                            }?>
                                             <div class="header">
                                                 <?php if($discountPercentage != 0) { ?> 
                                                     <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>

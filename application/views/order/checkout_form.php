@@ -80,15 +80,15 @@
                                                 <div class="text-left">
                                                     <span
                                                         class="verification-steps-heading d-block align-self-start" id="deliveryAddressTitle">Enter your Delivery Address</span>
-                                                    <span class="completed-content" id="deliveryAddressText"></span>
                                                 </div>
                                                 <div class="change-button ml-auto">Change</div>
                                             </button>
+                                            <span class="completed-content" id="deliveryAddressText"></span>
                                         </h5>
                                     </div>
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                         data-parent="#accordion">
-                                        <div class="card-body p-5">
+                                        <div class="card-body">
                                             <div class="container-fluid">
                                                 <form id="newAddressForm" style="display: <?=!$userAddress ? 'block' : 'none';?>" action="<?=base_url('user/submit_address_info')?>">
                                                     <input type="email" name="user_email" class="form-control newFormItem" placeholder="Enter your Email Address" required>
@@ -109,14 +109,20 @@
                                                     <input type="text" name="newAddress2" class="form-control newFormItem" placeholder="Area, Sector, Colony, Street" required>
                                                     <div class="form-group loctionDropdown">
                                                       <label for="newAddressLocation" class="ml-4">Delivery Location</label>
-                                                      <select class="form-control" id="newAddressLocation" required>
+                                                      <select style="font-size: 0.8rem;height: unset;background-position: calc(100% - 22px) calc(1em + 2px), calc(100% - 16px) calc(1em + 2px), 100% 0" class="form-control" id="newAddressLocation" required>
                                                         <option>Home</option>
                                                         <option>Office</option>
                                                       </select> 
 
                                                     </div>
-                                                    <input type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
-                                                    <input type="button" id="cancel-address" class="btn btn-link px-5 py-2 button-primary text-white" value="Cancel">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+                                                            <input style="width: 100%;" type="submit" name="newAddressSubmit" class="btn btn-link px-5 py-2 button-primary text-white" value="Save">
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <input style="width: 100%;" type="button" id="cancel-address" class="btn btn-link px-5 py-2 button-primary text-white" value="Cancel">
+                                                        </div>
+                                                    </div>
                                                 </form>
                                                 <form id="addressForm" style="display: <?=$userAddress ? 'block' : 'none';?>"  action="<?=base_url('user/submit_address')?>">
                                                     <input type="hidden" name="selectedFinalAddress" id="selectedFinalAddress">
@@ -182,10 +188,10 @@
                                                 <span class="mr-4 process-number" id="time-process">3</span>
                                                 <div class="text-left">
                                                     <span class="verification-steps-heading d-block" id="deliveryDateTitle">Enter Delivery Date and Time</span>
-                                                    <span class="completed-content" id="deliveryDateText"></span>
                                                 </div>
                                                 <div class="change-button ml-auto">Change</div>
                                             </button>
+                                            <span class="completed-content" id="deliveryDateText"></span>
                                         </h5>
                                     </div>
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
@@ -471,7 +477,7 @@
         var deliveryTimeArr = deliveryTime.split('__');
         var dt = new Date(deliveryTimeArr[0]);
         var dt1 = new Date(deliveryTimeArr[1]);
-        var deliverText = dt.toDateString() + "<br>" + dt.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + " to " + dt1.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+        var deliverText = dt.toDateString() + " (" + dt.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + " to " + dt1.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + ")";
         $('#deliveryDateTitle').html("Deliver On");
         $('#deliveryDateText').html(deliverText);
         $('#time-success').show();

@@ -21,60 +21,68 @@
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>
                <div class="slider featured-product-slider">
-                  <?php foreach($ProdList as $value) { ?>
-                  <div class="featured-products-content pb-1">
-                     <div class="card mr-2 each-prod product-card-inner">
-                        <div class="card-body p-0">
-                           <div class="header">
-                              <?php 
-                                 if($value['IsFeatured'] == 1) {
-                                  $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
-                                  if($discountPercentage > 0) { ?> 
-                              <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
-                              <?php } ?>
-                              <!-- <a href="javascript:void(0)" class="add_to_favorite">
-                              <i class="fas fa-heart float-right"></i>
-                              </a> -->
-                           </div>
-                        </div>
-                        <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
-                        <div class="product-info text-center">
-                           <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                           <p class="card-text product-card-inner-weight"><?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
-                           <p class="card-text product-card-inner-price d-inline">Rs. <?php echo $value['SalePrice']; ?></p>
-                           <?php if($discountPercentage > 0) { ?> 
-                           <span class="product-discount"><del>Rs. <?php echo $value['Price']; ?></del></span>
-                           <?php } 
-                              $productObject = (object) [
-                               'id' => $value['ProductId'],
-                               'pName' => $value['ProductName'],
-                               'price' => $value['SalePrice'],
-                               'img' => base_url().$value['ProductImg']
-                              ];
-                              ?>
-                           <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                              <input type="number" min="0" class="d-inline-flex quantity quantity-input">
-                              <span class="d-block quantity-button">
-                                 <a href="javascript:void(0);" class="qty-pls d-block">+</a>
-                                 <div class="separator"></div>
-                                 <a href="javascript:void(0);" class="qty-mns d-block">-</a>
-                              </span>
-                           </div>
-                        </div>
-                        <div class="card-footer p-1" style="border-top: none; background-color: transparent;">
-                           <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart d-block"
-                              data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                              >Add to Cart</a>
-                           <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                              data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                              >Remove From Cart</a>   
-                        </div>
-                        
-                     </div>
-                  </div>
-                  <?php }} ?>
+                     <?php foreach($ProdList as $value) { 
+                         $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
+                         ?>
+                             <div class="featured-products-content d-flex align-items-center justify-content-start">
+                                 <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px; padding-bottom: 10px; height: unset !important;">
+                                     <div class="card-body p-0">
+                                         
+                                         <?php if($value['stock'] == '0') { 
+                                         echo '<h5>Out Of Stock</h5>'; 
+                                         }elseif($value['stock'] == '2'){
+                                              echo '<h5>Out Of Season</h5>'; 
+                                         }?>
+                                         <div class="header">
+                                             <?php if($discountPercentage != 0) { ?> 
+                                                 <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
+                                             <?php } ?>
+                                             <!--<a href="#" class="add_to_favorite">
+                                                 <i class="fas fa-heart float-right"></i>
+                                             </a>-->
+                                         </div>
+                                     </div>
+                                     <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                     <div class="product-info text-center">
+                                         <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                                         <p class="card-text product-card-inner-weight">
+                                             <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
+                                         <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p> -->
+                                         <?php if($discountPercentage != 0) { ?> 
+                                             <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
+                                         <?php } 
+                                         $productObject = (object) [
+                                            'id' => $value['ProductId'],
+                                            'pName' => $value['ProductName'],
+                                            'price' => $value['SalePrice'],
+                                            'img' => base_url().$value['ProductImg']
+                                        ];
+                                        ?>
+                                        <?php if($value['stock'] == '1') { ?>
+                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                             <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                             <input type="text" class="d-inline-flex quantity-input quantity">
+                                             <span class="d-block quantity-button">
+                                                 <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                                                 <div class="separator"></div>
+                                                 <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                                             </span>
+                                         </div>
+                                         <?php } ?>
+                                     </div>
+                                     <?php if($value['stock'] == '1') { ?>
+                                     <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
+                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                     >Add to Cart</a>
+                                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                     >Remove From Cart</a>
+                                     <?php } ?>
+                                 </div>
+                             </div>
+                     <?php } ?>
                </div>
+               
             </div>
          </div>
          <div class="col-xl-4 col-lg-4 col-md-12">
@@ -163,25 +171,26 @@
 
                         <div class="container-fluid px-0">
                            <div class="container-fluid px-0">
-                              <div class="row d-flex align-items-center justify-content-start">
+                              <div class="row align-items-center justify-content-start" style="padding-right: 10px;">
+                                 
                                  <?php if(is_array($value->childCats)) for ($i=0; $i < count($value->childCats); $i++) {?>
-                                 <div class="card product-card mx-2 main-page-product-card">
-                                    <?php if(!empty($value->childCats[$i]['CatName'])){?>
-                                    <img class="card-img-top" src="<?php echo base_url().$value->childCats[$i]['Img']; ?>" alt="Card image cap">
-                                    <div class="card-body p-0">
-                                       <p class="product-card-title" title="<?php echo $value->childCats[$i]['CatName']; ?>"><?php echo $value->childCats[$i]['CatName']; ?></p>
-                                       <a href="javascript:void(0)" class="product-card-details-btn">View more details</a>
+                                    <div class="col-lg-3 col-md-4 col-sm-6 p-0">
+                                       <div class="card mx-2 cat-card">
+                                          <?php if(!empty($value->childCats[$i]['CatName'])){?>
+                                          <img class="img-fluid" src="<?php echo base_url().$value->childCats[$i]['Img']; ?>" alt="Card image cap">
+                                          <div class="card-body p-0">
+                                             <p class="product-card-title" title="<?php echo $value->childCats[$i]['CatName']; ?>"><?php echo $value->childCats[$i]['CatName']; ?></p>
+                                             <a href="javascript:void(0)" class="product-card-details-btn">View more details</a>
+                                          </div>
+                                          <a href="<?php echo base_url().'Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId']; ?>"
+                                                class="product-card-viewmore-btn">View more</a>
+                                          <?php } else { ?>
+                                          <div class="card-img-bottom text-center" style="margin-top: 80%;background: #80808052;padding: 20%;">
+                                             No Product
+                                          </div>
+                                          <?php } ?>
+                                       </div>
                                     </div>
-                                    <div class="card-footer p-0">
-                                       <a href="<?php echo base_url().'Cproduct/products?categoryId='.$value->childCats[$i]['CategoryId']; ?>"
-                                          class="product-card-viewmore-btn">View more</a>
-                                    </div>
-                                    <?php } else { ?>
-                                    <div class="card-img-bottom text-center" style="margin-top: 80%;background: #80808052;padding: 20%;">
-                                       No Product
-                                    </div>
-                                    <?php } ?>
-                                 </div>
                                  <?php } ?>
                               </div>
                            </div>  
@@ -301,7 +310,7 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-8 pl-0 pt-3">
+                        <div class="col-sm-12 col-md-8 pl-2 pt-3">
                            <div class="product-content">
                               <div class="container-fluid">
                                  <div class="row" id="product-wrt-cat">
@@ -339,35 +348,33 @@
 </div>
 <div style="display: none;">
     <script type="text" id="clone-cart">
-
-      <div class="col-sm-6 col-md-3 pr-sm-0">
-           <div class="mb-3 mx-auto">
-            <div class="card product-card each-prod">
-               <img class="card-img-top" src="{Img}" alt="Card image cap">
-               <div class="card-body p-0 text-center">
-                  <p class="product-card-title" title="{ProductName}">{ProductName}</p>
-                  <p class="product-card-weight mb-0">{UnitName}</p>
-                  <p class="card-text product-card-inner-price">{SalePrice}</p>
-                  <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                     <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                     <input type="number" min="0" class="d-inline-flex quantity quantity-input">
-                     <span class="d-block quantity-button">
-                         <a href="javascript:void(0)" class="qty-pls d-block">+</a>
-                         <div class="separator"></div>
-                         <a href="javascript:void(0)" class="qty-mns d-block">-</a>
-                     </span>
-                  </div>
-                  <a href="javascript:void(0);" class="product-card-btn mt-2 mx-auto add-cart"
-                     data-json="{Jsn}"
-                     >Add to Cart</a>
-                  <a href="javascript:void(0);" style="display: none;" class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart"
-                     data-json="{Jsn}"
-                     >Remove From Cart</a>
-               </div>
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6">
+        <div class="featured-products-content mb-2 justify-content-between">
+            <div class="card each-prod product-card-inner p-1">
+                <img class="img-fluid text-center" src="{Img}" alt="Card image cap">
+                <div class="product-info text-center">
+                    <p class="card-text product-card-inner-name" title="{ProductName}">{ProductName}</p>
+                    <p class="card-text product-card-inner-weight">{UnitName}</p>
+                    <p class="card-text product-card-inner-price d-inline">{SalePrice}</p>
+                    <div class="quantity-area d-flex justify-content-center align-items-center mt-2" style="width:auto;">
+                        <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                        <input type="text" class="d-inline-flex quantity-input quantity">
+                        <span class="d-block quantity-button">
+                            <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                            <div class="separator"></div>
+                            <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                        </span>
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart p-2 text-center" style="width:88%;"
+                data-json="{Jsn}"
+                >Add to Cart</a>
+                <a href="javascript:void(0);" style="display: none; width:90%;" class="product-card-btn mx-auto remove-cart"
+                data-json="{Jsn}"
+                >Remove From Cart</a>
             </div>
-           </div>
-      </div>
-
+        </div>
+    </div>
     </script>
 </div>
    <!-- Virtual Assistant -->
@@ -1106,6 +1113,18 @@ html{
    }
    .filterSelected : focus{
       box-shadow: 1px 1px 10px 1px green;
+   }
+   .cat-card{
+      padding: 10px;
+   }
+   .cat-card, .cat-card img{
+      border-radius: 10px 10px 0px 0px;
+   }
+
+   @media (max-width: 1024px) {
+      .main-content .featured-products-content .product-card-inner {
+         width: unset;
+      }
    }
    @media (max-width: 320px) {
       .featured-products-content .product-card-inner {
