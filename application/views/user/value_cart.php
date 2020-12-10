@@ -122,7 +122,7 @@
                                                     $discountPercentage = (($value[$i]['Price'] - $value[$i]['SalePrice'])/$value[$i]['Price']) * 100;
                                                     }?> 
 
-                                                    <img src="<?=base_url($value[$i]['ProductImg'])?>" style="width: 60px; max-height: 60px;" alt="">
+                                                    <img src="<?=base_url($value[$i]['ProductImg'])?>" class="img-fluid" alt="">
                                                     <div class="order-product-name order-item align-self-center" style="width: 230px;">
                                                         <p class="order-name"><?=$value[$i]['ProductName']?></p>
                                                         <p class="order-weight"><?=empty($value[$i]['SaleUnitName']) ? $value[$i]['UnitName'] : 
