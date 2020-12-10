@@ -16,7 +16,7 @@
     </div>
 </div>
 <style type="text/css">
-    @media (max-width: 425px) {
+    @media (max-width: 767px) {
         .remove-cart{
             /* top: auto;
             left: auto;
@@ -160,7 +160,7 @@
 
                                                         <a href="javascript:void(0);" 
                                                            style="display: none;" 
-                                                           class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart" 
+                                                           class="product-card-btn mt-2 mx-auto remove-cart va-panel-remove-cart text-center" 
                                                            data-json="<?= $value[$i]["Jsn"]?>">
                                                            Remove From Cart
                                                         </a>

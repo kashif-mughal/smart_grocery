@@ -3777,8 +3777,8 @@ a#newAddressCancelBtn {
    } */
 
    .order-history-card .quantity-area {
-      padding-left: 10% !important;
-      padding-right: 6% !important;
+      padding-left: 22%;
+      padding-right: 6%;
    }
    .order-history-card .order-button {
       padding-left: 0px !important;
@@ -3870,6 +3870,10 @@ a#newAddressCancelBtn {
   #product-wrt-cat {
    padding: 10px !important;
   }
+  .order-history-card .quantity-area {
+   padding-left: 20% !important;
+   padding-right: 6% !important;
+}
   
 }
 

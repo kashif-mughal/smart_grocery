@@ -238,7 +238,7 @@
                                                                >Add to Cart
                                                             </a>
                                                             <!-- <a href="#" class="d-block align-self-center button-primary">Add to Cart</a> -->
-                                                            <a href="javascript:void(0);" style="display: none;" class="button-secondary remove-cart" data-json="<?= $value[$i]["Jsn"]?>"
+                                                            <a href="javascript:void(0);" style="display: none;" class="button-secondary remove-cart text-center" data-json="<?= $value[$i]["Jsn"]?>"
                                                                >Remove From Cart
                                                            </a>
                                                             <!-- <a href="#" class="d-block align-self-center button-secondary">Delete</a> -->
