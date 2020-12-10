@@ -125,7 +125,7 @@
          <div class="col-xl-12 col-lg-12 col-md-12 my-3 px-0">
             <div class="container bg-transparent px-0">
 
-               <div class="card p-sm-5 content-box" style="z-index: -20; border: 3px 3px 0 0;">
+               <div class="card p-sm-5 content-box" style="z-index: 0; border: 3px 3px 0 0;">
                   <div class="d-flex flex-column pb-5 mb-4 border-b-primary">
                      <div id="orderNumberTitle">
                         <span>Order No.</span>
@@ -189,7 +189,7 @@
                   <!-- Order Details Table -->
 
                   
-                  <table class="table table-bordered bg-white">
+                  <table class="table table-bordered bg-white table-responsive-md">
                      <thead>
                         <tr>
                            <td scope="col">S.No</td>

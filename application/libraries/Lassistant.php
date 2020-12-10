@@ -40,7 +40,9 @@ class Lassistant {
                                  'id' => $assistant_list[$i]['ProductId'],
                                  'pName' => $assistant_list[$i]['ProductName'],
                                  'price' => $assistant_list[$i]['SalePrice'],
-                                 'img' => base_url($assistant_list[$i]['ProductImg'])
+                                 'img' => base_url($assistant_list[$i]['ProductImg']),
+                                 'saleUnitQty' => $assistant_list[$i]['SaleUnitQty'],
+                                 'saleUnit' => $assistant_list[$i]['UnitName']
                                 ];
 
             $assistant_list[$i]["Jsn"] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');

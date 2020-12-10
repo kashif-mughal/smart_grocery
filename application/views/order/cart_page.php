@@ -188,7 +188,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <div class="col-md-8">
                         <div class="content-box1" style="margin-left: -3px;">
                             <div class="container" id="shoppingCartBody1">
-                                <table class="table table-hover table-responsive table-condensed">
+                                <table class="table table-hover table-responsive-md table-condensed">
                                     <thead>
                                         <tr>
                                             <!-- <th colspan="3">Product Name</th>
@@ -349,7 +349,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
+               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
                //append newly created row in card body
@@ -422,7 +422,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
-             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, cart[i].pName);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));

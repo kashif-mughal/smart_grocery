@@ -57,7 +57,9 @@ class Cproduct extends CI_Controller {
                            'id' => $products['products'][$i]['ProductId'],
                            'pName' => $products['products'][$i]['ProductName'],
                            'price' => $products['products'][$i]['SalePrice'],
-                           'img' => base_url().$products['products'][$i]['ProductImg']
+                           'img' => base_url().$products['products'][$i]['ProductImg'],
+                           'saleUnitQty' => $products['products'][$i]['SaleUnitQty'],
+                           'saleUnit' => $products['products'][$i]['UnitName']
                        ];
                        $products['products'][$i]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
         }

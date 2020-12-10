@@ -580,7 +580,7 @@
                sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
+               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
                //append newly created row in card body
