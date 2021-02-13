@@ -167,7 +167,7 @@ class Categories extends CI_Model {
                     gp.Category IN(
                         $inCats
                     )
-                    ORDER BY gp.sort ASC
+                    ORDER BY gp.sort DESC
                     LIMIT $startFrom, $limit";
         $countQuery = "SELECT 
                         count(1) total
